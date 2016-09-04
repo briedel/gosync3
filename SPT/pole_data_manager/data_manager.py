@@ -9,7 +9,6 @@ import hashlib
 import shutil
 import ConfigParser as configparser
 
-from collections import namedtuple
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -17,7 +16,7 @@ parser.add_option("--config", dest="config_file", default="data_manager.conf",
                   help="Scripts config file", metavar="FILE")
 (options, args) = parser.parse_args()
 
-def check_new_files(, path_to_new_files, ):
+def check_new_files(db, path_to_new_files):
     """
     Runs glob on a data buffer directory and checks with 
     the data base whether a file has already been copied
@@ -119,7 +118,7 @@ def get_useable_disk(db):
     :return: List with the primary and copy disk label
     """
     cursor = db.cursor()
-    cursor.execute("SELECT label FROM disks WHERE previously_used = 'True'") 
+    cursor.execute("SELECT label FROM disks WHERE previously_used = 'True' AND full='False'") 
     results = cursor.fetchall()
     if results:
         if len(results) == 2:
@@ -142,48 +141,67 @@ def get_useable_disk(db):
         raise RuntimeError()
 
 def mark_disk_full(db, primary_disk, copy_disk):
-    cursor = db.cursor()
-    cursor.execute("SELECT label FROM disks WHERE previously_used = 'True'") 
+    """
+    Run two SQL commands to mark a disk as full
 
-def get_new_disk():
+    :param db: sqlite3 database object
+    :param primary_disk: Label for primary disk
+    :param copy_disk: Label for copy disk
+    """
+    cursor = db.cursor()
+    cursor.execute("UPDATE disks SET full='True' WHERE label = '{0}' OR label = '{1}".format(primary_disk, copy_disk))
+    cursor.execute("UPDATE disks SET previously_used='False' WHERE label = '{0}' OR label = '{1}".format(primary_disk, copy_disk))
+
+def get_new_disk(db, primary_disk, copy_disk):
+    """
+    Simply increment the disk numbers by one. If the disk number is over the expected
+    number of disks, check the DB and see if disks have been added. 
+    
+    :param db: sqlite3 database object
+    :param primary_disk: Label for primary disk
+    :param copy_disk: Label for copy disk
+    :return: Tuple with new disk labels to be used
+    """
+    new_primary_disk = 'P%02d'%(int(primary_disk[1:])+1)
+    new_copy_disk = 'S%02d'%(int(copy_disk[1:])+1)
+    if int(primary_disk[1:]) > 42 or int(copy_disk[1:]) > 28:
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM disks WHERE label = '{0}' OR label = '{1}'".format(new_primary_disk, new_copy_disk))
+    if :
+        raise RuntimeError("This disk is not available. Please update this error or the ")
+    return new_primary_disk, new_copy_disk
+
+def get_current_disk_space(primary_disk, copy_disk):
+    """
+    Calculate the free disk space
+
+    :param primary_disk: Label for primary disk
+    :param copy_disk: Label for copy disk
+    :return: Tuple of the free space of the two disks
+    """
+    disk_stats_primary = os.statvfs("/spt_disks/{0}".format(primary_disk))
+    disk_stats_copy = os.statvfs("/spt_disks/{0}".format(copy_disk))
+    freespace_primary = disk_stats_primary.f_bavail * disk_stats_primary.f_frsize
+    freespace_copy = disk_stats_copy.f_bavail * disk_stats_copy.f_frsize
+    return freespace_primary, freespace_copy
 
 def run():
     with sqlite3.connect("spt_data_management.db") as db:
         primary_disk, copy_disk = get_useable_disk(db)
-        new_files = check_new_files()
+        new_files = check_new_files(db,)
         if new_files:
             logging.info("No new files. Exiting")
             sys.exit()
         disk_stats_primary = os.statvfs("/spt_disks/{0}".format(primary_disk))
         disk_stats_copy = os.statvfs("/spt_disks/{0}".format(copy_disk))
-        freespace_primary = disk_stats_primary.f_bavail * disk_stats_primary.f_frsize
-        freespace_copy = disk_stats_copy.f_bavail * disk_stats_copy.f_frsize
+        freespace_primary, freespace_copy = get_current_disk_space(primary_disk, copy_disk)
         for file in new_files:
-            if freespace < os.stat(file).st_size:
-                # mark_disk_full(db, primary_disk, copy_disk)
-                disk_serial_no, disk_logical_id = get_new_disk(db)
+            if freespace_primary < os.stat(file).st_size and freespace_copy < os.stat(file).st_size :
+                mark_disk_full(db, primary_disk, copy_disk)
+                primary_disk, copy_disk = get_new_disk(db)
+                copy_file_to_disks(file, primary_disk, copy_disk)
             else:
                 copy_file_to_disks(file)
-        update_disk(db, primary_disk, copy_disk)
-
-
-
-# class DataManager(object):
-#     def __init__(self, config = None):
-#         if config:
-#             self.config = config
-#         else:
-#             raise RuntimeError("No config object provided")
-#         self.db = 
-#         self.disk
-#         self.
-
-#     def get_useable_disk(self):
-
-
-
-#     def check_new_files(self):
-
 
 def main():
     # if not os.path.exists(options.config_file):
