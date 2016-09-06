@@ -9,6 +9,7 @@ import hashlib
 import shutil
 import ast
 import glob
+import subprocess
 import ConfigParser as configparser
 
 from optparse import OptionParser
@@ -21,7 +22,7 @@ parser.add_option("--config", dest="config_file", default="data_manager.conf",
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%m-%d %H:%M')
+                    datefmt='%Y-%m-%d %H:%M:%S')
 
 def check_new_files(db, path_to_new_files):
     """
@@ -44,8 +45,29 @@ def check_new_files(db, path_to_new_files):
             file_basename = os.path.basename(file)
             logging.debug("Checking for file: {0}".format(file))
             cursor.execute("""SELECT * FROM files WHERE filename = '{0}'""".format(file_basename))
-            if cursor.fetchall():
-                continue
+            results = cursor.fetchall()
+            if results:
+                filesize, hash = get_file_info(file)
+                if hash != results[0][2] and filesize != results[0][3]:
+                    logging.critical("File {0} has the same basename as a previously copied file, ".format(file)+\
+                                     " but a different checksum and size. Please have a look.")
+                    ping_winterovers()
+                    raise RuntimeError("Issue with finding new files")
+                elif hash != results[0][2]:
+                    logging.critical("File {0} has the same basename as a previously copied file, ".format(file)+\
+                                     " but a different checksum. Please have a look.")
+                    ping_winterovers()
+                    sys.exit()
+                    raise RuntimeError("Issue with finding new files")
+                elif filesize != results[0][3]: 
+                    logging.critical("File {0} has the same basename as a previously copied file, ".format(file)+\
+                                     " but a different filesize. Please have a look.")
+                    ping_winterovers()
+                    raise RuntimeError("Issue with finding new files")
+                else:
+                    logging.info("File {0} has the same basename, checksum, and filesize ".format(file) +\
+                                 "as a previously copied file. Ignoring file.")
+                    continue
             else:
                 new_files.append(file)
     logging.debug("Found new files: {0}".format(new_files))
@@ -66,34 +88,39 @@ def copy_file_to_disks(db, filename, primary_disk, copy_disk):
     # Gathering file info
     filesize, hash = get_file_info(filename)
     # Copying with metadata intact
-    shutil.copy2(file, "/spt_disks/{0}".format(primary_disk))
-    shutil.copy2(file, "/spt_disks/{0}".format(copy_disk))
+    logging.debug("Copying to /spt_disks/{0}".format(primary_disk))
+    shutil.copy2(filename, "/spt_disks/{0}/".format(primary_disk))
+    logging.debug("Copying to /spt_disks/{0}".format(copy_disk))
+    shutil.copy2(filename, "/spt_disks/{0}/".format(copy_disk))
     # Making sure the files have been copied successfully
-    filesize_primary, hash_primary = get_file_info(os.path.join("/spt_disks/{0}".format(primary_disk), file))
-    filesize_copy, hash_copy = get_file_info(os.path.join("/spt_disks/{0}".format(copy_disk), file))
+    filesize_primary, hash_primary = get_file_info(os.path.join("/spt_disks/{0}".format(primary_disk), 
+                                                                os.path.basename(filename)))
+    filesize_copy, hash_copy = get_file_info(os.path.join("/spt_disks/{0}".format(copy_disk), 
+                                                          os.path.basename(filename)))
     # Raising hell if they haven't
     if filesize != filesize_primary or hash != hash_primary:
         logging.fatal("Copying to primary disk failed.\n" +\
-                      "Difference in filesize is {filesize}. ".format(filesize=filesize - filesize_primary) +\
-                      "The hash of the file was {hash}.\n".format(hash=hash) +\
-                      "The hash on the primary is {hash_primary}. ".format(hash_primary=hash_primary) +\
-                      "The hash on the copy is {hash_copy}.".format(hash_copy=hash_copy))
+                      "Difference in filesize is {0}. ".format(filesize - filesize_primary) +\
+                      "The hash of the file was {0}.\n".format(hash) +\
+                      "The hash on the primary is {0}. ".format(hash_primary) +\
+                      "The hash on the copy is {0}.".format(hash_copy))
         raise RuntimeError("Copying to primary disk failed")
     elif filesize != filesize_copy or hash != hash_copy:
         logging.fatal("Copying to copy disk failed.\n" +\
-                      "Difference in filesize is {filesize}. ".format(filesize=filesize - filesize_primary) +\
-                      "The hash of the file was {hash}.\n".format(hash=hash) +\
-                      "The hash on the primary is {hash_primary}. ".format(hash_primary=hash_primary) +\
-                      "The hash on the copy is {hash_copy}.".format(hash_copy=hash_copy))
+                      "Difference in filesize is {0}. ".format(filesize - filesize_primary) +\
+                      "The hash of the file was {0}.\n".format(hash) +\
+                      "The hash on the primary is {0}. ".format(hash_primary) +\
+                      "The hash on the copy is {0}.".format(hash_copy))
         raise RuntimeError("Copying to copy disk failed")
     else:
         # If file copied successfully. Add info to DB
-        db.cursor()
+        cursor = db.cursor()
         cursor.execute("""
-                       INSERT INTO FILE (filename, checksum, filesize, disk_primary, disk_copy) 
+                       INSERT INTO files (filename, checksum, filesize, disk_primary, disk_copy) 
                        VALUES ('{name}', '{checksum}', '{filesize}','{disk_primary}', '{disk_copy}')
-                       """.format(name=os.path.basename(), checksum=hash,filesize=filesize,
-                                  ))
+                       """.format(name = os.path.basename(filename), checksum = hash,
+                                  filesize = filesize, disk_primary = primary_disk,
+                                  disk_copy = copy_disk))
 
 
 def get_file_info(file):
@@ -102,7 +129,7 @@ def get_file_info(file):
 
     :return: Tuple of the filesize and sha512 hash
     """
-    filesize = os.stat(file)
+    filesize = os.stat(file).st_size
     sha512hash = sha512sum(file)
     return filesize, sha512hash
 
@@ -206,6 +233,9 @@ def get_current_disk_space(primary_disk, copy_disk):
     return freespace_primary, freespace_copy
 
 
+def ping_winterovers():
+    pass
+
 def run(config):
     with sqlite3.connect(os.path.expandvars(config["DB"]["filenamedb"])) as db:
         primary_disk, copy_disk = get_useable_disk(db)
@@ -222,6 +252,8 @@ def run(config):
                 mark_disk_full(db, primary_disk, copy_disk)
                 primary_disk, copy_disk = get_new_disk(db)
                 copy_file_to_disks(db, file, primary_disk, copy_disk)
+                if config["General"]["testing"]:
+                    raise RuntimeWarning("Done testing")
             else:
                 copy_file_to_disks(db, file, primary_disk, copy_disk)
 
@@ -251,14 +283,34 @@ def check_config(config):
     if not os.path.exists(config["Data"]["bufferlocation"]):
         raise RuntimeError("Buffer location does nost exist")
 
+def testing(config):
+    i = 0 
+    while True:
+        logging.debug("Creating file /buffer/file_testing_{0}.txt".format(i))
+        command = "dd if=/dev/urandom of=/buffer/file_testing_{0}.txt count=1048576 bs=4096".format(i)
+        c = subprocess.Popen(command,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE,
+                             shell=True)
+        output, error = c.communicate()
+        print(output, error)
+        try:
+            run(config)
+            os.remove("/buffer/file_testing_{0}.txt".format(i))
+        except:
+            break
+        i += 1
+
 def main():
     if not os.path.exists(options.config_file):
         raise RuntimeError("Config file {0} does not exist".format(options.config_file))
     config = configparser.ConfigParser()
     config.read(options.config_file)
     config_dict = config_options_dict(config)
-    print(config_dict)
-    run(config_dict)
+    if config_dict["General"]["testing"]:
+        testing(config_dict)
+    else:
+        run(config_dict)
 
 
 if __name__ == "__main__":
