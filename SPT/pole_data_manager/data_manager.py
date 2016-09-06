@@ -7,14 +7,21 @@ import logging
 import sqlite3
 import hashlib
 import shutil
+import ast
+import glob
 import ConfigParser as configparser
 
 from optparse import OptionParser
+
 
 parser = OptionParser()
 parser.add_option("--config", dest="config_file", default="data_manager.conf",
                   help="Scripts config file", metavar="FILE")
 (options, args) = parser.parse_args()
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%m-%d %H:%M')
 
 def check_new_files(db, path_to_new_files):
     """
@@ -29,18 +36,23 @@ def check_new_files(db, path_to_new_files):
     """
     cursor = db.cursor()
     files = glob.glob(path_to_new_files)
+    logging.debug("Found files {0}".format(files))
     new_files = []
     if files:
-        for file in files.sort():
-            file = os.path.basename(file)
-            cursor.execute("SELECT * FROM files WHERE filename = '{0}'".format(file))
+        files.sort()
+        for file in files:
+            file_basename = os.path.basename(file)
+            logging.debug("Checking for file: {0}".format(file))
+            cursor.execute("""SELECT * FROM files WHERE filename = '{0}'""".format(file_basename))
             if cursor.fetchall():
                 continue
             else:
                 new_files.append(file)
+    logging.debug("Found new files: {0}".format(new_files))
     return new_files
 
-def copy_files(db, filename, primary_disk, copy_disk):
+
+def copy_file_to_disks(db, filename, primary_disk, copy_disk):
     """
     Copies files to the primary and copy disk array,
     gathers all information needed to add the file to
@@ -61,16 +73,16 @@ def copy_files(db, filename, primary_disk, copy_disk):
     filesize_copy, hash_copy = get_file_info(os.path.join("/spt_disks/{0}".format(copy_disk), file))
     # Raising hell if they haven't
     if filesize != filesize_primary or hash != hash_primary:
-        logging.fatal("Copying to primary disk failed. " +\
+        logging.fatal("Copying to primary disk failed.\n" +\
                       "Difference in filesize is {filesize}. ".format(filesize=filesize - filesize_primary) +\
-                      "The hash of the file was {hash}. ".format(hash=hash) +\
+                      "The hash of the file was {hash}.\n".format(hash=hash) +\
                       "The hash on the primary is {hash_primary}. ".format(hash_primary=hash_primary) +\
                       "The hash on the copy is {hash_copy}.".format(hash_copy=hash_copy))
         raise RuntimeError("Copying to primary disk failed")
     elif filesize != filesize_copy or hash != hash_copy:
-        logging.fatal("Copying to copy disk failed. " +\
+        logging.fatal("Copying to copy disk failed.\n" +\
                       "Difference in filesize is {filesize}. ".format(filesize=filesize - filesize_primary) +\
-                      "The hash of the file was {hash}. ".format(hash=hash) +\
+                      "The hash of the file was {hash}.\n".format(hash=hash) +\
                       "The hash on the primary is {hash_primary}. ".format(hash_primary=hash_primary) +\
                       "The hash on the copy is {hash_copy}.".format(hash_copy=hash_copy))
         raise RuntimeError("Copying to copy disk failed")
@@ -94,6 +106,7 @@ def get_file_info(file):
     sha512hash = sha512sum(file)
     return filesize, sha512hash
 
+
 def sha512sum(file, blocksize=65536):
     """
     Calculating the sha512 checksum of a file
@@ -105,10 +118,12 @@ def sha512sum(file, blocksize=65536):
     :return: Sting representing the hex digest of the hash
     """
     hasher = hashlib.sha512()
+    logging.debug("Hashing file {0}".format(file))
     with open(file, "rb") as file:
         for block in iter(lambda: file.read(blocksize), ""):
-            hash.update(block)
-    return hash.hexdigest()
+            hasher.update(block)
+    return hasher.hexdigest()
+
 
 def get_useable_disk(db):
     """
@@ -124,8 +139,8 @@ def get_useable_disk(db):
         if len(results) == 2:
             results.sort()
             # We should be on the same disk number for primary and copy
-            if results[0][1:] == results[1][1:]
-                return results
+            if results[0][1:] == results[1][1:]:
+                return results[0][0], results[1][0]
             else:
                 logging.fatal("The disk number for primary and copy don't match. " +\
                               "That should not be possible. Something went wrong in the DB.")
@@ -140,6 +155,7 @@ def get_useable_disk(db):
         logging.fatal("Cannot find usable disk.")
         raise RuntimeError()
 
+
 def mark_disk_full(db, primary_disk, copy_disk):
     """
     Run two SQL commands to mark a disk as full
@@ -151,6 +167,7 @@ def mark_disk_full(db, primary_disk, copy_disk):
     cursor = db.cursor()
     cursor.execute("UPDATE disks SET full='True' WHERE label = '{0}' OR label = '{1}".format(primary_disk, copy_disk))
     cursor.execute("UPDATE disks SET previously_used='False' WHERE label = '{0}' OR label = '{1}".format(primary_disk, copy_disk))
+
 
 def get_new_disk(db, primary_disk, copy_disk):
     """
@@ -167,9 +184,12 @@ def get_new_disk(db, primary_disk, copy_disk):
     if int(primary_disk[1:]) > 42 or int(copy_disk[1:]) > 28:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM disks WHERE label = '{0}' OR label = '{1}'".format(new_primary_disk, new_copy_disk))
-    if :
-        raise RuntimeError("This disk is not available. Please update this error or the ")
-    return new_primary_disk, new_copy_disk
+        if cursor.fetchall():
+            return new_primary_disk, new_copy_disk
+        else:
+            raise RuntimeError("This disk is not available. Please update the DB or check out what happened here.")
+    
+
 
 def get_current_disk_space(primary_disk, copy_disk):
     """
@@ -185,11 +205,13 @@ def get_current_disk_space(primary_disk, copy_disk):
     freespace_copy = disk_stats_copy.f_bavail * disk_stats_copy.f_frsize
     return freespace_primary, freespace_copy
 
-def run():
-    with sqlite3.connect("spt_data_management.db") as db:
+
+def run(config):
+    with sqlite3.connect(os.path.expandvars(config["DB"]["filenamedb"])) as db:
         primary_disk, copy_disk = get_useable_disk(db)
-        new_files = check_new_files(db,)
-        if new_files:
+        logging.debug("Primary Disk is {0}. Copy disk is {1}".format(primary_disk, copy_disk))
+        new_files = check_new_files(db, config["Data"]["bufferlocation"] + "*." + config["Data"]["extension"])
+        if not new_files:
             logging.info("No new files. Exiting")
             sys.exit()
         disk_stats_primary = os.statvfs("/spt_disks/{0}".format(primary_disk))
@@ -199,16 +221,45 @@ def run():
             if freespace_primary < os.stat(file).st_size and freespace_copy < os.stat(file).st_size :
                 mark_disk_full(db, primary_disk, copy_disk)
                 primary_disk, copy_disk = get_new_disk(db)
-                copy_file_to_disks(file, primary_disk, copy_disk)
+                copy_file_to_disks(db, file, primary_disk, copy_disk)
             else:
-                copy_file_to_disks(file)
+                copy_file_to_disks(db, file, primary_disk, copy_disk)
+
+def config_options_dict(config):
+    """
+    Parsing config file
+
+    :param config: Python config parser object
+    :return: dict with the different sections of the config file
+             and the literal values of the configuraton objects
+    """
+    config_dict = {}
+    for section in config.sections():
+        config_dict[section] = {}
+        for option in config.options(section):
+            val = config.get(section, option)
+            try:
+                val = ast.literal_eval(val)
+            except Exception:
+                pass
+            config_dict[section][option] = val
+    return config_dict
+
+def check_config(config):
+    if not os.path.exists(config["DB"]["filenamedb"]):
+        raise RuntimeError("Cannot find DB file")
+    if not os.path.exists(config["Data"]["bufferlocation"]):
+        raise RuntimeError("Buffer location does nost exist")
 
 def main():
-    # if not os.path.exists(options.config_file):
-    #     raise RuntimeError("Config file {} does not exist".format(options.config_file))
-    # config = configparser.ConfigParser()
-    # config.read(options.config_file)
-    run()
+    if not os.path.exists(options.config_file):
+        raise RuntimeError("Config file {0} does not exist".format(options.config_file))
+    config = configparser.ConfigParser()
+    config.read(options.config_file)
+    config_dict = config_options_dict(config)
+    print(config_dict)
+    run(config_dict)
+
 
 if __name__ == "__main__":
     main()
