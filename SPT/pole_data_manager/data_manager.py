@@ -173,7 +173,7 @@ def get_useable_disk(db):
                               "That should not be possible. Something went wrong in the DB.")
                 raise RuntimeError()
         elif len(results) > 2:
-            logging.fatal("Too many active disks.")
+            logging.fatal("Too many active disks: {0}".format(results))
             raise RuntimeError()
         else:
             logging.fatal("Not enough disks.")
@@ -192,8 +192,11 @@ def mark_disk_full(db, primary_disk, copy_disk):
     :param copy_disk: Label for copy disk
     """
     cursor = db.cursor()
-    cursor.execute("UPDATE disks SET full='True' WHERE label = '{0}' OR label = '{1}".format(primary_disk, copy_disk))
-    cursor.execute("UPDATE disks SET previously_used='False' WHERE label = '{0}' OR label = '{1}".format(primary_disk, copy_disk))
+    cursor.execute("UPDATE disks SET full='True' WHERE label = '{0}'".format(primary_disk))
+    cursor.execute("UPDATE disks SET full='True' WHERE label = '{0}'".format(copy_disk))
+    cursor.execute("UPDATE disks SET previously_used='False' WHERE label = '{0}'".format(primary_disk))
+    cursor.execute("UPDATE disks SET previously_used='False' WHERE label = '{0}'".format(copy_disk))
+
 
 
 def get_new_disk(db, primary_disk, copy_disk):
@@ -206,15 +209,16 @@ def get_new_disk(db, primary_disk, copy_disk):
     :param copy_disk: Label for copy disk
     :return: Tuple with new disk labels to be used
     """
+    cursor = db.cursor()
     new_primary_disk = 'P%02d'%(int(primary_disk[1:])+1)
     new_copy_disk = 'S%02d'%(int(copy_disk[1:])+1)
     if int(primary_disk[1:]) > 42 or int(copy_disk[1:]) > 28:
-        cursor = db.cursor()
         cursor.execute("SELECT * FROM disks WHERE label = '{0}' OR label = '{1}'".format(new_primary_disk, new_copy_disk))
-        if cursor.fetchall():
-            return new_primary_disk, new_copy_disk
-        else:
+        if cursor.fetchall() is None:
             raise RuntimeError("This disk is not available. Please update the DB or check out what happened here.")
+    cursor.execute("UPDATE disks SET previously_used='True' WHERE label = '{0}'".format(new_primary_disk))
+    cursor.execute("UPDATE disks SET previously_used='True' WHERE label = '{0}'".format(new_copy_disk))
+    return new_primary_disk, new_copy_disk
     
 
 
@@ -247,10 +251,14 @@ def run(config):
         disk_stats_primary = os.statvfs("/spt_disks/{0}".format(primary_disk))
         disk_stats_copy = os.statvfs("/spt_disks/{0}".format(copy_disk))
         freespace_primary, freespace_copy = get_current_disk_space(primary_disk, copy_disk)
+        logging.debug("Primary Disk is {0} and has {1} free space. Copy disk is {2} and has {3} ".format(primary_disk, freespace_primary, copy_disk, freespace_copy))
         for file in new_files:
+            # TODO: or statement if one disk isnt quite full yet... what to do?
             if freespace_primary < os.stat(file).st_size and freespace_copy < os.stat(file).st_size :
+                logging.debug("Getting new disks")
                 mark_disk_full(db, primary_disk, copy_disk)
-                primary_disk, copy_disk = get_new_disk(db)
+                primary_disk, copy_disk = get_new_disk(db, primary_disk, copy_disk)
+                logging.debug("New Primary Disk is {0}. New Copy disk is {1}".format(primary_disk, copy_disk))
                 copy_file_to_disks(db, file, primary_disk, copy_disk)
                 if config["General"]["testing"]:
                     raise RuntimeWarning("Done testing")
@@ -284,7 +292,7 @@ def check_config(config):
         raise RuntimeError("Buffer location does nost exist")
 
 def testing(config):
-    i = 0 
+    i = 3
     while True:
         logging.debug("Creating file /buffer/file_testing_{0}.txt".format(i))
         command = "dd if=/dev/urandom of=/buffer/file_testing_{0}.txt count=1048576 bs=4096".format(i)
@@ -296,7 +304,9 @@ def testing(config):
         print(output, error)
         try:
             run(config)
+            logging.debug("Removing file")
             os.remove("/buffer/file_testing_{0}.txt".format(i))
+            logging.debug("Removing file")
         except:
             break
         i += 1
