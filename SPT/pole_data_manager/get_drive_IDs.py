@@ -44,7 +44,7 @@ def get_sn_label_map(infilename = "disk-map-v3"):
     Reading in mapping file
 
     :param infilename: File name of mapping between label and drive serial number
-    :return: 
+    :return: dict with {<serial number>: <label>}
     """
     sn_to_label = {}
     with open(infilename, "rt") as infile:
