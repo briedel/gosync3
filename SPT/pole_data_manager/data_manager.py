@@ -33,7 +33,7 @@ def check_new_files(db, path_to_new_files):
 
     :param db: sqlite3 database object
     :param path_to_new_files: Path to data buffer dir
-    :return: List of files that need to be copied to 
+    :return: List of files that need to be copied to
              disk and added to file catalog
     """
     cursor = db.cursor()
@@ -52,22 +52,25 @@ def check_new_files(db, path_to_new_files):
                 filesize, hash = get_file_info(file)
                 if hash != results[0][2] and filesize != results[0][3]:
                     logging.critical(("File %s has the same basename as a "
-                                      "previously copied file, but a different "
-                                      "checksum and size. Please have a look."), 
+                                      "previously copied file, but a "
+                                      "different checksum and size. "
+                                      "Please have a look."),
                                      file)
                     ping_winterovers()
                     raise RuntimeError("Issue with finding new files")
                 elif hash != results[0][2]:
                     logging.critical(("File %s has the same basename as a "
-                                      "previously copied file, but a different "
-                                      "checksum. Please have a look."), file)
+                                      "previously copied file, but a "
+                                      "different checksum. "
+                                      "Please have a look."), file)
                     ping_winterovers()
                     sys.exit()
                     raise RuntimeError("Issue with finding new files")
                 elif filesize != results[0][3]:
                     logging.critical(("File %s has the same basename as a "
-                                      "previously copied file, but a different "
-                                      "filesize. Please have a look."), file)
+                                      "previously copied file, but a "
+                                      "different filesize. Please have a "
+                                      "look."), file)
                     ping_winterovers()
                     raise RuntimeError("Issue with finding new files")
                 else:
@@ -114,34 +117,32 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
     filesize_copy, hash_copy = get_file_info(copy_disk_path)
     # Raising hell if they haven't
     if filesize != filesize_primary or hash != hash_primary:
-        logging.fatal(("Copying to primary disk failed.\nDifference in filesize"
-                       " is %d bytes. The hash of the file was %s.\nThe hash on"
-                       " the primary disk is %s. The hash on the copy is %s."),
-                        filesize - filesize_primary,
-                        hash, 
-                        hash_primary, 
-                        hash_copy)
+        logging.fatal(("Copying to primary disk failed.\nDifference in "
+                       "filesize is %d bytes. The hash of the file was %s.\n"
+                       "The hash on the primary disk is %s. The hash on the "
+                       "copy is %s."), filesize - filesize_primary, hash,
+                      hash_primary,
+                      hash_copy)
         raise RuntimeError()
     elif filesize != filesize_copy or hash != hash_copy:
-        logging.fatal(("Copying to copy disk failed.\nDifference in filesize"
-                       " is %d bytes. The hash of the file was %s.\nThe hash on"
-                       " the primary disk is %s. The hash on the copy is %s."),
-                        filesize - filesize_copy,
-                        hash, 
-                        hash_primary, 
-                        hash_copy)
+        logging.fatal(("Copying to copy disk failed.\nDifference in "
+                       "filesize is %d bytes. The hash of the file was %s.\n"
+                       "The hash on the primary disk is %s. The hash on the "
+                       "copy is %s."), filesize - filesize_copy, hash,
+                      hash_primary,
+                      hash_copy)
         raise RuntimeError()
     else:
         # If file copied successfully. Add info to DB
         cursor = db.cursor()
         cursor.execute("""
-                       INSERT INTO files (filename, checksum, filesize, 
-                       disk_primary, disk_copy) VALUES ('{name}', '{checksum}', 
+                       INSERT INTO files (filename, checksum, filesize,
+                       disk_primary, disk_copy) VALUES ('{name}', '{checksum}',
                        '{filesize}','{disk_primary}', '{disk_copy}')
-                       """.format(name = os.path.basename(filename), 
-                                  checksum = hash, filesize = filesize, 
-                                  disk_primary = primary_disk, 
-                                  disk_copy = copy_disk))
+                       """.format(name=os.path.basename(filename),
+                                  checksum=hash, filesize=filesize,
+                                  disk_primary=primary_disk,
+                                  disk_copy=copy_disk))
 
 
 def get_file_info(file):
@@ -161,7 +162,7 @@ def sha512sum(file, blocksize=65536):
     bit-by-bit
 
     :param file: File path
-    :param blocksize: How much of the file should 
+    :param blocksize: How much of the file should
                       read in at a time
     :return: Sting representing the hex digest of the hash
     """
@@ -181,8 +182,8 @@ def get_useable_disk(db):
     :return: List with the primary and copy disk label
     """
     cursor = db.cursor()
-    cursor.execute("""SELECT label FROM disks 
-                      WHERE previously_used = 'True' AND full='False'""") 
+    cursor.execute("""SELECT label FROM disks
+                      WHERE previously_used = 'True' AND full='False'""")
     results = cursor.fetchall()
     if results:
         if len(results) == 2:
@@ -217,16 +218,18 @@ def mark_disks_full(db, primary_disk, copy_disk):
     mark_disk_full(db, primary_disk)
     mark_disk_full(db, copy_disk)
 
+
 def mark_disk_full(db, disk):
     cursor = db.cursor()
-    cursor.execute("""UPDATE disks SET full='True', previously_used='False' 
+    cursor.execute("""UPDATE disks SET full='True', previously_used='False'
                       WHERE label = '{0}'""".format(disk))
+
 
 def get_new_disks(db, primary_disk, copy_disk):
     """
-    Simply increment the disk numbers by one. If the disk number is over the 
-    expected number of disks, check the DB and see if disks have been added. 
-    
+    Simply increment the disk numbers by one. If the disk number is over the
+    expected number of disks, check the DB and see if disks have been added.
+
     :param db: sqlite3 database object
     :param primary_disk: Label for primary disk
     :param copy_disk: Label for copy disk
@@ -236,24 +239,25 @@ def get_new_disks(db, primary_disk, copy_disk):
     new_copy_disk = get_new_disk(db, copy_disk)
     return new_primary_disk, new_copy_disk
 
+
 def get_new_disk(db, disk):
     """
-    Simply increment the disk numbers by one. If the disk number is over the 
-    expected number of disks, check the DB and see if disks have been added. 
+    Simply increment the disk numbers by one. If the disk number is over the
+    expected number of disks, check the DB and see if disks have been added.
 
     :param db: sqlite3 database object
     :param disk: Disk ID to be incremented
     :return: New Disk ID
     """
     cursor = db.cursor()
-    new_disk = "%s%02d" % (disk[0], int(disk[1:])+1)
+    new_disk = "%s%02d" % (disk[0], int(disk[1:]) + 1)
     # Sanity check that the disk exists in the DB
     cursor.execute("SELECT * FROM disks WHERE label = '{0}'".format(new_disk))
     if cursor.fetchall() is None:
-            logging.fatal(("The disk %s is not available. Please update the DB "
-                           "or check out what happened here."), new_disk)
+            logging.fatal(("The disk %s is not available. Please update the "
+                           "DB or check out what happened here."), new_disk)
             raise RuntimeError()
-    cursor.execute("""UPDATE disks SET previously_used='True' 
+    cursor.execute("""UPDATE disks SET previously_used='True'
                       WHERE label = '{0}'""".format(new_disk))
     return new_disk
 
@@ -272,8 +276,8 @@ def get_current_disk_space(config, primary_disk, copy_disk):
     copy_disk_abspath = os.path.join(mountpoint, copy_disk, "")
     disk_stats_primary = os.statvfs(primary_disk_abspath)
     disk_stats_copy = os.statvfs(copy_disk_abspath)
-    freespace_primary = disk_stats_primary.f_bavail * \
-                        disk_stats_primary.f_frsize
+    freespace_primary = (disk_stats_primary.f_bavail *
+                         disk_stats_primary.f_frsize)
     freespace_copy = disk_stats_copy.f_bavail * disk_stats_copy.f_frsize
     return freespace_primary, freespace_copy
 
@@ -319,34 +323,35 @@ def check_config(config):
         logging.fatal("Disk mount does not exist")
         raise RuntimeError()
 
+
 def run(config):
     with sqlite3.connect(os.path.expandvars(config["DB"]["filenamedb"])) as db:
         primary_disk, copy_disk = get_useable_disk(db)
-        logging.debug("Primary Disk is %s. Copy disk is %s", 
-                      primary_disk, 
+        logging.debug("Primary Disk is %s. Copy disk is %s",
+                      primary_disk,
                       copy_disk)
-        new_files = check_new_files(db, config["Data"]["bufferlocation"] +
-                                        "*." + config["Data"]["extension"])
+        new_files = check_new_files(db, (config["Data"]["bufferlocation"] +
+                                         "*." + config["Data"]["extension"]))
         if not new_files:
             logging.info("No new files. Exiting")
             sys.exit()
-        freespace_primary, freespace_copy = get_current_disk_space(primary_disk, 
-                                                                   copy_disk)
+        freespace_prim, freespace_copy = get_current_disk_space(primary_disk,
+                                                                copy_disk)
         logging.debug(("Primary Disk is %s and has %d GB free. "
                        "Copy disk is %s and has %d GB free"),
-                       primary_disk,
-                       freespace_copy/(1024.*1024),
-                       copy_disk,
-                       freespace_copy/(1024.*1024.))
+                      primary_disk,
+                      freespace_prim / (1024. * 1024.),
+                      copy_disk,
+                      freespace_copy / (1024. * 1024.))
         for file in new_files:
             filesize = os.stat(file).st_size
-            if (freespace_primary < filesize and 
-                freespace_copy < filesize):
-                logging.info(("Getting new disks. Primary Disk %s and copy disk"
-                              "%s are full."), primary_disk, copy_disk)
+            if (freespace_prim < filesize and
+               freespace_copy < filesize):
+                logging.info(("Getting new disks. Primary Disk %s and copy "
+                              "disk%s are full."), primary_disk, copy_disk)
                 mark_disks_full(db, primary_disk, copy_disk)
-                primary_disk, copy_disk = get_new_disks(db, 
-                                                        primary_disk, 
+                primary_disk, copy_disk = get_new_disks(db,
+                                                        primary_disk,
                                                         copy_disk)
                 logging.debug("New Primary Disk is %s. New Copy disk is %s",
                               primary_disk,
@@ -354,7 +359,7 @@ def run(config):
                 if config["General"]["testing"]:
                     logging.fatal("Done testing")
                     raise RuntimeWarning()
-            elif freespace_primary < filesize:
+            elif freespace_prim < filesize:
                 logging.info("Primary Disk %s is full.", primary_disk)
                 mark_disk_full(db, primary_disk)
                 primary_disk = get_new_disk(db, primary_disk)
@@ -364,12 +369,13 @@ def run(config):
                 mark_disk_full(db, copy_disk)
                 copy_disk = get_new_disk(db, copy_disk)
                 logging.info("New Copy Disk is %s.", copy_disk)
-            copy_file_to_disks(db, file, primary_disk, copy_disk)
+            copy_file_to_disks(config, db, file, primary_disk, copy_disk)
+
 
 def testing(config):
     i = 3
     while True:
-        buffer_file = os.path.join(config["Data"]["bufferlocation"], 
+        buffer_file = os.path.join(config["Data"]["bufferlocation"],
                                    "file_testing_{0}.txt".format(i))
         logging.debug("Creating file %s", buffer_file)
         command = "dd if=/dev/urandom of={0} ".format(buffer_file) +\
@@ -388,10 +394,10 @@ def testing(config):
             break
         i += 1
 
+
 def main():
     if not os.path.exists(options.config_file):
-        logging.log_fatal("Config file {0} ".format(options.config_file) +\
-                           "does not exist")
+        logging.log_fatal("Config file %s does not exist", options.config_file)
         raise RuntimeError()
     config = configparser.ConfigParser()
     config.read(options.config_file)
