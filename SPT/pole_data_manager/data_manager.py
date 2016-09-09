@@ -20,7 +20,7 @@ parser.add_option("--config", dest="config_file", default="data_manager.conf",
 (options, args) = parser.parse_args()
 
 logging.basicConfig(level=logging.DEBUG,
-                    format=('%(asctime)s %(name)-12s '
+                    format=('%(asctime)s %(name)-2s Line %(lineno)d '
                             '%(levelname)-8s %(message)s'),
                     datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -49,6 +49,7 @@ def check_new_files(db, path_to_new_files):
                               WHERE filename = '{0}'""".format(file_basename))
             results = cursor.fetchall()
             if results:
+                logging.debug("Checking for file duplicate")
                 filesize, hash = get_file_info(file)
                 if hash != results[0][2] and filesize != results[0][3]:
                     logging.critical(("File %s has the same basename as a "
@@ -74,7 +75,7 @@ def check_new_files(db, path_to_new_files):
                     ping_winterovers()
                     raise RuntimeError("Issue with finding new files")
                 else:
-                    logging.info(("File {0} has the same basename, checksum, "
+                    logging.info(("File %s has the same basename, checksum, "
                                   "and filesize as a previously copied file. "
                                   "Ignoring file."), file)
                     continue
@@ -143,7 +144,7 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
                                   checksum=hash, filesize=filesize,
                                   disk_primary=primary_disk,
                                   disk_copy=copy_disk))
-
+        logging.info("Successfully copied file %s to Primary Disk %s and Copy Disk %s", os.path.basename(filename), primary_disk, copy_disk)
 
 def get_file_info(file):
     """
@@ -183,7 +184,7 @@ def get_useable_disk(db):
     """
     cursor = db.cursor()
     cursor.execute("""SELECT label FROM disks
-                      WHERE previously_used = 'True' AND full='False'""")
+                      WHERE previously_used='True' AND full='False'""")
     results = cursor.fetchall()
     if results:
         if len(results) == 2:
@@ -203,7 +204,7 @@ def get_useable_disk(db):
             logging.fatal("Not enough disks.")
             raise RuntimeError()
     else:
-        logging.fatal("Cannot find usable disk.")
+        logging.fatal("Cannot find usable disk. Database returned %s", results)
         raise RuntimeError()
 
 
@@ -330,12 +331,17 @@ def run(config):
         logging.debug("Primary Disk is %s. Copy disk is %s",
                       primary_disk,
                       copy_disk)
-        new_files = check_new_files(db, (config["Data"]["bufferlocation"] +
-                                         "*." + config["Data"]["extension"]))
+        logging.debug("Looking for files with pattern %s", 
+                      os.path.join(config["Data"]["bufferlocation"],
+                                   "*." + config["Data"]["extension"]))
+        new_files = check_new_files(db, 
+                                    os.path.join(config["Data"]["bufferlocation"],
+                                                 "*." + config["Data"]["extension"]))
         if not new_files:
             logging.info("No new files. Exiting")
             sys.exit()
-        freespace_prim, freespace_copy = get_current_disk_space(primary_disk,
+        freespace_prim, freespace_copy = get_current_disk_space(config,
+                                                                primary_disk,
                                                                 copy_disk)
         logging.debug(("Primary Disk is %s and has %d GB free. "
                        "Copy disk is %s and has %d GB free"),
@@ -370,6 +376,9 @@ def run(config):
                 copy_disk = get_new_disk(db, copy_disk)
                 logging.info("New Copy Disk is %s.", copy_disk)
             copy_file_to_disks(config, db, file, primary_disk, copy_disk)
+            if "cleanup" in config["Data"] and config["Data"]["cleanup"]:
+                logging.info("Removing file %s", file)
+                os.remove(file)
 
 
 def testing(config):
