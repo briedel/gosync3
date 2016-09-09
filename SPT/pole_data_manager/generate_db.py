@@ -19,6 +19,8 @@ parser.add_option("--diskfile", dest="disk_filename", default="disk-map",
                   help="File with relationship between labels, disk serial number, and partition uuid")
 parser.add_option("--newDB", action="store_true", dest="new_DB", default=False,
                   help="Completely new DB")
+parser.add_option("--pole", action="store_false", dest="pole",
+                  help="Assuming we are using the pole setup. More checks: Disk size, disk space, etc.")
 (options, args) = parser.parse_args()
 
 def main():
@@ -36,48 +38,57 @@ def main():
                 for line in f:
                     line = line.rstrip("\n")
                     label, serial_number, logical_id = line.split(" ")
+                    if not os.path.exists("/spt_disks/{0}".format(label)):
+                        raise RuntimeError("Mountpoint does not exist")
                     st = os.statvfs("/spt_disks/{0}".format(label))
                     free = st.f_bavail * st.f_frsize
                     total = st.f_blocks * st.f_frsize
                     used = (st.f_blocks - st.f_bfree) * st.f_frsize
-                    ####
-                    # TODO: Numbers for free, used edge cases need adjusting according 
-                    #       to expected filesizes
-                    #       35028992 is the default used space
-                    #       7999426224128 is the default disk size
-                    #       7999391195136 is the free space in a formated disk
-                    ####
-                    if total < 7999426224128:
-                        logging.fatal("Disk /spt_disks/{0} is maller than expected. Something is weird".format(label))
-                        raise RuntimeError("Exiting because disk mount appears corrupted. Check mount on /spt_disks/{0}".format(label))
-                    if (label == "P01" or label == "S01") and options.new_DB and free > 35028992:   
-                        conn.execute("""
-                        insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                        values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
-                        """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
-                                   alive=True, full=False, max_space=total, space_used=used,
-                                   previously_used=True))
-                    elif options.new_DB and free > 35028992 and used > 35028992:
-                        conn.execute("""
-                        insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                        values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
-                        """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
-                                   alive=True, full=False, max_space=total, space_used=used,
-                                   previously_used=True))
-                    elif options.new_DB and used == 35028992 :
-                        conn.execute("""
-                        insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                        values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
-                        """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
-                                   alive=True, full=False, max_space=total, space_used=used,
-                                   previously_used=False))
+                    previously_used = False
+                    if options.pole:
+                        ####
+                        # TODO: Numbers for free, used edge cases need adjusting according 
+                        #       to expected filesizes
+                        #       35028992 is the default used space
+                        #       7999426224128 is the default disk size
+                        #       7999391195136 is the free space in a formated disk
+                        ####
+                        if total < 7999426224128:
+                            # Are the drives below 8 TB..... Odd!
+                            logging.fatal("Disk /spt_disks/{0} is maller than expected. Something is weird".format(label))
+                            raise RuntimeError("Exiting because disk mount appears corrupted. Check mount on /spt_disks/{0}".format(label))
+                        if (label == "P01" or label == "S01") and options.new_DB and free > 35028992: # free number has to change  
+                            # 
+                            # conn.execute("""
+                            #                 insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
+                            #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
+                            #              """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
+                            #                         alive=True, full=False, max_space=total, space_used=used,
+                            #                         previously_used=True))
+                            previously_used = True 
+                        elif options.new_DB and free > 35028992 and used > 35028992: # free and used number have to change
+                            # conn.execute("""
+                            #                insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
+                            #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
+                            #              """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
+                            #                         alive=True, full=False, max_space=total, space_used=used,
+                            #                         previously_used=True))
+                            previously_used = True
+                        # elif options.new_DB and used <= 35028992 : # This is for drives that are full????? dunno what i was thinking here
+                            # conn.execute("""
+                            #                 insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
+                            #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
+                            #              """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
+                            #                         alive=True, full=False, max_space=total, space_used=used,
+                            #                         previously_used=False))
                     else:
-                        conn.execute("""
+                        previously_used = True 
+                    conn.execute("""
                         insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
                         values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
                         """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
                                    alive=True, full=False, max_space=total, space_used=used,
-                                   previously_used=False))
+                                   previously_used=previously_used))
 
 if __name__ == "__main__":
     main()
