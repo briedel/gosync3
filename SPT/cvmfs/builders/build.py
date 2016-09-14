@@ -8,12 +8,12 @@ Example:
 
 import sys
 import os
+from build_util import get_module
 
 # append this directory to the path
 if os.path.dirname(__file__) not in sys.path:
     sys.path.append(os.path.dirname(__file__))
 
-from build_util import get_module
 
 def get_variants():
     build_variants = {}
@@ -27,14 +27,16 @@ def get_variants():
                 raise
     return build_variants
 
+
 def absolute(p):
     return os.path.abspath(os.path.expandvars(os.path.expanduser(p)))
 
+
 def main():
     from optparse import OptionParser
-    
+
     parser = OptionParser()
-    parser.add_option("--dest", type="string", default=None, 
+    parser.add_option("--dest", type="string", default=None,
                       help="CVMFS repository destination (inside repo)")
     parser.add_option("--src", type="string", default=None, 
                       help="Source for repository template")

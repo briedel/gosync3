@@ -111,7 +111,7 @@ def build(src, dest, **build_kwargs):
     tools['tcl_tk']['8.6.5'](dir_name)
     tools['cmake']['3.5.2'](dir_name)
     tools['zmq']['4.1.4'](dir_name)
-    tools['bzip2']['1.0.6'](dir_name) # needs new build file
+    tools['bzip2']['1.0.6'](dir_name)
     tools['python']['2.7.11'](dir_name)
     tools['pip']['latest'](dir_name)
     tools['gsl']['2.1'](dir_name)
@@ -121,6 +121,6 @@ def build(src, dest, **build_kwargs):
     tools['fftw']['3.3.4'](dir_name)
     tools['healpix']['3.20'](dir_name)
     tools['hdf5']['1.8.17'](dir_name)
-    tools['freetype']['2.6.3'](dir_name) # needs new build file
-    tools['netcdf']['4.4.0'](dir_name) # needs new build file
-    tools['flac']['1.3.1'](dir_name) # needs new build file
+    tools['freetype']['2.6.3'](dir_name)
+    tools['netcdf']['4.4.0'](dir_name)
+    tools['flac']['1.3.1'](dir_name)
