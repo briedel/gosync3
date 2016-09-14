@@ -74,7 +74,7 @@ def build(src, dest, **build_kwargs):
     # first, make sure the base dir is there
     dir_name = os.path.join(dest, 'py2-v1')
     copy_src(os.path.join(src, 'py2-v1'), dir_name)
-
+    
     # now, do the OS-specific stuff
     load_env(dir_name)
     if 'SROOT' not in os.environ:
