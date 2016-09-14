@@ -16,7 +16,7 @@ def install(dir_name, version=None):
             path = os.path.join(tmp_dir,name)
             url = os.path.join('http://downloads.xiph.org/releases/flac/', name)
             wget(url, path)
-            unpack(path, tmp_dir)
+            unpack_xz(path, tmp_dir)
             flac_dir = os.path.join(tmp_dir, 'flac-' + version)
             if subprocess.call([os.path.join(flac_dir,' configure'),
                                 '--prefix=' + dir_name], cwd = flac_dir):
