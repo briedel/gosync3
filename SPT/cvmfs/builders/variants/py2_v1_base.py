@@ -96,6 +96,7 @@ def build(src, dest, **build_kwargs):
         tools['m4']['1.4.17'](dir_name)
         tools['bison']['3.0.4'](dir_name)
         tools['flex']['2.6.0'](dir_name)
+        tools['binutil']['2.26'](dir_name)
         tools['gcc']['5.3.0'](dir_name)
 
     tools['m4']['1.4.17'](dir_name)
