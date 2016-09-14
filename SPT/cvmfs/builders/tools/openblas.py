@@ -7,6 +7,12 @@ import shutil
 
 from build_util import wget, unpack, version_dict
 
+try:
+    import multiprocessing
+    cpu_cores = multiprocessing.cpu_count()
+except ImportError:
+    cpu_cores = 1
+
 def install(dir_name,version=None):
     if not os.path.exists(os.path.join(dir_name,'lib','libopenblas.so')):
         print('installing openblas version',version)
@@ -34,7 +40,7 @@ def install(dir_name,version=None):
                     f.write(line+'\n')
             finally:
                 f.close()
-            if subprocess.call(['make'],cwd=openblas_dir):
+            if subprocess.call(['make', '-j'+str(cpu_cores)],cwd=openblas_dir):
                 raise Exception('openblas failed to make')
             if subprocess.call(['make','install'],cwd=openblas_dir):
                 raise Exception('openblas failed to install')
