@@ -122,6 +122,7 @@ def build(src, dest, **build_kwargs):
     tools['fftw']['3.3.4'](dir_name)
     tools['healpix']['3.20'](dir_name)
     tools['hdf5']['1.8.17'](dir_name)
+    tools['png']['1.6.25'](dir_name)
     tools['freetype']['2.6.3'](dir_name)
     tools['netcdf']['4.4.0'](dir_name)
     tools['flac']['1.3.1'](dir_name)
