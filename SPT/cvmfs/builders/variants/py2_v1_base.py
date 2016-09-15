@@ -74,7 +74,7 @@ def build(src, dest, **build_kwargs):
     # first, make sure the base dir is there
     dir_name = os.path.join(dest, 'py2-v1')
     copy_src(os.path.join(src, 'py2-v1'), dir_name)
-    
+
     # now, do the OS-specific stuff
     load_env(dir_name)
     if 'SROOT' not in os.environ:
@@ -86,7 +86,6 @@ def build(src, dest, **build_kwargs):
 
     # install a temporary gcc in order to bootstrap clang
     if not os.path.exists(os.path.join(dir_name, 'bin', 'gcc')):
-        orig_environ = os.environ
         del os.environ['CC']
         del os.environ['CXX']
         tools['gmp']['6.1.0'](dir_name)
@@ -126,3 +125,5 @@ def build(src, dest, **build_kwargs):
     tools['freetype']['2.6.3'](dir_name)
     tools['netcdf']['4.4.0'](dir_name)
     tools['flac']['1.3.1'](dir_name)
+
+    python_packages(dir_name)
