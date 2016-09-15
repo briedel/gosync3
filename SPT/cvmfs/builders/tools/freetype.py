@@ -16,7 +16,7 @@ def install(dir_name, version=None):
             path = os.path.join(tmp_dir,name)
             url = os.path.join('http://download.savannah.gnu.org/releases/freetype/', name)
             wget(url, path)
-            unpack_bz(path, tmp_dir)
+            unpack_bz2(path, tmp_dir)
             freetype_dir = os.path.join(tmp_dir, 'freetype-' + version)
             if subprocess.call([os.path.join(freetype_dir,' configure'),
                                 '--prefix=' + dir_name], cwd = freetype_dir):
