@@ -18,9 +18,6 @@ def install(dir_name, version=None):
             wget(url, path)
             unpack(path, tmp_dir)
             bzip2_dir = os.path.join(tmp_dir, 'bzip2-' + version)
-            # if subprocess.call([os.path.join(netcdf_dir,' configure'),
-            #                     '--prefix=' + dir_name], cwd = netcdf_dir):
-            #     raise Exception('cmake failed to configure')
             if subprocess.call(['make', 'install', 'PREFIX=%s' % dir_name], cwd = bzip2_dir):
                 raise Exception('bzip2 failed to make')
             if subprocess.call(['make','clean'], cwd = bzip2_dir):
