@@ -18,7 +18,7 @@ def install(dir_name, version=None):
             wget(url, path)
             unpack_bz2(path, tmp_dir)
             freetype_dir = os.path.join(tmp_dir, 'freetype-' + version)
-            if subprocess.call([os.path.join(freetype_dir,' configure'),
+            if subprocess.call([os.path.join(freetype_dir, 'configure'),
                                 '--prefix=' + dir_name], cwd = freetype_dir):
                 raise Exception('freetype failed to configure')
             if subprocess.call(['make'], cwd = freetype_dir):
