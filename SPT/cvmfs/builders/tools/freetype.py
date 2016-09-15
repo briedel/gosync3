@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import shutil
 
-from build_util import wget, unpack_bz, version_dict
+from build_util import wget, unpack_bz2, version_dict
 
 def install(dir_name, version=None):
     if not os.path.exists(os.path.join(dir_name, 'lib', 'libfreetype.so')):
