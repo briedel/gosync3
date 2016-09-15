@@ -24,13 +24,13 @@ def install(dir_name,version=None):
             url = os.path.join('http://ftp.gnu.org/gnu/binutils/', name)
             wget(url,path)
             unpack(path,tmp_dir)
-            binutils_dir = os.path.join(tmp_dir,'binutils')
+            binutils_dir = os.path.join(tmp_dir,'binutils-'+version)
             configure_options = [
                 '--prefix=' + dir_name,
                 '--with-gmp-include=' + os.path.join(dir_name, "include"),
                 '--with-gmp-lib=' + os.path.join(dir_name, "lib")
             ]
-            if subprocess.call([os.path.join(gcc_dir, 'configure')] + configure_options,
+            if subprocess.call([os.path.join(binutils_dir, 'configure')] + configure_options,
                                 cwd = binutils_dir):
                 raise Exception('gcc failed to configure')
             if subprocess.call(['make', '-j' + str(cpu_cores)],

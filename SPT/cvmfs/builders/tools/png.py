@@ -8,7 +8,7 @@ import shutil
 from build_util import wget, unpack, version_dict
 
 def install(dir_name, version=None):
-    if not os.path.exists(os.path.join(dir_name, 'lib', 'ligpng.so')):
+    if not os.path.exists(os.path.join(dir_name, 'lib', 'libpng.so')):
         print('installing freetype version', version)
         name = 'libpng-' + str(version) + '.tar.gz'
         try:

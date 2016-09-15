@@ -4,7 +4,6 @@ import os
 import subprocess
 import tempfile
 import shutil
-import glob
 
 from build_util import wget, version_dict
 

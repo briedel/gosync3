@@ -18,7 +18,7 @@ def install(dir_name, version=None):
             wget(url, path)
             unpack(path, tmp_dir)
             netcdf_dir = os.path.join(tmp_dir, 'netcdf-' + version)
-            if subprocess.call([os.path.join(netcdf_dir,' configure'),
+            if subprocess.call([os.path.join(netcdf_dir,'configure'),
                                 '--prefix=' + dir_name], cwd = netcdf_dir):
                 raise Exception('netcdf failed to configure')
             if subprocess.call(['make'], cwd = netcdf_dir):

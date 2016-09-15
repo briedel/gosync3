@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import shutil
 
-from build_util import wget, unpack, version_dict
+from build_util import wget, unpack_xz, version_dict
 
 def install(dir_name, version=None):
     if not os.path.exists(os.path.join(dir_name, 'bin', 'flac')):
@@ -18,7 +18,7 @@ def install(dir_name, version=None):
             wget(url, path)
             unpack_xz(path, tmp_dir)
             flac_dir = os.path.join(tmp_dir, 'flac-' + version)
-            if subprocess.call([os.path.join(flac_dir,' configure'),
+            if subprocess.call([os.path.join(flac_dir,'configure'),
                                 '--prefix=' + dir_name], cwd = flac_dir):
                 raise Exception('flac failed to configure')
             if subprocess.call(['make'], cwd = flac_dir):
