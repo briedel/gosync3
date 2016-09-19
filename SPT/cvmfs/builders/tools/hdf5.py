@@ -14,10 +14,14 @@ def install(dir_name,version=None):
         try:
             tmp_dir = tempfile.mkdtemp()
             path = os.path.join(tmp_dir,name)
-            url = os.path.join('http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-'+version,'src',name)
+            # url = os.path.join('http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-'+version,'src',name)
+            url = os.path.join("https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-" + version, 'src', name)
             wget(url,path)
             unpack(path,tmp_dir,flags=['-xj'])
             hdf5_dir = os.path.join(tmp_dir,'hdf5-'+version)
+            if 'CC' in os.environ:
+                os.environ["HDF5_CC"] = os.environ["CC"]
+            # os.environ["HDF5_CLINKER"] = os.path.join(dir_name, "bin", "ld")
             if subprocess.call([os.path.join(hdf5_dir,'configure'),
                                 '--prefix',dir_name,'--disable-debug',
                                 '--enable-cxx','--enable-production',
