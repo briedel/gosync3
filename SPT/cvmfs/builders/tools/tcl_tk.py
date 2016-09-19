@@ -23,7 +23,6 @@ def install(dir_name,version=None):
             unpack(tcl_path,tmp_dir)
             unpack(tk_path,tmp_dir)
             tcl_dir = os.path.join(tmp_dir,'tcl'+str(version),'unix')
-            print tcl_dir
             if subprocess.call([os.path.join(tcl_dir,'configure'),'--prefix',
                                 dir_name,'--disable-shared'],cwd=tcl_dir):
                 raise Exception('tcl failed to configure')
