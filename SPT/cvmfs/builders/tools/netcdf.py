@@ -18,6 +18,8 @@ def install(dir_name, version=None):
             wget(url, path)
             unpack(path, tmp_dir)
             netcdf_dir = os.path.join(tmp_dir, 'netcdf-' + version)
+            os.environ['CPPFLAGS'] = "-I%s/include" % dir_name
+            os.environ['LDFLAGS'] = "-L%s/lib" % dir_name
             if subprocess.call([os.path.join(netcdf_dir,'configure'),
                                 '--prefix=' + dir_name], cwd = netcdf_dir):
                 raise Exception('netcdf failed to configure')
@@ -25,6 +27,8 @@ def install(dir_name, version=None):
                 raise Exception('netcdf failed to make')
             if subprocess.call(['make','install'], cwd = netcdf_dir):
                 raise Exception('netcdf failed to install')
+            del os.environ['CPPFLAGS']
+            del os.environ['LDFLAGS']
         finally:
             shutil.rmtree(tmp_dir)
 
