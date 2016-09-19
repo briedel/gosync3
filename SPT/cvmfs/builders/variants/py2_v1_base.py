@@ -1,7 +1,6 @@
 # build the /py2-v1 directory, for this OS
 
 import os
-
 from build_util import *
 
 tools = get_tools()
@@ -84,8 +83,11 @@ def build(src, dest, **build_kwargs):
     # fill OS-specific directory with dirs
     create_os_specific_dirs(dir_name)
 
+
     # install a temporary gcc in order to bootstrap clang
     if not os.path.exists(os.path.join(dir_name, 'bin', 'gcc')):
+        del os.environ['CC']
+        del os.environ['CXX']
         tools['gmp']['6.1.0'](dir_name)
         tools['mpfr']['3.1.4'](dir_name)
         tools['mpc']['1.0.3'](dir_name)
@@ -95,7 +97,7 @@ def build(src, dest, **build_kwargs):
         tools['flex']['2.6.0'](dir_name)
         tools['binutil']['2.26'](dir_name)
         tools['gcc']['5.3.0'](dir_name)
-
+    
     tools['m4']['1.4.17'](dir_name)
     tools['xz']['5.2.2'](dir_name)
     tools['libtool']['2.4.6'](dir_name)
@@ -120,6 +122,7 @@ def build(src, dest, **build_kwargs):
     tools['healpix']['3.20'](dir_name)
     tools['hdf5']['1.8.17'](dir_name)
     tools['gsoap']['2.8.22'](dir_name)
+    # tools['globus']['6.0.1470089956'](dir_name)
     tools['globus']['5.2.5'](dir_name)
     tools['png']['1.6.25'](dir_name)
     tools['freetype']['2.6.3'](dir_name)
