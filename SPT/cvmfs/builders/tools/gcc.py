@@ -64,6 +64,7 @@ def install(dir_name, version=None, gfortran_only=False):
                 raise Exception('gcc failed to make')
             if subprocess.call(['make','install'],cwd = gcc_dir, env = mod_env):
                 raise Exception('gcc failed to install')
+            os.symlink(os.path.join(dir_name, "bin", "gcc"), os.path.join(dir_name, "bin", "cc"))
         finally:
             shutil.rmtree(tmp_dir)
 
