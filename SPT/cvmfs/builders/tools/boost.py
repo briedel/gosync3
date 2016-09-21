@@ -27,6 +27,11 @@ def install(dir_name,version=None,for_clang=False):
             wget(url,path)
             unpack(path,tmp_dir)
             boost_dir = os.path.join(tmp_dir,'boost_'+version.replace('.','_'))
+            if version == "1.61.0":
+                wget("https://github.com/scopeInfinity/iostreams/commit/61a91325d936b0a9e6baaed6c974d0808e166822.patch",
+                      os.path.join(boost_dir,"61a91325d936b0a9e6baaed6c974d0808e166822.patch"))
+                subprocess.call(["patch", "-p2", "<", "61a91325d936b0a9e6baaed6c974d0808e166822.patch"], cwd=boost_dir)
+            print(os.environ["PYTHONPATH"], os.environ["LD_LIBRARY_PATH"])
             if for_clang:
                 if subprocess.call([os.path.join(boost_dir,'bootstrap.sh'),
                                     '--prefix='+dir_name,'--with-toolset=clang'],cwd=boost_dir):
@@ -37,7 +42,7 @@ def install(dir_name,version=None,for_clang=False):
                 if subprocess.call([os.path.join(boost_dir,'bootstrap.sh'),
                                     '--prefix='+dir_name],cwd=boost_dir):
                     raise Exception('boost failed to bootstrap')
-                if subprocess.call([os.path.join(boost_dir,'b2'),'install','-j'+str(cpu_cores)],cwd=boost_dir):
+                if subprocess.call([os.path.join(boost_dir,'b2'),'install','-j'+str(cpu_cores), 'cxxflags="-std=c++11"'],cwd=boost_dir):
                     raise Exception('boost failed to b2 install')
         finally:
             shutil.rmtree(tmp_dir)
