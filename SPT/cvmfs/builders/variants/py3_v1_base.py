@@ -13,7 +13,7 @@ def python_packages(dir_name):
                 'ipython==5.0.0', 'jupyter==1.0.0', 'pyfits==3.0.7',
                 'astropy==1.1.2', 'numexpr==2.5.2', 'Cython==0.24',
                 'matplotlib==1.5.0', 'Sphinx==1.4.1', 
-                'urwid==1.3.2', 'healpy==1.9.1', 'spectrum==0.6.1',
+                'urwid==1.3.1', 'healpy==1.9.1', 'spectrum==0.6.1',
                 'SQLAlchemy==1.0.13', 'PyYAML==3.11', 'ephem==3.7.6.0',
                 'idlsave==1.0.0', 'ipdb==0.10.0', 'jsonschema==2.5.1'
                 ]
@@ -86,16 +86,19 @@ def build(src, dest, **build_kwargs):
 
     # install a temporary gcc in order to bootstrap clang
     if not os.path.exists(os.path.join(dir_name, 'bin', 'gcc')):
+        del os.environ['CC']
+        del os.environ['CXX']
         tools['gmp']['6.1.0'](dir_name)
         tools['mpfr']['3.1.4'](dir_name)
         tools['mpc']['1.0.3'](dir_name)
-        tools['binutil']['2.26'](dir_name) # needs new build file
         tools['isl']['0.14'](dir_name)
+        tools['m4']['1.4.17'](dir_name)
         tools['bison']['3.0.4'](dir_name)
         tools['flex']['2.6.0'](dir_name)
-
+        tools['binutil']['2.26'](dir_name)
         tools['gcc']['5.3.0'](dir_name)
-
+        os.remove(os.path.join(dir_name, "bin", "m4"))
+    
     tools['m4']['1.4.17'](dir_name)
     tools['xz']['5.2.2'](dir_name)
     tools['libtool']['2.4.6'](dir_name)
@@ -105,14 +108,14 @@ def build(src, dest, **build_kwargs):
     tools['libxml2']['2.9.2'](dir_name)
     tools['readline']['6.3'](dir_name)
     tools['sqlite']['3081002'](dir_name)
-    tools['python']['3.5.2'](dir_name)
     tools['tcl_tk']['8.6.5'](dir_name)
+    tools['python']['3.5.2'](dir_name)
     tools['cmake']['3.5.2'](dir_name)
     tools['zmq']['4.1.4'](dir_name)
     tools['bzip2']['1.0.6'](dir_name)
     tools['pip']['latest'](dir_name)
     tools['gsl']['2.1'](dir_name)
-    tools['boost']['1.57.0'](dir_name)
+    tools['boost']['1.61.0'](dir_name)
     tools['openblas']['0.2.18'](dir_name)
     tools['cfitsio']['3.390'](dir_name)
     tools['fftw']['3.3.4'](dir_name)

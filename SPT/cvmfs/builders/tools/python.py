@@ -8,6 +8,12 @@ import shutil
 from distutils.version import LooseVersion
 from build_util import wget, unpack, version_dict
 
+try:
+    import multiprocessing
+    cpu_cores = multiprocessing.cpu_count()
+except ImportError:
+    cpu_cores = 1
+
 def install(dir_name,version=None):
     if not os.path.exists(os.path.join(dir_name,'bin','python')):
         print('installing python version',version)
@@ -23,7 +29,7 @@ def install(dir_name,version=None):
                                 '--prefix',dir_name,'--enable-shared'],
                                cwd=python_dir):
                 raise Exception('python failed to configure')
-            if subprocess.call(['make'],cwd=python_dir):
+            if subprocess.call(['make', '-j', str(cpu_cores)],cwd=python_dir):
                 raise Exception('python failed to make')
             if subprocess.call(['make','install'],cwd=python_dir):
                 raise Exception('python failed to install')
@@ -31,7 +37,7 @@ def install(dir_name,version=None):
             v = LooseVersion(version)
             # Python 3 specific symlinks
             if v.version[0] == 3:
-                version_short = v.version[:2] 
+                version_short = ".".join(map(str, v.version[:2]))
                 os.symlink(os.path.join(dir_name,'bin','python3'),
                            os.path.join(dir_name,'bin','python'))
                 os.symlink(os.path.join(dir_name, 'bin', 'python3-config'),
