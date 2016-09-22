@@ -5,7 +5,6 @@ import subprocess
 import tempfile
 import shutil
 
-from distutils.version import LooseVersion
 from build_util import wget, unzip, version_dict
 
 def install(dir_name,version=None):
@@ -14,8 +13,7 @@ def install(dir_name,version=None):
         name = 'gsoap_'+str(version)+'.zip'
         try:
             tmp_dir = tempfile.mkdtemp()
-            v = LooseVersion(version)
-            version_short = ".".join(map(str, v.version[:2]))
+            version_short = ".".join(version.split(".")[:2])
             path = os.path.join(tmp_dir,name)
             url = os.path.join('http://downloads.sourceforge.net/project/gsoap2',
                                'gsoap-%s' % version_short,
