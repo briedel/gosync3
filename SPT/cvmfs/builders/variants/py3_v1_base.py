@@ -74,13 +74,14 @@ def build(src, dest, **build_kwargs):
     # first, make sure the base dir is there
     dir_name = os.path.join(dest, 'py3-v1')
     copy_src(os.path.join(src, 'py3-v1'), dir_name)
-
+    
+    
     # now, do the OS-specific stuff
+    del os.environ["PYTHONPATH"]
     load_env(dir_name)
     if 'SROOT' not in os.environ:
         raise Exception('$SROOT not defined')
     dir_name = os.environ['SROOT']
-
     # fill OS-specific directory with dirs
     create_os_specific_dirs(dir_name)
 
