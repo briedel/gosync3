@@ -39,7 +39,6 @@ def install(dir_name,version=None,i3ports=False,for_clang=False):
                     break
             else:
                 raise Exception('healpix: cannot determine tarball name')
-            print 'NAME:',name
             url = os.path.join('http://downloads.sourceforge.net/project/healpix/Healpix_'+version,name)
             # the sourceforge retry
             wget(url,path,retry=5)
