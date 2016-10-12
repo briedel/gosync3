@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 from __future__ import print_function
 # import os
-# import sys
+import sys
 import logging
 # import getopt
 # import time
 # import glob
 # import json
-# import re
+import re
 # import fnmatch
 # import errno
 # import random
@@ -19,38 +19,145 @@ from optparse import OptionParser
 
 from util import *
 
-try:
-    from nexus import GlobusOnlineRestClient
-except:
-    logging.error(("Cannot import Globus Nexus. Trying to "
-                   "import Globus SDK Auth Client"))
-    try:
-        from globus_sdk import AuthClient
-    except:
-        logging.error(("Cannot import Globus Auth Client "
-                       "or Globus Nexus. Exiting"))
-        raise RuntimeError()
+def list_html(groups, baseurl):
+    print('<link rel="stylesheet" href="projects.css" />')
+    print('<link rel="stylesheet" href="projects.css" />')
+    print('<table id="grouplist" cellpadding="0" cellspacing="0">')
+    print('<tr><th>Project Name</th><th>Description</th></tr>')
+    for g in groups:
+        url = baseurl + g['id']
+        name = self.groupnamemap(g['name'])
+        print('<tr>')
+        print(('<td><a name="%s" href="%s">%s</a></td>') % (name,
+                                                            url,
+                                                            name))
+        print('<td>' + g['description'].encode('utf-8') + '</td>')
+        print('</tr>')
+    print('</table>')
+
+
+def list_text(groups, baseurl, dehtml):
+    for g in groups:
+        textdesc = dehtml.sub('',
+                              g['description'].encode('ascii',
+                                                      'ignore'))
+        textdesc = textdesc.replace('\n', '\\n')
+        textdesc = textdesc.replace('\r', '\\r')
+        print('%s %s %s' % (
+              g['name'],
+              baseurl + g['id'],
+              textdesc))
+
+
+def list_csv(groups, baseurl, dehtml):
+    print('groupname,url,description')
+    for g in groups:
+        textdesc = dehtml.sub('',
+                              g['description'].encode('ascii',
+                                                      'ignore'))
+        textdesc = textdesc.replace(',', '\,')
+        textdesc = textdesc.replace('\n', '\\n')
+        textdesc = textdesc.replace('\r', '\\r')
+        print('%s,%s,%s' % (
+              g['name'],
+              baseurl + g['id'],
+              textdesc))
+
+def list_xml(groups, baseurl, dehtml):
+    print('<?xml version="1.0" encoding="utf-8"?>')
+    print('<groups>')
+    for g in groups:
+        htmldesc = g['description']
+        htmldesc = htmldesc.replace('&', '&amp;')
+        htmldesc = htmldesc.replace('<', '&lt;')
+        htmldesc = htmldesc.replace('>', '&gt;')
+        textdesc = dehtml.sub('',
+                              g['description'].encode('ascii',
+                                                      'ignore'))
+        textdesc = textdesc.replace('&', '&amp;')
+        textdesc = textdesc.replace('<', '&lt;')
+        textdesc = textdesc.replace('>', '&gt;')
+        print('  <group>')
+        print('    <name>' + g['name'].encode('utf-8') + '</name>')
+        print('    <url>' + baseurl + g['id'] + '</url>')
+        print('    <description>')
+        print('      <html>' + htmldesc.encode('utf-8') + '</html>')
+        print('      <text>' + textdesc.encode('utf-8') + '</text>')
+        print('    </description>')
+        print('  </group>')
+    print('</groups>')
+
+
+def list_json(groups, baseurl, dehtml):
+    o = {'groups': []}
+    for g in groups:
+        htmldesc = g['description']
+        textdesc = dehtml.sub('',
+                              g['description'].encode('ascii',
+                                                      'ignore'))
+        g = {
+            'name': g['name'].encode('utf-8'),
+            'url': baseurl + g['id'],
+            'description': {
+                'html': htmldesc.encode('utf-8'),
+                'text': textdesc.encode('utf-8'),
+            },
+        }
+        o['groups'].append(g)
+    print(json.dumps(o, indent=4))
+
+
+def list_groups(options, client):
+    group_cache = (client.get_group_list(my_roles=['admin'])[1] +
+                   client.get_group_list(my_roles=['manager'])[1])
+    # print(group_cache)
+    # for keys, value in group_cache[-1].items():
+    #     print(keys, value)
+    # print(group_cache[-1].keys())
+    groups = get_groups(group_cache)
+    if options.baseurl:
+        options.baseurl = 'https://%s/Groups#id=' % config['gosync']['server']
+    if options.outfile is not None:
+        sys.stdout = open(options.outfile, "tw")
+    dehtml = re.compile('<[^>]+>')
+    for frmt in options.format:
+        if frmt.lower() == "html":
+            list_html(groups, options.baseurl)
+        elif frmt.lower() == 'text':
+            list_text(groups, options.baseurl, dehtml)
+        elif frmt.lower() == 'csv':
+            list_csv(groups, options.baseurl, dehtml)
+        elif frmt.lower() == 'xml':
+            list_xml(groups, options.baseurl, dehtml)
+        elif frmt.lower() == 'json':
+            list_json(groups, options.baseurl, dehtml)
+        else:
+            logging.fatal(("Provided format (%s) not support. "
+                           "Please choose a supported format: "
+                           "html, text, csv, xml, json") % options.format)
+            raise RuntimeError()
+    if options.outfile is not None:
+        sys.stdout.close()
 
 
 def main(options, args):
     config = parse_config(options.config)
-    nexusconfig = {"server": config['globus']['server'],
-                   "client": "admin",
-                   "client_secret": config['secrets']['connect']}
-    client = GlobusOnlineRestClient(config=nexusconfig)
-    print(client)
-    print(client.get_group_list(my_roles=['admin']))
+    client = get_globus_client(config)
+    list_groups(options, client)
+
 
 
 if __name__ == '__main__':
-
     parser = OptionParser()
     parser.add_option("--config", dest="config", default="gosync.conf",
                       help="config file to use",)
     parser.add_option("-v", "--verbosity", dest="verbosity",
                       help="Set logging level", default=3)
-    parser.add_option("--format", dest="format",
-                      help="Output format to use")
+    parser.add_option("--format", dest="format", default=['html'],
+                      action="callback", callback=callback_optparse,
+                      help="Output format to use given as a list")
+    parser.add_option("-o", "--outfile", dest="outfile", default=None,
+                      help="Output file to write things too")
     parser.add_option("--force", dest="force", action="store_true",
                       default=False, help="Force update information")
     parser.add_option("--baseurl", dest="baseurl", default=None,
