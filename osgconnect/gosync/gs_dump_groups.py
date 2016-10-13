@@ -19,7 +19,11 @@ from optparse import OptionParser
 
 from util import *
 
+
 def list_html(groups, baseurl):
+    """
+
+    """
     print('<link rel="stylesheet" href="projects.css" />')
     print('<link rel="stylesheet" href="projects.css" />')
     print('<table id="grouplist" cellpadding="0" cellspacing="0">')
@@ -144,7 +148,6 @@ def main(options, args):
     config = parse_config(options.config)
     client = get_globus_client(config)
     list_groups(options, client)
-
 
 
 if __name__ == '__main__':
