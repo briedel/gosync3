@@ -549,7 +549,12 @@ class gosync(object):
 
 
     def groupnamemap(self, name):
+        print name
         for matcher, xform in self.mapper:
+            print matcher, xform
+            print matcher(name)
+            print xform(name)
+            sys.exit()
             if matcher(name):
                 return xform(name)
         return name
@@ -647,7 +652,7 @@ class gosync(object):
             self.error('invalid command: %s' % cstr)
             self.usage()
             return 2
-
+        print driver
         return driver(args)
 
 
@@ -693,7 +698,7 @@ class gosync(object):
         if args is None:
             self.usage()
             return 2
-
+        print args
         self.cfg = config()
 
         if not self.files:
@@ -713,6 +718,7 @@ class gosync(object):
         # create group name mappings
         map = {}
         for expr, xform in self.cfg.items('groupnamemaps'):
+            print expr, xform
             map[expr] = (Matcher.matchfunc(expr), eval(xform))
         self.mapper = []
         for mapping in self.cfg.getlist('group', 'namemaps'):
@@ -722,6 +728,7 @@ class gosync(object):
         self.client = GlobusOnlineRestClient(config=nexusconfig)
 
         command = args.pop(0)
+        print command
         return self.dispatch(command, args)
 
 
@@ -942,9 +949,11 @@ class gosync(object):
                 filter += base
             else:
                 filter.append(arg)
-
+        print filter
         matcher = Matcher(filter)
+        print groups[1]
         groups = matcher(groups, key=lambda g: g['name'])
+        print groups[1]
         groups.sort(lambda a, b: cmp(a['name'], b['name']))
 
         dehtml = re.compile('<[^>]+>')

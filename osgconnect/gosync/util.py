@@ -53,8 +53,20 @@ def get_globus_client(config):
     return client
 
 
-def get_groups(group_cache):
-    pass
+def uniclean(to_clean):
+    if isinstance(to_clean, str):
+        return to_clean
+    if isinstance(to_clean, unicode):
+        return to_clean.encode('latin-1', 'replace')
+    if isinstance(to_clean, list):
+        return [uniclean(x) for x in to_clean]
+    if isinstance(to_clean, dict):
+        new = {}
+        for k, v in to_clean.items():
+            new[str(k)] = uniclean(v)
+        return new
+
+    return None
 
 
 def callback_optparse(option, opt_str, value, parser):
@@ -68,3 +80,17 @@ def callback_optparse(option, opt_str, value, parser):
     if getattr(parser.values, option.dest):
         args.extend(getattr(parser.values, option.dest))
     setattr(parser.values, option.dest, args)
+
+
+# def strip_filters(group):
+#     if "osg" in group:
+#         return group.split('.')[-1]
+#     if "duke" in group or "atlas" in group:
+#         return group.replace('.', '-')
+
+def strip_filters(group, filters):
+    for f in filters:
+        if "osg" in f:
+            return group.split('.')[-1]
+        elif ("duke" in f or "atlas" in f):
+            return group.replace('.', '-')
