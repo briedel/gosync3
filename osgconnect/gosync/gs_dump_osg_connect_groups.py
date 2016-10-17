@@ -119,8 +119,7 @@ def get_groups(options, group_cache):
 
 
 def list_groups(options, config, client):
-    group_cache = (client.get_group_list(my_roles=['admin'])[1] +
-                   client.get_group_list(my_roles=['manager'])[1])
+    group_cache = get_groups_globus(client, ['admin', 'manager'])
     groups = get_groups(options, group_cache)
     if options.baseurl is None:
         options.baseurl = os.path.join('https://',
