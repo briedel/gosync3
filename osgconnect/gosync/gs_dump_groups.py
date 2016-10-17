@@ -6,12 +6,12 @@ import logging
 # import getopt
 # import time
 # import glob
-import json
-import re
+# import json
+# import re
 # import fnmatch
 # import errno
 # import random
-# import socket
+import socket
 # import grp
 # import pwd
 
@@ -20,139 +20,48 @@ from optparse import OptionParser
 from util import *
 
 
-def list_html(groups, baseurl, filters):
-    print('<link rel="stylesheet" href="projects.css" />')
-    print('<link rel="stylesheet" href="projects.css" />')
-    print('<link rel="stylesheet" href="projects.css" />')
-    print('<table id="grouplist" cellpadding="0" cellspacing="0">')
-    print('<tr><th>Project Name</th><th>Description</th></tr>')
-    for g in groups:
-        url = baseurl + g['id']
-        name = strip_filters(g['name'], filters)
-        print('<tr>')
-        print(('<td><a name="%s" href="%s">%s</a></td>') % (name,
-                                                            url,
-                                                            name))
-        print('<td>' + g['description'].encode('utf-8') + '</td>')
-        print('</tr>')
-    print('</table>')
+def get_connect_groupinfo(config, options):
+    """
+    Parse passwd file to see what users were already provisioned
+
+    :param config: Configuration parameters dict()
+    :param options: Command line options
+    :return: Tuple if lists, where every list is the user information
+    """
+    with open(groups_filename, "rt") as f:
+        group_info = [tuple(line.lstrip("\n").split(":")) for line in f]
+    return tuple(group_info)
 
 
-def list_text(groups, baseurl, dehtml):
-    for g in groups:
-        textdesc = dehtml.sub('',
-                              g['description'].encode('ascii',
-                                                      'ignore'))
-        textdesc = textdesc.replace('\n', '\\n')
-        textdesc = textdesc.replace('\r', '\\r')
-        print('%s %s %s' % (
-              g['name'],
-              baseurl + g['id'],
-              textdesc))
+def generate_groupid(group_name):
+    return (hash(group_name) % 4999) + 5000
 
 
-def list_csv(groups, baseurl, dehtml):
-    print('groupname,url,description')
-    for g in groups:
-        textdesc = dehtml.sub('',
-                              g['description'].encode('ascii',
-                                                      'ignore'))
-        textdesc = textdesc.replace(',', '\,')
-        textdesc = textdesc.replace('\n', '\\n')
-        textdesc = textdesc.replace('\r', '\\r')
-        print('%s,%s,%s' % (
-              g['name'],
-              baseurl + g['id'],
-              textdesc))
+def get_group_line(group):
+    g_name = "@" + strip_filters(group['name'], filters)
+    members = get_globus_group_members(config, client, group)
+    gid = generate_groupid(g_name)
+    group_line = [g_name,
+                  "x",
+                  str(gid),
+                  ",".join(members)]
+    return group_line
 
 
-def list_xml(groups, baseurl, dehtml):
-    print('<?xml version="1.0" encoding="utf-8"?>')
-    print('<groups>')
-    for g in groups:
-        htmldesc = g['description']
-        htmldesc = htmldesc.replace('&', '&amp;')
-        htmldesc = htmldesc.replace('<', '&lt;')
-        htmldesc = htmldesc.replace('>', '&gt;')
-        textdesc = dehtml.sub('',
-                              g['description'].encode('ascii',
-                                                      'ignore'))
-        textdesc = textdesc.replace('&', '&amp;')
-        textdesc = textdesc.replace('<', '&lt;')
-        textdesc = textdesc.replace('>', '&gt;')
-        print('  <group>')
-        print('    <name>' + g['name'].encode('utf-8') + '</name>')
-        print('    <url>' + baseurl + g['id'] + '</url>')
-        print('    <description>')
-        print('      <html>' + htmldesc.encode('utf-8') + '</html>')
-        print('      <text>' + textdesc.encode('utf-8') + '</text>')
-        print('    </description>')
-        print('  </group>')
-    print('</groups>')
-
-
-def list_json(groups, baseurl, dehtml):
-    o = {'groups': []}
-    for g in groups:
-        htmldesc = g['description']
-        textdesc = dehtml.sub('',
-                              g['description'].encode('ascii',
-                                                      'ignore'))
-        g = {
-            'name': g['name'].encode('utf-8'),
-            'url': baseurl + g['id'],
-            'description': {
-                'html': htmldesc.encode('utf-8'),
-                'text': textdesc.encode('utf-8'),
-            },
-        }
-        o['groups'].append(g)
-    print(json.dumps(o, indent=4))
-
-
-def get_groups(options, group_cache):
-    group_cache = uniclean(group_cache)
-    groups = [g for g in group_cache
-              if g['name'].startswith(tuple(options.filters))]
-    groups.sort(key=lambda k: k['name'])
-    return groups
-
-
-def list_groups(options, config, client):
-    group_cache = (client.get_group_list(my_roles=['admin'])[1] +
-                   client.get_group_list(my_roles=['manager'])[1])
-    groups = get_groups(options, group_cache)
-    if options.baseurl is None:
-        options.baseurl = os.path.join('https://',
-                                       config['gosync']['server'],
-                                       'Groups#id=')
-    dehtml = re.compile('<[^>]+>')
-    for frmt in options.format:
-        if options.outfile is not None:
-            sys.stdout = open(options.outfile + ".%s" % frmt, "wt")
-        if frmt.lower() == "html":
-            list_html(groups, options.baseurl, options.filters)
-        elif frmt.lower() == 'text':
-            list_text(groups, options.baseurl, dehtml)
-        elif frmt.lower() == 'csv':
-            list_csv(groups, options.baseurl, dehtml)
-        elif frmt.lower() == 'xml':
-            list_xml(groups, options.baseurl, dehtml)
-        elif frmt.lower() == 'json':
-            list_json(groups, options.baseurl, dehtml)
-        else:
-            logging.fatal(("Provided format (%s) not support. "
-                           "Please choose a supported format: "
-                           "html, text, csv, xml, json") % options.format)
-            raise RuntimeError()
-        if options.outfile is not None:
-            sys.stdout.close()
+def write_group_file(groups):
+    with open(groups_filename, "wt") as f:
+        for g in groups:
+            group_line = get_group_line(group)
+            f.write(":".join(group_line))
 
 
 def main(options, args):
     config = parse_config(options.config)
     client = get_globus_client(config)
-    list_groups(options, config, client)
+    groups_cache = get_groups_globus(client,
+                                     ['admin', 'manager'])
+    groups = get_groups(options, groups_cache)
+    write_group_file(groups)
 
 
 if __name__ == '__main__':
