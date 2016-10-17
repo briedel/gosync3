@@ -551,10 +551,6 @@ class gosync(object):
     def groupnamemap(self, name):
         print name
         for matcher, xform in self.mapper:
-            print matcher, xform
-            print matcher(name)
-            print xform(name)
-            sys.exit()
             if matcher(name):
                 return xform(name)
         return name
