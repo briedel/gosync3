@@ -18,7 +18,7 @@ def get_connect_userinfo(config, options):
     :param options: Command line options
     :return: Tuple if lists, where every list is the user information
     """
-    with open(passwd_filename, "rt") as f:
+    with open(config["users"]["passwd_file"], "rt") as f:
         user_info = [tuple(line.lstrip("\n").split(":")) for line in f]
     return tuple(user_info)
 
@@ -86,9 +86,8 @@ def gen_new_passwd(globus_user, used_usernames, used_user_ids):
     :return: List with user information. Every entry corresponds to position of
              of the information in the users passwd file.
     """
-
     if str(globus_user['username']) in used_usernames:
-        logging.error("Trying to provision user %s again. Duplicate user")
+        logging.error("Trying to provision user %s again. Duplicate user", str(globus_user['username']))
         raise RuntimeError()
     while True:
         new_user_id = random.randint(10000, 65001)
@@ -113,7 +112,7 @@ def get_users_to_work_on(options, config, client):
     :param client: Globus Nexus RESTful client
     :return: Tuple of users to work on
     """
-    globus_members = get_globus_group_members(config, client)
+    globus_members = get_globus_group_members(options, config, client)
     connect_usernames = get_connect_usernames(config, options)
     # separate new and old users
     new_users = []
@@ -153,16 +152,18 @@ def work_on_users(options, config, globus_users):
     connect_userids = get_connect_user_ids(config, options)
     for member in globus_users:
         username = str(member['username'])
-        passwd_line = gen_new_passwd(member,
-                                     connect_usernames,
-                                     connect_userids)
         try:
+            passwd_line = gen_new_passwd(member,
+                                         connect_usernames,
+                                         connect_userids)
             go_user_profile = client.get_user_profile(username)[1]
         except socket.timeout:
             # if we time out, pause and resume, skipping current
             logging.error(("Socket timed out. Waiting for 5 seconds. "
                            "User %s was skipped") % username)
             time.sleep(5)
+            continue
+        except:
             continue
         if 'credentials' in go_user_profile:
             member['ssh'] = sorted([cred['ssh_key']
@@ -175,7 +176,7 @@ def work_on_users(options, config, globus_users):
         elif options.onlyupdated:
             update_user(member, passwd_line, connect_usernames)
         else:
-            pass
+            create_new_user(member, passwd_line)
 
 
 def update_user(member, passwd_line, connect_usernames):

@@ -63,6 +63,7 @@ def get_globus_client(config):
     nexus_config = {"server": config['globus']['server'],
                     "client": config['globus']['client_user'],
                     "client_secret": config['secrets']['connect']}
+    print(nexus_config)
     client = GlobusOnlineRestClient(config=nexus_config)
     return client
 
@@ -133,7 +134,10 @@ def get_groups_globus(client, roles):
     :return: List of all groups in Globus Nexus groups
              that are associated with a role
     """
-    return client.get_group_list(my_roles=[roles])[1]
+    if isinstance(roles, str):
+        return client.get_group_list(my_roles=[roles])[1]
+    if isinstance(roles, list):
+        return client.get_group_list(my_roles=roles)[1]
 
 
 def filter_groups(groups, group_names):
@@ -307,7 +311,7 @@ def add_email_forwarding(member, passwd_line):
     os.chown(forward_file, int(passwd_line[2]), int(passwd_line[3]))
 
 
-def get_globus_group_members(config, client, groups=None):
+def get_globus_group_members(options, config, client, groups=None):
     """
     Getting all the active members of the group from globus nexus
 
@@ -316,8 +320,11 @@ def get_globus_group_members(config, client, groups=None):
     :return: List of "active" members
     """
     members = []
+    group_cache = get_groups_globus(client, ['admin', 'manager'])
+    groups = get_groups(config, group_cache)
     if groups is None:
-        group_ids = get_groupid(config["globus"]["root_group"])
+        group_ids = get_groupid(groups, config["globus"]["root_group"])
+        # group_ids = config["globus"]["root_group"]
     else:
         group_ids = get_groupid(groups)
     for group_id in group_ids:
@@ -331,3 +338,10 @@ def get_globus_group_members(config, client, groups=None):
                     if member and member['status'] == 'active']
     # members.sort(key=lambda m: m['name'])
     return members
+
+def get_groups(config, group_cache):
+    group_cache = uniclean(group_cache)
+    groups = [g for g in group_cache
+              if g['name'].startswith(tuple(config["groups"]["filters"]))]
+    groups.sort(key=lambda k: k['name'])
+    return groups
