@@ -63,7 +63,6 @@ def get_globus_client(config):
     nexus_config = {"server": config['globus']['server'],
                     "client": config['globus']['client_user'],
                     "client_secret": config['secrets']['connect']}
-    print(nexus_config)
     client = GlobusOnlineRestClient(config=nexus_config)
     return client
 
@@ -140,6 +139,14 @@ def get_groups_globus(client, roles):
         return client.get_group_list(my_roles=roles)[1]
 
 
+def get_groups(config, group_cache):
+    group_cache = uniclean(group_cache)
+    groups = [g for g in group_cache
+              if g['name'].startswith(tuple(config["groups"]["filters"]))]
+    groups.sort(key=lambda k: k['name'])
+    return groups
+
+
 def filter_groups(groups, group_names):
     """
     Return group(s) we are interested in
@@ -148,6 +155,8 @@ def filter_groups(groups, group_names):
     :param group_names: Group(s) we are interested in
     :return: List of or individual group(s)
     """
+    if isinstance(group_names, str):
+        group_names = [group_names]
     filtered_groups = [g for g in groups if g['name'] in group_names]
     if isinstance(group_names, list):
         return filtered_groups
@@ -171,6 +180,44 @@ def get_groupid(groups, names=None):
     else:
         return [groups['id']]
 
+
+# def get_groupids(globus_groups, groups, names):
+#     # groups_cache = get_groups_globus(client,
+#     #                                  ['admin', 'manager'])
+#     # grps = get_groups(options, groups_cache)
+#     if isinstance(groups, str):
+#         groups = [groups]
+#     globus_groups = [g for g in globus_groups if g['name'] in groups]
+#     return get_groupid_from_groups(globus_groups, names)
+
+
+def get_globus_group_members(options, config, client,
+                             globus_groups=None, groups=None):
+    """
+    Getting all the active members of the group from globus nexus
+
+    :param config: Configuration parameters dict()
+    :param client: Globus Nexus RESTful client
+    :return: List of "active" members
+    """
+    members = []
+    if groups is None and globus_groups is None:
+        # Get the group id of the root group
+        group_cache = get_groups_globus(client, ['admin', 'manager'])
+        globus_groups = get_groups(config, group_cache)
+        groups = config["globus"]["root_group"]
+    group_ids = get_groupid(globus_groups, groups)
+    for group_id in group_ids:
+        try:
+            headers, response = client.get_group_members(group_id)
+        except socket.timeout:
+            logging.error("Globus Nexus Server response timed out. Skipping.")
+            time.sleep(5)
+            continue
+        members += [member for member in response['members']
+                    if member and member['status'] == 'active']
+    # members.sort(key=lambda m: m['name'])
+    return members
 
 def recursive_chown(path, uid, gid):
     """
@@ -309,39 +356,3 @@ def add_email_forwarding(member, passwd_line):
         f.write(str(member["email"]))
     os.fchmod(forward_file, 644)
     os.chown(forward_file, int(passwd_line[2]), int(passwd_line[3]))
-
-
-def get_globus_group_members(options, config, client, groups=None):
-    """
-    Getting all the active members of the group from globus nexus
-
-    :param config: Configuration parameters dict()
-    :param client: Globus Nexus RESTful client
-    :return: List of "active" members
-    """
-    members = []
-    group_cache = get_groups_globus(client, ['admin', 'manager'])
-    groups = get_groups(config, group_cache)
-    if groups is None:
-        group_ids = get_groupid(groups, config["globus"]["root_group"])
-        # group_ids = config["globus"]["root_group"]
-    else:
-        group_ids = get_groupid(groups)
-    for group_id in group_ids:
-        try:
-            headers, response = client.get_group_members(group_id)
-        except socket.timeout:
-            logging.error("Globus Nexus Server response timed out. Skipping.")
-            time.sleep(5)
-            continue
-        members += [member for member in response['members']
-                    if member and member['status'] == 'active']
-    # members.sort(key=lambda m: m['name'])
-    return members
-
-def get_groups(config, group_cache):
-    group_cache = uniclean(group_cache)
-    groups = [g for g in group_cache
-              if g['name'].startswith(tuple(config["groups"]["filters"]))]
-    groups.sort(key=lambda k: k['name'])
-    return groups

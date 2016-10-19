@@ -1,19 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import os
-import sys
 import logging
-# import getopt
-# import time
-# import glob
-# import json
-# import re
-# import fnmatch
-# import errno
-# import random
-import socket
-# import grp
-# import pwd
 
 from optparse import OptionParser
 
@@ -37,9 +24,10 @@ def generate_groupid(group_name):
     return (hash(group_name) % 4999) + 5000
 
 
-def get_group_line(group):
+def get_group_line(options, config, client, group):
+    print("here1")
     g_name = "@" + strip_filters(group['name'], filters)
-    members = get_globus_group_members(config, client, group)
+    members = get_globus_group_members(options, config, client, group)
     gid = generate_groupid(g_name)
     group_line = [g_name,
                   "x",
@@ -48,20 +36,22 @@ def get_group_line(group):
     return group_line
 
 
-def write_group_file(groups):
+def write_group_file(options, config, client, groups):
     with open(groups_filename, "wt") as f:
         for g in groups:
-            group_line = get_group_line(group)
+            group_line = get_group_line(options, config, client, group)
             f.write(":".join(group_line))
 
 
 def main(options, args):
     config = parse_config(options.config)
     client = get_globus_client(config)
+    print("here3")
     groups_cache = get_groups_globus(client,
                                      ['admin', 'manager'])
+    print("here2")
     groups = get_groups(options, groups_cache)
-    write_group_file(groups)
+    write_group_file(options, config, client, groups)
 
 
 if __name__ == '__main__':

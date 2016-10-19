@@ -110,14 +110,6 @@ def list_json(groups, baseurl, dehtml):
     print(json.dumps(o, indent=4))
 
 
-def get_groups(options, group_cache):
-    group_cache = uniclean(group_cache)
-    groups = [g for g in group_cache
-              if g['name'].startswith(tuple(options.filters))]
-    groups.sort(key=lambda k: k['name'])
-    return groups
-
-
 def list_groups(options, config, client):
     group_cache = get_groups_globus(client, ['admin', 'manager'])
     groups = get_groups(options, group_cache)

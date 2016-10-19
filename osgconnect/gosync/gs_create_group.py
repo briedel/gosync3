@@ -10,13 +10,45 @@ from optparse import OptionParser
 
 from util import *
 
-def get_group_policy(options, config):
+
+def get_group_policy(options, config, group):
     policy_dir = config["users"]["policy_dir"]
     default_file = config["users"]["default_policy_file"]
+    possible_paths = group.split(".")
+    policy_files = ['policy.' + '.'.join(path[:i]) + '.json'
+                    for i in xrange(len(possible_paths), 0, -1)]
+    for f in policy_files:
+        f = os.path.join(policy_dir, f)
+        if os.path.exists(f):
+            with open(f, "rt") as fp:
+                policy = json.loads(fp.read())
+                return policy
 
 
+def put_globus_group_policy(options, config, client, group, guuid=None):
+    policy = get_group_policy(options, config, group)
+    if guuid is None:
+        grp = 
+        guuid = g['id']
+    client.put_group_policies(guuid, policy)
 
-def add_globus_groups(options, config):
+
+def add_globus_groups(options, config, client, groups):
+    for group in groups:
+        if options.parentgroup is not None:
+            puuid = get_groupids(options, config,
+                                 client, options.parentgroup)
+            name = group
+            g = client.post_group(group, parent=puuid)[1]
+        elif "." in group:
+            parent, name = group.split(".", 1)
+            puuid = get_groupids(options, config,
+                                 client, parent)
+            g = client.post_group(group, parent=puuid)[1]
+        else:
+            name = group
+            g = client.post_group(group)[1]
+        
 
 
 
