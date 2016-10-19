@@ -25,9 +25,9 @@ def generate_groupid(group_name):
 
 
 def get_group_line(options, config, client, group):
-    print("here1")
-    g_name = "@" + strip_filters(group['name'], filters)
+    g_name = "@" + strip_filters(group['name'], config["groups"]["filters"])
     members = get_globus_group_members(options, config, client, group)
+    members = get_usernames(members)
     gid = generate_groupid(g_name)
     group_line = [g_name,
                   "x",
@@ -37,20 +37,18 @@ def get_group_line(options, config, client, group):
 
 
 def write_group_file(options, config, client, groups):
-    with open(groups_filename, "wt") as f:
+    with open(config["groups"]["group_file"], "wt") as f:
         for g in groups:
-            group_line = get_group_line(options, config, client, group)
-            f.write(":".join(group_line))
+            group_line = get_group_line(options, config, client, g)
+            f.write(":".join(group_line) + "\n")
 
 
 def main(options, args):
     config = parse_config(options.config)
     client = get_globus_client(config)
-    print("here3")
     groups_cache = get_groups_globus(client,
                                      ['admin', 'manager'])
-    print("here2")
-    groups = get_groups(options, groups_cache)
+    groups = get_groups(config, groups_cache)
     write_group_file(options, config, client, groups)
 
 

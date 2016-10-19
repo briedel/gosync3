@@ -87,7 +87,8 @@ def gen_new_passwd(globus_user, used_usernames, used_user_ids):
              of the information in the users passwd file.
     """
     if str(globus_user['username']) in used_usernames:
-        logging.error("Trying to provision user %s again. Duplicate user", str(globus_user['username']))
+        logging.error("Trying to provision user %s again. Duplicate user",
+                      str(globus_user['username']))
         raise RuntimeError()
     while True:
         new_user_id = random.randint(10000, 65001)
@@ -117,6 +118,7 @@ def get_users_to_work_on(options, config, client):
     # separate new and old users
     new_users = []
     old_users = []
+    print(globus_members)
     for member in globus_members:
         username = str(member['username'])
         if '@' in username:
@@ -152,6 +154,9 @@ def work_on_users(options, config, globus_users):
     connect_userids = get_connect_user_ids(config, options)
     for member in globus_users:
         username = str(member['username'])
+        if (options.onlyuser is not None and
+           options.onlyuser != username):
+            continue
         try:
             passwd_line = gen_new_passwd(member,
                                          connect_usernames,
@@ -189,10 +194,10 @@ def update_user(member, passwd_line, connect_usernames):
     """
     if passwd_line[0] not in connect_usernames:
         edit_passwd_file(passwd_line, "append")
-    if not os.path.exists(passwd_line[-2]):
-        create_home_dir(passwd_line)
-    add_ssh_key(member, passwd_line)
-    add_email_forwarding(member, passwd_line)
+    # if not os.path.exists(passwd_line[-2]):
+    #     create_home_dir(passwd_line)
+    # add_ssh_key(member, passwd_line)
+    # add_email_forwarding(member, passwd_line)
 
 
 def create_new_user(member):
@@ -204,17 +209,20 @@ def create_new_user(member):
     :param connect_usernames: Tuple of connect user names
     """
     passwd_file(passwd_line, "append")
-    create_home_dir(passwd_line)
-    if member['ssh']:
-        add_ssh_key(member, passwd_line)
-    if member["email"]:
-        add_email_forwarding(member, passwd_line)
+    # create_home_dir(passwd_line)
+    # if member['ssh']:
+    #     add_ssh_key(member, passwd_line)
+    # if member["email"]:
+    #     add_email_forwarding(member, passwd_line)
 
 
 def main(options, args):
     config = parse_config(options.config)
     client = get_globus_client(config)
+    print("here")
     users_work_on = get_users_to_work_on(options, config, client)
+    print("here1")
+    print(users_work_on)
     work_on_users(options, config, users_work_on)
 
 
@@ -230,6 +238,8 @@ if __name__ == '__main__':
                       default=False, help="Force update information")
     parser.add_option("--onlyuser", dest="onlyuser", default=None,
                       help="Force update information")
+    parser.add_option("--forceupdate", dest="forceupdate", action="store_true",
+                      default=False, help="Force update information")
     (options, args) = parser.parse_args()
     level = {
         1: logging.ERROR,

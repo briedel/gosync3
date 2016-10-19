@@ -142,7 +142,8 @@ def get_groups_globus(client, roles):
 def get_groups(config, group_cache):
     group_cache = uniclean(group_cache)
     groups = [g for g in group_cache
-              if g['name'].startswith(tuple(config["groups"]["filters"]))]
+              if g['name'].startswith(tuple(config["groups"]["filters"]))
+              or g['name'] == config["globus"]["root_group"]]
     groups.sort(key=lambda k: k['name'])
     return groups
 
@@ -155,9 +156,12 @@ def filter_groups(groups, group_names):
     :param group_names: Group(s) we are interested in
     :return: List of or individual group(s)
     """
+    # print(group_names)
+    # print(groups)
     if isinstance(group_names, str):
         group_names = [group_names]
     filtered_groups = [g for g in groups if g['name'] in group_names]
+    print(filtered_groups)
     if isinstance(group_names, list):
         return filtered_groups
     elif isinstance(group_names, str):
@@ -218,6 +222,9 @@ def get_globus_group_members(options, config, client,
                     if member and member['status'] == 'active']
     # members.sort(key=lambda m: m['name'])
     return members
+
+def get_usernames(members):
+    return [member["username"] for member in members]
 
 def recursive_chown(path, uid, gid):
     """
