@@ -5,6 +5,7 @@ import logging
 import os
 import time
 import socket
+import shutil
 
 try:
     from nexus import GlobusOnlineRestClient
@@ -139,10 +140,14 @@ def get_groups_globus(client, roles):
         return client.get_group_list(my_roles=roles)[1]
 
 
-def get_groups(config, group_cache):
-    group_cache = uniclean(group_cache)
+def get_groups(config, group_cache, dump_groups=False,
+               remove_unicode=False):
+    if remove_unicode:
+        group_cache = uniclean(group_cache)
     groups = [g for g in group_cache
-              if g['name'].startswith(tuple(config["groups"]["filters"]))]
+              if (g['name'].startswith(tuple(config["groups"]["filters"])) or
+                  (g['name'] == config["globus"]["root_group"] and
+                   not dump_groups))]
     groups.sort(key=lambda k: k['name'])
     return groups
 
@@ -219,6 +224,9 @@ def get_globus_group_members(options, config, client,
     # members.sort(key=lambda m: m['name'])
     return members
 
+def get_usernames(members):
+    return [member["username"] for member in members]
+
 def recursive_chown(path, uid, gid):
     """
     Walk through directory tree and chown everything
@@ -242,7 +250,7 @@ def backup_file(filename):
     """
     t = time.localtime()
     timestamp = time.strftime('%b-%d-%Y_%H%M', t)
-    os.copy(filename, filename + "_" + timestamp)
+    shutil.copyfile(filename, filename + "_" + timestamp)
 
 
 def convert_passwd_line(passwd_line):
@@ -253,6 +261,8 @@ def convert_passwd_line(passwd_line):
     :param passwd_line: List, tuple, or string
     :return:
     """
+    print(len(passwd_line))
+    print(passwd_line)
     if (isinstance(passwd_line, list) or
        isinstance(passwd_line, tuple)):
         if len(passwd_line) != 7:
@@ -260,15 +270,18 @@ def convert_passwd_line(passwd_line):
                           "please check what you are trying to write to "
                           "the passwd file. ")
             raise RuntimeError()
+        print(passwd_line)
         passwd_line = ":".join(passwd_line)
+        print(passwd_line)
     elif (not isinstance(passwd_line, str) or
           ":" not in passwd_line):
         logging.error("passwd_line does not have expected format")
         raise RuntimeError()
+    print(type(passwd_line))
     return passwd_line
 
 
-def edit_passwd_file(passwd_lines, config, mode):
+def edit_passwd_file(config, passwd_lines, mode):
     """
     Adding to or creating new /etc/passwd-style file
 
@@ -288,17 +301,22 @@ def edit_passwd_file(passwd_lines, config, mode):
     if os.path.exists(config['users']['passwd_file']):
         backup_file(config['users']['passwd_file'])
     with open(config['users']['passwd_file'], mode) as f:
-        if (isinstance(passwd_lines, list) or
-           isinstance(passwd_lines, tuple)):
+        if (isinstance(passwd_lines[0], list) or
+           isinstance(passwd_lines[0], tuple)):
             for passwd_line in passwd_lines:
                 passwd_line = convert_passwd_line(passwd_line)
-                f.write(passwd_line)
+                f.write(passwd_line + "\n")
+        elif (isinstance(passwd_lines, list) or
+              isinstance(passwd_lines, tuple)):
+            passwd_line = convert_passwd_line(passwd_lines)
+            f.write(passwd_line + "\n")
         elif isinstance(passwd_lines, str):
-            passwd_line = convert_passwd_line(passwd_line)
-            f.write(passwd_lines)
+            passwd_line = convert_passwd_line(passwd_lines)
+            f.write(passwd_line + "\n")
         else:
             logging.error("Cannot write to password file because "
-                          "inputs are a list/tuple or a string")
+                          "inputs are a list/tuple of list/tuple,"
+                          "list/tuple, or string")
             raise RuntimeError()
 
 
