@@ -112,17 +112,21 @@ def list_json(groups, baseurl, dehtml):
 
 def list_groups(options, config, client):
     group_cache = get_groups_globus(client, ['admin', 'manager'])
-    groups = get_groups(config, group_cache)
+    groups = get_groups(config, group_cache, True)
     if options.baseurl is None:
         options.baseurl = os.path.join('https://',
                                        config['gosync']['server'],
                                        'Groups#id=')
     dehtml = re.compile('<[^>]+>')
+    if options.filters is not None:
+        filters = options.filters
+    else:
+        filters = config["groups"]["filters"]
     for frmt in options.format:
         if options.outfile is not None:
             sys.stdout = open(options.outfile + ".%s" % frmt, "wt")
         if frmt.lower() == "html":
-            list_html(groups, options.baseurl, config["groups"]["filters"])
+            list_html(groups, options.baseurl, filters)
         elif frmt.lower() == 'text':
             list_text(groups, options.baseurl, dehtml)
         elif frmt.lower() == 'csv':
@@ -173,6 +177,9 @@ if __name__ == '__main__':
                       help="User to use")
     parser.add_option("--selector", dest="selector", default="or",
                       help="Selection flag")
+    parser.add_option("--filters", dest="filters", default=None,
+                      action="callback", callback=callback_optparse,
+                      help="Output format to use given as a list")
     (options, args) = parser.parse_args()
     level = {
         1: logging.ERROR,
