@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 from __future__ import print_function
-# import os
-import sys
 import logging
 import random
 
@@ -118,7 +116,6 @@ def get_users_to_work_on(options, config, client):
     # separate new and old users
     new_users = []
     old_users = []
-    print(globus_members)
     for member in globus_members:
         username = str(member['username'])
         if '@' in username:
@@ -142,7 +139,7 @@ def get_users_to_work_on(options, config, client):
     return selected
 
 
-def work_on_users(options, config, globus_users):
+def work_on_users(options, config, client, globus_users):
     """
     Doing work on the list of users
 
@@ -161,7 +158,8 @@ def work_on_users(options, config, globus_users):
             passwd_line = gen_new_passwd(member,
                                          connect_usernames,
                                          connect_userids)
-            go_user_profile = client.get_user_profile(username)[1]
+
+            go_user_profile = client.get_user_profile(username)[1]        
         except socket.timeout:
             # if we time out, pause and resume, skipping current
             logging.error(("Socket timed out. Waiting for 5 seconds. "
@@ -177,14 +175,14 @@ def work_on_users(options, config, globus_users):
         else:
             member['ssh'] = []
         if options.onlynew:
-            create_new_user(member, passwd_line)
+            create_new_user(config, member, passwd_line)
         elif options.onlyupdated:
             update_user(member, passwd_line, connect_usernames)
         else:
-            create_new_user(member, passwd_line)
+            create_new_user(config, member, passwd_line)
 
 
-def update_user(member, passwd_line, connect_usernames):
+def update_user(config, member, passwd_line, connect_usernames):
     """
     Only update information for existing users.
 
@@ -193,14 +191,14 @@ def update_user(member, passwd_line, connect_usernames):
     :param connect_usernames: Tuple of connect user names
     """
     if passwd_line[0] not in connect_usernames:
-        edit_passwd_file(passwd_line, "append")
-    # if not os.path.exists(passwd_line[-2]):
-    #     create_home_dir(passwd_line)
-    # add_ssh_key(member, passwd_line)
-    # add_email_forwarding(member, passwd_line)
+        edit_passwd_file(config, passwd_line, "append")
+    if not os.path.exists(passwd_line[-2]):
+        create_home_dir(passwd_line)
+    add_ssh_key(member, passwd_line)
+    add_email_forwarding(member, passwd_line)
 
 
-def create_new_user(member):
+def create_new_user(config, member, passwd_line):
     """
     Create new user.
 
@@ -208,22 +206,19 @@ def create_new_user(member):
     :param passwd_line: Passwd list
     :param connect_usernames: Tuple of connect user names
     """
-    passwd_file(passwd_line, "append")
-    # create_home_dir(passwd_line)
-    # if member['ssh']:
-    #     add_ssh_key(member, passwd_line)
-    # if member["email"]:
-    #     add_email_forwarding(member, passwd_line)
+    edit_passwd_file(config, passwd_line, "append")
+    create_home_dir(passwd_line)
+    if member['ssh']:
+        add_ssh_key(member, passwd_line)
+    if member["email"]:
+        add_email_forwarding(member, passwd_line)
 
 
 def main(options, args):
     config = parse_config(options.config)
     client = get_globus_client(config)
-    print("here")
     users_work_on = get_users_to_work_on(options, config, client)
-    print("here1")
-    print(users_work_on)
-    work_on_users(options, config, users_work_on)
+    work_on_users(options, config, client, users_work_on)
 
 
 if __name__ == '__main__':
