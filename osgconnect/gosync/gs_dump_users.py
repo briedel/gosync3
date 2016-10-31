@@ -111,13 +111,14 @@ def get_users_to_work_on(options, config, client):
     :param client: Globus Nexus RESTful client
     :return: Tuple of users to work on
     """
-    globus_members = get_globus_group_members(options, config, client)
+    globus_members = get_globus_group_members(options, config, client, 
+                                              dump_users_groups=True)
     connect_usernames = get_connect_usernames(config, options)
     # separate new and old users
     new_users = []
     old_users = []
     for member in globus_members:
-        username = str(member['username'])
+        username = str(member[0]['username'])
         if '@' in username:
             logging.error(("username has @ in it, "
                            "skipping user %s"), username)
@@ -129,7 +130,7 @@ def get_users_to_work_on(options, config, client):
 
     if options.onlyuser is not None:
         selected = tuple(member for member in globus_members
-                         if str(member['username']) == options.onlyuser)
+                         if str(member[0]['username']) == options.onlyuser)
     elif options.onlyupdated:
         selected = old_users
     elif options.onlynew:
@@ -150,6 +151,7 @@ def work_on_users(options, config, client, globus_users):
     connect_usernames = get_connect_usernames(config, options)
     connect_userids = get_connect_user_ids(config, options)
     for member in globus_users:
+        member, group_name, group_id = member
         username = str(member['username'])
         if (options.onlyuser is not None and
            options.onlyuser != username):
@@ -158,8 +160,7 @@ def work_on_users(options, config, client, globus_users):
             passwd_line = gen_new_passwd(member,
                                          connect_usernames,
                                          connect_userids)
-
-            go_user_profile = client.get_user_profile(username)[1]        
+            go_user_profile = client.get_user_profile(username)[1]
         except socket.timeout:
             # if we time out, pause and resume, skipping current
             logging.error(("Socket timed out. Waiting for 5 seconds. "
@@ -182,7 +183,7 @@ def work_on_users(options, config, client, globus_users):
             create_new_user(config, member, passwd_line)
 
 
-def update_user(config, member, passwd_line, connect_usernames):
+def update_user(config, member, group_name, passwd_line, connect_usernames):
     """
     Only update information for existing users.
 
