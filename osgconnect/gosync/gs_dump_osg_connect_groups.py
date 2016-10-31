@@ -2,13 +2,13 @@
 from __future__ import print_function
 import os
 import sys
-import logging
+import logging as log
 import json
 import re
+import util as gs_util
 
 from optparse import OptionParser
-
-from util import *
+from globus_db import globus_db_nexus as globus_db
 
 
 def list_html(groups, baseurl, filters):
@@ -19,7 +19,7 @@ def list_html(groups, baseurl, filters):
     print('<tr><th>Project Name</th><th>Description</th></tr>')
     for g in groups:
         url = baseurl + g['id']
-        name = strip_filters(g['name'], filters)
+        name = gs_util.strip_filters(g['name'], filters)
         print('<tr>')
         print(('<td><a name="%s" href="%s">%s</a></td>') % (name,
                                                             url,
@@ -101,11 +101,28 @@ def list_json(groups, baseurl, dehtml):
     print(json.dumps(o, indent=4))
 
 
-def list_groups(options, config, client):
-    group_cache = get_groups_globus(client, ['admin', 'manager'])
-    groups = get_groups(config, group_cache, True)
-    if options.group is not None:
-        groups = [g for g in groups if g['name'] == options.group]
+def list_groups(options, go_db=None, config=None, client=None):
+    if go_db is None:
+        log.info(("No globus_db object provided. Checking if config "
+                  "and Globus Nexus client are provided"))
+        if config is None and client is None:
+            log.fatal("No config paramaters or Globus Nexus client provided.")
+            raise RuntimeError()
+        elif config is None:
+            log.fatal("No config paramaters provided.")
+            raise RuntimeError()
+        elif client is None:
+            log.fatal("No Globus Nexus client provided.")
+            raise RuntimeError()
+        elif config is not None and client is None:
+            go_db = globus_db(config)
+        elif config is not None and client is not None:
+            raise NotImplementedError()
+    if go_db is not None and options.group is not None:
+        groups = go_db.get_groups(group_names=options.group,
+                                  dump_root_groups=False)
+    elif go_db is not None and options.group is None:
+        groups = go_db.get_groups(dump_root_groups=False)
     if options.baseurl is None:
         options.baseurl = os.path.join('https://',
                                        config['gosync']['server'],
@@ -114,7 +131,10 @@ def list_groups(options, config, client):
     if options.filters is not None:
         filters = options.filters
     else:
-        filters = config["groups"]["filters"]
+        if config is not None:
+            filters = config["groups"]["filter_prefix"]
+        else:
+            filters = go_db.config["groups"]["filter_prefix"]
     for frmt in options.format:
         if options.outfile is not None:
             sys.stdout = open(options.outfile + ".%s" % frmt, "wt")
@@ -129,9 +149,9 @@ def list_groups(options, config, client):
         elif frmt.lower() == 'json':
             list_json(groups, options.baseurl, dehtml)
         else:
-            logging.fatal(("Provided format (%s) not support. "
-                           "Please choose a supported format: "
-                           "html, text, csv, xml, json") % options.format)
+            log.fatal(("Provided format (%s) not support. "
+                       "Please choose a supported format: "
+                       "html, text, csv, xml, json") % options.format)
             raise RuntimeError()
         if options.outfile is not None:
             sys.stdout.close()
@@ -139,18 +159,20 @@ def list_groups(options, config, client):
 
 def main(options, args):
     if options.format is None:
-        logging.fatal(("Please select a single or set of formats to "
-                       "write data out as. Choose a supported format: "
-                       "html, text, csv, xml, json"))
+        log.fatal(("Please select a single or set of formats to "
+                   "write data out as. Choose a supported format: "
+                   "html, text, csv, xml, json"))
         raise RuntimeError()
     if len([f for f in options.format
             if f in ["html", "text", "csv", "xml", "json"]]) == 0:
-                logging.fatal(("Please choose a supported format: "
-                               "html, text, csv, xml, json"))
+                log.fatal(("Please choose a supported format: "
+                           "html, text, csv, xml, json"))
                 raise RuntimeError()
-    config = parse_config(options.config)
-    client = get_globus_client(config)
-    list_groups(options, config, client)
+    config = gs_util.parse_config(options.config)
+    g_db = globus_db(config)
+    # client = get_globus_client(config)
+    list_groups(options, globus_db=g_db)
+    # list_groups(options, config, client)
 
 
 if __name__ == '__main__':
@@ -160,7 +182,7 @@ if __name__ == '__main__':
     parser.add_option("-v", "--verbosity", dest="verbosity",
                       help="Set logging level", default=3)
     parser.add_option("--format", dest="format", default=None,
-                      action="callback", callback=callback_optparse,
+                      action="callback", callback=gs_util.callback_optparse,
                       help="Output format to use given as a list")
     parser.add_option("-o", "--outfile", dest="outfile", default=None,
                       help="Output file to write things too")
@@ -181,13 +203,13 @@ if __name__ == '__main__':
     # parser.add_option("--selector", dest="selector", default="or",
     #                   help="Selection flag")
     parser.add_option("--filters", dest="filters", default=None,
-                      action="callback", callback=callback_optparse,
+                      action="callback", callback=gs_util.callback_optparse,
                       help="Output format to use given as a list")
     (options, args) = parser.parse_args()
     level = {
-        1: logging.ERROR,
-        2: logging.WARNING,
-        3: logging.INFO,
-        4: logging.DEBUG
-    }.get(options.verbosity, logging.DEBUG)
+        1: log.ERROR,
+        2: log.WARNING,
+        3: log.INFO,
+        4: log.DEBUG
+    }.get(options.verbosity, log.DEBUG)
     main(options, args)
