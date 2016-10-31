@@ -104,6 +104,8 @@ def list_json(groups, baseurl, dehtml):
 def list_groups(options, config, client):
     group_cache = get_groups_globus(client, ['admin', 'manager'])
     groups = get_groups(config, group_cache, True)
+    if options.group is not None:
+        groups = [g for g in groups if g['name'] == options.group]
     if options.baseurl is None:
         options.baseurl = os.path.join('https://',
                                        config['gosync']['server'],
@@ -166,18 +168,18 @@ if __name__ == '__main__':
                       default=False, help="Force update information")
     parser.add_option("--baseurl", dest="baseurl", default=None,
                       help="Base URL to use")
-    parser.add_option("--portal", dest="portal", default=None,
-                      help="Portal to use")
-    parser.add_option("--parent", dest="parent", default=None,
-                      help="Parent group to use")
-    parser.add_option("--top", dest="top", default=None,
-                      help="Top group to use")
+    # parser.add_option("--portal", dest="portal", default=None,
+    #                   help="Portal to use")
+    # parser.add_option("--parent", dest="parent", default=None,
+    #                   help="Parent group to use")
+    # parser.add_option("--top", dest="top", default=None,
+    #                   help="Top group to use")
     parser.add_option("--group", dest="group", default=None,
                       help="Group to use")
-    parser.add_option("--user", dest="user", default=None,
-                      help="User to use")
-    parser.add_option("--selector", dest="selector", default="or",
-                      help="Selection flag")
+    # parser.add_option("--user", dest="user", default=None,
+    #                   help="User to use")
+    # parser.add_option("--selector", dest="selector", default="or",
+    #                   help="Selection flag")
     parser.add_option("--filters", dest="filters", default=None,
                       action="callback", callback=callback_optparse,
                       help="Output format to use given as a list")

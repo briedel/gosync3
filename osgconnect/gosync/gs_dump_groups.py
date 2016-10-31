@@ -15,7 +15,7 @@ def get_connect_groupinfo(config, options):
     :param options: Command line options
     :return: Tuple if lists, where every list is the user information
     """
-    with open(groups_filename, "rt") as f:
+    with open(config["groups"]["groups_filename"], "rt") as f:
         group_info = [tuple(line.lstrip("\n").split(":")) for line in f]
     return tuple(group_info)
 
@@ -65,20 +65,20 @@ if __name__ == '__main__':
                       help="Output file to write things too")
     parser.add_option("--force", dest="force", action="store_true",
                       default=False, help="Force update information")
-    parser.add_option("--baseurl", dest="baseurl", default=None,
-                      help="Base URL to use")
-    parser.add_option("--portal", dest="portal", default=None,
-                      help="Portal to use")
-    parser.add_option("--parent", dest="parent", default=None,
-                      help="Parent group to use")
-    parser.add_option("--top", dest="top", default=None,
-                      help="Top group to use")
-    parser.add_option("--group", dest="group", default=None,
-                      help="Group to use")
-    parser.add_option("--user", dest="user", default=None,
-                      help="User to use")
-    parser.add_option("--selector", dest="selector", default="or",
-                      help="Selection flag")
+    # parser.add_option("--baseurl", dest="baseurl", default=None,
+    #                   help="Base URL to use")
+    # parser.add_option("--portal", dest="portal", default=None,
+    #                   help="Portal to use")
+    # parser.add_option("--parent", dest="parent", default=None,
+    #                   help="Parent group to use")
+    # parser.add_option("--top", dest="top", default=None,
+    #                   help="Top group to use")
+    # parser.add_option("--group", dest="group", default=None,
+    #                   help="Group to use")
+    # parser.add_option("--user", dest="user", default=None,
+    #                   help="User to use")
+    # parser.add_option("--selector", dest="selector", default="or",
+    #                   help="Selection flag")
     parser.add_option("--filters", dest="filters", default=None,
                       action="callback", callback=callback_optparse,
                       help="Output format to use given as a list")

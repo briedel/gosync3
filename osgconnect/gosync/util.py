@@ -25,6 +25,11 @@ def parse_config(config_file):
     Have configparser open the config file
     and generate a dict mapping sections
     and options in a dict(dict())
+
+    :param config_file: Path to config file
+    :returns: Dict(dict()) of the format
+              config[section_header][variable_name]=
+              variable_value
     """
     config = configparser.ConfigParser()
     config.optionxform = str
@@ -84,10 +89,7 @@ def uniclean(to_clean):
     if isinstance(to_clean, list):
         return [uniclean(x) for x in to_clean]
     if isinstance(to_clean, dict):
-        new = {}
-        for k, v in to_clean.items():
-            new[str(k)] = uniclean(v)
-        return new
+        return {str(k): uniclean(v) for k, v in to_clean.items()}
     return None
 
 
@@ -142,6 +144,15 @@ def get_groups_globus(client, roles):
 
 def get_groups(config, group_cache, dump_groups=False,
                remove_unicode=False):
+    """
+    
+
+    :param config:
+    :param group_cache:
+    :param dump_groups:
+    :param remove_unicode:
+    :return:
+    """
     if remove_unicode:
         group_cache = uniclean(group_cache)
     groups = [g for g in group_cache
@@ -202,8 +213,11 @@ def get_globus_group_members(options, config, client,
     """
     Getting all the active members of the group from globus nexus
 
+    :param options:
     :param config: Configuration parameters dict()
     :param client: Globus Nexus RESTful client
+    :param globus_groups:
+    :param groups:
     :return: List of "active" members
     """
     members = []
@@ -232,7 +246,13 @@ def get_globus_group_members(options, config, client,
 
 
 def get_usernames(members):
-    if instannce(members[0], tuple):
+    """
+    Get a list of just usernames
+
+    :param members: List of member information dicts
+    :return: List of usernames
+    """
+    if isinstance(members[0], tuple):
         return [member[0]["username"] for member in members]
     return [member["username"] for member in members]
 
@@ -269,10 +289,8 @@ def convert_passwd_line(passwd_line):
     text file
 
     :param passwd_line: List, tuple, or string
-    :return:
+    :return: String that is a /etc/passwd line
     """
-    print(len(passwd_line))
-    print(passwd_line)
     if (isinstance(passwd_line, list) or
        isinstance(passwd_line, tuple)):
         if len(passwd_line) != 7:
@@ -287,7 +305,6 @@ def convert_passwd_line(passwd_line):
           ":" not in passwd_line):
         logging.error("passwd_line does not have expected format")
         raise RuntimeError()
-    print(type(passwd_line))
     return passwd_line
 
 
