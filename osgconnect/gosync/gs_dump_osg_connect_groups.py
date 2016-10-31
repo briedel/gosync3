@@ -3,17 +3,8 @@ from __future__ import print_function
 import os
 import sys
 import logging
-# import getopt
-# import time
-# import glob
 import json
 import re
-# import fnmatch
-# import errno
-# import random
-# import socket
-# import grp
-# import pwd
 
 from optparse import OptionParser
 
@@ -145,6 +136,16 @@ def list_groups(options, config, client):
 
 
 def main(options, args):
+    if options.format is None:
+        logging.fatal(("Please select a single or set of formats to "
+                       "write data out as. Choose a supported format: "
+                       "html, text, csv, xml, json"))
+        raise RuntimeError()
+    if len([f for f in options.format
+            if f in ["html", "text", "csv", "xml", "json"]]) == 0:
+                logging.fatal(("Please choose a supported format: "
+                               "html, text, csv, xml, json"))
+                raise RuntimeError()
     config = parse_config(options.config)
     client = get_globus_client(config)
     list_groups(options, config, client)
@@ -156,7 +157,7 @@ if __name__ == '__main__':
                       help="config file to use",)
     parser.add_option("-v", "--verbosity", dest="verbosity",
                       help="Set logging level", default=3)
-    parser.add_option("--format", dest="format", default=['html'],
+    parser.add_option("--format", dest="format", default=None,
                       action="callback", callback=callback_optparse,
                       help="Output format to use given as a list")
     parser.add_option("-o", "--outfile", dest="outfile", default=None,
