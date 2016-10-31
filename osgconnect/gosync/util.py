@@ -180,7 +180,7 @@ def get_groupid(groups, names=None):
     if names is not None:
         groups = filter_groups(groups, names)
     if isinstance(groups, list):
-        ids = [g['id'] for g in groups]
+        ids = {g['id']: g for g in groups}
         return ids
     else:
         return [groups['id']]
@@ -197,7 +197,8 @@ def get_groupid(groups, names=None):
 
 
 def get_globus_group_members(options, config, client,
-                             globus_groups=None, groups=None):
+                             globus_groups=None, groups=None,
+                             dump_users_groups=False):
     """
     Getting all the active members of the group from globus nexus
 
@@ -212,20 +213,29 @@ def get_globus_group_members(options, config, client,
         globus_groups = get_groups(config, group_cache)
         groups = config["globus"]["root_group"]
     group_ids = get_groupid(globus_groups, groups)
-    for group_id in group_ids:
+    for group_id, group in group_ids.items():
         try:
             headers, response = client.get_group_members(group_id)
         except socket.timeout:
             logging.error("Globus Nexus Server response timed out. Skipping.")
             time.sleep(5)
             continue
-        members += [member for member in response['members']
-                    if member and member['status'] == 'active']
+        if dump_users_groups:
+            members += [(member, group['name'], group_id)
+                        for member in response['members']
+                        if member and member['status'] == 'active']
+        else:
+            members += [member for member in response['members']
+                        if member and member['status'] == 'active']
     # members.sort(key=lambda m: m['name'])
     return members
 
+
 def get_usernames(members):
+    if instannce(members[0], tuple):
+        return [member[0]["username"] for member in members]
     return [member["username"] for member in members]
+
 
 def recursive_chown(path, uid, gid):
     """
@@ -320,7 +330,7 @@ def edit_passwd_file(config, passwd_lines, mode):
             raise RuntimeError()
 
 
-def create_user_dirs(passwd_line, create_stash=True):
+def create_user_dirs(passwd_line, create_stash_like=True):
     """
     Create user home directory and (optionally) their stash directory
 
@@ -332,16 +342,25 @@ def create_user_dirs(passwd_line, create_stash=True):
         os.makedirs(home_dir)
         # copy skeleton home dir into dir
     os.fchmod(home_dir, 2700)
-    if create_stash:
-        stash_dir = os.path.join("/stash/user/", passwd_line[0])
-        if not os.path.exists(stash_dir):
-            os.makedirs(stash_dir)
-            os.makedirs(os.path.join(stash_dir, "public"))
-        recursive_chown(stash_dir, int(passwd_line[2]), int(passwd_line[3]))
-        os.symlink(stash_dir, os.path.join(home_dir, "stash"))
-        os.symlink(os.path.join(stash_dir, "public"),
-                   os.path.join(home_dir, "public"))
+    # if create_stash_like and #osg or duke:
+    #     create_stash_dir(passwd_line)
+    # elif create_stash_like and # atlas:
+
+    # elif create_stash_like and #spt:
+
     recursive_chown(home_dir, int(passwd_line[2]), int(passwd_line[3]))
+
+
+def create_stash_dir(passwd_line):
+    home_dir = passwd_line[-2]
+    stash_dir = os.path.join("/stash/user/", passwd_line[0])
+    if not os.path.exists(stash_dir):
+        os.makedirs(stash_dir)
+        os.makedirs(os.path.join(stash_dir, "public"))
+    recursive_chown(stash_dir, int(passwd_line[2]), int(passwd_line[3]))
+    os.symlink(stash_dir, os.path.join(home_dir, "stash"))
+    os.symlink(os.path.join(stash_dir, "public"),
+               os.path.join(home_dir, "public"))
 
 
 def add_ssh_key(member, passwd_line):
