@@ -25,7 +25,7 @@ def generate_groupid(group_name):
 
 
 def get_group_line(options, config, client, group):
-    g_name = "@" + strip_filters(group['name'], config["groups"]["filters"])
+    g_name = "@" + strip_filters(group['name'], config["groups"]["filter_prefix"])
     members = get_globus_group_members(options, config, client, group)
     members = get_usernames(members)
     gid = generate_groupid(g_name)
