@@ -89,7 +89,8 @@ def uniclean(to_clean):
     if isinstance(to_clean, list):
         return [uniclean(x) for x in to_clean]
     if isinstance(to_clean, dict):
-        return {str(k): uniclean(v) for k, v in to_clean.items()}
+        return dict((str(k), uniclean(v))
+                    for k, v in to_clean.items())
     return None
 
 
@@ -191,7 +192,7 @@ def get_groupid(groups, names=None):
     if names is not None:
         groups = filter_groups(groups, names)
     if isinstance(groups, list):
-        ids = {g['id']: g for g in groups}
+        ids = dict((g['id'], g) for g in groups)
         return ids
     else:
         return [groups['id']]

@@ -119,10 +119,12 @@ def list_groups(options, go_db=None, config=None, client=None):
         elif config is not None and client is not None:
             raise NotImplementedError()
     if go_db is not None and options.group is not None:
-        groups = go_db.get_groups(group_names=options.group,
-                                  dump_root_groups=False)
+        groups = go_db.get_groups(filters_name=options.group,
+                                  dump_root_group=False)
     elif go_db is not None and options.group is None:
-        groups = go_db.get_groups(dump_root_groups=False)
+        groups = go_db.get_groups(dump_root_group=False)
+    if config is None:
+        config = go_db.config
     if options.baseurl is None:
         options.baseurl = os.path.join('https://',
                                        config['gosync']['server'],
@@ -135,6 +137,7 @@ def list_groups(options, go_db=None, config=None, client=None):
             filters = config["groups"]["filter_prefix"]
         else:
             filters = go_db.config["groups"]["filter_prefix"]
+    print(groups)
     for frmt in options.format:
         if options.outfile is not None:
             sys.stdout = open(options.outfile + ".%s" % frmt, "wt")
@@ -169,9 +172,9 @@ def main(options, args):
                            "html, text, csv, xml, json"))
                 raise RuntimeError()
     config = gs_util.parse_config(options.config)
-    g_db = globus_db(config)
+    g_db = globus_db(config, get_members=False)
     # client = get_globus_client(config)
-    list_groups(options, globus_db=g_db)
+    list_groups(options, go_db=g_db)
     # list_groups(options, config, client)
 
 

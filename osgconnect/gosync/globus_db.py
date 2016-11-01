@@ -66,18 +66,18 @@ class globus_db_nexus(globus_db):
     """
     A class to hide some of the goriness of the globus
     """
-    def __init__(self, config=None):
+    def __init__(self, config=None, get_members=True):
         if config is None:
             log.warn(("No config provided. "
                       "Please make sure to supply your own!"))
         self.config = config
-        self.client = self.get_globus_client()
+        self.get_globus_client()
         self.all_groups = None
         # self.all_groups = self.get_globus_groups(
-        #     self.config['globus']['roles'])
-        self.groups = self.get_groups()
-        (self.group_members,
-         self.member_group) = self.get_globus_group_members()
+        #     self.config['globus']['nexus_roles'])
+        self.get_groups()
+        if get_members:
+            self.get_globus_group_members()
 
     def get_globus_client(self, config=None):
         """
@@ -91,8 +91,9 @@ class globus_db_nexus(globus_db):
         nexus_config = {"server": config['globus']['server'],
                         "client": config['globus']['client_user'],
                         "client_secret": config['secrets']['connect']}
-        client = GlobusOnlineRestClient(config=nexus_config)
-        return client
+        self.client = GlobusOnlineRestClient(config=nexus_config)
+        log.debug("Got Globus Nexus client")
+        return self.client
 
     def get_globus_groups(self, roles=None, client=None):
         """
@@ -108,12 +109,12 @@ class globus_db_nexus(globus_db):
         if client is None:
             client = self.client
         if roles is None:
-            roles = self.config['globus']['roles']
+            roles = self.config['globus']['nexus_roles']
         if isinstance(roles, str):
-            all_groups = client.get_group_list(my_roles=[roles])[1]
+            self.all_groups = client.get_group_list(my_roles=[roles])[1]
         if isinstance(roles, list):
-            all_groups = client.get_group_list(my_roles=roles)[1]
-        return all_groups
+            self.all_groups = client.get_group_list(my_roles=roles)[1]
+        return self.all_groups
 
     def filter_group(self, groups=None, group_names=None, filter_func=None):
         """
@@ -179,6 +180,7 @@ class globus_db_nexus(globus_db):
             groups: List of all groups that start with one of the filters
                     and optionally the root group
         """
+        log.debug("Getting groups")
         if remove_unicode and all_groups is not None:
             all_groups = uniclean(all_groups)
         elif remove_unicode:
@@ -192,9 +194,8 @@ class globus_db_nexus(globus_db):
             filters_prefix = tuple(self.config["groups"]["filter_prefix"])
         elif not isinstance(filters_prefix, tuple):
             filters_prefix = tuple(filters_prefix)
-        if not isinstance(filters_name, tuple):
-            filters_name = tuple(filters_name)
         root_group = self.config["globus"]["root_group"]
+        log.debug("Filtering groups")
         if filters_name is None:
 
             def filter_group(g):
@@ -214,6 +215,7 @@ class globus_db_nexus(globus_db):
                 return result
         self.groups = [g for g in all_groups if filter_group(g)]
         self.groups.sort(key=lambda k: k['name'])
+        log.debug("Got groups")
         return self.groups
 
     def get_groupid(self, groups=None, names=None):
@@ -229,7 +231,7 @@ class globus_db_nexus(globus_db):
         if names is not None:
             groups = self.filter_groups(names, groups=groups)
         if isinstance(groups, list):
-            ids = {g['id']: g for g in groups}
+            ids = dict((g['id'], g) for g in groups)
             return ids
         else:
             return {groups['id']: groups}
@@ -281,8 +283,8 @@ class globus_db_nexus(globus_db):
             try:
                 headers, response = client.get_group_members(group_id)
             except socket.timeout:
-                logging.error(("Globus Nexus Server "
-                               "response timed out. Skipping."))
+                log.error(("Globus Nexus Server "
+                           "response timed out. Skipping."))
                 time.sleep(5)
                 continue
             # Loop through group members and build output
@@ -291,11 +293,11 @@ class globus_db_nexus(globus_db):
                     continue
                 username = str(member['username'])
                 user_info = client.get_user(username)
-                if group_ids in self.roup_members:
-                    self.group_members[group_ids]["members"].append(
+                if group["name"] in self.group_members:
+                    self.group_members[group["name"]]["members"].append(
                         user_info)
                 else:
-                    self.group_members[group_ids] = {
+                    self.group_members[group["name"]] = {
                         "members": [user_info],
                         "group": group}
                 self.member_group[username] = {
