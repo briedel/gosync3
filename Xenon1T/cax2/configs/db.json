@@ -1,0 +1,14 @@
+{
+    "host": "rucio.mwt2.org",
+    "auth_host": ,
+    "account": "production",
+    "credentials": ,
+    "ca_certificate": ,
+    "timeout":, 
+    "user_agent":,
+    "naming_scheme": {
+        "containers": "xe1t_SR%03d", 
+        "tpc_dataset": "%s_%s_tpc",
+        "mv_dataset": "%s_%s_mw"
+    }
+}
