@@ -326,9 +326,11 @@ class globus_db_nexus(globus_db):
                 if group["name"] in self.group_members:
                     self.group_members[group["name"]]["members"].append(
                         user_info)
+                    self.group_members[group["name"]]["usernames"].append(username)
                 else:
                     self.group_members[group["name"]] = {
                         "members": [user_info],
+                        "usernames": [username],
                         "group": group}
                 if (group["name"] != config["globus"]["root_group"] or
                     only_top_level):

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import logging
-
+import logging as log
+import sys
 from optparse import OptionParser
+from globus_db import globus_db_nexus as globus_db
 
 from util import *
 
@@ -24,32 +25,33 @@ def generate_groupid(group_name):
     return (hash(group_name) % 4999) + 5000
 
 
-def get_group_line(options, config, client, group):
-    g_name = "@" + strip_filters(group['name'], config["groups"]["filter_prefix"])
-    members = get_globus_group_members(options, config, client, group)
-    members = get_usernames(members)
+def get_group_line(options, config, group):
+    g_name = "@" + strip_filters(group[0], config["groups"]["filter_prefix"])
     gid = generate_groupid(g_name)
     group_line = [g_name,
                   "x",
                   str(gid),
-                  ",".join(members)]
+                  ",".join(group[1]["usernames"])]
     return group_line
 
 
-def write_group_file(options, config, client, groups):
+def write_group_file(options, config, groups):
     with open(config["groups"]["group_file"], "wt") as f:
-        for g in groups:
-            group_line = get_group_line(options, config, client, g)
+        for g in groups.iteritems():
+            group_line = get_group_line(options, config, g)
             f.write(":".join(group_line) + "\n")
 
 
 def main(options, args):
     config = parse_config(options.config)
-    client = get_globus_client(config)
-    groups_cache = get_groups_globus(client,
-                                     ['admin', 'manager'])
-    groups = get_groups(config, groups_cache)
-    write_group_file(options, config, client, groups)
+    log.debug("Config is %s", config)
+    if options.filters is not None:
+        config["groups"]["filter_prefix"] = options.filters
+    go_db = globus_db(config)
+    group_members, member_group = go_db.get_globus_group_members(get_user_profile=False,
+        no_top_level=True)
+    print(group_members.keys())
+    write_group_file(options, config, group_members)
 
 
 if __name__ == '__main__':
@@ -65,20 +67,6 @@ if __name__ == '__main__':
                       help="Output file to write things too")
     parser.add_option("--force", dest="force", action="store_true",
                       default=False, help="Force update information")
-    # parser.add_option("--baseurl", dest="baseurl", default=None,
-    #                   help="Base URL to use")
-    # parser.add_option("--portal", dest="portal", default=None,
-    #                   help="Portal to use")
-    # parser.add_option("--parent", dest="parent", default=None,
-    #                   help="Parent group to use")
-    # parser.add_option("--top", dest="top", default=None,
-    #                   help="Top group to use")
-    # parser.add_option("--group", dest="group", default=None,
-    #                   help="Group to use")
-    # parser.add_option("--user", dest="user", default=None,
-    #                   help="User to use")
-    # parser.add_option("--selector", dest="selector", default="or",
-    #                   help="Selection flag")
     parser.add_option("--filters", dest="filters", default=None,
                       action="callback", callback=callback_optparse,
                       help="Output format to use given as a list")
@@ -88,5 +76,5 @@ if __name__ == '__main__':
         2: logging.WARNING,
         3: logging.INFO,
         4: logging.DEBUG
-    }.get(options.verbosity, logging.DEBUG)
+    }.get(options.verbosity, log.DEBUG)
     main(options, args)
