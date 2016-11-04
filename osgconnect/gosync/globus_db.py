@@ -66,7 +66,7 @@ class globus_db_nexus(globus_db):
     """
     A class to hide some of the goriness of the globus
     """
-    def __init__(self, config=None, get_members=True):
+    def __init__(self, config=None, get_members=False):
         if config is None:
             log.warn(("No config provided. "
                       "Please make sure to supply your own!"))
@@ -82,6 +82,9 @@ class globus_db_nexus(globus_db):
     def get_globus_client(self, config=None):
         """
         Get Globus Nexus RESTful client
+
+        Args:
+            config: Configuration dict()
 
         Returns:
             client: Globus Nexus RESTful client
@@ -116,7 +119,7 @@ class globus_db_nexus(globus_db):
             self.all_groups = client.get_group_list(my_roles=roles)[1]
         return self.all_groups
 
-    def filter_group(self, groups=None, group_names=None, filter_func=None):
+    def filter_groups(self, groups=None, group_names=None, filter_func=None):
         """
         Return group(s) we are interested in
 
@@ -136,7 +139,14 @@ class globus_db_nexus(globus_db):
             elif isinstance(group_names, str):
                 return filtered_groups[0]
         elif filter_func is not None:
-            return filter_func()
+            # still work in process
+            # mostly playground to figure out
+            # where you can pass a function
+            # to filter instead
+            raise NotImplementedError()
+        else:
+            log.fatal("Requires a set of group names to consider")
+            raise RuntimeError()
 
     def strip_replace_prefix(group, prefixes):
         """
@@ -229,7 +239,7 @@ class globus_db_nexus(globus_db):
         if groups is None:
             groups = self.groups
         if names is not None:
-            groups = self.filter_groups(names, groups=groups)
+            groups = self.filter_groups(group_names=names, groups=groups)
         if isinstance(groups, list):
             ids = dict((g['id'], g) for g in groups)
             return ids
@@ -238,7 +248,8 @@ class globus_db_nexus(globus_db):
 
     def get_globus_group_members(self, config=None,
                                  client=None, globus_groups=None,
-                                 group_names=None, only_top_level=False):
+                                 group_names=None, get_user_profile=True,
+                                 only_top_level=False, no_top_level=False):
         """
         Getting all the active members of the group from globus nexus
 
@@ -251,6 +262,7 @@ class globus_db_nexus(globus_db):
         Returns:
             
         """
+        log.debug("Getting users")
         # Dict of group to members
         self.group_members = defaultdict(dict)
         # Dict of members to group
@@ -260,7 +272,9 @@ class globus_db_nexus(globus_db):
         if config is None:
             config = self.config
         # Making sure we get the right groups
-        if globus_groups is None and group_names is None:
+        if (globus_groups is None and
+            group_names is None and
+            not only_top_level):
             group_ids = self.get_groupid()
         elif globus_groups is None and group_names is not None:
             if not (isinstance(group_names, list) or
@@ -268,6 +282,7 @@ class globus_db_nexus(globus_db):
                 group_names = tuple(group_names)
             group_ids = self.get_groupid(names=group_names)
         elif globus_groups is None and only_top_level:
+            log.debug("Getting only top level group")
             group_ids = self.get_groupid(names=config["globus"]["root_group"])
         elif globus_groups is not None and group_names is not None:
             group_ids = self.get_groupid(groups=globus_groups,
@@ -277,8 +292,12 @@ class globus_db_nexus(globus_db):
         elif globus_groups is not None and only_top_level:
             group_ids = self.get_groupid(globus_groups,
                                          config["globus"]["root_group"])
+        log.debug("Looping through groups")
         # Loop though selected groups
-        for group_id, group in group_ids.items():
+        for group_id, group in group_ids.iteritems():
+            if (no_top_level and
+               group["name"] == config["globus"]["root_group"]):
+                continue
             # Getting members
             try:
                 headers, response = client.get_group_members(group_id)
@@ -287,12 +306,23 @@ class globus_db_nexus(globus_db):
                            "response timed out. Skipping."))
                 time.sleep(5)
                 continue
-            # Loop through group members and build output
+            log.debug("Looping through users for group %s",
+                      group["name"])
             for member in response['members']:
                 if not member or member['status'] != 'active':
                     continue
                 username = str(member['username'])
-                user_info = client.get_user(username)
+                if get_user_profile:
+                    try:
+                        user_info = client.get_user(username)
+                    except socket.timeout:
+                        # if we time out, pause and resume, skipping current
+                        log.error(("Socket timed out. Waiting for 5 seconds. "
+                                   "User %s was skipped") % username)
+                        time.sleep(5)
+                        continue
+                else:
+                    user_info = member
                 if group["name"] in self.group_members:
                     self.group_members[group["name"]]["members"].append(
                         user_info)
@@ -300,8 +330,14 @@ class globus_db_nexus(globus_db):
                     self.group_members[group["name"]] = {
                         "members": [user_info],
                         "group": group}
-                self.member_group[username] = {
-                    "user_profile": user_info,
-                    "group_id": group_id,
-                    "group": group}
+                if (group["name"] != config["globus"]["root_group"] or
+                    only_top_level):
+                    self.member_group[username] = {
+                        "user_profile": user_info,
+                        "group_id": group_id,
+                        "group_name": group["name"],
+                        "group": group,
+                        "top_group": (group["name"].split(".")[0]
+                                      if not "project" in group["name"]
+                                      else "osg")}
         return self.group_members, self.member_group

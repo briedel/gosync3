@@ -4,7 +4,7 @@ import ConfigParser as configparser
 import logging
 import os
 import time
-import socket
+import stat
 import shutil
 
 try:
@@ -59,18 +59,18 @@ def config_options_dict(config):
     return config_dict
 
 
-def get_globus_client(config):
-    """
-    Get Globus Nexus RESTful client
+# def get_globus_client(config):
+#     """
+#     Get Globus Nexus RESTful client
 
-    :param config: (optional requires options) Configuration parameters dict()
-    :return: Globus Nexus RESTful client
-    """
-    nexus_config = {"server": config['globus']['server'],
-                    "client": config['globus']['client_user'],
-                    "client_secret": config['secrets']['connect']}
-    client = GlobusOnlineRestClient(config=nexus_config)
-    return client
+#     :param config: (optional requires options) Configuration parameters dict()
+#     :return: Globus Nexus RESTful client
+#     """
+#     nexus_config = {"server": config['globus']['server'],
+#                     "client": config['globus']['client_user'],
+#                     "client_secret": config['secrets']['connect']}
+#     client = GlobusOnlineRestClient(config=nexus_config)
+#     return client
 
 
 def uniclean(to_clean):
@@ -128,74 +128,74 @@ def strip_filters(group, filters):
             return group.replace('.', '-')
 
 
-def get_groups_globus(client, roles):
-    """
-    Get list of Globus groups
+# def get_groups_globus(client, roles):
+#     """
+#     Get list of Globus groups
 
-    :param client: Globus Nexus Client
-    :param roles: Globus Nexus roles
-    :return: List of all groups in Globus Nexus groups
-             that are associated with a role
-    """
-    if isinstance(roles, str):
-        return client.get_group_list(my_roles=[roles])[1]
-    if isinstance(roles, list):
-        return client.get_group_list(my_roles=roles)[1]
+#     :param client: Globus Nexus Client
+#     :param roles: Globus Nexus roles
+#     :return: List of all groups in Globus Nexus groups
+#              that are associated with a role
+#     """
+#     if isinstance(roles, str):
+#         return client.get_group_list(my_roles=[roles])[1]
+#     if isinstance(roles, list):
+#         return client.get_group_list(my_roles=roles)[1]
 
 
-def get_groups(config, group_cache, dump_groups=False,
-               remove_unicode=False):
-    """
+# def get_groups(config, group_cache, dump_groups=False,
+#                remove_unicode=False):
+#     """
     
 
-    :param config:
-    :param group_cache:
-    :param dump_groups:
-    :param remove_unicode:
-    :return:
-    """
-    if remove_unicode:
-        group_cache = uniclean(group_cache)
-    groups = [g for g in group_cache
-              if (g['name'].startswith(tuple(config["groups"]["filters"])) or
-                  (g['name'] == config["globus"]["root_group"] and
-                   not dump_groups))]
-    groups.sort(key=lambda k: k['name'])
-    return groups
+#     :param config:
+#     :param group_cache:
+#     :param dump_groups:
+#     :param remove_unicode:
+#     :return:
+#     """
+#     if remove_unicode:
+#         group_cache = uniclean(group_cache)
+#     groups = [g for g in group_cache
+#               if (g['name'].startswith(tuple(config["groups"]["filters"])) or
+#                   (g['name'] == config["globus"]["root_group"] and
+#                    not dump_groups))]
+#     groups.sort(key=lambda k: k['name'])
+#     return groups
 
 
-def filter_groups(groups, group_names):
-    """
-    Return group(s) we are interested in
+# def filter_groups(groups, group_names):
+#     """
+#     Return group(s) we are interested in
 
-    :param groups: List of Globus Nexus groups
-    :param group_names: Group(s) we are interested in
-    :return: List of or individual group(s)
-    """
-    if isinstance(group_names, str):
-        group_names = [group_names]
-    filtered_groups = [g for g in groups if g['name'] in group_names]
-    if isinstance(group_names, list):
-        return filtered_groups
-    elif isinstance(group_names, str):
-        return filtered_groups[0]
+#     :param groups: List of Globus Nexus groups
+#     :param group_names: Group(s) we are interested in
+#     :return: List of or individual group(s)
+#     """
+#     if isinstance(group_names, str):
+#         group_names = [group_names]
+#     filtered_groups = [g for g in groups if g['name'] in group_names]
+#     if isinstance(group_names, list):
+#         return filtered_groups
+#     elif isinstance(group_names, str):
+#         return filtered_groups[0]
 
 
-def get_groupid(groups, names=None):
-    """
-    Get the Globus Nexus ID for the group
+# def get_groupid(groups, names=None):
+#     """
+#     Get the Globus Nexus ID for the group
 
-    :param groups: List of Globus Nexus groups
-    :param names: Group(s) we are interested in
-    :return: List of or individual group(s) ids
-    """
-    if names is not None:
-        groups = filter_groups(groups, names)
-    if isinstance(groups, list):
-        ids = dict((g['id'], g) for g in groups)
-        return ids
-    else:
-        return [groups['id']]
+#     :param groups: List of Globus Nexus groups
+#     :param names: Group(s) we are interested in
+#     :return: List of or individual group(s) ids
+#     """
+#     if names is not None:
+#         groups = filter_groups(groups, names)
+#     if isinstance(groups, list):
+#         ids = dict((g['id'], g) for g in groups)
+#         return ids
+#     else:
+#         return [groups['id']]
 
 
 # def get_groupids(globus_groups, groups, names):
@@ -208,42 +208,42 @@ def get_groupid(groups, names=None):
 #     return get_groupid_from_groups(globus_groups, names)
 
 
-def get_globus_group_members(options, config, client,
-                             globus_groups=None, groups=None,
-                             dump_users_groups=False):
-    """
-    Getting all the active members of the group from globus nexus
+# def get_globus_group_members(options, config, client,
+#                              globus_groups=None, groups=None,
+#                              dump_users_groups=False):
+#     """
+#     Getting all the active members of the group from globus nexus
 
-    :param options:
-    :param config: Configuration parameters dict()
-    :param client: Globus Nexus RESTful client
-    :param globus_groups:
-    :param groups:
-    :return: List of "active" members
-    """
-    members = []
-    if groups is None and globus_groups is None:
-        # Get the group id of the root group
-        group_cache = get_groups_globus(client, ['admin', 'manager'])
-        globus_groups = get_groups(config, group_cache)
-        groups = config["globus"]["root_group"]
-    group_ids = get_groupid(globus_groups, groups)
-    for group_id, group in group_ids.items():
-        try:
-            headers, response = client.get_group_members(group_id)
-        except socket.timeout:
-            logging.error("Globus Nexus Server response timed out. Skipping.")
-            time.sleep(5)
-            continue
-        if dump_users_groups:
-            members += [(member, group['name'], group_id)
-                        for member in response['members']
-                        if member and member['status'] == 'active']
-        else:
-            members += [member for member in response['members']
-                        if member and member['status'] == 'active']
-    # members.sort(key=lambda m: m['name'])
-    return members
+#     :param options:
+#     :param config: Configuration parameters dict()
+#     :param client: Globus Nexus RESTful client
+#     :param globus_groups:
+#     :param groups:
+#     :return: List of "active" members
+#     """
+#     members = []
+#     if groups is None and globus_groups is None:
+#         # Get the group id of the root group
+#         group_cache = get_groups_globus(client, ['admin', 'manager'])
+#         globus_groups = get_groups(config, group_cache)
+#         groups = config["globus"]["root_group"]
+#     group_ids = get_groupid(globus_groups, groups)
+#     for group_id, group in group_ids.items():
+#         try:
+#             headers, response = client.get_group_members(group_id)
+#         except socket.timeout:
+#             logging.error("Globus Nexus Server response timed out. Skipping.")
+#             time.sleep(5)
+#             continue
+#         if dump_users_groups:
+#             members += [(member, group['name'], group_id)
+#                         for member in response['members']
+#                         if member and member['status'] == 'active']
+#         else:
+#             members += [member for member in response['members']
+#                         if member and member['status'] == 'active']
+#     # members.sort(key=lambda m: m['name'])
+#     return members
 
 
 def get_usernames(members):
@@ -267,6 +267,7 @@ def recursive_chown(path, uid, gid):
     :param gid: UNIX id of the group
     """
     for root, dirs, files in os.walk(path):
+        os.chown(root, uid, gid)
         for momo in dirs:
             os.chown(os.path.join(root, momo), uid, gid)
         for momo in files:
@@ -341,6 +342,8 @@ def edit_passwd_file(config, passwd_lines, mode):
         elif isinstance(passwd_lines, str):
             passwd_line = convert_passwd_line(passwd_lines)
             f.write(passwd_line + "\n")
+        elif passwd_lines is None:
+            return
         else:
             logging.error("Cannot write to password file because "
                           "inputs are a list/tuple of list/tuple,"
@@ -348,66 +351,92 @@ def edit_passwd_file(config, passwd_lines, mode):
             raise RuntimeError()
 
 
-def create_user_dirs(passwd_line, create_stash_like=True):
+def create_user_dirs(config, member, passwd_line, create_user_storage=True):
     """
     Create user home directory and (optionally) their stash directory
 
     :param passwd_lines: List of lines to be added passwd file
     :param create_stash: (optional) create users stash directory
     """
-    home_dir = passwd_line[-2]
-    if not os.path.exists(home_dir):
-        os.makedirs(home_dir)
-        # copy skeleton home dir into dir
-    os.fchmod(home_dir, 2700)
-    # if create_stash_like and #osg or duke:
-    #     create_stash_dir(passwd_line)
-    # elif create_stash_like and # atlas:
-
-    # elif create_stash_like and #spt:
-
+    home_dir = get_home_dir(config, member)
+    create_home_dir(home_dir)
+    group = member[1]["group_name"]
+    top_group = group.split(".")[0] if not "project" in group else "osg"
+    if config["debug"]["debug"]:
+        user_storage_dir = config["debug"]["dummy_stash"]
+    else:
+        if top_group not in config["groups"]["storage_dir"].keys():
+            log.fatal("Top group %s has not defined user storage directory. Please add.")
+            raise RuntimeError()
+        user_storage_dir = os.path.join(config["groups"]["storage_dir"][top_group],
+                                        "user", "")
+    create_user_storage_dir(member, passwd_line, home_dir, top_level_dir=user_storage_dir)
     recursive_chown(home_dir, int(passwd_line[2]), int(passwd_line[3]))
 
 
-def create_stash_dir(passwd_line):
-    home_dir = passwd_line[-2]
-    stash_dir = os.path.join("/stash/user/", passwd_line[0])
-    if not os.path.exists(stash_dir):
-        os.makedirs(stash_dir)
-        os.makedirs(os.path.join(stash_dir, "public"))
-    recursive_chown(stash_dir, int(passwd_line[2]), int(passwd_line[3]))
-    os.symlink(stash_dir, os.path.join(home_dir, "stash"))
-    os.symlink(os.path.join(stash_dir, "public"),
-               os.path.join(home_dir, "public"))
+def get_home_dir(config, member):
+    if config["debug"]["debug"]:
+        home_dir = os.path.join(config["debug"]["dummy_home"],
+                                member[0])
+    else:
+        home_dir = os.path.join(config["users"]["home_dir"],
+                                member[0])
+    return home_dir
 
 
-def add_ssh_key(member, passwd_line):
+def create_home_dir(home_dir):
+    if not os.path.exists(home_dir):
+        log.debug("Creating home directory %s", home_dir)
+        os.makedirs(home_dir)
+        # copy skeleton home dir into home
+        for file in os.listdir("/etc/skel/"):
+            shutil.copy2(os.path.join("/etc/skel/", file),
+                         os.path.join(home_dir, ""))
+        os.chmod(home_dir, stat.S_IRWXU)
+
+
+def create_user_storage_dir(member, passwd_line, home_dir=None, top_level_dir="/stash/user/"):
+    storage_dir = os.path.join(top_level_dir, member[0])
+    if not os.path.exists(storage_dir):
+        log.debug("Creating user storage directory %s")
+        os.makedirs(storage_dir)
+        os.makedirs(os.path.join(storage_dir, "public"))
+    recursive_chown(storage_dir, int(passwd_line[2]), int(passwd_line[3]))
+    if home_dir is not None:
+        os.symlink(storage_dir, os.path.join(home_dir, "stash"))
+        os.symlink(os.path.join(storage_dir, "public"),
+                   os.path.join(home_dir, "public"))
+
+
+def add_ssh_key(config, member):
     """
     Adding ssh key file to users home directory
 
     :param member: Globus Nexus member object
     :param passwd_line: passwd_line providing home dir
     """
-    ssh_dir = os.path.join(passwd_line[-2], ".ssh")
+    ssh_dir = os.path.join(config["users"]["home_dir"],
+                           member[0], ".ssh")
     if not os.path.exists(ssh_dir):
         os.makedirs(ssh_dir)
-    os.fchmod(ssh_dir, 0700)
+        os.chmod(ssh_dir, stat.S_IRWXU)
     auth_keys_file = os.path.join(ssh_dir, "authorized_keys")
     with open(auth_keys_file, "wt") as f:
-        for key in member["ssh"]:
-            f.write(key)
-    os.fchmod(auth_keys_file, 0600)
+        for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
+            f.write(key["ssh_key"])
+    os.chmod(auth_keys_file, stat.S_IRUSR | stat.S_IWUSR)
 
 
-def add_email_forwarding(member, passwd_line):
+def add_email_forwarding(config, member):
     """
     Adding email forwarding file to users home directory
 
     :param member: Globus Nexus member object
     :param passwd_line: passwd_line providing home dir
     """
-    forward_file = os.path.join(passwd_line[-2], ".forward")
+    forward_file = os.path.join(config["users"]["home_dir"],
+                                member[0], ".forward")
     with open(forward_file, "wt") as f:
         f.write(str(member["email"]))
-    os.fchmod(forward_file, 644)
-    os.chown(forward_file, int(passwd_line[2]), int(passwd_line[3]))
+    os.chmod(forward_file, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chown(forward_file, member["user_id"], member["group_id"])

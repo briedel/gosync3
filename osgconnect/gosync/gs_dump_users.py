@@ -1,75 +1,16 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import logging
+import logging as log
 import random
-
+from globus_db import globus_db_nexus as globus_db
+from connect_users import connect_users
+from collections import defaultdict
 from optparse import OptionParser
 
 from util import *
 
 
-def get_connect_userinfo(config, options):
-    """
-    Parse passwd file to see what users were already provisioned
-
-    :param config: Configuration parameters dict()
-    :param options: Command line options
-    :return: Tuple if lists, where every list is the user information
-    """
-    with open(config["users"]["passwd_file"], "rt") as f:
-        user_info = [tuple(line.lstrip("\n").split(":")) for line in f]
-    return tuple(user_info)
-
-
-def get_connect_usernames(config=None, options=None, users=None):
-    """
-    Get tuple of already provisioned usernames. Works either by
-    getting the output of get_connect_userinfo() or by getting
-    the configuration and options to call get_connect_userinfo()
-    internally.
-
-    :param config: (optional requires options) Configuration parameters dict()
-    :param options: (optional requires config) Command line options
-    :param users: (optional) list of user information
-    :return: Tuple of already provisioned usernames
-    """
-    def do_work(usrs):
-        return tuple(u[0] for u in usrs)
-    if users is not None:
-        return do_work(users)
-    elif config is not None and options is not None:
-        user_info = get_connect_userinfo(config, options)
-        return do_work(user_info)
-    else:
-        logging.error("Cannot retrieve connect usernames")
-        raise RuntimeError()
-
-
-def get_connect_user_ids(config=None, options=None, users=None):
-    """
-    Get tuple of already used user ids. Works either by
-    getting the output of get_connect_userinfo() or by getting
-    the configuration and options to call get_connect_userinfo()
-    internally.
-
-    :param config: (optional requires options) Configuration parameters dict()
-    :param options: (optional requires config) Command line options
-    :param users: (optional) list of user information
-    :return: Tuple of already used user ids
-    """
-    def do_work(usrs):
-        return tuple(u[2] for u in usrs)
-    if users is not None:
-        return do_work(users)
-    elif config is not None and options is not None:
-        user_info = get_connect_userinfo(config, options)
-        return do_work(user_info)
-    else:
-        logging.error("Cannot retrieve connect user ids")
-        raise RuntimeError()
-
-
-def gen_new_passwd(globus_user, used_usernames, used_user_ids):
+def gen_new_passwd(config, globus_user, current_users):
     """
     Generate new passwd style list for a new user.
 
@@ -84,106 +25,92 @@ def gen_new_passwd(globus_user, used_usernames, used_user_ids):
     :return: List with user information. Every entry corresponds to position of
              of the information in the users passwd file.
     """
-    if str(globus_user['username']) in used_usernames:
-        logging.error("Trying to provision user %s again. Duplicate user",
-                      str(globus_user['username']))
-        raise RuntimeError()
+    if str(globus_user[0]) in current_users.usernames:
+        log.warn("Trying to provision user %s again. Duplicate user",
+                 str(globus_user[0]))
+        return None
     while True:
         new_user_id = random.randint(10000, 65001)
-        if new_user_id not in used_user_ids:
+        if new_user_id not in current_users.user_ids:
             break
-    passwd_new_user = [str(globus_user["username"]),
+    name = str(globus_user[1]["user_profile"][1]["full_name"])
+    home_dir = get_home_dir(config, globus_user)
+    passwd_new_user = [globus_user[0],
                        "x",
                        str(new_user_id),
                        "1000",
-                       str(globus_user['name']),
-                       os.path.join("/home", str(globus_user["username"])),
+                       name,
+                       home_dir,
                        "/bin/bash"]
     return passwd_new_user
 
 
-def get_users_to_work_on(options, config, client):
+def merge_two_dicts(x, y):
+    """
+    Given two dicts, merge them into a new dict as a shallow copy.
+    """
+    z = x.copy()
+    z.update(y)
+    return z
+
+
+def get_users_to_work_on(options, config, globus_users, current_users):
     """
     Determining which users we should work on.
 
     :param config: (optional requires options) Configuration parameters dict()
     :param options: (optional requires config) Command line options
-    :param client: Globus Nexus RESTful client
+    :param globus_users: Globus Nexus RESTful client
     :return: Tuple of users to work on
     """
-    globus_members = get_globus_group_members(options, config, client,
-                                              dump_users_groups=True)
-    connect_usernames = get_connect_usernames(config, options)
-    # separate new and old users
-    new_users = []
-    old_users = []
-    for member in globus_members:
-        username = str(member[0]['username'])
-        if '@' in username:
-            logging.error(("username has @ in it, "
-                           "skipping user %s"), username)
-            continue
-        if username in connect_usernames:
-            old_users.append(member)
-        else:
-            new_users.append(member)
-
     if options.onlyuser is not None:
-        selected = tuple(member for member in globus_members
-                         if str(member[0]['username']) == options.onlyuser)
-    elif options.onlyupdated:
-        selected = old_users
-    elif options.onlynew:
-        selected = new_users
+        selected = tuple(member for member in member_group.iteritems()
+                         if member[0] == options.onlyuser)
     else:
-        selected = old_users + new_users
+        # separate new and old users
+        new_users, old_users = defaultdict(dict), defaultdict(dict)
+        for username, info in globus_users.iteritems():
+            if '@' in username:
+                log.error(("username has @ in it, "
+                               "skipping user %s"), username)
+                continue
+            if username in current_users.usernames:
+                old_users[username] = info
+            else:
+                new_users[username] = info
+        if options.onlycurrent:
+            selected = old_users
+        elif options.onlynew:
+            selected = new_users
+        else:
+            selected = merge_two_dicts(old_users, new_users)
     return selected
 
 
-def work_on_users(options, config, client, globus_users):
+def work_on_users(options, config, globus_users, current_users):
     """
     Doing work on the list of users
 
-    :param config: (optional requires options) Configuration parameters dict()
+    :param config: (optional requires opticons) Configuration parameters dict()
     :param options: (optional requires config) Command line options
     :param globus_users: List of users from Globus that we need to work on
     """
-    connect_usernames = get_connect_usernames(config, options)
-    connect_userids = get_connect_user_ids(config, options)
-    for member in globus_users:
-        member, group_name, group_id = member
-        username = str(member['username'])
+    log.debug("Provisioning or updating users")
+    for member in globus_users.iteritems():
+        username = member[0]
         if (options.onlyuser is not None and
            options.onlyuser != username):
             continue
-        try:
-            passwd_line = gen_new_passwd(member,
-                                         connect_usernames,
-                                         connect_userids)
-            go_user_profile = client.get_user_profile(username)[1]
-        except socket.timeout:
-            # if we time out, pause and resume, skipping current
-            logging.error(("Socket timed out. Waiting for 5 seconds. "
-                           "User %s was skipped") % username)
-            time.sleep(5)
-            continue
-        except:
-            continue
-        if 'credentials' in go_user_profile:
-            member['ssh'] = sorted([cred['ssh_key']
-                                    for cred in go_user_profile['credentials']
-                                    if cred['credential_type'] == 'ssh2'])
-        else:
-            member['ssh'] = []
+        log.debug("Provisioning or updating user %s", username)
         if options.onlynew:
-            create_new_user(config, member, passwd_line)
-        elif options.onlyupdated:
-            update_user(member, passwd_line, connect_usernames)
+            create_new_user(config, member, current_users)
+        elif options.onlycurrent:
+            update_user(member, passwd_line, current_users)
         else:
-            create_new_user(config, member, passwd_line)
+            create_new_user(config, member, current_users)
 
 
-def update_user(config, member, group_name, passwd_line, connect_usernames):
+def update_user(config, member, current_users):
     """
     Only update information for existing users.
 
@@ -191,15 +118,25 @@ def update_user(config, member, group_name, passwd_line, connect_usernames):
     :param passwd_line: Passwd list
     :param connect_usernames: Tuple of connect user names
     """
-    if passwd_line[0] not in connect_usernames:
-        edit_passwd_file(config, passwd_line, "append")
-    if not os.path.exists(passwd_line[-2]):
-        create_home_dir(passwd_line)
-    add_ssh_key(member, passwd_line)
-    add_email_forwarding(member, passwd_line)
+    # passwd_line = gen_new_passwd(config, member,
+    #                              current_users)
+    # if passwd_line is not None:
+    #     print(passwd_line)
+    #     log.debug("Passwd line for user %s = %s",
+    #               passwd_line[0],
+    #               ":".join(passwd_line))
+    #     if member[0] not in current_users.usernames:
+    #         edit_passwd_file(config, passwd_line, "append")
+    #     home_dir = get_home_dir(config, member)
+    #     if not os.path.exists(home_dir):
+    #         create_user_dirs(config, member, passwd_line)
+    if member[1]["user_profile"][1]["ssh_pubkeys"]:
+        add_ssh_key(config, member)
+    if member[1]["user_profile"][1]["email"]:
+        add_email_forwarding(config, member)
 
 
-def create_new_user(config, member, passwd_line):
+def create_new_user(config, member, current_users):
     """
     Create new user.
 
@@ -207,19 +144,36 @@ def create_new_user(config, member, passwd_line):
     :param passwd_line: Passwd list
     :param connect_usernames: Tuple of connect user names
     """
-    edit_passwd_file(config, passwd_line, "append")
-    create_home_dir(passwd_line)
-    if member['ssh']:
-        add_ssh_key(member, passwd_line)
-    if member["email"]:
-        add_email_forwarding(member, passwd_line)
+    passwd_line = gen_new_passwd(config, member,
+                                 current_users)
+    if passwd_line is not None:
+        print(passwd_line)
+        log.debug("Passwd line for user %s = %s",
+                  passwd_line[0],
+                  ":".join(passwd_line))
+        if member[0] not in current_users.usernames:
+            edit_passwd_file(config, passwd_line, "append")
+        home_dir = get_home_dir(config, member)
+        if not os.path.exists(home_dir):
+            create_user_dirs(config, member, passwd_line)
+    if member[1]["user_profile"][1]["ssh_pubkeys"]:
+        add_ssh_key(config, member)
+    if member[1]["user_profile"][1]["email"]:
+        add_email_forwarding(config, member)
 
 
 def main(options, args):
     config = parse_config(options.config)
-    client = get_globus_client(config)
-    users_work_on = get_users_to_work_on(options, config, client)
-    work_on_users(options, config, client, users_work_on)
+    log.debug("Config is %s", config)
+    if options.filters is not None:
+        config["groups"]["filter_prefix"] = options.filters
+    go_db = globus_db(config)
+    group_members, member_group = go_db.get_globus_group_members(
+        no_top_level=True)
+    current_users = connect_users(config, options)
+    users_work_on = get_users_to_work_on(options, config, 
+                                         member_group, current_users)
+    work_on_users(options, config, users_work_on, current_users)
 
 
 if __name__ == '__main__':
@@ -227,10 +181,10 @@ if __name__ == '__main__':
     parser.add_option("--config", dest="config", default="gosync.conf",
                       help="config file to use",)
     parser.add_option("-v", "--verbosity", dest="verbosity",
-                      help="Set logging level", default=3)
+                      help="Set log level", default=4)
     parser.add_option("--onlynew", dest="onlynew", action="store_true",
                       default=False, help="Force update information")
-    parser.add_option("--onlyupdated", dest="onlyupdated", action="store_true",
+    parser.add_option("--onlycurrent", dest="onlycurrent", action="store_true",
                       default=False, help="Force update information")
     parser.add_option("--onlyuser", dest="onlyuser", default=None,
                       help="Force update information")
@@ -246,4 +200,5 @@ if __name__ == '__main__':
         3: logging.INFO,
         4: logging.DEBUG
     }.get(options.verbosity, logging.DEBUG)
+    logging.basicConfig(level=level)
     main(options, args)
