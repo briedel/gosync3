@@ -22,10 +22,37 @@ def get_connect_groupinfo(config, options):
 
 
 def generate_groupid(group_name):
+    """
+    Genating the group ID as a has of the group name
+
+    Args:
+        group_name: Name of group for which you need an ID
+
+    Returns:
+        Hash of group name shifted to be > 5000
+    """
     return (hash(group_name) % 4999) + 5000
 
 
 def get_group_line(options, config, group):
+    """
+    Create the line needed in the an /etc/group file as a list.
+    With the positions in list corresponding to the positon
+    of the information in the /etc/groups file
+
+    A passwd style list:
+    [<group name>, <password>, <group id>,
+     <group members as a comma separated list>]
+
+    Args:
+        options: CLI options passed to the script
+        config: config dict()
+        group: Globus you want to generate the line for
+
+    Returns:
+        group_line: List of strings equivalent to
+                    the a line in the /etc/groups file.
+    """
     g_name = "@" + strip_filters(group[0], config["groups"]["filter_prefix"])
     gid = generate_groupid(g_name)
     group_line = [g_name,
@@ -36,6 +63,10 @@ def get_group_line(options, config, group):
 
 
 def write_group_file(options, config, groups):
+    """
+    
+
+    """
     with open(config["groups"]["group_file"], "wt") as f:
         for g in groups.iteritems():
             group_line = get_group_line(options, config, g)
@@ -48,7 +79,8 @@ def main(options, args):
     if options.filters is not None:
         config["groups"]["filter_prefix"] = options.filters
     go_db = globus_db(config)
-    group_members, member_group = go_db.get_globus_group_members(get_user_profile=False,
+    group_members, member_group = go_db.get_globus_group_members(
+        get_user_profile=False,
         no_top_level=True)
     print(group_members.keys())
     write_group_file(options, config, group_members)

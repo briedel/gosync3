@@ -26,7 +26,16 @@ except:
 
 
 class globus_db(object):
+    """
+    Virutal class to implement an interface to the Globus user
+    database
+    """
     def __init__(self, config=None):
+        """
+        Intiliazer
+        Args:
+            config: Configuration dict()
+        """
         if config is None:
             log.warn(("No config provided. "
                       "Please make sure to supply your own!"))
@@ -67,6 +76,12 @@ class globus_db_nexus(globus_db):
     A class to hide some of the goriness of the globus
     """
     def __init__(self, config=None, get_members=False):
+        """
+        Intiliazer
+        Args:
+            config: Configuration dict()
+            get_members: Get the members of the groups
+        """
         if config is None:
             log.warn(("No config provided. "
                       "Please make sure to supply your own!"))
@@ -123,9 +138,13 @@ class globus_db_nexus(globus_db):
         """
         Return group(s) we are interested in
 
-        :param groups: List of Globus Nexus groups
-        :param group_names: Group(s) we are interested in
-        :return: List of or individual group(s)
+        Args:
+            groups: List of Globus Nexus groups
+            group_names: Group(s) we are interested in
+
+        Returns:
+            filtered_groups: List or instance of the
+                             group object of the Globus DB
         """
         if groups is None:
             groups = self.groups
@@ -153,9 +172,14 @@ class globus_db_nexus(globus_db):
         Stripping Globus specific prefixes from
         Globus group names
 
-        :param group: Group to filtered
-        :param filters: Filter
-        :return: Group without filter
+        TODO: Make this configurable
+
+        Args:
+            group: Group name
+            prefixes: Prefixes of group names
+
+        Returns:
+            Group name without the prefix
         """
         if not (isinstance(prefixes, list) or
                 isinstance(prefixes, tuple)):
@@ -174,13 +198,13 @@ class globus_db_nexus(globus_db):
                    dump_root_group=True,
                    remove_unicode=False):
         """
-        fjgas
+        Get the groups in the Globus DB
 
         Args:
             filters_prefix: Tuple of keywords that will filter the groups by
-            filters_name:
-            config:
-            all_groups:
+            filters_name: Tuple of names by which to filter the groups
+            config: config dict()
+            all_groups: Bool to all groups or not
             dump_root_group: Bool whether to include the top-level
                              group, i.e. "connect"
             remove_unicode: Bool whether to remove the unicode
@@ -232,9 +256,12 @@ class globus_db_nexus(globus_db):
         """
         Get the Globus Nexus ID for the group
 
-        :param groups: List of Globus Nexus groups
-        :param names: Group(s) we are interested in
-        :return: List of or individual group(s) ids
+        Args:
+            groups: List of Globus Nexus groups
+            names: Group(s) we are interested in
+
+        Returns:
+            ids: Dict() mapping group(s) ids group
         """
         if groups is None:
             groups = self.groups

@@ -19,11 +19,14 @@ def gen_new_passwd(config, globus_user, current_users):
      <default group (always 1000, i.e users)>, <Comment, i.e. user's name>,
      <home directory path>, <shell, defaults to bash>]
 
-    :param globus_user: Globus users to generate a passwd list for
-    :param used_usernames: List of usernames that have already been provisioned
-    :param used_user_ids: List of user ids that have already been used
-    :return: List with user information. Every entry corresponds to position of
-             of the information in the users passwd file.
+    Args:
+        globus_user: Globus users to generate a passwd list for
+        used_usernames: List of usernames that have already been provisioned
+
+    Returns:
+        passwd_new_user: List with user information. Every entry
+                         corresponds to position  of the information in
+                         the users passwd file.
     """
     if str(globus_user[0]) in current_users.usernames:
         log.warn("Trying to provision user %s again. Duplicate user",
@@ -48,6 +51,13 @@ def gen_new_passwd(config, globus_user, current_users):
 def merge_two_dicts(x, y):
     """
     Given two dicts, merge them into a new dict as a shallow copy.
+
+    Args:
+        x: Dict() 1 to merge
+        y: Dict() 2 to merge
+
+    Returns:
+        z: Dict() that is combination of x and y
     """
     z = x.copy()
     z.update(y)
@@ -58,21 +68,26 @@ def get_users_to_work_on(options, config, globus_users, current_users):
     """
     Determining which users we should work on.
 
-    :param config: (optional requires options) Configuration parameters dict()
-    :param options: (optional requires config) Command line options
-    :param globus_users: Globus Nexus RESTful client
-    :return: Tuple of users to work on
+    Args:
+        options: CLI options
+        config: Configuration parameters dict()
+        globus_users: Dict mapping member to group
+        current_users: connects_users object that holds the
+                       information about already provisioned users
+
+    Returns:
+        :selected: Dict() mapping username to globus member object
     """
     if options.onlyuser is not None:
-        selected = tuple(member for member in member_group.iteritems()
-                         if member[0] == options.onlyuser)
+        selected = dict(member for member in member_group.iteritems()
+                        if member[0] == options.onlyuser)
     else:
         # separate new and old users
         new_users, old_users = defaultdict(dict), defaultdict(dict)
         for username, info in globus_users.iteritems():
             if '@' in username:
                 log.error(("username has @ in it, "
-                               "skipping user %s"), username)
+                           "skipping user %s"), username)
                 continue
             if username in current_users.usernames:
                 old_users[username] = info
@@ -89,11 +104,14 @@ def get_users_to_work_on(options, config, globus_users, current_users):
 
 def work_on_users(options, config, globus_users, current_users):
     """
-    Doing work on the list of users
+    Doing work on the dicts of users
 
-    :param config: (optional requires opticons) Configuration parameters dict()
-    :param options: (optional requires config) Command line options
-    :param globus_users: List of users from Globus that we need to work on
+    Args:
+        options: Command line options
+        config: Configuration parameters dict()
+        globus_users: Dict mapping member to group to work on
+        current_users: connects_users object that holds the
+                       information about already provisioned users
     """
     log.debug("Provisioning or updating users")
     for member in globus_users.iteritems():
@@ -113,10 +131,13 @@ def work_on_users(options, config, globus_users, current_users):
 def update_user(config, member, current_users):
     """
     Only update information for existing users.
+    At the moment only updated ssh key and email forwarding
 
-    :param member: Globus Nexus member
-    :param passwd_line: Passwd list
-    :param connect_usernames: Tuple of connect user names
+    Args:
+        config: Configuration parameters dict()
+        member: Globus Nexus member
+        current_users: connects_users object that holds the
+                       information about already provisioned users
     """
     # passwd_line = gen_new_passwd(config, member,
     #                              current_users)
@@ -138,11 +159,15 @@ def update_user(config, member, current_users):
 
 def create_new_user(config, member, current_users):
     """
-    Create new user.
+    Create new user. Create entry in /etc/passwd file, create
+    home directory and user storage directory, add ssh key,
+    and email forwarding
 
-    :param member: Globus Nexus member
-    :param passwd_line: Passwd list
-    :param connect_usernames: Tuple of connect user names
+    Args:
+        config: Configuration parameters dict()
+        member: Globus Nexus member
+        connect_usernames: connects_users object that holds the
+                           information about already provisioned users
     """
     passwd_line = gen_new_passwd(config, member,
                                  current_users)
@@ -171,7 +196,7 @@ def main(options, args):
     group_members, member_group = go_db.get_globus_group_members(
         no_top_level=True)
     current_users = connect_users(config, options)
-    users_work_on = get_users_to_work_on(options, config, 
+    users_work_on = get_users_to_work_on(options, config,
                                          member_group, current_users)
     work_on_users(options, config, users_work_on, current_users)
 

@@ -12,6 +12,15 @@ from globus_db import globus_db_nexus as globus_db
 
 
 def list_html(groups, baseurl, filters):
+    """
+    Print groups in formation to stdout in HTML 
+
+    Args:
+        groups: List of Globus groups in OSG Connect
+        baseurl: URL where the group info can be found
+        filters: What should be stripped from the group name
+                 to make it compatible with HTML
+    """
     print('<link rel="stylesheet" href="projects.css" />')
     print('<link rel="stylesheet" href="projects.css" />')
     print('<link rel="stylesheet" href="projects.css" />')
@@ -30,6 +39,15 @@ def list_html(groups, baseurl, filters):
 
 
 def list_text(groups, baseurl, dehtml):
+    """
+    Print groups in formation to stdout in plain text
+
+    Args:
+        groups: List of Globus groups in OSG Connect
+        baseurl: URL where the group info can be found
+        dehtml: Compiled regex expression to remove HTML
+                weirdness
+    """
     for g in groups:
         textdesc = dehtml.sub('',
                               g['description'].encode('ascii',
@@ -43,6 +61,15 @@ def list_text(groups, baseurl, dehtml):
 
 
 def list_csv(groups, baseurl, dehtml):
+    """
+    Print groups in formation to stdout in CSV
+
+    Args:
+        groups: List of Globus groups in OSG Connect
+        baseurl: URL where the group info can be found
+        dehtml: Compiled regex expression to remove HTML
+                weirdness
+    """
     print('groupname,url,description')
     for g in groups:
         textdesc = dehtml.sub('',
@@ -58,6 +85,15 @@ def list_csv(groups, baseurl, dehtml):
 
 
 def list_xml(groups, baseurl, dehtml):
+    """
+    Print groups in formation to stdout in XML
+
+    Args:
+        groups: List of Globus groups in OSG Connect
+        baseurl: URL where the group info can be found
+        dehtml: Compiled regex expression to remove HTML
+                weirdness
+    """
     print('<?xml version="1.0" encoding="utf-8"?>')
     print('<groups>')
     for g in groups:
@@ -83,6 +119,15 @@ def list_xml(groups, baseurl, dehtml):
 
 
 def list_json(groups, baseurl, dehtml):
+    """
+    Print groups in formation to stdout in JSON
+
+    Args:
+        groups: List of Globus groups in OSG Connect
+        baseurl: URL where the group info can be found
+        dehtml: Compiled regex expression to remove HTML
+                weirdness
+    """
     o = {'groups': []}
     for g in groups:
         htmldesc = g['description']
@@ -101,23 +146,24 @@ def list_json(groups, baseurl, dehtml):
     print(json.dumps(o, indent=4))
 
 
-def list_groups(options, go_db=None, config=None, client=None):
+def list_groups(options, go_db=None, config=None):
+    """
+    Produces a list in various output formats, either to text file or
+    stdout.
+
+    Args:
+        options: CLI options
+        go_db: globus_db object
+        config: configuration dict()
+    """
     if go_db is None:
         log.info(("No globus_db object provided. Checking if config "
                   "and Globus Nexus client are provided"))
-        if config is None and client is None:
-            log.fatal("No config paramaters or Globus Nexus client provided.")
-            raise RuntimeError()
-        elif config is None:
-            log.fatal("No config paramaters provided.")
-            raise RuntimeError()
-        elif client is None:
-            log.fatal("No Globus Nexus client provided.")
-            raise RuntimeError()
-        elif config is not None and client is None:
+        if config is None:
             go_db = globus_db(config)
-        elif config is not None and client is not None:
-            raise NotImplementedError()
+        else:
+            log.fatal("Cannot initalize a globus_db object without a config")
+            raise RuntimeError()
     if go_db is not None and options.group is not None:
         groups = go_db.get_groups(filters_name=options.group,
                                   dump_root_group=False)
@@ -137,7 +183,6 @@ def list_groups(options, go_db=None, config=None, client=None):
             filters = config["groups"]["filter_prefix"]
         else:
             filters = go_db.config["groups"]["filter_prefix"]
-    print(groups)
     for frmt in options.format:
         if options.outfile is not None:
             sys.stdout = open(options.outfile + ".%s" % frmt, "wt")
