@@ -1,0 +1,51 @@
+#!/bin/bash
+# executable is the location of the executable
+executable = /path/to/executable
+
+# universe is into which queue the job should be submitted into
+universe = vanilla
+
+# Location where log files should be put
+Error = /path/to/log/files/std_error_log
+Output  = /path/to/log/files/std_output_log
+Log     = /path/to/log/files/condor_job_log
+
+# Job requirements 
+# Example: `(GLIDEIN_ResourceName =!= "NPX")` means that the 
+#          advertised resource name cannot match "NPX"
+# Example: `(OpSysAndVer == "CentOS6" || OpSysAndVer == "RedHat6" || OpSysAndVer == "SL6")` 
+#          means that the advertised `OpSysAndVer` 
+#          (or operation system and version) is RHEL6 
+#           or one of this derivaties
+Requirements = ((OpSysAndVer == "CentOS6" || OpSysAndVer == "RedHat6" || OpSysAndVer == "SL6") && (GLIDEIN_ResourceName =!= "NPX"))
+
+# `request_cpus` tells HTCondor how many CPU cores
+# this jobs needs, default value is always 1
+request_cpus = $(ncpus)
+# `request_memory` tells HTCondor how much 
+# memory (in MB) are needed. 
+# Here 2 GB are requested, which is the
+# default for OSG. 
+request_memory = 2048 
+# `request_disk` tells HTCondor how much 
+# memory (in KB) are needed.
+# Here 1 GB of disk are requested. 
+request_disk = 1048576
+# `transfer_input_files` defines which files should
+# be transfered to the remote worker from the
+# local machine
+transfer_input_files = /home/briedel/user_cert
+# `transfer_output_files` similar to `transfer_input_files`
+# this allows one to define which files should be transfered
+# back to the local host
+transfer_output_files = ""
+# `when_to_transfer_output` defines when the output should be transferred
+when_to_transfer_output = ON_EXIT
+# Whether or not to transfer executable to remote location
+transfer_executable = True
+# Defines possible arguments to the executable defined above
+arguments = $(name) $(input_file) $(host) $(pax_version) $(pax_hash) $(out_location) $(ncpus) $(disable_updates)
+# Defines the end of the jb submission file and tells HTCondor
+# to queue a job. The number, in this example, 1
+# signifies how many copies of the job should be submitted.
+queue 1
