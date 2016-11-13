@@ -107,32 +107,7 @@ def write_dag_file(options):
 
 
 def main(options, args):
-    if options.outdagfile is None:
-        log.fatal("No output DAG file provided")
-        raise RuntimeError()
-    else:
-        if os.path.exists(options.outdagfile):
-            log.fatal("Output DAG file exists. Please rename or delete.")
-            raise RuntimeError()
-    if options.inputdir is None:
-        log.fatal("No input dir provided")
-        raise RuntimeError()
-    if options.outdir is None:
-        log.fatal("No output top level dir provided")
-        raise RuntimeError()
-    if options.uri is None:
-        log.fatal("No URI to file transfer server provided")
-        raise RuntimeError()
-    if options.submitfile is None:
-        log.fatal("No submit file provided")
-        raise RuntimeError()
-    else:
-        if not os.path.exists(options.submitfile):
-            log.fatal("Submit file does not exist. Please create.")
-            raise RuntimeError()
-    if options.paxversion is None:
-        log.fatal("No URI to file transfer server provided")
-        raise RuntimeError()
+    write_dag_file(options)
 
 
 if __name__ == '__main__':
@@ -161,6 +136,24 @@ if __name__ == '__main__':
     parser.add_option("--paxversion", dest="paxversion", default=None,
                       help="PAX version to be used")
     (options, args) = parser.parse_args()
+    if options.outdagfile is None:
+        parser.error("No output DAG file provided")
+    else:
+        if os.path.exists(options.outdagfile):
+            parser.error("Output DAG file exists. Please rename or delete.")
+    if options.inputdir is None:
+        parser.error("No input dir provided")
+    if options.outdir is None:
+        parser.error("No output top level dir provided")
+    if options.uri is None:
+        parser.error("No URI to file transfer server provided")
+    if options.submitfile is None:
+        parser.error("No submit file provided")
+    else:
+        if not os.path.exists(options.submitfile):
+            parser.error("Submit file does not exist. Please create.")
+    if options.paxversion is None:
+        parser.error("No URI to file transfer server provided")
     level = {
         1: logging.ERROR,
         2: logging.WARNING,
