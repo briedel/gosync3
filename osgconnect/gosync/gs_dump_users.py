@@ -215,7 +215,7 @@ if __name__ == '__main__':
     parser.add_option("--forceupdate", dest="forceupdate", action="store_true",
                       default=False, help="Force update information")
     parser.add_option("--filters", dest="filters", default=None,
-                      action="callback_optparsellback", callback=callback_optparse,
+                      action="callback", callback=callback_optparse,
                       help="Output format to use given as a list")
     (options, args) = parser.parse_args()
     level = {
