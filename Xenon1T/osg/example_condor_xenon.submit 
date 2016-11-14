@@ -18,7 +18,10 @@ Log     = /path/to/log/files/condor_job_log
 #          (or operation system and version) is RHEL6 
 #           or one of this derivaties
 Requirements = ((OpSysAndVer == "CentOS6" || OpSysAndVer == "RedHat6" || OpSysAndVer == "SL6") && (GLIDEIN_ResourceName =!= "NPX"))
-
+# Special condition to get access to the 
+# Friends of MWT2 queue available from
+# login.ci-connect.uchicago.edu
++WANT_RCC_ciconnect = True
 # `request_cpus` tells HTCondor how many CPU cores
 # this jobs needs, default value is always 1
 request_cpus = $(ncpus)
