@@ -336,6 +336,8 @@ def add_ssh_key(config, member):
         for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
             f.write(key["ssh_key"])
     os.chmod(auth_keys_file, stat.S_IRUSR | stat.S_IWUSR)
+    os.chown(auth_keys_file, member[1]["user_id"], member[1]["group_id"])
+    os.chown(ssh_dir, member[1]["user_id"], member[1]["group_id"])
 
 
 def add_email_forwarding(config, member):
@@ -350,4 +352,4 @@ def add_email_forwarding(config, member):
     with open(forward_file, "wt") as f:
         f.write(str(member[1]["user_profile"][1]["email"]))
     os.chmod(forward_file, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
-    os.chown(forward_file, member["user_id"], member["group_id"])
+    os.chown(forward_file, member[1]["user_id"], member[1]["group_id"])
