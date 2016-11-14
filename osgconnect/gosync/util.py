@@ -327,8 +327,7 @@ def add_ssh_key(config, member):
         config: Configuration parameters dict()
         member: Globus Nexus member object
     """
-    ssh_dir = os.path.join(config["users"]["home_dir"],
-                           member[0], ".ssh")
+    ssh_dir = os.path.join(get_home_dir(config, member), ".ssh")
     if not os.path.exists(ssh_dir):
         os.makedirs(ssh_dir)
         os.chmod(ssh_dir, stat.S_IRWXU)
@@ -343,13 +342,12 @@ def add_email_forwarding(config, member):
     """
     Adding email forwarding file to users home directory
 
-    Args: 
+    Args:
         config: Configuration parameters dict()
         member: Globus Nexus member object
     """
-    forward_file = os.path.join(config["users"]["home_dir"],
-                                member[0], ".forward")
+    forward_file = os.path.join(get_home_dir(config, member), ".forward")
     with open(forward_file, "wt") as f:
-        f.write(str(member["email"]))
+        f.write(str(member[1]["user_profile"][1]["email"]))
     os.chmod(forward_file, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
     os.chown(forward_file, member["user_id"], member["group_id"])

@@ -172,7 +172,6 @@ def create_new_user(config, member, current_users):
     passwd_line = gen_new_passwd(config, member,
                                  current_users)
     if passwd_line is not None:
-        print(passwd_line)
         log.debug("Passwd line for user %s = %s",
                   passwd_line[0],
                   ":".join(passwd_line))
