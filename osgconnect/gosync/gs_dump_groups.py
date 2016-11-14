@@ -104,9 +104,9 @@ if __name__ == '__main__':
                       help="Output format to use given as a list")
     (options, args) = parser.parse_args()
     level = {
-        1: logging.ERROR,
-        2: logging.WARNING,
-        3: logging.INFO,
-        4: logging.DEBUG
+        1: log.ERROR,
+        2: log.WARNING,
+        3: log.INFO,
+        4: log.DEBUG
     }.get(options.verbosity, log.DEBUG)
     main(options, args)
