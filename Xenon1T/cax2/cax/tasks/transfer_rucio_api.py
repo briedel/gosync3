@@ -1,7 +1,6 @@
 from __future__ import absolute_import, division, print_function
 import os
 import glob
-import subprocess
 import logging as log
 
 from rucio.client import Client
@@ -46,128 +45,9 @@ class Transfer(object):
         raise NotImplementedError()
 
 
-class TransferRucioCLI(Transfer):
+class TransferRucio(Transfer):
     """
-    Class for Rucio transfers using CLI
-    """
-    def __init__(self, config, rucio_config):
-        Transfer.__init__(self, config)
-        self.rucio_config = rucio_config
-
-    def upload(self, direc, file_ids,
-               scope, rse, account=None, dataset=None):
-        # rucio_user = self.rucio_config["account"]["production"]
-        if account is None:
-            account = self.rucio_config["general"]["account"]
-        file_list = " ".join(self.find_files(direc, file_ids))
-        if dataset_name is None:
-            rucio_command = ("rucio -a %s -v upload "
-                             "--scope %s --rse %s "
-                             "%s") % (account,
-                                      scope,
-                                      rse,
-                                      file_list)
-        else:
-            dataset = "%s:%s" % (scope, dataset)
-            rucio_command = ("rucio -a %s -v upload "
-                             "--scope %s --rse %s "
-                             "%s %s") % (account,
-                                         scope,
-                                         rse,
-                                         dataset,
-                                         file_list)
-        subprocess.popen(rucio_command)
-
-    def add_replication_rule(self, dataset, copies, rse, account=None):
-        if account is None:
-            account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio -a %s -v add-rule %s %s %s" %
-                         (account, dataset, copies, rse))
-        subprocess.Popen(rucio_command)
-        # return the uuid for the rule.
-        return rule_id
-
-    def create_scope(self, scope_name, account=None):
-        if account is None:
-            account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio-admin rse add "
-                         "--scope %s --account %s") % (scope_name, account)
-        subprocess.Popen(rucio_command)
-
-    def create_container(self, container_name, scope, account=None):
-        if account is None:
-            account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio -a %s add-container "
-                         "%s:%s") % (account, scope, container_name)
-        subprocess.Popen(rucio_command)
-
-    def create_dataset(self, dataset_name, scope, account=None):
-        if account is None:
-            account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio -a %s add-dataset "
-                         "%s:%s") % (account, scope, dataset_name)
-        subprocess.Popen(rucio_command)
-
-    def upload_raw_data(self):
-        # Checking for new run
-        run_number = check_new_run(config)
-        if run_number is not None:
-            # new run
-            # Figure out what type of data either tpc or muon veto data
-            # TODO: How to pick between tpc and muon veto. DB?
-            data_type = "tpc"
-            # generate new scope
-            scope = (
-                self.rucio_config["naming_scheme"]["data_scope"] %
-                config["science_run_number"])
-            scope_science_run = (
-                self.rucio_config["naming_scheme"]["science_run_scope"])
-            create_scope(scope)
-            create_scope(scope_science_run)
-            # Guessing container name, create if not present
-            container = (
-                self.rucio_config["naming_scheme"]["container"] %
-                (config["science_run_number"], run_number, data_type))
-            create_container(scope, container)
-            # Guessing container name
-            dataset = (
-                self.rucio_config["naming_scheme"]["dataset"] %
-                (run_number, data_type))
-            for i, rse in enumerate(config["destination_RSEs"]):
-                if i == 0:
-                    input_dir = os.path.join(config["input_dir"], run_number)
-                    self.upload(input_dir,
-                                config["input_file_patterns"],
-                                scope,
-                                rse,
-                                dataset_name=dataset)
-                    log.info(("Added files in %s to scope %s "
-                              "and dataset %s"
-                              "and uploaded to rse %s"),
-                             input_dir, scope, dataset, rse)
-                else:
-                    try:
-                        rule_id = self.add_replication_rule(dataset,
-                                                            copies,
-                                                            rse)
-                        log.info(("New replication rule "
-                                  "added for %s:%s to "
-                                  "RSE %s with rule id %s"),
-                                 scope, dataset, rse, rule_id)
-                    except:
-                        log.fatal(("Could not add replication rule for "
-                                   "dataset %s:%s to RSE %s"),
-                                  scope, dataset, rse)
-                        log.error(error)
-                        raise RuntimeError()
-        else:
-            log.info("No new run. Exiting.")
-            sys.exit()
-
-
-class TransferRucioAPI(Transfer):
-    """
-    Class for Rucio transfers using homebrewed API
+    Class for Rucio transfers
     """
     def __init__(self, config, rucio_config):
         Transfer.__init__(self, config)
