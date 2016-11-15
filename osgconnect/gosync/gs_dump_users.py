@@ -29,15 +29,14 @@ def gen_new_passwd(config, globus_user, current_users, force=False):
                          the users passwd file.
     """
     home_dir = get_home_dir(config, globus_user)
-    print(globus_user[1]["user_profile"][1])
     name = str(uniclean(globus_user[1]["user_profile"][1]["full_name"]))
     if (str(globus_user[0]) in current_users.usernames) and not force:
         log.warn("Trying to provision user %s again. Duplicate user",
-                     str(globus_user[0]))
+                 str(globus_user[0]))
         return None
-    elif (str(globus_user[0]) in current_users.usernames) and force: 
+    elif (str(globus_user[0]) in current_users.usernames) and force:
         new_user_id = current_users.users[globus_user[0]]["user_id"]
-    else:       
+    else:
         while True:
             new_user_id = random.randint(10000, 65001)
             if new_user_id not in current_users.user_ids:
