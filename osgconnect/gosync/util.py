@@ -319,13 +319,14 @@ def create_user_storage_dir(member, passwd_line,
                    os.path.join(home_dir, "public"))
 
 
-def add_ssh_key(config, member):
+def add_ssh_key(config, member, passwd_line):
     """
     Adding ssh key file to users home directory
 
     Args:
         config: Configuration parameters dict()
         member: Globus Nexus member object
+        passwd: 
     """
     ssh_dir = os.path.join(get_home_dir(config, member), ".ssh")
     if not os.path.exists(ssh_dir):
@@ -336,11 +337,9 @@ def add_ssh_key(config, member):
         for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
             f.write(key["ssh_key"])
     os.chmod(auth_keys_file, stat.S_IRUSR | stat.S_IWUSR)
-    os.chown(auth_keys_file, member[1]["user_id"], member[1]["group_id"])
-    os.chown(ssh_dir, member[1]["user_id"], member[1]["group_id"])
+    recursive_chown(ssh_dir, int(passwd_line[2]), int(passwd_line[3]))
 
-
-def add_email_forwarding(config, member):
+def add_email_forwarding(config, member, passwd_line):
     """
     Adding email forwarding file to users home directory
 
@@ -352,4 +351,4 @@ def add_email_forwarding(config, member):
     with open(forward_file, "wt") as f:
         f.write(str(member[1]["user_profile"][1]["email"]))
     os.chmod(forward_file, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
-    os.chown(forward_file, member[1]["user_id"], member[1]["group_id"])
+    recursive_chown(forward_file, int(passwd_line[2]), int(passwd_line[3]))

@@ -82,7 +82,6 @@ def main(options, args):
     group_members, member_group = go_db.get_globus_group_members(
         get_user_profile=False,
         no_top_level=True)
-    print(group_members.keys())
     write_group_file(options, config, group_members)
 
 

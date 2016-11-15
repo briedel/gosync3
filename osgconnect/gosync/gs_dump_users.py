@@ -10,7 +10,7 @@ from optparse import OptionParser
 from util import *
 
 
-def gen_new_passwd(config, globus_user, current_users):
+def gen_new_passwd(config, globus_user, current_users, force=False):
     """
     Generate new passwd style list for a new user.
 
@@ -28,16 +28,20 @@ def gen_new_passwd(config, globus_user, current_users):
                          corresponds to position  of the information in
                          the users passwd file.
     """
-    if str(globus_user[0]) in current_users.usernames:
-        log.warn("Trying to provision user %s again. Duplicate user",
-                 str(globus_user[0]))
-        return None
-    while True:
-        new_user_id = random.randint(10000, 65001)
-        if new_user_id not in current_users.user_ids:
-            break
-    name = str(globus_user[1]["user_profile"][1]["full_name"])
     home_dir = get_home_dir(config, globus_user)
+    print(globus_user[1]["user_profile"][1])
+    name = str(uniclean(globus_user[1]["user_profile"][1]["full_name"]))
+    if (str(globus_user[0]) in current_users.usernames) and not force:
+        log.warn("Trying to provision user %s again. Duplicate user",
+                     str(globus_user[0]))
+        return None
+    elif (str(globus_user[0]) in current_users.usernames) and force: 
+        new_user_id = current_users.users[globus_user[0]]["user_id"]
+    else:       
+        while True:
+            new_user_id = random.randint(10000, 65001)
+            if new_user_id not in current_users.user_ids:
+                break
     passwd_new_user = [globus_user[0],
                        "x",
                        str(new_user_id),
@@ -139,10 +143,10 @@ def update_user(config, member, current_users):
         current_users: connects_users object that holds the
                        information about already provisioned users
     """
-    # passwd_line = gen_new_passwd(config, member,
-    #                              current_users)
+    passwd_line = gen_new_passwd(config, member,
+                                 current_users, 
+                                 force=True)
     # if passwd_line is not None:
-    #     print(passwd_line)
     #     log.debug("Passwd line for user %s = %s",
     #               passwd_line[0],
     #               ":".join(passwd_line))
@@ -152,9 +156,9 @@ def update_user(config, member, current_users):
     #     if not os.path.exists(home_dir):
     #         create_user_dirs(config, member, passwd_line)
     if member[1]["user_profile"][1]["ssh_pubkeys"]:
-        add_ssh_key(config, member)
+        add_ssh_key(config, member, passwd_line)
     if member[1]["user_profile"][1]["email"]:
-        add_email_forwarding(config, member)
+        add_email_forwarding(config, member, passwd_line)
 
 
 def create_new_user(config, member, current_users):
@@ -180,10 +184,13 @@ def create_new_user(config, member, current_users):
         home_dir = get_home_dir(config, member)
         if not os.path.exists(home_dir):
             create_user_dirs(config, member, passwd_line)
+    else:
+        passwd_line = gen_new_passwd(config, member,
+                                     current_users, force=True)
     if member[1]["user_profile"][1]["ssh_pubkeys"]:
-        add_ssh_key(config, member)
+        add_ssh_key(config, member, passwd_line)
     if member[1]["user_profile"][1]["email"]:
-        add_email_forwarding(config, member)
+        add_email_forwarding(config, member, passwd_line)
 
 
 def main(options, args):
