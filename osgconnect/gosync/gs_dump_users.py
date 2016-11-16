@@ -2,6 +2,7 @@
 from __future__ import print_function
 import logging as log
 import random
+import fcntl
 from globus_db import globus_db_nexus as globus_db
 from connect_users import connect_users
 from collections import defaultdict
@@ -29,8 +30,14 @@ def gen_new_passwd(config, globus_user, current_users, force=False):
                          the users passwd file.
     """
     home_dir = get_home_dir(config, globus_user)
-    print(globus_user[1]["user_profile"][1])
-    name = str(uniclean(globus_user[1]["user_profile"][1]["full_name"]))
+    try:
+        name = str(uniclean(globus_user[1]["user_profile"][1]["full_name"]))
+    except:
+        try:
+            name = str(uniclean(globus_user[1]["user_profile"][1]["fullname"]))
+        except:
+            log.info("Setting user %s's name as 'No Name'", globus_user[0])
+            name = "No Name"
     if (str(globus_user[0]) in current_users.usernames) and not force:
         log.warn("Trying to provision user %s again. Duplicate user",
                      str(globus_user[0]))
@@ -106,6 +113,7 @@ def get_users_to_work_on(options, config, globus_users, current_users):
     return selected
 
 
+@lock('/var/run/gosync2.lock', mode=RETRY, retries=10, timeout=300)
 def work_on_users(options, config, globus_users, current_users):
     """
     Doing work on the dicts of users
@@ -181,12 +189,10 @@ def create_new_user(config, member, current_users):
                   ":".join(passwd_line))
         if member[0] not in current_users.usernames:
             edit_passwd_file(config, passwd_line, "append")
-        home_dir = get_home_dir(config, member)
-        if not os.path.exists(home_dir):
-            create_user_dirs(config, member, passwd_line)
     else:
         passwd_line = gen_new_passwd(config, member,
                                      current_users, force=True)
+    create_user_dirs(config, member, passwd_line)
     if member[1]["user_profile"][1]["ssh_pubkeys"]:
         add_ssh_key(config, member, passwd_line)
     if member[1]["user_profile"][1]["email"]:

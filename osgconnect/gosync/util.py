@@ -3,9 +3,15 @@ import ast
 import ConfigParser as configparser
 import logging as log
 import os
+import sys
 import time
 import stat
 import shutil
+
+from fcntl import LOCK_EX
+from fcntl import LOCK_NB
+from fcntl import flock
+from time import sleep
 
 try:
     from nexus import GlobusOnlineRestClient
@@ -141,7 +147,20 @@ def recursive_chown(path, uid, gid):
         for momo in dirs:
             os.chown(os.path.join(root, momo), uid, gid)
         for momo in files:
-            os.chown(os.path.join(root, momo), uid, gid)
+            if os.path.exists(momo): 
+                os.chown(os.path.join(root, momo), uid, gid)
+
+def check_file_is_open(filename):
+    if os.path.exists(filename):
+        try:
+            os.rename(filename, filename)
+            log.debug("Access to file %s is possible", filename)
+        except OSError as e:
+            log.fatal("Access to file %s NOT possible", filename)
+            sys.exit(1)
+    else:
+        pass
+
 
 
 def backup_file(filename):
@@ -151,6 +170,8 @@ def backup_file(filename):
     Args:
         filename: Filename to backup
     """
+    log.debug("Backuping up %s", filename)
+    check_file_is_open(filename)
     t = time.localtime()
     timestamp = time.strftime('%b-%d-%Y_%H%M', t)
     shutil.copyfile(filename, filename + "_" + timestamp)
@@ -175,9 +196,7 @@ def convert_passwd_line(passwd_line):
                        "please check what you are trying to write to "
                        "the passwd file."))
             raise RuntimeError()
-        print(passwd_line)
         passwd_line = ":".join(passwd_line)
-        print(passwd_line)
     elif (not isinstance(passwd_line, str) or
           ":" not in passwd_line):
         log.error("passwd_line does not have expected format")
@@ -238,7 +257,7 @@ def create_user_dirs(config, member, passwd_line, create_user_storage=True):
         create_user_storage: (optional) create users storage directory
     """
     home_dir = get_home_dir(config, member)
-    create_home_dir(home_dir)
+    created_home_dir = create_home_dir(home_dir)
     group = member[1]["group_name"]
     top_group = group.split(".")[0] if "project" not in group else "osg"
     if config["debug"]["debug"]:
@@ -252,7 +271,8 @@ def create_user_dirs(config, member, passwd_line, create_user_storage=True):
                                         "user", "")
     create_user_storage_dir(member, passwd_line,
                             home_dir, top_level_dir=user_storage_dir)
-    recursive_chown(home_dir, int(passwd_line[2]), int(passwd_line[3]))
+    if created_home_dir:
+        recursive_chown(home_dir, int(passwd_line[2]), int(passwd_line[3]))
 
 
 def get_home_dir(config, member):
@@ -290,6 +310,17 @@ def create_home_dir(home_dir):
             shutil.copy2(os.path.join("/etc/skel/", file),
                          os.path.join(home_dir, ""))
         os.chmod(home_dir, stat.S_IRWXU)
+        return True
+    return False
+
+def check_symlink_broken(link):
+    if os.path.exists(link):
+        return False
+    else:
+        if os.islink(link):
+            log.debug("Link %s is broken. Unlinking", link)
+            os.unlink(link)
+        return True
 
 
 def create_user_storage_dir(member, passwd_line,
@@ -309,14 +340,21 @@ def create_user_storage_dir(member, passwd_line,
     """
     storage_dir = os.path.join(top_level_dir, member[0])
     if not os.path.exists(storage_dir):
-        log.debug("Creating user storage directory %s")
+        log.debug("Creating user storage directory %s", storage_dir)
         os.makedirs(storage_dir)
         os.makedirs(os.path.join(storage_dir, "public"))
-    recursive_chown(storage_dir, int(passwd_line[2]), int(passwd_line[3]))
+        recursive_chown(storage_dir, int(passwd_line[2]), int(passwd_line[3]))
     if home_dir is not None:
-        os.symlink(storage_dir, os.path.join(home_dir, "stash"))
-        os.symlink(os.path.join(storage_dir, "public"),
-                   os.path.join(home_dir, "public"))
+        if check_symlink_broken(os.path.join(home_dir, "stash")):
+            os.symlink(storage_dir, os.path.join(home_dir, "stash"))
+            os.chown(os.path.join(home_dir, "stash"), int(passwd_line[2]), 
+                     int(passwd_line[3]))
+        if check_symlink_broken(os.path.join(home_dir, "public")):
+            os.symlink(os.path.join(storage_dir, "public"),
+                       os.path.join(home_dir, "public"))
+            os.chown(os.path.join(home_dir, "public"), 
+                     int(passwd_line[2]), 
+                     int(passwd_line[3]))
 
 
 def add_ssh_key(config, member, passwd_line):
@@ -335,7 +373,7 @@ def add_ssh_key(config, member, passwd_line):
     auth_keys_file = os.path.join(ssh_dir, "authorized_keys")
     with open(auth_keys_file, "wt") as f:
         for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
-            f.write(key["ssh_key"])
+            f.write(key["ssh_key"] + "\n")
     os.chmod(auth_keys_file, stat.S_IRUSR | stat.S_IWUSR)
     recursive_chown(ssh_dir, int(passwd_line[2]), int(passwd_line[3]))
 
@@ -352,3 +390,89 @@ def add_email_forwarding(config, member, passwd_line):
         f.write(str(member[1]["user_profile"][1]["email"]))
     os.chmod(forward_file, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
     recursive_chown(forward_file, int(passwd_line[2]), int(passwd_line[3]))
+
+
+NO_BLOCK = 'nb'
+BLOCK = 'block'
+RETRY = 'retry'
+
+
+class UnableToLock(Exception):
+    pass
+
+class InvalidMode(Exception):
+    pass
+
+
+def lock(lock_file, mode=NO_BLOCK, retries=1, timeout=1):
+    """
+    Use flock sys-call to protect an action from multiple concurrent calls
+
+    This decorator will attempt to get an exclusive lock on the specified file
+    by using the flock system call.  As long as all callers of a protected action
+    use this decorator with the same lockfile, only 1 caller will be able to
+    execute at a time, all others will fail, or will be blocked.
+
+    Usage:
+
+        @lock('/var/run/protected.lock')
+        def protected():
+            # do some potentialy unsafe actions
+
+        # wait indefinetly for the lock
+        @lock('/var/run/protected.lock', mdoe=BLOCK)
+        def protected():
+            # do some potentialy unsafe actions
+        
+        # If the initial lock failed retry 10 more times.
+        @lock('/var/run/protected.lock', mode=RETRY, retries=10)
+        def protected():
+            # do some potentialy unsafe actions
+
+    Taken from: https://gist.github.com/mvliet/5715690
+
+    Args:
+        lock_file: string, of the full path to a file that will be used as a lock.
+        mode: string, how should we run this? (BLOCK, NO_BLOCK, RETRY)
+        retries: int, If the initial lock failed, how many more times to retry.
+        timeout: int, How long(seconds) should we wait before retrying the lock
+    """
+    def decorator(target):
+
+        def wrapper(*args, **kwargs):
+            # touch the file to create it. (not necessarily needed.)
+            # will raise IOError if permission denied.
+            if not (os.path.exists(lock_file) and os.path.isfile(lock_file)):
+                f = open(lock_file, 'a').close()
+
+            operation = LOCK_EX
+            if mode in [NO_BLOCK, RETRY]:
+                operation = operation | LOCK_NB
+
+            f = open(lock_file, 'a')
+            if mode in [BLOCK, NO_BLOCK]:
+                try:
+                    flock(f, operation)
+                except IOError:
+                    raise UnableToLock('Unable to get exclusive lock.')
+
+            elif mode == RETRY:
+                for i in range(0, retries + 1):
+                    try:
+                        flock(f, operation)
+                        break
+                    except IOError:
+                        if i == retries:
+                            raise UnableToLock('Unable to get exclusive lock.')
+                        sleep(timeout)
+
+            else:
+                raise InvalidMode('%s is not a valid mode.')
+
+            # Execute the target
+            result = target(*args, **kwargs)
+            # Release the lock by closing the file
+            f.close()
+            return result
+        return wrapper
+    return decorator
