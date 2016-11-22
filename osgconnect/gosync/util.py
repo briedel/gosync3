@@ -92,7 +92,7 @@ def uniclean(to_clean):
         if unichr(246) in to_clean:
             to_clean = to_clean.replace(unichr(246), "oe")
         if unichr(228) in to_clean:
-            to_clean = to_clean.replace(unichr(228), "ae") 
+            to_clean = to_clean.replace(unichr(228), "ae")
         return to_clean.encode('latin-1', 'replace')
     if isinstance(to_clean, list):
         return [uniclean(x) for x in to_clean]
