@@ -153,8 +153,9 @@ def recursive_chown(path, uid, gid):
         for momo in dirs:
             os.chown(os.path.join(root, momo), uid, gid)
         for momo in files:
-            if os.path.exists(momo): 
+            if os.path.exists(momo):
                 os.chown(os.path.join(root, momo), uid, gid)
+
 
 def check_file_is_open(filename):
     if os.path.exists(filename):
@@ -166,7 +167,6 @@ def check_file_is_open(filename):
             sys.exit(1)
     else:
         pass
-
 
 
 def backup_file(filename):
@@ -353,7 +353,7 @@ def create_user_storage_dir(member, passwd_line,
     if home_dir is not None:
         if check_symlink_broken(os.path.join(home_dir, "stash")):
             os.symlink(storage_dir, os.path.join(home_dir, "stash"))
-            os.chown(os.path.join(home_dir, "stash"), int(passwd_line[2]), 
+            os.chown(os.path.join(home_dir, "stash"), int(passwd_line[2]),
                      int(passwd_line[3]))
         if check_symlink_broken(os.path.join(home_dir, "public")):
             os.symlink(os.path.join(storage_dir, "public"),
