@@ -44,17 +44,15 @@ if __name__ == '__main__':
                       help="logging level verbosity",)
     parser.add_option("--mode", dest="mode", default=None,
                       help=("Operation mode. 'upload' to upload data "
-                            " from LNGS. 'process-pbs' to process "
-                            "data on a pbs batch queue. 'process-osg' "
-                            "to process data on OSG or a "
-                            "HTCondor batch queue. "))
+                            "from LNGS. 'process' to process "
+                            "data on the local job scheduler"))
 
     (options, args) = parser.parse_args()
     if options.mode is None:
         parser.error("Please provide an operation mode")
-    if options.mode not in ["upload", "process-pbs", "process-osg"]:
+    if options.mode not in ["upload", "process"]:
         parser.error(("Please provide a support operation mode: "
-                      "upload, process-pbs, process-osg"))
+                      "upload, or process."))
     level = {
         1: log.ERROR,
         2: log.WARNING,
