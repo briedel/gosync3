@@ -100,15 +100,21 @@ def write_dag_file(options):
                 outfile = os.path.abspath(os.path.join(options.outputdir,
                                           run_number, outfile))
                 outfile = options.uri + outfile
-                dag_file.write("JOB XENON.%d %s\n" % (i, options.submitfile))
-                dag_file.write(("VARS XENON.%d input_file=\"%s\" "
-                                "out_location=\"%s\" name=\"%s\" "
-                                "ncpus=\"1\" disable_updates=\"True\" "
-                                "host=\"login\" pax_version=\"%s\" "
-                                "pax_hash=\"n/a\"\n") % (i, infile,
-                                                         outfile, run_number,
-                                                         options.paxversion))
-                dag_file.write("Retry XENON.%d 3\n" % i)
+                dag_file.write(("JOB XENON.{counter} "
+                                "{submitfile}"
+                                "\n").format(counter=i,
+                                             submitfile=options.submitfile))
+                dag_file.write(('VARS XENON.{counter} input_file="{infile}" '
+                                'out_location="{outfile}" '
+                                'name="{run_number}" ncpus="1" '
+                                'disable_updates="True" host="login" '
+                                'pax_version="{paxversion}" pax_hash="n/a"'
+                                '\n').format(counter=i,
+                                             infile=infile,
+                                             outfile=outfile,
+                                             run_number=run_number,
+                                             paxversion=options.paxversion))
+                dag_file.write("Retry XENON.{counter} 3\n".format(counter=i))
                 i += 1
 
 
