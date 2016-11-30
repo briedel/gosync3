@@ -262,9 +262,10 @@ class SubmitPBS(Submit):
             walltime = int(self.config["Cluster"]["walltime_hrs"])
 
             self.write_general_header(f, mem=mem_requested, num_cpus=num_cpus,
-                                      num_gpus=num_gpus, walltime_hours=walltime,
+                                      num_gpus=num_gpus,
+                                      walltime_hours=walltime,
                                       disk=disk,
-                                      num_jobs = state["count"] if group_jobs else 0)
+                                      num_jobs=state["count"] if group_jobs else 0)
 
             if "custom_header" in self.config["SubmitFile"]:
                 self.write_line(f, self.config["SubmitFile"]["custom_header"])

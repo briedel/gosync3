@@ -61,28 +61,31 @@ class TransferRucioCLI(Transfer):
             account = self.rucio_config["general"]["account"]
         file_list = " ".join(self.find_files(direc, file_ids))
         if dataset_name is None:
-            rucio_command = ("rucio -a %s -v upload "
-                             "--scope %s --rse %s "
-                             "%s") % (account,
-                                      scope,
-                                      rse,
-                                      file_list)
+            rucio_command = ["rucio",
+                             "-a", account,
+                             "-v", "upload",
+                             "--scope", scope,
+                             "--rse", rse,
+                             file_list]
         else:
             dataset = "%s:%s" % (scope, dataset)
-            rucio_command = ("rucio -a %s -v upload "
-                             "--scope %s --rse %s "
-                             "%s %s") % (account,
-                                         scope,
-                                         rse,
-                                         dataset,
-                                         file_list)
-        subprocess.popen(rucio_command)
+            rucio_command = ["rucio",
+                             "-a", account,
+                             "-v", "upload",
+                             "--scope", scope,
+                             "--rse", rse,
+                             dataset,
+                             file_list]
+        p = subprocess.Popen(rucio_command)
 
     def add_replication_rule(self, dataset, copies, rse, account=None):
         if account is None:
             account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio -a %s -v add-rule %s %s %s" %
-                         (account, dataset, copies, rse))
+        rucio_command = ["rucio",
+                         "-a", account,
+                         "-v", "add-rule",
+                         account, dataset,
+                         copies, rse]
         subprocess.Popen(rucio_command)
         # return the uuid for the rule.
         return rule_id
@@ -90,22 +93,28 @@ class TransferRucioCLI(Transfer):
     def create_scope(self, scope_name, account=None):
         if account is None:
             account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio-admin rse add "
-                         "--scope %s --account %s") % (scope_name, account)
+        rucio_command = ["rucio-admin",
+                         "rse", "add"
+                         "--scope", scope_name,
+                         "--account", account]
         subprocess.Popen(rucio_command)
 
     def create_container(self, container_name, scope, account=None):
         if account is None:
             account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio -a %s add-container "
-                         "%s:%s") % (account, scope, container_name)
+        rucio_command = ["rucio",
+                         "-a", account,
+                         "add-container",
+                         "%s:%s" % (scope, container_name)]
         subprocess.Popen(rucio_command)
 
     def create_dataset(self, dataset_name, scope, account=None):
         if account is None:
             account = self.rucio_config["general"]["account"]
-        rucio_command = ("rucio -a %s add-dataset "
-                         "%s:%s") % (account, scope, dataset_name)
+        rucio_command = ["rucio",
+                         "-a", account,
+                         "add-dataset",
+                         "%s:%s" % (scope, dataset_name)]
         subprocess.Popen(rucio_command)
 
     def upload_raw_data(self):
