@@ -63,6 +63,10 @@ optional arguments:
           --id IDENTITY         Identity
           --email EMAIL         Email address associated with the identity
         ```
+        Example: 
+        ```
+        rucio-admin -a root identity add --account sthapa --type X509 --id "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Suchandra Thapa" --email sthapa@ci.uchicago.edu
+        ```
     * Create user scope
         ```
         rucio-admin scope add --help
@@ -76,11 +80,14 @@ optional arguments:
     * To add the RSE
         `rucio-admin rse add <rse>`
     * Set attributes for the RSE
+
         ```
         rucio-admin rse set-attribute --help
         usage: rucio-admin rse set-attribute [-h] --rse RSE --key KEY --value VALUE
         ```
+
     * Configure gridftp for an existing endpoint. From python command line:
+
         ```
         from rucio.core.rse import add_protocol
         proto = {‘hostname’: endpoint.host.name,
@@ -342,3 +349,24 @@ In web interface: (rucio.mwt2.org:8161, default ports)
 add queues: Consumer.kronos.rucio.tracer
 add topics: transfer.fts_monitoring_queue_state, rucio.tracer, rucio.fax\x
 ```
+
+<!-- ### Troubleshooting
+
+#### Restart the Rucio VM
+
+VM lives on `uct2-kvm03.mwt2.org`. To restart the machine `virsh shutdown rucio.mwt2.org`. If it is not responding `virsh destroy rucio.mwt2.org`. 
+
+Host cert, host key, ca cert are located in `/opt/rucio/etc/web`
+
+FTS are complaining about delegation
+
+To check the daemons: `/etc/init.d/supervisord status`
+
+Logs are in: `/var/log/rucio`
+
+MariaDB: `service restart MariaDB`
+
+ActiveMQ: `/opt/apache-activemq-5.13.3/bin/activemq start` 
+
+change space for an RSE: /root/rucio/tools/probes/common/check_srm_space
+-->
