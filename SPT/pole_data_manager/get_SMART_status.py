@@ -5,9 +5,9 @@ import re
 
 with open(inputfilename, "rt") as f:
     serial_nums = []
-    for l in f:
-        l = l.rstrip("\n")
-        l.split(" ")
+    for line in f:
+        line = line.rstrip("\n")
+        line.split(" ")
     # Looping through the disks in /dev/
     for d in glob.glob("/dev/sd*"):
         # Calls the smartctl

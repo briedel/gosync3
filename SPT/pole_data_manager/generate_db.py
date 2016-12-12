@@ -10,27 +10,16 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M')
 
-parser = OptionParser()
-parser.add_option("--dbfile", dest="db_filename", default="spt_data_management.db",
-                  help="Filename for sqlite3 DB", metavar="FILE")
-parser.add_option("--schemafile", dest="db_schema_filename", default="spt_data_management_schema.sql",
-                  help="Filename for DB schema file")
-parser.add_option("--diskfile", dest="disk_filename", default="disk-map",
-                  help="File with relationship between labels, disk serial number, and partition uuid")
-parser.add_option("--newDB", action="store_true", dest="new_DB", default=False,
-                  help="Completely new DB")
-parser.add_option("--pole", action="store_false", dest="pole",
-                  help="Assuming we are using the pole setup. More checks: Disk size, disk space, etc.")
-(options, args) = parser.parse_args()
 
-def main():
+def main(options, args):
     if os.path.exists(options.db_filename) and not options.new_DB:
-        logging.info('Database exists, assume schema does, too.')
+        logging.info('Database exists, assume schema does, too. Doing nothing')
     else:
         if os.path.exists(options.db_filename):
+            logging.info("Deleting old DB.")
             os.remove(options.db_filename)
-        with sqlite3.connect(options.db_filename) as conn:    
-            logging.info("DB is new")
+        with sqlite3.connect(options.db_filename) as conn:
+            logging.info("New DB")
             with open(options.db_schema_filename, 'rt') as f:
                 schema = f.read()
             conn.executescript(schema)
@@ -55,9 +44,13 @@ def main():
                         ####
                         if total < 7999426224128:
                             # Are the drives below 8 TB..... Odd!
-                            logging.fatal("Disk /spt_disks/{0} is maller than expected. Something is weird".format(label))
+                            logging.fatal(("Disk /spt_disks/{0} is smaller "
+                                           "than expected. Something "
+                                           "is weird").format(label))
                             raise RuntimeError("Exiting because disk mount appears corrupted. Check mount on /spt_disks/{0}".format(label))
-                        if (label == "P01" or label == "S01") and options.new_DB and free > 35028992: # free number has to change  
+                        if ((label == "P01" or label == "S01") and
+                           options.new_DB and free > 35028992):
+                            # free number has to change  
                             # 
                             # conn.execute("""
                             #                 insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
@@ -66,7 +59,10 @@ def main():
                             #                         alive=True, full=False, max_space=total, space_used=used,
                             #                         previously_used=True))
                             previously_used = True 
-                        elif options.new_DB and free > 35028992 and used > 35028992: # free and used number have to change
+                        elif (options.new_DB and
+                              free > 35028992 and
+                              used > 35028992): 
+                            # free and used number have to change
                             # conn.execute("""
                             #                insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
                             #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
@@ -91,4 +87,22 @@ def main():
                                    previously_used=previously_used))
 
 if __name__ == "__main__":
-    main()
+    parser = OptionParser()
+    parser.add_option("--dbfile",
+                      dest="db_filename", default="spt_data_management.db",
+                      help="Filename for sqlite3 DB",
+                      metavar="FILE")
+    parser.add_option("--schemafile",
+                      dest="db_schema_filename",
+                      default="spt_data_management_schema.sql",
+                      help="Filename for DB schema file")
+    parser.add_option("--diskfile", dest="disk_filename", default="disk-map",
+                      help=("File with relationship between labels, "
+                            "disk serial number, and partition uuid"))
+    parser.add_option("--newDB", action="store_true", dest="new_DB", default=False,
+                      help="Completely new DB")
+    parser.add_option("--pole", action="store_false", dest="pole",
+                      help=("Assuming we are using the pole setup. "
+                            "More checks: Disk size, disk space, etc."))
+    (options, args) = parser.parse_args()
+    main(options, args)

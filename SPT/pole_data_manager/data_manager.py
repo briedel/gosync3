@@ -14,10 +14,6 @@ import ConfigParser as configparser
 
 from optparse import OptionParser
 
-parser = OptionParser()
-parser.add_option("--config", dest="config_file", default="data_manager.conf",
-                  help="Scripts config file", metavar="FILE")
-(options, args) = parser.parse_args()
 
 logging.basicConfig(level=logging.DEBUG,
                     format=('%(asctime)s %(name)-2s Line %(lineno)d '
@@ -144,7 +140,11 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
                                   checksum=hash, filesize=filesize,
                                   disk_primary=primary_disk,
                                   disk_copy=copy_disk))
-        logging.info("Successfully copied file %s to Primary Disk %s and Copy Disk %s", os.path.basename(filename), primary_disk, copy_disk)
+        logging.info(("Successfully copied file %s to "
+                      "Primary Disk %s and Copy Disk %s"),
+                     os.path.basename(filename),
+                     primary_disk, copy_disk)
+
 
 def get_file_info(file):
     """
@@ -331,12 +331,13 @@ def run(config):
         logging.debug("Primary Disk is %s. Copy disk is %s",
                       primary_disk,
                       copy_disk)
-        logging.debug("Looking for files with pattern %s", 
+        logging.debug("Looking for files with pattern %s",
                       os.path.join(config["Data"]["bufferlocation"],
                                    "*." + config["Data"]["extension"]))
-        new_files = check_new_files(db, 
-                                    os.path.join(config["Data"]["bufferlocation"],
-                                                 "*." + config["Data"]["extension"]))
+        new_files = check_new_files(db,
+                                    os.path.join(
+                                        config["Data"]["bufferlocation"],
+                                        "*." + config["Data"]["extension"]))
         if not new_files:
             logging.info("No new files. Exiting")
             sys.exit()
@@ -404,7 +405,7 @@ def testing(config):
         i += 1
 
 
-def main():
+def main(options, args):
     if not os.path.exists(options.config_file):
         logging.log_fatal("Config file %s does not exist", options.config_file)
         raise RuntimeError()
@@ -418,4 +419,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = OptionParser()
+    parser.add_option("--config", dest="config_file",
+                      default="data_manager.conf",
+                      help="Scripts config file", metavar="FILE")
+    (options, args) = parser.parse_args()
+    main(options, args)
