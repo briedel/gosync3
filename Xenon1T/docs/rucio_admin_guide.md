@@ -65,7 +65,7 @@ optional arguments:
         ```
         Example: 
         ```
-        rucio-admin -a root identity add --account sthapa --type X509 --id "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Suchandra Thapa" --email sthapa@ci.uchicago.edu
+        rucio-admin -a root identity add --account <username> --type X509 --id "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Suchandra Thapa" --email <email>
         ```
     * Create user scope
         ```
@@ -76,34 +76,34 @@ optional arguments:
           --account ACCOUNT  Account name
           --scope SCOPE     Scope name
         ```
+    * Create quota for account on RSEs
+        `rucio-admin -a root account set-limits <username> <rse> <quota_in_bytes>`
 * Registering an RSE
     * To add the RSE
         `rucio-admin rse add <rse>`
     * Set attributes for the RSE
-
         ```
         rucio-admin rse set-attribute --help
         usage: rucio-admin rse set-attribute [-h] --rse RSE --key KEY --value VALUE
         ```
-
     * Configure gridftp for an existing endpoint. From python command line:
-
         ```
         from rucio.core.rse import add_protocol
-        proto = {‘hostname’: endpoint.host.name,
-                 ‘scheme’: ‘gsiftp’,
-                 ‘port’: port,
-                 ‘prefix’: /path/to/storage,
-                 ‘impl’: ‘rucio.rse.protocols.gfal.Default’,
-                 ‘extended_attributes’: None,
-                 ‘domains’: {‘lan’: {‘read’: 1,
-                             ‘write’: 1,
-                             ‘delete’: 1},
-                 ‘wan’: {‘read’: 1,
-                         ‘write’: 1,
-                         ‘delete’: 1}}}
+        proto = {'hostname': 'ccsrm02.in2p3.fr', 
+                 'scheme': 'srm', 
+                 'port': 8443, 
+                 'prefix': '/pnfs/in2p3.fr/data/xenon.biggrid.nl/rucio',
+                 'impl': 'rucio.rse.protocols.gfalv2.Default', 
+                 'extended_attributes': None, 
+                 'domains': {'lan': {'read': 1, 
+                                     'write': 1, 
+                                     'delete': 1},
+                 'wan': {'read': 1, 
+                         'write': 1, 
+                         'delete': 1}}}
         add_protocol(<rse>, parameter=proto)
         ```
+        Note: SRM requires to have `extended_attributes` `space_token` and `web_service_path` set. It can be an empty string if necessary.
     * Set distances between the RSEs
         ```
         from rucio.core.rse import list_rses
@@ -113,6 +113,17 @@ optional arguments:
             for dst in rses:
                 add_distance(src_rse_id=src['id'], dest_rse_id=dst['id'], ranking=1, agis_distance=1)
         ```
+    * Set FTS server:
+        ```
+        from rucio.core.rse import add_rse_attribute
+        add_rse_attribute('CCIN2P3_USERDISK', 'fts', 'https://fts.usatlas.bnl.gov:8446')```
+    * Changing RSE quota: `rucio-admin -a root account set-limits <account> <rse> <quota_in_bytes>`
+
+* Update RSE protocols: 
+    ```
+    from rucio.core.rse import update_protocols
+    update_protocols(rse="CCIN2P3_USERDISK", scheme="srm", data={'extended_attributes': {u'space_token': '', u'web_service_path': u''}}, hostname="ccsrm02.in2p3.fr", port=8443)
+    ```
 
 ## Troubleshooting a Rucio instance
 
@@ -162,6 +173,7 @@ vi /opt/rucio/etc/rucio.cfg:
 ```
 
 `rucio.cfg`:
+
     ```
     rucio_host      -> <HTTP_accessible_Rucio_hostname, e.g. https://rucio.mwt2.org:443>
     auth_host       -> <HTTP_accessible_Rucio_hostname, e.g. https://rucio.mwt2.org:443>
