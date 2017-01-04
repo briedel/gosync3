@@ -92,7 +92,7 @@ def uniclean(to_clean):
         if unichr(246) in to_clean:
             to_clean = to_clean.replace(unichr(246), "oe")
         if unichr(228) in to_clean:
-            to_clean = to_clean.replace(unichr(228), "ae")
+            to_clean = to_clean.replace(unichr(228), "ae") 
         return to_clean.encode('latin-1', 'replace')
     if isinstance(to_clean, list):
         return [uniclean(x) for x in to_clean]
@@ -153,9 +153,8 @@ def recursive_chown(path, uid, gid):
         for momo in dirs:
             os.chown(os.path.join(root, momo), uid, gid)
         for momo in files:
-            if os.path.exists(momo):
+            if os.path.exists(momo): 
                 os.chown(os.path.join(root, momo), uid, gid)
-
 
 def check_file_is_open(filename):
     if os.path.exists(filename):
@@ -167,6 +166,7 @@ def check_file_is_open(filename):
             sys.exit(1)
     else:
         pass
+
 
 
 def backup_file(filename):
@@ -319,6 +319,7 @@ def create_home_dir(home_dir):
         return True
     return False
 
+
 def check_symlink_broken(link):
     if os.path.exists(link):
         return False
@@ -353,17 +354,22 @@ def create_user_storage_dir(member, passwd_line,
     if home_dir is not None:
         if check_symlink_broken(os.path.join(home_dir, "stash")):
             os.symlink(storage_dir, os.path.join(home_dir, "stash"))
-            os.chown(os.path.join(home_dir, "stash"), int(passwd_line[2]),
+            os.chown(os.path.join(home_dir, "stash"),
+                     int(passwd_line[2]),
                      int(passwd_line[3]))
-        if check_symlink_broken(os.path.join(home_dir, "public")):
+        if (os.path.exists(os.path.join(storage_dir, "public")) and
+           check_symlink_broken(os.path.join(home_dir, "public"))):
             os.symlink(os.path.join(storage_dir, "public"),
                        os.path.join(home_dir, "public"))
-            os.chown(os.path.join(home_dir, "public"), 
-                     int(passwd_line[2]), 
+            os.chown(os.path.join(home_dir, "public"),
+                     int(passwd_line[2]),
                      int(passwd_line[3]))
+    if not os.path.exists(os.path.join(storage_dir, "public")):
+        log.warn("User %s does not have a public directory in stash",
+                 member[0])
 
 
-def add_ssh_key(config, member, passwd_line):
+def add_ssh_key(config, member, passwd_line, overwrite=False):
     """
     Adding ssh key file to users home directory
 
@@ -377,13 +383,24 @@ def add_ssh_key(config, member, passwd_line):
         os.makedirs(ssh_dir)
         os.chmod(ssh_dir, stat.S_IRWXU)
     auth_keys_file = os.path.join(ssh_dir, "authorized_keys")
-    with open(auth_keys_file, "wt") as f:
-        for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
-            f.write(key["ssh_key"] + "\n")
+    if os.path.exists(auth_keys_file) and not overwrite:
+        with open(auth_keys_file, "at+") as f:
+            keys = [line.rstrip("\n") for line in f if "#" not in line]
+            for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
+                print(key)
+                if key["ssh_key"] in keys:
+                    continue
+                else:
+                    f.write(key["ssh_key"] + "\n")
+    else:
+        with open(auth_keys_file, "wt") as f:
+            for key in member[1]["user_profile"][1]["ssh_pubkeys"]:
+                f.write(key["ssh_key"] + "\n")
+    # Permissions: read/write for user
     os.chmod(auth_keys_file, stat.S_IRUSR | stat.S_IWUSR)
     recursive_chown(ssh_dir, int(passwd_line[2]), int(passwd_line[3]))
 
-def add_email_forwarding(config, member, passwd_line):
+def add_email_forwarding(config, member, passwd_line, overwrite=False):
     """
     Adding email forwarding file to users home directory
 
@@ -392,8 +409,16 @@ def add_email_forwarding(config, member, passwd_line):
         member: Globus Nexus member object
     """
     forward_file = os.path.join(get_home_dir(config, member), ".forward")
-    with open(forward_file, "wt") as f:
-        f.write(str(member[1]["user_profile"][1]["email"]))
+    if os.path.exists(forward_file) and not overwrite:
+        with open(forward_file, "at+") as f:
+            email = [line.rstrip("\n") for line in f]
+            if (email and
+               str(member[1]["user_profile"][1]["email"]) != email[0]):
+                f.write(str(member[1]["user_profile"][1]["email"]) + "\n")
+    else:
+        with open(forward_file, "wt") as f:
+            f.write(str(member[1]["user_profile"][1]["email"]) + "\n")
+    # Permissions: read/write user, read group, read global
     os.chmod(forward_file, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
     recursive_chown(forward_file, int(passwd_line[2]), int(passwd_line[3]))
 
