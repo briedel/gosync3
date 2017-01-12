@@ -9,5 +9,6 @@ create table files (
     checksum     TEXT not null,
     filesize     INTEGER not null,
     backup_nersc NUMERIC,
-    backup_anl   NUMERIC
+    backup_anl   NUMERIC,
+    at_rcc       NUMERIC,
 );
