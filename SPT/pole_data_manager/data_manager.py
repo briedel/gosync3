@@ -97,8 +97,17 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
     filesize, hash = get_file_info(filename)
     mountpoint = config["Data"]["diskmountpoints"]
 
-    # Need that trailing /
-    primary_disk_abspath = os.path.join(mountpoint, primary_disk, "")
+    if (config["Data"]["singleprimarydisk"] and
+       "singleprimarydiskpath" in config["Data"]):
+        # Need that trailing /
+        primary_disk_abspath = os.path.join(primary_disk, "")
+    elif (config["Data"]["singleprimarydisk"] and
+          "singleprimarydiskpath" not in config["Data"]):
+        logging.fatal("No path to single primary disk provided")
+        raise RuntimeError()
+    else:
+        primary_disk_abspath = os.path.join(mountpoint,
+                                            primary_disk, "")
     copy_disk_abspath = os.path.join(mountpoint, copy_disk, "")
     # Copying with metadata intact
     logging.debug("Copying to %s", primary_disk_abspath)
@@ -175,7 +184,7 @@ def sha512sum(file, blocksize=65536):
     return hasher.hexdigest()
 
 
-def get_useable_disk(db):
+def get_useable_disk(config, db):
     """
     Get disks that should be used
 
@@ -197,6 +206,12 @@ def get_useable_disk(db):
                                "match. That should not be possible. Something "
                                "went wrong in the DB."))
                 raise RuntimeError()
+        elif len(results) == 1:
+            if (not config["Data"]["singleprimarydisk"] and
+               "singleprimarydiskpath" not in config["Data"]):
+                    logging.fatal("No path to single primary disk provided")
+                    raise RuntimeError()
+            return config["Data"]["singleprimarydiskpath"], results[0][0]
         elif len(results) > 2:
             logging.fatal("Too many active disks: %s", results)
             raise RuntimeError()
@@ -226,7 +241,7 @@ def mark_disk_full(db, disk):
                       WHERE label = '{0}'""".format(disk))
 
 
-def get_new_disks(db, primary_disk, copy_disk):
+def get_new_disks(config, db, primary_disk, copy_disk):
     """
     Simply increment the disk numbers by one. If the disk number is over the
     expected number of disks, check the DB and see if disks have been added.
@@ -236,7 +251,15 @@ def get_new_disks(db, primary_disk, copy_disk):
     :param copy_disk: Label for copy disk
     :return: Tuple with new disk labels to be used
     """
-    new_primary_disk = get_new_disk(db, primary_disk)
+    if (config["Data"]["singleprimarydisk"] and
+       "singleprimarydiskpath" in config["Data"]):
+        new_primary_disk = primary_disk
+    elif (config["Data"]["singleprimarydisk"] and
+          "singleprimarydiskpath" not in config["Data"]):
+        logging.fatal("No path to single primary disk provided")
+        raise RuntimeError()
+    else:
+        new_primary_disk = get_new_disk(db, primary_disk)
     new_copy_disk = get_new_disk(db, copy_disk)
     return new_primary_disk, new_copy_disk
 
@@ -273,7 +296,15 @@ def get_current_disk_space(config, primary_disk, copy_disk):
     :return: Tuple of the free space of the two disks
     """
     mountpoint = config["Data"]["diskmountpoints"]
-    primary_disk_abspath = os.path.join(mountpoint, primary_disk, "")
+    if (config["Data"]["singleprimarydisk"] and
+       "singleprimarydiskpath" in config["Data"]):
+        primary_disk_abspath = primary_disk
+    elif (config["Data"]["singleprimarydisk"] and
+          "singleprimarydiskpath" not in config["Data"]):
+        logging.fatal("No path to single primary disk provided")
+        raise RuntimeError()
+    else:
+        primary_disk_abspath = os.path.join(mountpoint, primary_disk, "")
     copy_disk_abspath = os.path.join(mountpoint, copy_disk, "")
     disk_stats_primary = os.statvfs(primary_disk_abspath)
     disk_stats_copy = os.statvfs(copy_disk_abspath)
@@ -327,7 +358,7 @@ def check_config(config):
 
 def run(config):
     with sqlite3.connect(os.path.expandvars(config["DB"]["filenamedb"])) as db:
-        primary_disk, copy_disk = get_useable_disk(db)
+        primary_disk, copy_disk = get_useable_disk(config, db)
         logging.debug("Primary Disk is %s. Copy disk is %s",
                       primary_disk,
                       copy_disk)
@@ -357,7 +388,7 @@ def run(config):
                 logging.info(("Getting new disks. Primary Disk %s and copy "
                               "disk%s are full."), primary_disk, copy_disk)
                 mark_disks_full(db, primary_disk, copy_disk)
-                primary_disk, copy_disk = get_new_disks(db,
+                primary_disk, copy_disk = get_new_disks(config, db,
                                                         primary_disk,
                                                         copy_disk)
                 logging.debug("New Primary Disk is %s. New Copy disk is %s",
