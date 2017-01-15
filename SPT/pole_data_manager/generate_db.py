@@ -7,7 +7,8 @@ import sqlite3
 from optparse import OptionParser
 
 logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    format=('%(asctime)s %(name)-12s '
+                            '%(levelname)-8s %(message)s'),
                     datefmt='%m-%d %H:%M')
 
 
@@ -47,41 +48,26 @@ def main(options, args):
                             logging.fatal(("Disk /spt_disks/{0} is smaller "
                                            "than expected. Something "
                                            "is weird").format(label))
-                            raise RuntimeError("Exiting because disk mount appears corrupted. Check mount on /spt_disks/{0}".format(label))
+                            raise RuntimeError(("Exiting because disk mount "
+                                                "appears corrupted. Check "
+                                                "mount on "
+                                                "/spt_disks/{0}").format(label))
                         if ((label == "P01" or label == "S01") and
                            options.new_DB and free > 35028992):
-                            # free number has to change  
-                            # 
-                            # conn.execute("""
-                            #                 insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                            #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
-                            #              """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
-                            #                         alive=True, full=False, max_space=total, space_used=used,
-                            #                         previously_used=True))
                             previously_used = True 
                         elif (options.new_DB and
                               free > 35028992 and
-                              used > 35028992): 
-                            # free and used number have to change
-                            # conn.execute("""
-                            #                insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                            #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
-                            #              """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
-                            #                         alive=True, full=False, max_space=total, space_used=used,
-                            #                         previously_used=True))
+                              used > 35028992):
                             previously_used = True
-                        # elif options.new_DB and used <= 35028992 : # This is for drives that are full????? dunno what i was thinking here
-                            # conn.execute("""
-                            #                 insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                            #                 values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
-                            #              """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
-                            #                         alive=True, full=False, max_space=total, space_used=used,
-                            #                         previously_used=False))
                     else:
-                        previously_used = True 
+                        previously_used = True
                     conn.execute("""
-                        insert into disks (label, serialno, logical_device_id, alive, full, max_space, space_used, previously_used)
-                        values ('{name}', '{sn}', '{logical_device_id}', '{alive}', '{full}', '{max_space}', '{space_used}', '{previously_used}')
+                        insert into disks (label, serialno,
+                        logical_device_id, alive, full,
+                        max_space, space_used, previously_used)
+                        values ('{name}', '{sn}', '{logical_device_id}',
+                        '{alive}', '{full}', '{max_space}',
+                        '{space_used}', '{previously_used}')
                         """.format(name=label, sn=serial_number, logical_device_id=logical_id, 
                                    alive=True, full=False, max_space=total, space_used=used,
                                    previously_used=previously_used))

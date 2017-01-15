@@ -13,6 +13,7 @@ import subprocess
 import ConfigParser as configparser
 
 from optparse import OptionParser
+from rsync import rsync
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -153,6 +154,24 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
                       "Primary Disk %s and Copy Disk %s"),
                      os.path.basename(filename),
                      primary_disk, copy_disk)
+
+
+def rsync_files_to_disk(config, db, primary_disk, copy_disk):
+    src = os.path.join(config["Data"]["bufferlocation"], "")
+    rsync_prim = rsync(src, primary_disk, delete=True)
+    if rsync_prim.wait():
+        logging.fatal("rsync (src: %s, dest: %s) exited with code %d" %
+                      (src, primary_disk, rsync_prim.returncode))
+        raise RuntimeError()
+    rsync_copy = rsync(src, copy_disk, delete=True)
+    if rsync_copy.wait():
+        logging.fatal("rsync (src: %s, dest: %s) exited with code %d" %
+                      (src, primary_disk, rsync_prim.returncode))
+        raise RuntimeError()
+    logging.info(("Successfully synced files from %s to "
+                  "Primary Disk %s and Copy Disk %s"),
+                 src,
+                 primary_disk, copy_disk)
 
 
 def get_file_info(file):
