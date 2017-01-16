@@ -25,11 +25,13 @@ def main(options, args):
                 schema = f.read()
             conn.executescript(schema)
             with open(options.disk_filename, "rt") as f:
+                disk_status_prim = False
+                disk_status_copy = False
                 for line in f:
                     line = line.rstrip("\n")
                     label, serial_number, logical_id = line.split(" ")
                     if not os.path.exists("/spt_disks/{0}".format(label)):
-                        raise RuntimeError("Mountpoint does not exist")
+                        raise RuntimeError("Mountpoint {0} does not exist".format("/spt_disks/{0}".format(label)))
                     st = os.statvfs("/spt_disks/{0}".format(label))
                     free = st.f_bavail * st.f_frsize
                     total = st.f_blocks * st.f_frsize
@@ -44,7 +46,7 @@ def main(options, args):
                         #       7999391195136 is the free space in a formated disk
                         ####
                         if total < 7999426224128:
-                            # Are the drives below 8 TB..... Odd!
+                            # Are the drives below 8 TB..... Odd! Sad!
                             logging.fatal(("Disk /spt_disks/{0} is smaller "
                                            "than expected. Something "
                                            "is weird").format(label))
@@ -52,13 +54,22 @@ def main(options, args):
                                                 "appears corrupted. Check "
                                                 "mount on "
                                                 "/spt_disks/{0}").format(label))
-                        if ((label == "P01" or label == "S01") and
-                           options.new_DB and free > 35028992):
-                            previously_used = True 
-                        elif (options.new_DB and
-                              free > 35028992 and
-                              used > 35028992):
-                            previously_used = True
+                        if not disk_status_prim or not disk_status_copy:
+                            if ((label == "P01" or label == "S01") and
+                               options.new_DB and free > 35028992):
+                                previously_used = True
+                                if label[0] == "P":
+                                    disk_status_prim = True
+                                if label[0] == "S":
+                                    disk_status_copy = True
+                            elif (options.new_DB and
+                                  free > 35028992 and
+                                  used > 35028992):
+                                previously_used = True
+                                if label[0] == "P":
+                                    disk_status_prim = True
+                                if label[0] == "S":
+                                    disk_status_copy = True
                     else:
                         previously_used = True
                     conn.execute("""
@@ -87,7 +98,7 @@ if __name__ == "__main__":
                             "disk serial number, and partition uuid"))
     parser.add_option("--newDB", action="store_true", dest="new_DB", default=False,
                       help="Completely new DB")
-    parser.add_option("--pole", action="store_false", dest="pole",
+    parser.add_option("--pole", action="store_true", dest="pole", default=False,
                       help=("Assuming we are using the pole setup. "
                             "More checks: Disk size, disk space, etc."))
     (options, args) = parser.parse_args()
