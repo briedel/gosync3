@@ -22,28 +22,31 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt='%Y-%m-%d %H:%M:%S')
 
 
-def check_new_files(db, path_to_new_files):
+def check_new_files(config, db):
     """
     Runs glob on a data buffer directory and checks with
     the data base whether a file has already been copied
     or not
 
+    :param config: Config parameters dict()
     :param db: sqlite3 database object
-    :param path_to_new_files: Path to data buffer dir
     :return: List of files that need to be copied to
              disk and added to file catalog
     """
     cursor = db.cursor()
-    files = glob.glob(path_to_new_files)
+    files = scan_buffer_directory(config)
     logging.debug("Found files {0}".format(files))
     new_files = []
     if files:
         files.sort()
         for file in files:
-            file_basename = os.path.basename(file)
+            # file_basename = os.path.basename(file)
+            # file_name in this case is the file path without the 
+            # constant buffer path at the beginning
+            file_name = file.lstrip(config["Data"]["bufferlocation"])
             logging.debug("Checking for file: {0}".format(file))
             cursor.execute("""SELECT * FROM files
-                              WHERE filename = '{0}'""".format(file_basename))
+                              WHERE filename = '{0}'""".format(file_name))
             results = cursor.fetchall()
             if results:
                 logging.debug("Checking for file duplicate")
@@ -82,6 +85,25 @@ def check_new_files(db, path_to_new_files):
     return new_files
 
 
+def scan_buffer_directory(config):
+    """
+    Function that walks through the directory structure of 
+    the configured buffer and looks for files with 
+    valid extensions.
+
+    :param config: Config parameters dict()
+    :return: List of absolute paths of files with
+             valid extension
+    """
+    valid_extensions = config["Data"]["extensions"]
+    top_level_input_dir = config["Data"]["bufferlocation"]
+    return [os.path.join(dirpath, file)
+            for dirpath, dirnames, filenames in os.walk(top_level_input_dir)
+            if filenames
+            for file in filenames
+            if os.path.splitext(file)[1] in valid_extensions]
+
+
 def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
     """
     Copies files to the primary and copy disk array,
@@ -98,18 +120,38 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
     filesize, hash = get_file_info(filename)
     mountpoint = config["Data"]["diskmountpoints"]
 
+    # Getting the sub directories of the buffer disk
+    # so we can create subdirectory structure if
+    # necessary
+    dirs = os.path.dirname(filename)
+    sub_dirs_buffer = dirs.lstrip(config["Data"]["bufferlocation"])
+
+    # Decide which kind of primary disk we have
+    # Large single, or a lot of smaller disks
     if (config["Data"]["singleprimarydisk"] and
        "singleprimarydiskpath" in config["Data"]):
         # Need that trailing /
-        primary_disk_abspath = os.path.join(primary_disk, "")
+        primary_disk_abspath = os.path.join(primary_disk,
+                                            sub_dirs_buffer,
+                                            "")
     elif (config["Data"]["singleprimarydisk"] and
           "singleprimarydiskpath" not in config["Data"]):
         logging.fatal("No path to single primary disk provided")
         raise RuntimeError()
     else:
         primary_disk_abspath = os.path.join(mountpoint,
-                                            primary_disk, "")
-    copy_disk_abspath = os.path.join(mountpoint, copy_disk, "")
+                                            primary_disk,
+                                            sub_dirs_buffer,
+                                            "")
+    copy_disk_abspath = os.path.join(mountpoint,
+                                     copy_disk,
+                                     sub_dirs_buffer,
+                                     "")
+    # Create necessary directories
+    if not os.path.exists(primary_disk_abspath):
+        os.makedirs(primary_disk_abspath)
+    if not os.path.exists(copy_disk_abspath):
+        os.exists(copy_disk_abspath)
     # Copying with metadata intact
     logging.debug("Copying to %s", primary_disk_abspath)
     shutil.copy2(filename, primary_disk_abspath)
@@ -141,22 +183,31 @@ def copy_file_to_disks(config, db, filename, primary_disk, copy_disk):
         raise RuntimeError()
     else:
         # If file copied successfully. Add info to DB
+        filename = filename.lstrip(config["Data"]["bufferlocation"])
         cursor = db.cursor()
         cursor.execute("""
                        INSERT INTO files (filename, checksum, filesize,
                        disk_primary, disk_copy) VALUES ('{name}', '{checksum}',
                        '{filesize}','{disk_primary}', '{disk_copy}')
-                       """.format(name=os.path.basename(filename),
+                       """.format(name=filename,
                                   checksum=hash, filesize=filesize,
                                   disk_primary=primary_disk,
                                   disk_copy=copy_disk))
         logging.info(("Successfully copied file %s to "
                       "Primary Disk %s and Copy Disk %s"),
-                     os.path.basename(filename),
-                     primary_disk, copy_disk)
+                     filename, primary_disk, copy_disk)
 
 
 def rsync_files_to_disk(config, db, primary_disk, copy_disk):
+    """
+    Example function to use rsync to copy files from buffer
+    to primary and copy disks. Not used at this point.
+
+    :param config: Config parameters dict()
+    :param db: sqlite3 database object
+    :param primary_disk: Identifier for primary disk to be used
+    :param copy_disk: Identifier for copy disk to be used
+    """
     src = os.path.join(config["Data"]["bufferlocation"], "")
     rsync_prim = rsync(src, primary_disk, delete=True)
     if rsync_prim.wait():
@@ -230,6 +281,7 @@ def get_useable_disk(config, db):
                "singleprimarydiskpath" not in config["Data"]):
                     logging.fatal("No path to single primary disk provided")
                     raise RuntimeError()
+            logging.debug("Selected disk {0}".format(results[0][0]))
             return config["Data"]["singleprimarydiskpath"], results[0][0]
         elif len(results) > 2:
             logging.fatal("Too many active disks: %s", results)
@@ -255,6 +307,12 @@ def mark_disks_full(db, primary_disk, copy_disk):
 
 
 def mark_disk_full(db, disk):
+    """
+    Mark disks as full
+
+    :param db: sqlite3 database object
+    :param disk: Disk to be designated as full
+    """
     cursor = db.cursor()
     cursor.execute("""UPDATE disks SET full='True', previously_used='False'
                       WHERE label = '{0}'""".format(disk))
@@ -384,10 +442,7 @@ def run(config):
         logging.debug("Looking for files with pattern %s",
                       os.path.join(config["Data"]["bufferlocation"],
                                    "*." + config["Data"]["extension"]))
-        new_files = check_new_files(db,
-                                    os.path.join(
-                                        config["Data"]["bufferlocation"],
-                                        "*." + config["Data"]["extension"]))
+        new_files = check_new_files(config, db)
         if not new_files:
             logging.info("No new files. Exiting")
             sys.exit()
