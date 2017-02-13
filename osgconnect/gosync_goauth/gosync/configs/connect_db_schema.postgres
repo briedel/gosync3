@@ -1,0 +1,70 @@
+CREATE TYPE user_status AS ENUM ('Provisioned', 'Approved', 'Pending');
+
+CREATE TABLE users(
+    id           SERIAL NOT NULL PRIMARY KEY,
+    username     TEXT NOT NULL UNIQUE,
+    name         TEXT NOT NULL,
+    globus_uuid  UUID NOT NULL UNIQUE,
+    id_provider  UUID NOT NULL UNIQUE,
+    email        TEXT NOT NULL,
+    organization TEXT,
+    unix_id      INTEGER NOT NULL CONSTRAINT positive_unix_id CHECK (unix_id > 0) UNIQUE,
+    ssh_key      TEXT,
+    status       user_status NOT NULL DEFAULT 'Pending',
+    last_update  TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE TABLE groups(
+    id               SERIAL NOT NULL PRIMARY KEY,
+    name             TEXT,
+    short_name       TEXT,
+    discipline       TEXT,
+    other_discipline TEXT,
+    pi               TEXT,
+    pi_email         TEXT,
+    pi_organization  TEXT,
+    pi_department    TEXT,
+    join_date        DATE,
+    contact_name     TEXT,
+    contact_email    TEXT,
+    phone_number     TEXT,
+    description      TEXT,
+    num_members      INTEGER NOT NULL CONSTRAINT positive_num_members CHECK (num_members > 0),
+    parent_org       TEXT,
+    approved         BOOLEAN NOT NULL DEFAULT FALSE,
+    globus_uuid      UUID NOT NULL UNIQUE,
+    unix_id          INTEGER NOT NULL CONSTRAINT positive_unix_id CHECK (unix_id > 0) UNIQUE,
+    last_update      TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE TABLE groupmembers(
+    group_id  INTEGER REFERENCES groups(id) ON DELETE CASCADE, 
+    user_id   INTEGER REFERENCES users(id) ON DELETE RESTRICT,
+    last_update TIMESTAMP NOT NULL DEFAULT now(),
+    PRIMARY KEY(group_id, user_id)
+);
+
+CREATE TABLE grouptree(
+    parent_group_id  INTEGER REFERENCES groups(id) ON DELETE CASCADE, 
+    child_group_id   INTEGER REFERENCES groups(id) ON DELETE RESTRICT,
+    last_update TIMESTAMP NOT NULL DEFAULT now(),
+    PRIMARY KEY(parent_group_id, child_group_id)
+);
+
+CREATE TABLE idenitymap(
+    user_id    INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    identity_id    INTEGER REFERENCES users(id) ON DELETE RESTRICT,
+    last_update TIMESTAMP NOT NULL DEFAULT now(),
+    PRIMARY KEY(user_id, identity_id)
+);
+
+CREATE TABLE identities(
+    id           SERIAL NOT NULL PRIMARY KEY,
+    username     TEXT NOT NULL UNIQUE,
+    name         TEXT NOT NULL,
+    globus_uuid  UUID NOT NULL UNIQUE,
+    id_provider  UUID NOT NULL UNIQUE,
+    organization TEXT,
+    email        TEXT NOT NULL,
+    last_update  TIMESTAMP NOT NULL DEFAULT now()  
+);
