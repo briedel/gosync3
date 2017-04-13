@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import webbrowser
 import argparse
 import globus_sdk
+import os
 from util import parse_config
 
 parser = argparse.ArgumentParser()
@@ -12,50 +12,81 @@ args = parser.parse_args()
 
 config = parse_config(args.config_file)
 
-def do_native_app_authentication(config):
-    client = globus_sdk.NativeAppAuthClient(config["Globus"]["client_id"])
-    client.oauth2_start_flow_native_app(requested_scopes="openid email profile urn:globus:auth:scope:transfer.api.globus.org:all")
 
-    url = client.oauth2_get_authorize_url()
+def get_globus_tokens(config):
+    """
+    Get Globus authenication tokens
+    """
+    client = globus_sdk.NativeAppAuthClient(
+        config["Globus"]["client_id"])
+    client.oauth2_start_flow_native_app(refresh_tokens=True)
+    if os.path.exists("/home/briedel/.spt_transfer"):
+        with open("/home/briedel/.spt_transfer", "rt") as f:
+            for line in f:
+                transfer_refresh_token = line.rstrip("\n")
+        return client, None, None, transfer_refresh_token
+    else:
+        authorize_url = client.oauth2_get_authorize_url()
+        print('Please go to this URL and login: {0}'.format(authorize_url))
+        # this is to work on Python2 and Python3 -- you can just
+        # use raw_input() or input() for your specific version
+        get_input = getattr(__builtins__, 'raw_input', input)
+        auth_code = get_input(
+            'Please enter the code you get after login here: ').strip()
+        token_response = client.oauth2_exchange_code_for_tokens(auth_code)
 
-    print('Native App Authorization URL: \n{}'.format(url))
-    # if not is_remote_session():
-    #     webbrowser.open(url, new=1)
+        globus_auth_data = token_response.by_resource_server['auth.globus.org']
+        globus_transfer_data = token_response.by_resource_server[
+            'transfer.api.globus.org']
+
+        auth_token = globus_auth_data[
+            'access_token']
+        transfer_token = globus_transfer_data[
+            'access_token']
+        transfer_refresh_token = globus_transfer_data[
+            'refresh_token']
+        with open("/home/briedel/.spt_transfer", "wt") as f:
+            f.write(transfer_refresh_token)
+        return client, auth_token, transfer_token, transfer_refresh_token
 
 
-# def get_globus_tokens(config):
-#     """
-#     Get Globus authenication tokens
-#     """
-#     client = globus_sdk.NativeAppAuthClient(config["Globus"]["client_id"])
-#     # print(client.oauth2_refresh_token("6vVg3RpGdBgfuPXtEG7H6nOWy7AJAL"))
-#     client.oauth2_start_flow_native_app()
+(client, auth_token,
+ transfer_token, transfer_refresh_token) = get_globus_tokens(config)
 
+if transfer_token is not None:
+    authorizer = globus_sdk.AccessTokenAuthorizer(transfer_token)
+else:
+    authorizer = globus_sdk.RefreshTokenAuthorizer(
+        transfer_refresh_token, client)
+# authorizer = globus_sdk.AccessTokenAuthorizer(transfer_token)
+tc = globus_sdk.TransferClient(authorizer=authorizer)
 
-#     authorize_url = client.oauth2_get_authorize_url()
-#     print('Please go to this URL and login: {0}'.format(authorize_url))
+print("My Endpoints:")
+for ep in tc.endpoint_search(filter_scope="my-endpoints"):
+    print("[{}] {}".format(ep["id"], ep["display_name"]))
 
-#     # this is to work on Python2 and Python3 -- you can just use raw_input() or
-#     # input() for your specific version
-#     get_input = getattr(__builtins__, 'raw_input', input)
-#     auth_code = get_input(
-#         'Please enter the code you get after login here: ').strip()
-#     token_response = client.oauth2_exchange_code_for_tokens(auth_code)
-#     print(token_response)
-#     # p
-#     # globus_auth_data = token_response.by_resource_server['auth.globus.org']
-#     # globus_transfer_data = token_response.by_resource_server['transfer.api.globus.org']
+print("Activating")
+ep1result = tc.endpoint_autoactivate(config["Origin"]["endpoint"])
+for endpoint in config["Destination"]["endpoint"].keys():
+    ep2result = tc.endpoint_autoactivate(config["Destination"][
+        "endpoint"][endpoint])
 
-#     # # client.oauth2_refresh_token()
+    tdata = globus_sdk.TransferData(tc,
+                                    config["Origin"]["endpoint"],
+                                    config["Destination"][
+                                        "endpoint"][endpoint],
+                                    verify_checksum=True,
+                                    sync_level="checksum")
+    for loc in config["Origin"]["file_location"]:
+        # ## Recursively transfer source path contents
+        tdata.add_item(loc,
+                       os.path.join(config["Destination"][
+                                    "file_location"][endpoint],
+                                    os.path.basename(loc)),
+                       recursive=True)
 
-#     # # # most specifically, you want these tokens as strings
-#     # auth_token = globus_auth_data['access_token']
-#     # transfer_token = globus_transfer_data['access_token']
-
-#     # return auth_token, transfer_token
-
-# get_globus_tokens(config)
-
+    transfer_result = tc.submit_transfer(tdata)
+    print(transfer_result)
 
 ############################################################################
 
@@ -132,27 +163,7 @@ def do_native_app_authentication(config):
 # print(tc.endpoint_autoactivate(
 #     config["Destination"]["endpoint"]["rcc"]))
 # # for endpoint in config["Globus"]["destination_endpoints"]
-# ep1result = tc.endpoint_autoactivate(config["Origin"]["endpoint"])
-# ep2result = tc.endpoint_autoactivate(config["Destination"]["endpoint"]["rcc"])
 
-# r = tc.operation_ls(config["Origin"]["endpoint"],
-#                     path=config["Origin"]["file_location"])
-# print("==== Endpoint_ls for endpoint {} {} ====".format(config["Origin"]["endpoint"], config["Origin"]["file_location"]))
-# for item in r:
-#     print("{}: {} [{}]".format(item["type"], item["name"], item["size"]))
-
-# r = tc.operation_ls(config["Destination"]["endpoint"]["rcc"],
-#                     path=config["Destination"]["file_location"]["rcc"])
-# print("==== Endpoint_ls for endpoint {} {} ====".format(config["Destination"]["endpoint"]["rcc"], config["Destination"]["file_location"]["rcc"]))
-# for item in r:
-#     print("{}: {} [{}]".format(item["type"], item["name"], item["size"]))
-
-# tdata = globus_sdk.TransferData(tc, config["Origin"]["endpoint"],
-#                                 config["Destination"]["endpoint"]["rcc"],
-#                                 label="rcc")
-
-# ## Recursively transfer source path contents
-# tdata.add_item(config["Origin"]["file_location"], config["Destination"]["file_location"]["rcc"], recursive=True)
 
 # # tc.endpoint_autoactivate(config["Origin"]["endpoint"])
 # # tc.endpoint_autoactivate(config["Destination"]["file_location"]["rcc"])
