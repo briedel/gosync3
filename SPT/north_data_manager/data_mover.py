@@ -19,7 +19,7 @@ def get_globus_tokens(config):
     """
     client = globus_sdk.NativeAppAuthClient(
         config["Globus"]["client_id"])
-    client.oauth2_start_flow_native_app(refresh_tokens=True)
+    client.oauth2_start_flow(refresh_tokens=True)
     if os.path.exists("/home/briedel/.spt_transfer"):
         with open("/home/briedel/.spt_transfer", "rt") as f:
             for line in f:
