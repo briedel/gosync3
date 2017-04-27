@@ -1,0 +1,92 @@
+{
+  "debug": {
+    "debug": true,
+    "dummy_stash": "/tmp/test/stash",
+    "dummy_home": "/tmp/test/home"
+  },
+  "users": {
+    "passwd_file": "passwd_www",
+    "default_group": 1000
+  },
+  "groups": {
+    "group_file": "group_www",
+    "storage_dir": {
+      "spt": "/spt/",
+      "atlas": "/faxbox2/",
+      "cms": "/stash/",
+      "osg": "/stash/",
+      "duke": "/stash/",
+      "uchicago": "/stash/",
+      "umich": "/stash/"
+    },
+    "home_dir": {
+      "spt": "/home/",
+      "atlas": "/home/",
+      "cms": "/home/",
+      "osg": "/home/",
+      "duke": "/home/",
+      "uchicago": "/home/",
+      "umich": "/home/"
+    },
+    "public_dir": {
+      "spt": "/spt/public"
+    }
+  },
+  "globus": {
+    "server": "nexus.api.globusonline.org",
+    "groups": {
+      "top_level_groups": [
+        "spt",
+        "atlas",
+        "cms",
+        "osg",
+        "duke",
+        "uchicago",
+        "umich"
+      ],
+      "root_group": "connect",
+      "root_group_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
+    },
+    "root_user": {
+      "roles": [
+        "admin",
+        "manager"
+      ],
+      "username": "connect",
+      "secret": "Gl0bus+OSG4tw",
+      "auth_refresh_token": "AQEAAAAAAAThNwyRJEObHcdMFUsfg2hsTsI-pnOEzBPbmaTEqMy_KJTw4k6284BdG4Di_WR5UdsUaJcX0q2u",
+      "nexus_refresh_token": "AQEAAAAAAAThOeWquaUStI9IwrlzUr7hyBRczoDt-oXy7_U_MK7mDTuPKMdtZxbUspPu5kbRMr0Rj7I-byil"
+    },
+    "user": {
+      "roles": [
+        "member",
+        "admin",
+        "manager"
+      ],
+      "username": "briedel",
+      "auth_refresh_token": "AQEAAAAAAAThBcoa_kLNB4G-eZt1J6t_0k88QTp8JVjFh4fQT8WCz1Ydb8rbD0XCa1Oc7gPW24fENo7Htn5n",
+      "nexus_refresh_token": "AQEAAAAAAAThAwfg6G5L7OU1gJNXbZAvkcGG2sbctDsyvsxMchuCu-KRrgnZSBVlCL0xgcQuQIpiYX5qJyw2"
+    },
+    "app": {
+      "scopes": [
+        "openid",
+        "profile",
+        "email",
+        "urn:globus:auth:scope:auth.globus.org:view_identities",
+        "urn:globus:auth:scope:transfer.api.globus.org:all",
+        "urn:globus:auth:scope:auth.globus.org:view_identity_set",
+        "urn:globus:auth:scope:nexus.api.globus.org:groups"
+      ],
+      "future_scopes": [
+        "urn:globus:auth:scope:auth.globus.org:view_ssh_public_keys"
+      ],
+      "client_id": "5386889e-5aa1-420b-9c99-11570576f19c",
+      "client_secret": "xePWoH16L19cskwglwY7bGPZTfYEW6REgqV4VLGIppU="
+    }
+  },
+  "connect_db": {
+    "user": "connectdb",
+    "secret": "EZDRHkVxNeVnDKkqvpVsmD2j",
+    "db_name": "connectdb"
+  }
+}
