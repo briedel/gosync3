@@ -15,6 +15,7 @@ class connect_db(object):
             user=self.config["connect_db"]["user"],
             password=self.config["connect_db"]["secret"],
             dbname=self.config["connect_db"]["db_name"])
+        self.dict_cursor = psycopg2.extras.DictCursor
 
     def __del__(self):
         self.connection.close()
@@ -35,10 +36,10 @@ class connect_db(object):
         else:
             column = "username"
         with self.connection as conn:
-            with conn.cursor() as c:
+            with conn.cursor(cursor_factory=self.dict_cursor) as c:
                 sql = """SELECT unix_id FROM %(table)s WHERE %(column)=%s"""
                 c.execute(sql, {"table": AsIs(table), "column": column})
-                unix_id = mem_id = c.fetchall()[0][0]
+                unix_id = c.fetchall()["unix_id"]
         return unix_id
 
     def get_group_id(self, group_name):
@@ -67,7 +68,7 @@ class connect_db(object):
     def get_group_line_info(self, group_name, get_sub_groups=False,
         list_group_members=False):
         with self.connection as conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as c:
+            with conn.cursor(cursor_factory=self.dict_cursor) as c:
                 if list_group_members:
                     sql = """SELECT g.short_name, g.unix_id, 
                                     array_agg(u.username, 
@@ -119,7 +120,7 @@ class connect_db(object):
                       get_sub_groups=False):
         # TODO: errors about inputs
         with self.connection as conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as c:
+            with conn.cursor(cursor_factory=self.dict_cursor) as c:
                 sql = self.get_user_sql_base()
                 if (group_name is not None and
                    group_name != self.config["globus"]["root_group"]):
@@ -142,7 +143,7 @@ class connect_db(object):
 
     def get_new_approved_users(self):
         with self.connection as conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as c:
+            with conn.cursor(cursor_factory=self.dict_cursor) as c:
                 sql = self.get_user_sql_base()
                 sql += self.get_group_user_sql()
                 sql += """WHERE u.status = 'Approved'"""
@@ -152,7 +153,7 @@ class connect_db(object):
 
     def get_provisioned_users(self):
         with self.connection as conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as c:
+            with conn.cursor(cursor_factory=self.dict_cursor) as c:
                 sql = self.get_user_sql_base()
                 sql += self.get_group_user_sql()
                 sql += """WHERE ((u.status = 'SSHKeyMissing') 

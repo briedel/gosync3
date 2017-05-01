@@ -30,6 +30,10 @@ class globus_db(object):
             log.fatal("Config is not dict")
             raise RuntimeError()
         self.connect_db = connect_db
+        # get legacy tokens, and "connect" user get_tokens
+        self.legacy_client = self.get_legacy_client(
+            self.config["globus"]["root_user"]["username"],
+            self.config["globus"]["root_user"]["secret"])
 
     def get_tokens(self, username):
         print(username)
@@ -88,11 +92,11 @@ class globus_db(object):
         log.debug("Got Globus Nexus client")
         return auth_client, nexus_client
 
-    def get_group_members(self):
-        raise NotImplementedError()
-
     def get_group(self, group_name):
-        raise NotImplementedError()
+        groups = self.get_groups()
+        for group in groups:
+            if group["name"] == group_name:
+                return group
 
     def get_groups(self):
         auth_client, nexus_client = self.get_globus_client()
@@ -108,10 +112,7 @@ class globus_db(object):
         raise NotImplementedError()
 
     def get_user_info(self, username):
-        legacy_client = self.get_legacy_client(
-            self.config["globus"]["root_user"]["username"],
-            self.config["globus"]["root_user"]["secret"])
-        return legacy_client.get_user(username).data
+        return self.legacy_client.get_user(username).data
 
     def get_roles(self, username=None):
         if username is None:
@@ -121,7 +122,7 @@ class globus_db(object):
                  else self.config["globus"]["user"]["roles"])
         return roles
 
-    def get_user_groups_membership(self, usernames):
+    def get_user_groups(self, usernames):
         if isinstance(usernames, six.string_types):
             usernames = [usernames]
         membership = {}
@@ -130,7 +131,7 @@ class globus_db(object):
                 username=user)
             roles = self.get_roles(user)
             membership[user] = nexus_client.list_groups(
-                fields="id,name",
+                # fields="id,name",
                 for_all_identities=True,
                 include_identity_set_properties=True,
                 my_roles=roles)
@@ -150,10 +151,50 @@ class globus_db(object):
                                            my_roles=roles)
         return tree
 
-    def get_group_members(self, group_id, username=None):
+    def get_group_members(self, group_id,
+                          username=None, get_user_summary=False):
         auth_client, nexus_client = self.get_globus_client(username=username)
-        group_members = nexus_client.get_group_memberships(self, group_id).data
+        group_members = nexus_client.get_group_memberships(group_id).data
+        if get_user_summary:
+            group_members = [self.summarize_user(member)
+                             for member in group_members["members"]
+                             if member["status"] == "active"]
+        else:
+            group_members = [member for member in group_members["members"]
+                             if member["status"] == "active"]
         return group_members
+
+    def summarize_user(self, user, connect_db=True):
+        new_member_profile = {}
+        member_profile = self.get_user_info(user["username"])
+        required_keys = ["username", "ssh_pubkeys", "custom_fields",
+                         "fullname", "email", "identity_id"]
+        for k, v in member_profile.iteritems():
+            if v == "briedel":
+                print(member_profile)
+            if k not in required_keys:
+                continue
+            if k != "custom_fields":
+                if k == "ssh_pubkeys":
+                    for key in v:
+                        if k not in new_member_profile.keys():
+                            new_member_profile[k] = []
+                        new_member_profile[k].append(key['ssh_key'])
+                    if not v:
+                        new_member_profile[k] = []
+                else:
+                    if connect_db:
+                        if k == "fullname":
+                            k = "name"
+                        if k == "identity_id":
+                            k = "globus_uuid"
+                    new_member_profile[k] = v
+            else:
+                for sk, sv in v.iteritems():
+                    if sk in new_member_profile.keys():
+                        continue
+                    new_member_profile[sk] = sv
+        return new_member_profile
 
     def check_new_members(self, group_name, group_count):
         return (self.check_group_membership_changes(group_name, group_count))

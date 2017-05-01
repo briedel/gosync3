@@ -1,36 +1,17 @@
 {
   "debug": {
-    "debug": true,
-    "dummy_stash": "/tmp/test/stash",
-    "dummy_home": "/tmp/test/home"
+    "debug": true
+  },
+  "gosync":
+  {
+    "json_out": ""
   },
   "users": {
     "passwd_file": "passwd_www",
     "default_group": 1000
   },
   "groups": {
-    "group_file": "group_www",
-    "storage_dir": {
-      "spt": "/spt/",
-      "atlas": "/faxbox2/",
-      "cms": "/stash/",
-      "osg": "/stash/",
-      "duke": "/stash/",
-      "uchicago": "/stash/",
-      "umich": "/stash/"
-    },
-    "home_dir": {
-      "spt": "/home/",
-      "atlas": "/home/",
-      "cms": "/home/",
-      "osg": "/home/",
-      "duke": "/home/",
-      "uchicago": "/home/",
-      "umich": "/home/"
-    },
-    "public_dir": {
-      "spt": "/spt/public"
-    }
+    "group_file": "group_www"
   },
   "globus": {
     "server": "nexus.api.globusonline.org",
@@ -85,7 +66,7 @@
     }
   },
   "connect_db": {
-    "user": "connectdb",
+    "user": "connect",
     "secret": "EZDRHkVxNeVnDKkqvpVsmD2j",
     "db_name": "connectdb"
   }
