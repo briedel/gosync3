@@ -21,8 +21,8 @@ class globus_db(object):
         """
         Intiliazer
         Args:
-            config: Configuration dict()
-            get_members: Get the members of the groups
+            config (dict): Configuration parameters 
+            get_members (bool): Get the members of the groups
         """
         if config is None:
             log.warn(("No config provided. "
@@ -43,6 +43,20 @@ class globus_db(object):
     """
 
     def get_tokens(self, username):
+        """
+        Gets the correct auth and nexus tokens for the users
+
+        Args:
+            username (str): User's GlobusID username
+
+        Returns:
+            auth_token (str): Globus Auth token
+            nexus_token (str): Globus Nexus token
+        """
+        log.debug("Getting token for user: %s", username)
+        # Depending on user we get the tokens differently
+        # Connect user from the config file
+        # Everyone else from the database
         if username == self.config["globus"]["root_user"]["username"]:
             auth_token = self.config[
                 "globus"]["root_user"]["auth_refresh_token"]
@@ -59,31 +73,51 @@ class globus_db(object):
         return auth_token, nexus_token
 
     def get_legacy_client(self, username, password):
+        """
+        Gets the Nexus Client using the username/password combination
+
+        Args:
+            username (str): User's GlobusID username
+            password (str): User's GlobusID password
+
+        Returns:
+            auth_token (str): Globus Auth token
+            nexus_token (str): Globus Nexus token
+        """
+        # Get the legacy Golbus Auth Nexus token using the username/password
         nc = NexusClient(
             authorizer=globus_sdk.BasicAuthorizer(username, password))
         legacy_token = LegacyGOAuthAuthorizer(nc.get_goauth_token())
+        # Creating a Nexus client with the legacy token
         nc_legacy = NexusClient(
             authorizer=legacy_token)
         return nc_legacy
 
     def get_globus_client(self, username=None):
         """
-        Get Globus SDK-Nexus RESTful client
+        Get Globus SDK RESTful clients
 
         Args:
-            config: Configuration dict()
+            username (str): User's GlobusID username
 
         Returns:
-            client: Globus Nexus RESTful client
+            auth_client (Globus SDK Client): Globus Auth RESTful client
+            nexus_client (Globus Nexus Client): Globus Auth-based RESTful
+                                                Globus Nexus client
         """
         if username is None:
             username = self.config["globus"]["root_user"]["username"]
 
+        log.debug("Getting Globus SDK Auth and Nexus client for user %s",
+                  username)
+
+        # Setting up Globus SDK client
         client_id = self.config["globus"]["app"]["client_id"]
         client_secret = self.config["globus"]["app"]["client_secret"]
         confidential_client = globus_sdk.ConfidentialAppAuthClient(
             client_id, client_secret)
 
+        # Getting Authorizers
         auth_token, nexus_token = self.get_tokens(username)
         auth_authorizer = globus_sdk.RefreshTokenAuthorizer(
             auth_token,
@@ -94,7 +128,6 @@ class globus_db(object):
 
         auth_client = globus_sdk.AuthClient(authorizer=auth_authorizer)
         nexus_client = NexusClient(authorizer=nexus_authorizer)
-        log.debug("Got Globus Nexus client")
         return auth_client, nexus_client
 
 
@@ -103,10 +136,28 @@ class globus_db(object):
     """
 
     def get_group(self, group_name):
+        """
+        Get information about single groups
+
+        Args:
+            group_name: Globus name of the group
+
+        Returns:
+            Group information for group_name
+        """
         group = self.get_groups(group_name)
         return group[0]
 
     def get_groups(self, group_names=None):
+        """
+        Get information about a list of groups
+
+        Args:
+            group_names (list): List of Globus group names
+
+        Returns:
+            list: List with group information
+        """
         if self.all_groups is None:
             all_groups = self.get_all_groups()
         if isinstance(group_names, six.string_types):
@@ -117,8 +168,15 @@ class globus_db(object):
                   if group["name"] in group_names]
         return groups
 
-    def get_all_groups(self, update=True):
-        if self.all_groups is not None and update:
+    def get_all_groups(self, update=False):
+        """
+        Get all groups associated with the globus root user ("connect")
+
+        Args:
+            update (bool): Optional argument to allow to update the group list
+                           in case that is desired
+        """
+        if self.all_groups is not None and not update:
             return self.all_groups
         all_groups = self.get_user_groups(
             [self.config["globus"]["root_user"]["username"]],
@@ -127,13 +185,31 @@ class globus_db(object):
             "globus"]["root_user"]["username"]]
         return self.all_groups
 
-    def get_user_info_for_db(self, username):
-        raise NotImplementedError()
-
     def get_user_info(self, username):
-        return self.legacy_client.get_user(username).data
+        """
+        Get the information about the user. At the moment, this requires the 
+        legacy client because the Groups scope in Auth do not allow to get the
+        user information
+
+        Args:
+            username (str): User's username
+
+        Returns:
+            user_data (dict): User data stored in Globus Nexus
+        """
+        user_data = self.legacy_client.get_user(username).data
+        return user_data
 
     def get_roles(self, username=None):
+        """
+        Getting the user roles in a Globus group for a username
+
+        Args:
+            username (str): Optional argument of the user's username
+
+        Returns:
+            roles (list): List of possible user roles in a Globus group
+        """
         if username is None:
             username = self.config["globus"]["root_user"]["username"]
         roles = (self.config["globus"]["root_user"]["roles"]
@@ -142,6 +218,16 @@ class globus_db(object):
         return roles
 
     def get_group_tree(self, username=None, root_group_uuid=None, depth=3):
+        """
+        Get Globus group tree
+
+        Args:
+            username (string): username to use to populate group trees
+            root_group_uuid (string): Root group to use for the search
+            depth (int): How deep in the tree we need to look
+        Returns:
+            tree (dict with nested lists): Dictionary with a nested list
+        """
         auth_client, nexus_client = self.get_globus_client(username=username)
         if root_group_uuid is None:
             root_group_uuid = self.config["globus"]["groups"][
@@ -157,9 +243,21 @@ class globus_db(object):
     """
 
     def get_user_groups(self, usernames=None, using_auth=False):
+        """
+        Get groups that a user is a member of using either Globus Auth or
+        Globus Nexus
+
+        Args:
+            usernames (list of string or string): Optional List of users for 
+                                                  which to determine group 
+                                                  membership
+            using_auth (bool): Optional whether to use Globus Auth or Nexus
+
+        Returns:
+            membership (dict): Mapping of user to list of Globus Groups
+        """
         if isinstance(usernames, six.string_types):
             usernames = [usernames]
-        #### TODO: NEED TO FIX THIS FOR NEXUS
         elif usernames is None:
             usernames = [self.config["globus"]["root_user"]["username"]]
         if using_auth:
@@ -169,6 +267,18 @@ class globus_db(object):
         return membership
 
     def get_user_groups_auth(self, usernames):
+        """
+        Get groups that a user is a member of using Globus Auth. This requires
+        authenticating as the user using the refresh token.
+
+        Args:
+            usernames (list of string or string): Optional List of users for
+                                                  which to determine group
+                                                  membership
+
+        Returns:
+            membership (dict): Mapping of user to list of Globus Groups
+        """
         membership = {}
         for user in usernames:
             auth_client, nexus_client = self.get_globus_client(
@@ -182,6 +292,18 @@ class globus_db(object):
         return membership
 
     def get_user_groups_nexus(self, usernames):
+        """
+        Get groups that a user is a member of using Globus Nexus. We cannot
+        authenticate as the user unless we have their password. Need to
+        authenticate as the root user ("connect") and the loop through the 
+        groups to get groups to members mapping. That mapping is then inverted
+
+        Args:
+            usernames (list): List of usernames
+
+        Returns:
+            member_groups (dict): Mapping of username to list of groups
+        """
         group_members = {}
         for group in self.get_all_groups():
             group_members[group["name"]] = self.get_group_members(
@@ -218,8 +340,6 @@ class globus_db(object):
         required_keys = ["username", "ssh_pubkeys", "custom_fields",
                          "fullname", "email", "identity_id"]
         for k, v in member_profile.iteritems():
-            if v == "briedel":
-                print(member_profile)
             if k not in required_keys:
                 continue
             if k != "custom_fields":
@@ -269,7 +389,8 @@ class globus_db(object):
 
     def _invert_dict_list_values(self, dic):
         return {x: list(t[1] for t in group)
-                for (x, group) in groupby(sorted(((j, k) for k, v in dic.items()
-                                                  for j in v), key=itemgetter(0)),
-                                          key=itemgetter(0))
+                for (x, group) in groupby(
+                    sorted(((j, k) for k, v in dic.items() for j in v),
+                           key=itemgetter(0)),
+                           key=itemgetter(0))
                 }
