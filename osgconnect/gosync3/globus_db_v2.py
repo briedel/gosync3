@@ -316,9 +316,22 @@ class globus_db(object):
                              if member in usernames}
         return member_groups
 
-    def get_group_members(self, group_id,
-                          username=None, get_user_summary=False,
+    def get_group_members(self,
+                          group_id,
+                          get_user_summary=False,
                           only_usernames=False):
+        """
+        Getting the "active" group members for given group
+
+        Args:
+            group_id (string): Globus UUID of the group in question
+            get_user_summary (bool): Optionally, get Globus Nexus user profile
+            only_usernames (bool): Optionally, only return the username of the
+                                   group name
+
+        Returns:
+            group_members (list): "Active" members for certain group
+        """
         auth_client, nexus_client = self.get_globus_client(username=username)
         group_members = nexus_client.get_group_memberships(group_id).data
         if get_user_summary:
@@ -335,6 +348,19 @@ class globus_db(object):
         return group_members
 
     def summarize_user(self, user, connect_db=True):
+        """
+        Format the Globus user profile output into a flatter format, i.e.
+        removing unnecessary fields and flatting the "custom fields" 
+        into the profile
+
+        Args:
+            user (dict): Globus Nexus user dictionary
+            connect_db (bool): Optional argument whether to change the format
+                               for the connect db or not
+
+        Returns:
+            new_member_profile (dict): Reformatted member profile
+        """
         new_member_profile = {}
         member_profile = self.get_user_info(user["username"])
         required_keys = ["username", "ssh_pubkeys", "custom_fields",
@@ -365,32 +391,54 @@ class globus_db(object):
         return new_member_profile
 
     def get_all_users(self, get_user_groups=False):
+        """
+        Getting a list of all users with and without group membership
+
+        Args:
+            get_user_groups (bool): Optional argument to add the user's groups
+                                    to the profile
+
+        Returns:
+            members (list): List of member profiles
+        """
         members = self.get_group_members(
             self.config["globus"]["groups"]["root_group_uuid"],
             get_user_summary=True)
         if get_user_groups:
             ### Need to improve this.... looping over the members twice
             ### one time should be sufficient.... most a restriction of
-            ### using nexes
+            ### using nexus
             user_groups = self.get_user_groups()
             for member in members:
                 member["groups"] = user_groups[member["username"]]
         return members
 
     def check_new_members(self, group_name, group_count):
-        return (self.check_group_membership_changes(group_name, group_count))
+        """
+        Checking whether a group as new members
 
-    def check_filters(self, term, filters):
-        return (filters is not None and term not in filters)
+        Args:
+            group_name (string): Group name to be checked
+            group_count (int): How many users are currently in the group
 
-    def check_group_membership_changes(self, group_name, globus_member_count):
+        Returns:
+            Bool whether the membership count changed
+        """
         connect_member_count = self.connect_db.get_member_count(group_name)
-        return (connect_member_count == globus_member_count)
+        return (connect_member_count == group_count)
 
     def _invert_dict_list_values(self, dic):
-        return {x: list(t[1] for t in group)
-                for (x, group) in groupby(
-                    sorted(((j, k) for k, v in dic.items() for j in v),
-                           key=itemgetter(0)),
-                           key=itemgetter(0))
-                }
+        """
+        Inverting a dict of {key: list of values} to {value: list of keys}
+
+        Args:
+            dic (dict): Dict {key: list of values} to be inverted
+
+        Returns:
+            dict: Inverted dict with {value: list of keys}
+        """
+        inv_dic = {x: list(t[1] for t in group)
+                   for (x, group) in groupby(
+                        sorted(((j, k) for k, v in dic.items() for j in v),
+                               key=itemgetter(0)), key=itemgetter(0))}
+        return inv_dic
