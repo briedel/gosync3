@@ -164,6 +164,7 @@ class globus_db(object):
             group_names = [group_names]
         elif group_names is None:
             return all_groups
+        ### TODO: what about number of active users
         groups = [group for group in all_groups
                   if group["name"] in group_names]
         return groups

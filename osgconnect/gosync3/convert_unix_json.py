@@ -92,33 +92,10 @@ def main(args):
                 "ssh_keys": puppet_ssh_key,
                 "nexus_refresh_token": None,
                 "auth_refresh_token": None}
-    # print(json_out)
     with open("test_groups.json", "w") as jtg:
         json.dump(json_out, jtg)
 
-    # "briedel": {
-    #   "comment": "Benedikt Riedel",
-    #   "gid": 1000,
-    #   "uid": 58068,
-    #   "manage_group": false,
-    #   "groups": [
-    #     "connect",
-    #     "icecube",
-    #     "spt",
-    #     "osg",
-    #     "uchicago",
-    #     "spt-all",
-    #     "SouthPoleTelescope",
-    #     "xenon1t"
-    #   ],
-    #   "shell": "/bin/bash",
-    #   "ssh_keys": {
-    #     "benedikt.riedel@icecube.wisc.edu": {
-    #       "type": "ssh-rsa",
-    #       "key": "AAAAB3NzaC1yc2EAAAABIwAAAgEA4S7HFXLheNFj60djZlmCEuQuNbxuSOzmgaokTo+HRO0/WiWWSxFKZpJatCeA00NO8IiVJuQTUZEIv0Z/WWAf/Ct2MAj11IXgJzjsjmj8TmaQrCfstdDe3EPGcSfIS1Mbakh9FZEzt/665EVgCuFAX7fcRWn3zYWwqiLvLl1YljJtqxWsbhDuETc7opK+L0JaS+PJIkq4vsADfmpWP49k2T1xIEoH8L/W1XyrMCXpwd2OvCIm04G2cElDEk40kh30Txwtypr3ABAb/ybp6LxylUVhHpQws5jQ9peIOkft8ciq7wModVyR4M8qazZy0xwSo37y6cdNuK4WkhoUR39Ipoc7CCvE+IkEAiKKFFM7IQcHXXfl9jQaabCbu4UpNxLtmIDYosvKdda0fKh5d6t9BG6P4Hln649w3hejL7fKzqPSb0VMxz7E++0EuI8fUsbTQkQlQjnGYVOyUqDlUV6qAXX00MCnnmHek2mlGT4qi1iUJQvuix3eCPYkjMhBFktxPQ7NwIn7lmGrZlEu63F3DsguF8Fhd1WfDBRXqCYAWp/frvoPmjjWhAt/P3KD4SyKgTTtP178c2tmvmJC80XkxIAPeOTvdYV8CDZh91hItPuor2sql3XVc+tE9spMKv+lCN4InJR+8egUzmfiYHgFxD4PHRIzlsQUkbTvu+93ST0="
-    #     }
-    #   }
-    # },
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", help="echo the string you use here",
