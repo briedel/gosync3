@@ -12,21 +12,17 @@ class globus_db(object):
     A class to hide some of the goriness of the globus
     """
     def __init__(self, config=None,
-                 connect_db=None,
-                 get_groups=False,
-                 get_members=False,
-                 only_new_members=False,
-                 only_update_members=False,
-                 consistency_check=False):
+                 connect_db=None):
         """
         Intiliazer
         Args:
-            config (dict): Configuration parameters 
+            config (dict): Configuration parameters
             get_members (bool): Get the members of the groups
         """
         if config is None:
-            log.warn(("No config provided. "
+            log.fatal(("No config provided. "
                       "Please make sure to supply your own!"))
+            raise RuntimeError()
         self.config = config
         if not isinstance(self.config, dict):
             log.fatal("Config is not dict")
@@ -130,12 +126,11 @@ class globus_db(object):
         nexus_client = NexusClient(authorizer=nexus_authorizer)
         return auth_client, nexus_client
 
-
     """
     Group Methods
     """
 
-    def get_group(self, group_name):
+    def get_group(self, group_name, get_summary=False):
         """
         Get information about single groups
 
@@ -145,10 +140,10 @@ class globus_db(object):
         Returns:
             Group information for group_name
         """
-        group = self.get_groups(group_name)
+        group = self.get_groups(group_name, get_summary=get_summary)
         return group[0]
 
-    def get_groups(self, group_names=None):
+    def get_groups(self, group_names=None, get_summary=False):
         """
         Get information about a list of groups
 
@@ -159,7 +154,7 @@ class globus_db(object):
             list: List with group information
         """
         if self.all_groups is None:
-            all_groups = self.get_all_groups()
+            all_groups = self.get_all_groups(get_summary=get_summary)
         if isinstance(group_names, six.string_types):
             group_names = [group_names]
         elif group_names is None:
@@ -169,7 +164,7 @@ class globus_db(object):
                   if group["name"] in group_names]
         return groups
 
-    def get_all_groups(self, update=False):
+    def get_all_groups(self, get_summary=False, update=False):
         """
         Get all groups associated with the globus root user ("connect")
 
@@ -179,16 +174,18 @@ class globus_db(object):
         """
         if self.all_groups is not None and not update:
             return self.all_groups
+        # Use root user to get the groups associated with it, i.e. all groups
+        # the root user it admin/manager of
         all_groups = self.get_user_groups(
             [self.config["globus"]["root_user"]["username"]],
-            using_auth=True)
+            using_auth=True, get_summary=get_summary)
         self.all_groups = all_groups[self.config[
             "globus"]["root_user"]["username"]]
         return self.all_groups
 
     def get_user_info(self, username):
         """
-        Get the information about the user. At the moment, this requires the 
+        Get the information about the user. At the moment, this requires the
         legacy client because the Groups scope in Auth do not allow to get the
         user information
 
@@ -218,7 +215,9 @@ class globus_db(object):
                  else self.config["globus"]["user"]["roles"])
         return roles
 
-    def get_group_tree(self, username=None, root_group_uuid=None, depth=3):
+    def get_group_tree(self, username=None,
+                       root_group_uuid=None,
+                       depth=3, flatten_tree=False):
         """
         Get Globus group tree
 
@@ -243,14 +242,15 @@ class globus_db(object):
     Group Membership Methods
     """
 
-    def get_user_groups(self, usernames=None, using_auth=False):
+    def get_user_groups(self,
+                        usernames=None, using_auth=False, get_summary=False):
         """
         Get groups that a user is a member of using either Globus Auth or
         Globus Nexus
 
         Args:
-            usernames (list of string or string): Optional List of users for 
-                                                  which to determine group 
+            usernames (list of string or string): Optional List of users for
+                                                  which to determine group
                                                   membership
             using_auth (bool): Optional whether to use Globus Auth or Nexus
 
@@ -262,12 +262,14 @@ class globus_db(object):
         elif usernames is None:
             usernames = [self.config["globus"]["root_user"]["username"]]
         if using_auth:
-            membership = self.get_user_groups_auth(usernames)
+            membership = self.get_user_groups_auth(usernames,
+                                                   get_summary=get_summary)
         else:
-            membership = self.get_user_groups_nexus(usernames)
+            membership = self.get_user_groups_nexus(usernames,
+                                                    get_summary=get_summary)
         return membership
 
-    def get_user_groups_auth(self, usernames):
+    def get_user_groups_auth(self, usernames, get_summary=False):
         """
         Get groups that a user is a member of using Globus Auth. This requires
         authenticating as the user using the refresh token.
@@ -285,19 +287,25 @@ class globus_db(object):
             auth_client, nexus_client = self.get_globus_client(
                 username=user)
             roles = self.get_roles(user)
-            membership[user] = nexus_client.list_groups(
+            groups = nexus_client.list_groups(
                 # fields="id,name",
                 for_all_identities=True,
                 include_identity_set_properties=True,
                 my_roles=roles)
+            if get_summary:
+                groups = [nexus_client.get_group(grp["id"]).data
+                          for grp in groups]
+            membership[user] = groups
         return membership
 
-    def get_user_groups_nexus(self, usernames):
+    def get_user_groups_nexus(self, usernames, get_summary=False):
         """
         Get groups that a user is a member of using Globus Nexus. We cannot
         authenticate as the user unless we have their password. Need to
         authenticate as the root user ("connect") and the loop through the 
         groups to get groups to members mapping. That mapping is then inverted
+
+        TODO: Do something about the group summary 
 
         Args:
             usernames (list): List of usernames
@@ -306,7 +314,7 @@ class globus_db(object):
             member_groups (dict): Mapping of username to list of groups
         """
         group_members = {}
-        for group in self.get_all_groups():
+        for group in self.get_all_groups(get_summary=get_summary):
             group_members[group["name"]] = self.get_group_members(
                 group["id"],
                 only_usernames=True)
@@ -333,7 +341,7 @@ class globus_db(object):
         Returns:
             group_members (list): "Active" members for certain group
         """
-        auth_client, nexus_client = self.get_globus_client(username=username)
+        auth_client, nexus_client = self.get_globus_client()
         group_members = nexus_client.get_group_memberships(group_id).data
         if get_user_summary:
             group_members = [self.summarize_user(member)
@@ -351,7 +359,7 @@ class globus_db(object):
     def summarize_user(self, user, connect_db=True):
         """
         Format the Globus user profile output into a flatter format, i.e.
-        removing unnecessary fields and flatting the "custom fields" 
+        removing unnecessary fields and flatting the "custom fields"
         into the profile
 
         Args:
@@ -407,7 +415,7 @@ class globus_db(object):
             get_user_summary=True)
         if get_user_groups:
             ### Need to improve this.... looping over the members twice
-            ### one time should be sufficient.... most a restriction of
+            ### one time should be sufficient.... mostly a restriction of
             ### using nexus
             user_groups = self.get_user_groups()
             for member in members:

@@ -8,15 +8,23 @@ import subprocess
 import datetime
 
 
-class connect_db(object):
-    def __init__(self, config):
+# TODOs:
+## 1. Update the tokens, etc. 
+## 2. Get tokens, etc.
+
+class connect_db_json(object):
+    def __init__(self, config=None):
+        if config is None:
+            log.fatal(("No config provided. "
+                      "Please make sure to supply your own!"))
+            raise RuntimeError()
         self.config = config
-        with open(self.config["connectdb"]["db_file"], "r") as cdbf:
+        with open(self.config["connect_db"]["db_file"], "r") as cdbf:
             self.db = json.load(cdbf)
         self.users = self.db["accounts::users"]
         self.uids = [user["uid"] for user in self.users.values()]
         self.groups = self.db["accounts::groups"]
-        self.gids = [group["uid"] for group in self.groups.values()]
+        self.gids = [group["gid"] for group in self.groups.values()]
 
     def commit_old_version(self):
         """
@@ -24,7 +32,7 @@ class connect_db(object):
         """
         p = subprocess.Popen(
             ["git", "commit",
-             self.config["connectdb"]["db_file"],
+             self.config["connect_db"]["db_file"],
              "-m", "Committing backup version %s" % datetime.datetime.now()],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         git_out = p.communicate()
@@ -37,15 +45,14 @@ class connect_db(object):
         log.info("std out git commit = %s", git_out[0])
         log.info("std err git commit = %s", git_out[1])
 
-
     def write_db(self):
         """
         Write out json file
         """
-        self.commit_old_version()
+        # self.commit_old_version()
         self.db = {"accounts::users": self.users,
                    "accounts::groups": self.groups}
-        with open(self.config["connectdb"]["db_file"], "w") as cdbf:
+        with open(self.config["connect_db"]["db_file"], "w") as cdbf:
             json.dump(self.db, cdbf)
 
     def new_unix_id(self, ids):
@@ -58,12 +65,12 @@ class connect_db(object):
             new_id (int): New ID for group or user
         """
         max_id = max(ids)
-        new_id = (max(max_id) + 1) if max_id > 100000 else 100000
+        new_id = (max_id + 1) if max_id > 100000 else 100000
         return new_id
 
     def decompose_sshkey(self, user):
         """
-        Break up SSH key into format needed by hiera/puppet for user 
+        Break up SSH key into format needed by hiera/puppet for user
         generation
 
         Args:
@@ -127,12 +134,13 @@ class connect_db(object):
         Adding a group to the json database
 
         Args:
-            group (dict): Group information from Globus    
+            group (dict): Group information from Globus
         """
         new_gid = self.new_unix_id(self.gids)
         self.groups[group["name"]] = {
             "gid": new_gid,
-            "num_users": group["active_count"]
+            "num_users": group["active_count"],
+            "globus_uuid": group["id"]
         }
         self.gids.append(new_gid)
 
@@ -176,11 +184,12 @@ class connect_db(object):
         Update group information, i.e. number of members
 
         Args:
-            group (dict): Group information from Globus  
+            group (dict): Group information from Globus
         """
         self.groups[group["name"]] = {
             "gid": self.groups[group["name"]]["gid"],
-            "num_members": group["active_count"]
+            "num_members": group["active_count"],
+            "globus_uuid": group["id"]
         }
 
     def get_user(self, username):
@@ -216,3 +225,25 @@ class connect_db(object):
         """
         group = self.get_group(group_name)
         return group["num_members"]
+
+    def get_auth_token(self, username):
+        """
+        Get Globus Auth token for a user
+
+        Args:
+            username (string): Globus username
+        Returns:
+            Globus auth refresh token as a string
+        """
+        return self.users[username]["auth_refresh_token"]
+
+    def get_nexus_token(self, username):
+        """
+        Get Globus Auth Nexus token for a user
+
+        Args:
+            username (string): Globus username
+        Returns:
+            Globus Auth Nexus refresh token as a string
+        """
+        return self.users[username]["nexus_refresh_token"]

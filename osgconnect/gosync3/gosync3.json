@@ -2,10 +2,6 @@
   "debug": {
     "debug": true
   },
-  "gosync":
-  {
-    "json_out": ""
-  },
   "users": {
     "passwd_file": "passwd_www",
     "default_group": 1000
@@ -66,8 +62,6 @@
     }
   },
   "connect_db": {
-    "user": "connect",
-    "secret": "EZDRHkVxNeVnDKkqvpVsmD2j",
-    "db_name": "connectdb"
+    "db_file": "test_connectdb.json"
   }
 }
