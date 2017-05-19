@@ -190,12 +190,44 @@ Some of the methods in this class are self-explanatory:
 * `get_member_count`: Retrieve the group's active member count
 * `get_auth_token`: Retrieve user's Globus Auth refresh token
 * `get_nexus_token`: Retrieve user's Globus Nexus refresh token
-* `remove_unicode`: Remove unicode characters from a user's name
+* `get_globus_tokens`: Retrieves user's Globus Auth and Nexus refresh tokens
+* `remove_unicode`: Remove unicode characters from a user's name. This can cause problems when generating a passwd file or trying to serialize a JSON file.
+* `commit_old_version`: In the spirit of old GOSync, we commit the JSON file to Gitlab, so puppet/hiera can grab it from there
+* `write_db`: Write the JSON object out.
 
+The `decompose_sshkey` method is necessary because of the format that puppet/hiera wants the SSH key in. A typical SSH key is formatted as follows:
+
+```
+<encryption_type> <public_key> <idenitifier>
+
+```
+
+where the `<encryption_type>` is the type of SSH key, i.e. ssh-rsa, `<public_key>` is the actual key portion of an SSH key, and `<idenitifier>` is an optional identifier that is usually `<username>@<network_hostname>` of the machine the key pair was generated on. 
+
+Puppet/hiera wants the key in this JSON object:
+
+```
+{
+    "<identifier>":
+    {
+        "type": <encryption_type> # Encryption type, i.e. ssh-rsa, ssh-dsa
+        "key": <public_key> # Key part
+    }
+}
+```
+
+This requires to split the key. Unfortunately, not all keys have the identifier. In those cases it is replaced with the user's email address. This will not affect operations.
 
 ## Future Plans
 
 ### `PUT` and `PUSH` Methods for Globus Interface
 
-### Moving connect db to a real DB
+To create groups in Globus Groups, we will need to implement `PUT` and `PUSH` methods The `NexusClient` already has these, but they are untested. I will need to test them before I can sanction them. I also want to standardize all information that is stored in Globus Groups for all the groups. Currently there are several different formats. 
 
+### Moving connect DB to a real DB
+
+The data volume is not that large and the JSON file is sufficient to store all the information. Down the road, we might want split from Globus and at this point we need to retrieve all the data from Globus. Storing this data would need a database.
+
+### Multiple Connect Globus Apps
+
+Branded websites in Globus are mapped one-to-one to a specific Globus App. To have different branded website for the various connect instances, we would need multiple Globus Apps. Tokens are app-specific, so for users that are members of multiple connect instances, for example CI Connect and OSG Connect, we will need to keep track of different refresh tokens and apps that they are associated with. 
