@@ -27,15 +27,14 @@ class globus_db(object):
         if not isinstance(self.config, dict):
             log.fatal("Config is not dict")
             raise RuntimeError()
+        if connect_db is None:
+            log.fatal("No connect_db object provided")
+            raise RuntimeError()
         self.connect_db = connect_db
-        # get legacy tokens, and "connect" user get_tokens
-        self.legacy_client = self.get_legacy_client(
-            self.config["globus"]["root_user"]["username"],
-            self.config["globus"]["root_user"]["secret"])
         self.all_groups = None
 
     """
-    Gloubus Client methods
+    Globus Client methods
     """
 
     def get_tokens(self, username):
@@ -64,8 +63,8 @@ class globus_db(object):
             nexus_token = self.config[
                 "globus"]["user"]["nexus_refresh_token"]
         else:
-            auth_token = self.connect_db.get_auth_token(username)
-            nexus_token = self.connect_db.get_nexus_token(username)
+            auth_token, nexus_token = self.connect_db.get_globus_tokens(
+                username)
         return auth_token, nexus_token
 
     def get_legacy_client(self, username, password):
@@ -80,7 +79,7 @@ class globus_db(object):
             auth_token (str): Globus Auth token
             nexus_token (str): Globus Nexus token
         """
-        # Get the legacy Golbus Auth Nexus token using the username/password
+        # Get the legacy Globus Auth Nexus token using the username/password
         nc = NexusClient(
             authorizer=globus_sdk.BasicAuthorizer(username, password))
         legacy_token = LegacyGOAuthAuthorizer(nc.get_goauth_token())
@@ -178,25 +177,10 @@ class globus_db(object):
         # the root user it admin/manager of
         all_groups = self.get_user_groups(
             [self.config["globus"]["root_user"]["username"]],
-            using_auth=True, get_summary=get_summary)
+            using_tokens=True, get_summary=get_summary)
         self.all_groups = all_groups[self.config[
             "globus"]["root_user"]["username"]]
         return self.all_groups
-
-    def get_user_info(self, username):
-        """
-        Get the information about the user. At the moment, this requires the
-        legacy client because the Groups scope in Auth do not allow to get the
-        user information
-
-        Args:
-            username (str): User's username
-
-        Returns:
-            user_data (dict): User data stored in Globus Nexus
-        """
-        user_data = self.legacy_client.get_user(username).data
-        return user_data
 
     def get_roles(self, username=None):
         """
@@ -238,12 +222,26 @@ class globus_db(object):
                                            my_roles=roles)
         return tree
 
+    def check_new_members(self, group_name, group_count):
+        """
+        Checking whether a group as new members
+
+        Args:
+            group_name (string): Group name to be checked
+            group_count (int): How many users are currently in the group
+
+        Returns:
+            Bool whether the membership count changed
+        """
+        connect_member_count = self.connect_db.get_member_count(group_name)
+        return (connect_member_count == group_count)
+
     """
     Group Membership Methods
     """
 
     def get_user_groups(self,
-                        usernames=None, using_auth=False, get_summary=False):
+                        usernames=None, using_tokens=False, get_summary=False):
         """
         Get groups that a user is a member of using either Globus Auth or
         Globus Nexus
@@ -261,12 +259,12 @@ class globus_db(object):
             usernames = [usernames]
         elif usernames is None:
             usernames = [self.config["globus"]["root_user"]["username"]]
-        if using_auth:
+        if using_tokens:
             membership = self.get_user_groups_auth(usernames,
                                                    get_summary=get_summary)
         else:
-            membership = self.get_user_groups_nexus(usernames,
-                                                    get_summary=get_summary)
+            membership = self.get_user_groups_no_tokens(usernames,
+                                                        get_summary=get_summary)
         return membership
 
     def get_user_groups_auth(self, usernames, get_summary=False):
@@ -298,14 +296,14 @@ class globus_db(object):
             membership[user] = groups
         return membership
 
-    def get_user_groups_nexus(self, usernames, get_summary=False):
+    def get_user_groups_no_tokens(self, usernames, get_summary=False):
         """
         Get groups that a user is a member of using Globus Nexus. We cannot
         authenticate as the user unless we have their password. Need to
-        authenticate as the root user ("connect") and the loop through the 
+        authenticate as the root user ("connect") and the loop through the
         groups to get groups to members mapping. That mapping is then inverted
 
-        TODO: Do something about the group summary 
+        TODO: Do something about the group summary
 
         Args:
             usernames (list): List of usernames
@@ -355,6 +353,37 @@ class globus_db(object):
             group_members = [member for member in group_members["members"]
                              if member["status"] == "active"]
         return group_members
+
+    """
+    User Methods
+    """
+
+    def get_user_info(self, username):
+        """
+        Get the Globus groups user profile for a the user.
+
+        Args:
+            username (str): User's username
+
+        Returns:
+            user_data (dict): User data stored in Globus Nexus
+        """
+        user_data = self.get_user_groups_profile(
+            username=username,
+            group_id=self.config["globus"]["groups"]["root_group_uuid"])
+        return user_data
+
+    def get_user_groups_profile(self, username=None, group_id=None):
+        if group_id is None:
+            group_id = self.config["globus"]["groups"]["root_group_uuid"]
+        if None in self.connect_db.get_globus_tokens(username):
+            auth_client, nexus_client = self.get_globus_client()
+        else:
+            auth_client, nexus_client = self.get_globus_client(
+                username=username)
+        user_data = nexus_client.get_user_groups_profile(
+            group_id, username).data
+        return user_data
 
     def summarize_user(self, user, connect_db=True):
         """
@@ -421,20 +450,6 @@ class globus_db(object):
             for member in members:
                 member["groups"] = user_groups[member["username"]]
         return members
-
-    def check_new_members(self, group_name, group_count):
-        """
-        Checking whether a group as new members
-
-        Args:
-            group_name (string): Group name to be checked
-            group_count (int): How many users are currently in the group
-
-        Returns:
-            Bool whether the membership count changed
-        """
-        connect_member_count = self.connect_db.get_member_count(group_name)
-        return (connect_member_count == group_count)
 
     def _invert_dict_list_values(self, dic):
         """

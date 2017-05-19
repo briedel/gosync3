@@ -7,10 +7,9 @@ import unicodedata
 import subprocess
 import datetime
 
-
 # TODOs:
 ## 1. Update the tokens, etc. 
-## 2. Get tokens, etc.
+
 
 class connect_db_json(object):
     def __init__(self, config=None):
@@ -55,7 +54,7 @@ class connect_db_json(object):
         with open(self.config["connect_db"]["db_file"], "w") as cdbf:
             json.dump(self.db, cdbf)
 
-    def new_unix_id(self, ids):
+    def new_unix_id(self, ids, id_minium=100000):
         """
 
         Args:
@@ -65,7 +64,7 @@ class connect_db_json(object):
             new_id (int): New ID for group or user
         """
         max_id = max(ids)
-        new_id = (max_id + 1) if max_id > 100000 else 100000
+        new_id = (max_id + 1) if max_id > id_minium else id_minium
         return new_id
 
     def decompose_sshkey(self, user):
@@ -138,8 +137,11 @@ class connect_db_json(object):
         """
         new_gid = self.new_unix_id(self.gids)
         self.groups[group["name"]] = {
+            # group's UNIX ID
             "gid": new_gid,
+            # Number of active members
             "num_users": group["active_count"],
+            # Globus group UUID
             "globus_uuid": group["id"]
         }
         self.gids.append(new_gid)
@@ -154,15 +156,25 @@ class connect_db_json(object):
         new_uid = self.new_unix_id(self.uids)
         ssh_key = self.decompose_sshkey(user)
         self.users[user["username"]] = {
+            # user's Globus Auth refresh token
             "auth_refresh_token": None,
+            # user's full name in Globus
             "comment": self.remove_unicode(user["name"]),
+            # user's email
             "email": user["email"],
-            "gid": 1000,
+            # default gid
+            "gid": self.config["users"]["default_group"],
+            # puppet/hiera config parameter
             "manage_group": False,
+            # user's Globus Nexus refresh token
             "nexus_refresh_token": None,
+            # default user shell
             "shell": "/bin/bash",
+            # user's SSH key(s) from decompose_sshkey
             "ssh_keys": ssh_key,
+            # user's UNIX id
             "uid": new_uid,
+            # user's groups
             "groups": user["groups"]
         }
         self.uids.append(new_uid)
@@ -186,11 +198,7 @@ class connect_db_json(object):
         Args:
             group (dict): Group information from Globus
         """
-        self.groups[group["name"]] = {
-            "gid": self.groups[group["name"]]["gid"],
-            "num_members": group["active_count"],
-            "globus_uuid": group["id"]
-        }
+        self.groups[group["name"]]["num_members"] = group["active_count"]
 
     def get_user(self, username):
         """
@@ -233,8 +241,10 @@ class connect_db_json(object):
         Args:
             username (string): Globus username
         Returns:
-            Globus auth refresh token as a string
+            Globus Auth refresh token as a string
         """
+        if username not in self.users:
+            return None
         return self.users[username]["auth_refresh_token"]
 
     def get_nexus_token(self, username):
@@ -244,6 +254,25 @@ class connect_db_json(object):
         Args:
             username (string): Globus username
         Returns:
-            Globus Auth Nexus refresh token as a string
+            Globus Nexus refresh token as a string
         """
+        if username not in self.users:
+            return None
         return self.users[username]["nexus_refresh_token"]
+
+    def get_globus_tokens(self, username):
+        """
+        Get both Globus Auth and Nexues token for a user
+
+        Args:
+            username (string): Globus username
+        Returns:
+            Tuple of strings: Globus Auth and Nexus refresh tokens
+        """
+        return self.get_auth_token(username), self.get_nexus_token(username)
+
+    def update_auth_token(self, username, token):
+        raise NotImplementedError()
+
+    def update_nexus_token(self, username, token):
+        raise NotImplementedError()
