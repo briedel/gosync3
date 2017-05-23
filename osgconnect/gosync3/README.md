@@ -1,8 +1,8 @@
 # GOSync3
 
-This is the replacement for the current GOSync. It is based on the [Globus SDK](http://globus-sdk-python.readthedocs.io/en/latest/), a [Globus SDK-based Globus Nexus Client](https://github.com/sirosen/globus-nexus-client/tree/master/globus_nexus_client), and puppet/hiera to create and manage UNIX users and groups. The main tasks of these classes and scripts is to interact with the GlobusID and Globus Groups database through their RESTful API and manage the JSON file that puppet/hiera require for creating and managing user accounts. 
+GOSync3 is the replacement for the current GOSync. It is based on the [Globus SDK](http://globus-sdk-python.readthedocs.io/en/latest/), the [Globus SDK-based Globus Nexus Client](https://github.com/sirosen/globus-nexus-client/tree/master/globus_nexus_client), and puppet/hiera to create and manage UNIX users and groups. The main tasks of these classes and scripts is to interact with the GlobusID and Globus Groups database through their RESTful API and manage the JSON file that puppet/hiera requires for creating and managing user accounts. 
 
-The old GOSync was based on the [Globus Nexus Python library](https://github.com/globusonline/python-nexus-client). The Globus Nexus Python library has been official deprecated and functionality, such as accessing a user's GlobusID, will disappear over time. There was a GOSync2, however, it was still based on the Globus Nexus Python library and Globus is moving to an OAuth2-based model for all authentication and access to a user's GlobusID. We abandoned it after this change. 
+The old GOSync was based on the [Globus Nexus Python library](https://github.com/globusonline/python-nexus-client). The Globus Nexus Python library has been officially deprecated and functionality, such as accessing a user's GlobusID, will disappear over time. There was a GOSync2, however, it was still based on the Globus Nexus Python library and Globus is moving to an OAuth2-based model for all authentication and access to a user's GlobusID. We abandoned it after this change. 
 
 Important notes READ BEFORE USING:
 
@@ -15,10 +15,10 @@ GOSync3 requires two Python packages:
 
 ```
 globus-sdk[jwt]>=1.0,<2.0
-globus-nexus-client
+globus-nexus-client>=0.2.4
 ```
 
-`globus-sdk[jwt]>=1.0,<2.0` is the Globus SDK including the JSON Web Token library. This is necessary to interact with Globus Auth and be able to do token introspection. `globus-nexus-client` is an implementation of the Nexus client using the Globus SDK. It is not an official Globus product, but supported by one of the authors (Stephen Rosen) of the Globus SDK.
+`globus-sdk[jwt]>=1.0,<2.0` is the Globus SDK including the JSON Web Token library. This is necessary to interact with Globus Auth and be able to do token introspection. `globus-nexus-client>=0.2.4` is an implementation of the Nexus client using the Globus SDK. It is not an official Globus product, but supported by one of the authors (Stephen Rosen) of the Globus SDK.
 
 In addition to the Python packages, one will need a Globus Confidential "app" that:
 
@@ -109,7 +109,7 @@ The class is split into four sections: client methods, group methods, group memb
 
 The client methods are for getting the different types of clients needed to interact with GlobusID through Globus Auth and Globus Groups through Globus Nexus. There are two main clients used: Globus Auth client and Globus Nexus client. The Globus Auth client is for interacting with the user's GlobusID, i.e get the user profile in GlobusID. The Globus Nexus client is for interacting with a user's Globus Groups and their Globus Groups's profile.
 
-The clients can be authenticated using Globus Auth tokens or Globus Online Auth legacy tokens. The latter will be referred to as legacy tokens from here on out. Tokens can be thought of as randomly generated passwords that encode the user's identity and the application's permission level.
+The clients can be authenticated using Globus Auth tokens or Globus Online Auth legacy tokens. Tokens can be thought of as randomly generated passwords that encode the user's identity and the application's permission level. Globus Online Auth legacy tokens will be referred to as legacy tokens from here on out. Legacy tokens should be avoided at all cost. They may not work down the road and are bad practice.
 
 Globus Auth tokens are OAuth2 tokens. OAuth2 gives the user and the authorization server the explicit power to reject or limit (either in time or scope) an application's access, to the user's information. It also moves large parts of the authentication process from the resource provider to an authentication provider, which allows for better separation between resources and authentication. For more details please visit [An introduction to OAuth2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2). 
 
@@ -127,38 +127,38 @@ The individual methods are self-explanatory:
 
 The group methods currently only implement a `GET` from Globus Groups. There are two ways to access all groups associated with `connect`. The first is to the retrieve the group tree for the root group, named `connect`. The second is to retrieve all groups associated with the root user, also named `connect`. 
 
-In GOSyn3, we are using the second method. There is a method to retrieve the group tree, but it is unused at the moment. The `get_group()` and `get_groups()` method simply filter the `all_groups` list for the desired group(s). `get_all_groups()` is the method that uses the root user's credentials to determine groups in which the root user, `connect`, is and `admin` or `manager`. The distinction between between being `admin`, `manager`, or `member` is important here. It filters the groups that are returned by Globus Nexus. The `connect` user will always be an `admin` or `manager` in a subgroup, while a user might be a `admin`, `manager`, or `member`. The root user is a `member` of some groups that are not associated with the Connect instances. 
+In GOSyn3, we are using the second method. There is a method to retrieve the group tree, but it is unused at the moment. The `get_group` and `get_groups` method simply filter the `all_groups` list for the desired group(s). `get_all_groups` is the method that uses the root user's credentials to determine groups in which the root user, `connect`, is an `admin` or `manager`. The distinction between between being `admin`, `manager`, or `member` is important here. It filters the groups that are returned by Globus Nexus. The `connect` user will always be an `admin` or `manager` in a subgroup, while a user might be a `admin`, `manager`, or `member`. The root user is a `member` of some groups that are not associated with the Connect instances. 
 
-In addition there is a `check_new_members()` methods at is currently used. It allows to filter the group list to those groups that have recently added members. 
+In addition there is a `check_new_members` methods at is currently used. It allows to filter the group list to those groups that have recently added members. 
 
 ### Group Membership Methods
 
-The workflow for retrieving a user's group membership depends on the authentication method used. In a purely Globus Auth-based workflow, one would retrieve a user's group membership by using their tokens and calling `list_groups()` from the client. This is done in the function `get_user_groups_auth()`.
+The workflow for retrieving a user's group membership depends on the authentication method used. In a purely Globus Auth-based workflow, one would retrieve a user's group membership by using their tokens and calling `list_groups` from the client. This is done in the function `get_user_groups_auth`.
 
-At the moment, we only have tokens for the `connect` user. To work around this, GOsync3 tries to generate a mapping of group to users first and then inverts that mapping, see function `get_user_groups_no_tokens()`. It retrieves the list of all groups associated with the `connect` and then determines the group members for every group. Using `_invert_dict_list_values()`, the group-to-users mapping is then inverted to the user-to-groups mapping. 
+At the moment, we only have tokens for the `connect` user. To work around this, GOsync3 tries to generate a mapping of group to users first and then inverts that mapping, see function `get_user_groups_no_tokens`. It retrieves the list of all groups associated with the `connect` and then determines the group members for every group. Using `_invert_dict_list_values`, the group-to-users mapping is then inverted to the user-to-groups mapping. 
 
-`get_group_members()` simply returns the users for a given group. This has to be done using the group's Globus UUID. A mapping of Globus group name to Globus group UUID is in the works. 
+`get_group_members` simply returns the users for a given group. This has to be done using the group's Globus UUID. A mapping of Globus group name to Globus group UUID is in the works. 
 
 ### User Methods
 
 The user methods allow one to retrieve more information about user, i.e. query Globus for the user's "user information" and manipulate the Globus output in a more easily digestible patterns. 
 
-`get_user_info()` is a specialization of `get_user_groups_profile()`. It allows to get the a user's profile, i.e. username, SSH key, group-specific information, full name, e-mail, through Globus Nexues. `get_user_info()` is specialization in the sens that it uses the root group user profile rather than specific group's profile as needed by `get_user_groups_profile()`.
+`get_user_info` is a specialization of `get_user_groups_profile`. It allows to get the a user's profile, i.e. username, SSH key, group-specific information, full name, e-mail, through Globus Nexus. `get_user_info` is specialization in the sense that it uses the root group user profile rather than specific group's profile as needed by `get_user_groups_profile`.
 
-`get_all_users()` simply grabs all the users in the root group and then queries Globus Groups for the user's profile. `_invert_dict_list_values()` allows you to invert the group to users mapping to a user to groups mapping.
+`get_all_users` simply grabs all the users in the root group and then queries Globus Groups for the user's profile. `_invert_dict_list_values` allows you to invert the group to users mapping to a user to groups mapping.
 
 ## Puppet/Hiera Interface - `connect_db.py`
 
 In this case, we are using the JSON file needed by puppet/hiera as a database. This is suboptimal, but it will do for now. The information source for puppet/hiera can be replaced by a real DB later on. Some of the information, i.e. UNIX ids, stored in the JSON file at the moment will be needed to populate a database down the road anyway. 
 
-The puppet/hiera interface, i.e `connect_db()`, is a thin layer of the JSON object that puppet/hiera uses to provision user accounts. It reads a previous version of the JSON object, and produces a `users` and `groups` dictionary and a `uids` and `gids` list. These four objects contain all the necessary information to be able add new groups and users to the JSON object passed to puppet/hiera.
+The puppet/hiera interface, i.e `connect_db`, is a thin layer of the JSON object that puppet/hiera uses to provision user accounts. It reads a previous version of the JSON object, and produces a `users` and `groups` dictionary and a `uids` and `gids` list. These four objects contain all the necessary information to be able add new groups and users to the JSON object passed to puppet/hiera.
 
 The `users` and `groups` dictionaries are made up of sub-dictionaries. Holding the information for each user and group, respectively. The `users` dictionary is a mapping of username to user information. In our case this is:
 
 ```
 {
     "auth_refresh_token": # user's Globus Auth refresh token
-    "comment": 
+    "comment": # user's name
     "email": # user's emails
     "gid": # default group for passwd file
     "manage_group": # puppet/hiera config parameter
