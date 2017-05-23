@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import argparse
 import logging as log
-from globus_db_v2 import globus_db
-from connect_db_v2 import connect_db_json as connect_db
+from globus_db import globus_db
+from connect_db import connect_db_json as connect_db
 from util import parse_json_config
 
 

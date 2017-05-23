@@ -341,17 +341,32 @@ class globus_db(object):
         """
         auth_client, nexus_client = self.get_globus_client()
         group_members = nexus_client.get_group_memberships(group_id).data
+
+        def restrict_users(member):
+            """
+            Need to throw out "invited" or removed users and those with the
+            wrong username
+
+            Args:
+                Globus member profile
+
+            Returns:
+                Bool
+            """
+            return (member["status"] == "active" and
+                    "@" not in member["username"])
+
         if get_user_summary:
             group_members = [self.summarize_user(member)
                              for member in group_members["members"]
-                             if member["status"] == "active"]
+                             if restrict_users(member)]
         elif only_usernames:
             group_members = [member["username"]
                              for member in group_members["members"]
-                             if member["status"] == "active"]
+                             if restrict_users(member)]
         else:
             group_members = [member for member in group_members["members"]
-                             if member["status"] == "active"]
+                             if restrict_users(member)]
         return group_members
 
     """

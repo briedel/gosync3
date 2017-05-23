@@ -52,7 +52,7 @@ class connect_db_json(object):
         self.db = {"accounts::users": self.users,
                    "accounts::groups": self.groups}
         with open(self.config["connect_db"]["db_file"], "w") as cdbf:
-            json.dump(self.db, cdbf)
+            json.dump(self.db, cdbf, indent=4)
 
     def new_unix_id(self, ids, id_minium=100000):
         """
