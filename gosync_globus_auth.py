@@ -1,9 +1,15 @@
 #!/usr/bin/env python
+import sys
 import argparse
 import logging as log
 from globus_db import globus_db
 from connect_db import connect_db_json as connect_db
 from util import parse_json_config
+
+assert sys.version_info >= (2, 7), ("You done fucked up. "
+                                    "GOSync3 requires Python 2.7 or greater")
+
+# log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=1)
 
 
 def main(args):
