@@ -567,12 +567,12 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 996, 
+            "num_members": 995, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
             "gid": 7114, 
-            "num_members": 145, 
+            "num_members": 144, 
             "globus_uuid": "7c580b9a-4592-11e3-a2a0-12313d2d6e7f"
         }, 
         "duke.4fermion": {
@@ -1874,7 +1874,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "adotti@slac.stanford.edu", 
-            "uid": 100003
+            "uid": 14203
         }, 
         "adwasser": {
             "comment": "Asher Wasserman", 
@@ -2164,7 +2164,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "adithia.kusno@yahoo.com", 
-            "uid": 100009
+            "uid": 45712
         }, 
         "alberto": {
             "comment": "Alberto Otero de la Roza", 
@@ -2257,6 +2257,8 @@
         "alexszatmary": {
             "comment": "Alex Szatmary", 
             "shell": "/bin/bash", 
+            "uid": 37122, 
+            "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
@@ -2265,8 +2267,6 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
-            "auth_refresh_token": null, 
-            "uid": 100021, 
             "email": "alex.szatmary@gmail.com", 
             "ssh_keys": {}
         }, 
@@ -2744,7 +2744,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "anju.archana@gmail.com", 
-            "uid": 100012
+            "uid": 28344
         }, 
         "arahlin": {
             "comment": "Alexandra Rahlin", 
@@ -3627,7 +3627,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "biggstd@gmail.com", 
-            "uid": 100008
+            "uid": 24543
         }, 
         "bill10": {
             "comment": "Feng Shi", 
@@ -3797,7 +3797,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "ben.loer@pnnl.gov", 
-            "uid": 100004
+            "uid": 55400
         }, 
         "bloom": {
             "comment": "Kenneth Bloom", 
@@ -4503,7 +4503,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "cfanelli@jlab.org", 
-            "uid": 100016
+            "uid": 50893
         }, 
         "chantie808": {
             "comment": "Chantel Chang", 
@@ -5255,7 +5255,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "cploen@gmail.com", 
-            "uid": 100005
+            "uid": 44276
         }, 
         "crc34": {
             "comment": "Christopher Castorena", 
@@ -5411,7 +5411,7 @@
         "cyoun": {
             "comment": "Choonhan Youn", 
             "shell": "/bin/bash", 
-            "uid": 100019, 
+            "uid": 17241, 
             "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
@@ -5742,7 +5742,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "dblyth@anl.gov", 
-            "uid": 100014
+            "uid": 57076
         }, 
         "dbrown": {
             "comment": "Duncan Brown", 
@@ -6431,7 +6431,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "drjohn@colorado.edu", 
-            "uid": 100000
+            "uid": 26262
         }, 
         "dschultz": {
             "comment": "David Schultz", 
@@ -7441,7 +7441,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "filikhin@gmail.com", 
-            "uid": 100017
+            "uid": 15696
         }, 
         "filipedasilva1": {
             "comment": "Carlos Filipe Da Silva Costa", 
@@ -9139,7 +9139,7 @@
         "jadamso": {
             "comment": "Jordan Adamson", 
             "shell": "/bin/bash", 
-            "uid": 100018, 
+            "uid": 35827, 
             "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
@@ -9298,7 +9298,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "jtisk001@odu.edu", 
-            "uid": 100015
+            "uid": 16028
         }, 
         "jbalewski": {
             "comment": "Jan Balewski", 
@@ -9465,6 +9465,8 @@
         "jchavesb": {
             "comment": "Jorge Chaves", 
             "shell": "/bin/bash", 
+            "uid": 53823, 
+            "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
@@ -9473,8 +9475,6 @@
                 "connect"
             ], 
             "nexus_refresh_token": null, 
-            "auth_refresh_token": null, 
-            "uid": 100022, 
             "email": "jec429@cornell.edu", 
             "ssh_keys": {
                 "hmrbrtzero@mq167.lns.cornell.edu": {
@@ -10900,6 +10900,8 @@
         "kaspuhler": {
             "comment": "Karl Spuhler", 
             "shell": "/bin/bash", 
+            "uid": 30100, 
+            "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
@@ -10908,8 +10910,6 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
-            "auth_refresh_token": null, 
-            "uid": 100020, 
             "email": "karl.spuhler@stonybrook.edu", 
             "ssh_keys": {}
         }, 
@@ -14199,7 +14199,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "Norman.Graf@slac.stanford.edu", 
-            "uid": 100007
+            "uid": 32712
         }, 
         "nguyentrungh": {
             "comment": "Trung Hai Nguyen", 
@@ -15164,7 +15164,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "parkkj@jlab.org", 
-            "uid": 100013
+            "uid": 26346
         }, 
         "patrickc": {
             "comment": "Patrick Claflin Jr.", 
@@ -15360,7 +15360,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "rperes@gian.fis.uc.pt", 
-            "uid": 100001
+            "uid": 42623
         }, 
         "perronea": {
             "comment": "Anders Perrone", 
@@ -15623,7 +15623,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "pooser@jlab.org", 
-            "uid": 100010
+            "uid": 48333
         }, 
         "posada": {
             "comment": "Chrystian Posada", 
@@ -18447,7 +18447,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "td115@duke.edu", 
-            "uid": 100011
+            "uid": 17698
         }, 
         "tijmen": {
             "comment": "Tijmen de Haan", 
@@ -18512,7 +18512,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "ttriche@usc.edu", 
-            "uid": 100002
+            "uid": 45489
         }, 
         "timugilm": {
             "comment": "Tim Gilmanov", 
@@ -19627,6 +19627,8 @@
         "weiyh": {
             "comment": "Yuehuan Wei", 
             "shell": "/bin/bash", 
+            "uid": 46122, 
+            "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
@@ -19636,8 +19638,6 @@
                 "osg.xenon1t"
             ], 
             "nexus_refresh_token": null, 
-            "auth_refresh_token": null, 
-            "uid": 100023, 
             "email": "weiyh@physik.uzh.ch", 
             "ssh_keys": {}
         }, 
@@ -20821,7 +20821,7 @@
             ], 
             "nexus_refresh_token": null, 
             "email": "yzhou11@email.wm.edu", 
-            "uid": 100006
+            "uid": 43867
         }, 
         "zziolko": {
             "comment": "Marcin Ziolkowski", 
