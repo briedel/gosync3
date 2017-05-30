@@ -48,9 +48,12 @@ class connect_db_json(object):
         """
         Write out json file
         """
-        # self.commit_old_version()
+        self.commit_old_version()
+        self.users = collections.OrderedDict(sorted(self.users.items()))
+        self.groups = collections.OrderedDict(sorted(self.groups.items()))
         self.db = {"accounts::users": self.users,
                    "accounts::groups": self.groups}
+
         with open(self.config["connect_db"]["db_file"], "w") as cdbf:
             json.dump(self.db, cdbf, indent=4)
 
