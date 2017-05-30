@@ -307,7 +307,7 @@
         }, 
         "cms": {
             "gid": 7366, 
-            "num_members": 55, 
+            "num_members": 56, 
             "globus_uuid": "ea39c31c-0322-11e4-a050-123139141556"
         }, 
         "cms.org.baylor": {
@@ -352,7 +352,7 @@
         }, 
         "cms.org.cornell": {
             "gid": 5541, 
-            "num_members": 4, 
+            "num_members": 5, 
             "globus_uuid": "38ed65a6-8705-11e5-8100-22000ab80e73"
         }, 
         "cms.org.fairfield": {
@@ -567,12 +567,12 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 992, 
+            "num_members": 996, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
             "gid": 7114, 
-            "num_members": 144, 
+            "num_members": 145, 
             "globus_uuid": "7c580b9a-4592-11e3-a2a0-12313d2d6e7f"
         }, 
         "duke.4fermion": {
@@ -612,7 +612,7 @@
         }, 
         "duke.campus": {
             "gid": 5430, 
-            "num_members": 41, 
+            "num_members": 42, 
             "globus_uuid": "23f094d2-851f-11e3-9f5b-12313809f035"
         }, 
         "duke.duke-campus": {
@@ -637,7 +637,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 758, 
+            "num_members": 760, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -742,7 +742,7 @@
         }, 
         "osg.ConnectTrain": {
             "gid": 7021, 
-            "num_members": 535, 
+            "num_members": 537, 
             "globus_uuid": "da657c6a-b4a3-11e3-8e76-12313809f035"
         }, 
         "osg.ContinuousIntegration": {
@@ -1492,7 +1492,7 @@
         }, 
         "osg.xenon1t": {
             "gid": 8812, 
-            "num_members": 71, 
+            "num_members": 72, 
             "globus_uuid": "dd27e2ea-5195-11e5-b638-22000aeb2621"
         }, 
         "osg.z2dqmc": {
@@ -1517,7 +1517,7 @@
         }, 
         "uchicago": {
             "gid": 9487, 
-            "num_members": 90, 
+            "num_members": 91, 
             "globus_uuid": "6e99ebfc-dc84-11e3-89cc-12313b077182"
         }, 
         "uchicago.RDCEP": {
@@ -2253,6 +2253,22 @@
             "nexus_refresh_token": null, 
             "email": "alexkish@physik.uzh.ch", 
             "uid": 12794
+        }, 
+        "alexszatmary": {
+            "comment": "Alex Szatmary", 
+            "shell": "/bin/bash", 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "auth_refresh_token": null, 
+            "uid": 100021, 
+            "email": "alex.szatmary@gmail.com", 
+            "ssh_keys": {}
         }, 
         "alexwei": {
             "comment": "Shouyi Wei", 
@@ -4176,12 +4192,18 @@
         "bw142": {
             "comment": "Baosheng Wang", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "bw142@dcc-slogin-02": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDD+PX7t0rquJ6D+ToMDV1HFoKPA3/dFSiWGGaQZYUUWUX8POaMqPUS20y2L2UkzE/vPlF/ywZi30lTBZzK0qEhrywvZG85eKhvJp/4TG1Li4/Xq6Um2Krqlf14NtEseEcEnKfnNI+tBojwDWMtx46DdcfNjmh21POIE4kIwjemMzWYlkKBdwmjZeQqhSSJqLFTX3lQiyzcTspaH7gJafozWdf/TwKq66FEqI3ivPN1ziCK7w1tlT8jXJqe7szOucHbkJqtOMGCTe9k08fcC/T7w5IC8d0IvurgFPHDXRPZwcuQK/v9zOcmnbQyHAezQzTyYslqSbpEuPbcDXRMZtD1"
+                }
+            }, 
             "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "duke", 
+                "duke.campus", 
                 "connect"
             ], 
             "nexus_refresh_token": null, 
@@ -5389,6 +5411,8 @@
         "cyoun": {
             "comment": "Choonhan Youn", 
             "shell": "/bin/bash", 
+            "uid": 100019, 
+            "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
@@ -5397,8 +5421,6 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
-            "auth_refresh_token": null, 
-            "uid": 100019, 
             "email": "cyoun@sdsc.edu", 
             "ssh_keys": {
                 "cyoun@hpcdev-pub04.sdsc.edu": {
@@ -9440,6 +9462,27 @@
             "email": "jason.gordon@duke.edu", 
             "uid": 64691
         }, 
+        "jchavesb": {
+            "comment": "Jorge Chaves", 
+            "shell": "/bin/bash", 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "cms.org.cornell", 
+                "cms", 
+                "connect"
+            ], 
+            "nexus_refresh_token": null, 
+            "auth_refresh_token": null, 
+            "uid": 100022, 
+            "email": "jec429@cornell.edu", 
+            "ssh_keys": {
+                "hmrbrtzero@mq167.lns.cornell.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDGR21g4Z0vN8yA3a4RPHf1HnvNGqQNdAhkOfdIk9BAeK8x/vN1aBHugMY6oMhBwsgFlV/Lg590oVUrYza4SNfa0ROeyqUE1bKSjBAIBja8OZFoAjoK0rZgEF4HtChbUJC0Lc0i62TQkkQfWMXF1xDPlkgpq96nOHCMWX2dCVlh5k5g1DKVpKk9fCS+pAgxEhD56ScW6ac/QqQ1nEP3y/4rcOc7BncwWPv74SNYItmZYykFZI1q2NjEdEsZl6W6v/3OwxSrcbQEx7bxfJS4HmdP4cfIE7y/sCOQOo4sqR7LCfYhvWb0eZQ2ez0Trf75KDUjksLeKU1SfxWZgYjTO4xz"
+                }
+            }
+        }, 
         "jchem39": {
             "comment": "Javier Ruiz", 
             "shell": "/bin/bash", 
@@ -10853,6 +10896,22 @@
             "nexus_refresh_token": null, 
             "email": "karlnewell@gmail.com", 
             "uid": 63687
+        }, 
+        "kaspuhler": {
+            "comment": "Karl Spuhler", 
+            "shell": "/bin/bash", 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "auth_refresh_token": null, 
+            "uid": 100020, 
+            "email": "karl.spuhler@stonybrook.edu", 
+            "ssh_keys": {}
         }, 
         "katecooper": {
             "comment": "Kathryn Cooper", 
@@ -16852,7 +16911,12 @@
         "satra": {
             "comment": "Satrajit Ghosh", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "satra@mit.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQComY0tusFER1zAYYEcTN0SqedcydpszTMjYaP6JDBRCMDa8KchQYxTcKzjMmAFYJqZcekDwg0XMJGa1u5VZayBCe1EOF4i+x6PMx1q5BY5UcfsJsChEfaM1BE3sh2mY1oy6CX/LhFQDbqXDxN+yqVUWmr77UHxqusAAYIsw2FeQbJ0gW1jxtmV9vX6QNZWJQQj+Y6fVqqv+JXKJ/lu1VEwAV4w/NXfwJOiWPdUSvzZHhvokEC2Q1Enx/vD78r1qAb1waqKtp4WF3EO4mvm49U2VDFHCSkej64Qnz5Iuy9p/svcfXD7Pq7p+u5YF+SjPjNorUiZgQr28ck9SmXClo4T"
+                }
+            }, 
             "auth_refresh_token": null, 
             "gid": 1000, 
             "manage_group": false, 
@@ -19559,6 +19623,23 @@
             "nexus_refresh_token": null, 
             "email": "wangwe90@msu.edu", 
             "uid": 58562
+        }, 
+        "weiyh": {
+            "comment": "Yuehuan Wei", 
+            "shell": "/bin/bash", 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "auth_refresh_token": null, 
+            "uid": 100023, 
+            "email": "weiyh@physik.uzh.ch", 
+            "ssh_keys": {}
         }, 
         "wenaus": {
             "comment": "Torre Wenaus", 
