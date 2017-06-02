@@ -9,8 +9,6 @@ from util import parse_json_config
 assert sys.version_info >= (2, 7), ("You done fucked up. "
                                     "GOSync3 requires Python 2.7 or greater")
 
-# log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=1)
-
 
 def main(args):
     config = parse_json_config(args.config)
@@ -39,6 +37,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", help="echo the string you use here",
                         default="gosync3.json")
+    parser.add_argument('--verbose', '-v', action='count')
+    parser.parse_args(['-vvv'])
     args = parser.parse_args()
+    log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=args.verbose)
     log.debug("Using config file %s", args.config)
     main(args)
