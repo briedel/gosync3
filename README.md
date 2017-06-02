@@ -172,7 +172,7 @@ The `users` and `groups` dictionaries are made up of sub-dictionaries. Holding t
     "uid": # user's UNIX id
     "groups": # list of user's groups,
     "connect_project":  # Initial connect project, typically osg.ConnectTrain
-    "condor_queue": # The condor schedd to pick on the login host
+    "condor_schedd": # The condor schedd to pick on the login host
 }
 ```
 
