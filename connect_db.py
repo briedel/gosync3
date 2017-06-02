@@ -160,7 +160,7 @@ class connect_db_json(object):
         sub_groups = [g for g in user["groups"] if "." in g]
         top_groups = [g for g in user["groups"]
                       if ("." not in g and
-                          g != self.config["globus"]["root_group"])]
+                          g != self.config["globus"]["groups"]["root_group"])]
         while len(sub_groups) > 1:
             # If there are more than one sub project we need to filter
             # out any of the default ones. First we remove the
@@ -170,13 +170,24 @@ class connect_db_json(object):
             # if the user is a member of the other
             # connect instances, i.e. SPT, ATLAS, CMS, Duke
             if "osg.ConnectTrain" in sub_groups:
-                sub_groups.pop("osg.ConnectTrain")
-                continue
-            sub_groups = [sg for sg in sub_groups
-                          if ("UserSchool" not in sg and
-                              (len(top_groups) > 1 and
-                               "osg" not in sg))]
-        return sub_groups[0]
+                sub_groups.remove("osg.ConnectTrain")
+                break
+            tmp_subgroups = []
+            for sg in sub_groups:
+                if ("UserSchool" in sg or
+                    "SWC" in sg or
+                    "wg" in sg or
+                    "old" in sg or
+                    any(g in sg.split(".")[-1] for g in top_groups)):
+                    continue
+                if len(top_groups) > 1 and "osg" in sg:
+                    continue
+                tmp_subgroups.append(sg)
+            sub_groups = tmp_subgroups
+        if len(sub_groups) > 0:
+            return sub_groups[0]
+        else:
+            return top_groups[0]
 
     def add_user(self, user):
         """
@@ -211,7 +222,7 @@ class connect_db_json(object):
             # Adding initial connect project
             "connect_project": self.get_default_project(user),
             # Pick a condor queue, 1 through 5, at random
-            "condor_queue": random.randint(1, 5)
+            "condor_schedd": random.randint(1, 5)
         }
         self.uids.append(new_uid)
 
