@@ -97,6 +97,10 @@ The configuration is a JSON file for ease of parsing it as a dictionary. The min
 
 This JSON object will be parsed into a Python dictionary and will be passed to the various classes.
 
+## Execute code
+
+If there are no changes to default config, execute the code syncing process by just running `./gosync_globus_auth.py`. If you want to run with you own config: `./gosync_globus_auth.py --config /path/to/config`. If you want to increase the verbosity, default the program will not print out anything to screen, simply add the `-v` flag. To increase the verbosity, just add more `v`s, i.e. `-vvvv`.
+
 ## Globus Interface - `globus_db.py`
 
 The class `globus_db` is meant as a one-stop shop for for retrieving information from the Globus ID and Globus Groups service. Please note that being able to `PUT` and `PUSH` information into Globus Groups is possible through the Nexus interface, but needs to be thoroughly tested before those methods will be available.
@@ -166,7 +170,9 @@ The `users` and `groups` dictionaries are made up of sub-dictionaries. Holding t
     "shell": # default user shell
     "ssh_keys": # SSH key dictionary, explained below
     "uid": # user's UNIX id
-    "groups": # list of user's groups
+    "groups": # list of user's groups,
+    "connect_project":  # Initial connect project, typically osg.ConnectTrain
+    "condor_queue": # The condor schedd to pick on the login host
 }
 ```
 
@@ -194,6 +200,8 @@ Some of the methods in this class are self-explanatory:
 * `remove_unicode`: Remove unicode characters from a user's name. This can cause problems when generating a passwd file or trying to serialize a JSON file.
 * `commit_old_version`: In the spirit of old GOSync, we commit the JSON file to Gitlab, so puppet/hiera can grab it from there
 * `write_db`: Write the JSON object out.
+
+The `get_default_project` method is tries to guess a user's first OSG project for account reasons. If the user is a member of more than more than one sub-project we need to filter out any of the default ones. First, we remove the "osg.ConnectTrain". If there are still more than one projects, we filter out any project associated with a user school and any OSG project, if the user is a member of the other connect instances, i.e. SPT, ATLAS, CMS, and Duke. 
 
 The `decompose_sshkey` method is necessary because of the format that puppet/hiera wants the SSH key in. A typical SSH key is formatted as follows:
 
