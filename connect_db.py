@@ -68,7 +68,7 @@ class connect_db_json(object):
             new_id (int): New ID for group or user
         """
         max_id = max(ids)
-        new_id = (max_id + 1) if max_id > id_minium else id_minium
+        new_id = (max_id + 1) if max_id >= id_minium else id_minium
         return new_id
 
     def decompose_sshkey(self, user):
