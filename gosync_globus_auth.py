@@ -26,7 +26,8 @@ def main(args):
     globus_members = globusdb.get_all_users(get_user_groups=True)
     if len(connectdb.users.keys()) != len(globus_members):
         new_users = [user for user in globus_members
-                     if user["username"] not in connectdb.users.keys()]
+                     if (user["username"] not in connectdb.users.keys() and
+                         user["groups"] != ["connect"])]
         for nu in new_users:
             connectdb.add_user(nu)
     for gusr in globus_members:
