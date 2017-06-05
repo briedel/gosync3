@@ -144,7 +144,7 @@ class connect_db_json(object):
             # group's UNIX ID
             "gid": new_gid,
             # Number of active members
-            "num_users": group["active_count"],
+            "num_members": group["active_count"],
             # Globus group UUID
             "globus_uuid": group["id"]
         }

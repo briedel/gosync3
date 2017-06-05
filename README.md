@@ -181,7 +181,7 @@ The `groups` dictionary follows a similar pattern:
 ```
 {
     "gid": # group UNIX ID
-    "num_users": # Number if active user according to Globus
+    "num_members": # Number if active user according to Globus
     "globus_uuid": # Groups Globus UUID
 }
 ```
