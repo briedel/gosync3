@@ -161,6 +161,10 @@ class connect_db_json(object):
         top_groups = [g for g in user["groups"]
                       if ("." not in g and
                           g != self.config["globus"]["groups"]["root_group"])]
+        if not top_groups:
+            log.fatal(("User %s is only in the connect group."
+                       "Please double check"), user["username"])
+            raise RuntimeError()
         while len(sub_groups) > 1:
             # If there are more than one sub project we need to filter
             # out any of the default ones. First we remove the
