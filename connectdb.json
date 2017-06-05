@@ -1340,6 +1340,11 @@
             "num_members": 4, 
             "globus_uuid": "4ed05d82-f818-11e4-9074-123139260d4e"
         }, 
+        "osg.ddpscbioinfo": {
+            "gid": 100001, 
+            "num_members": 2, 
+            "globus_uuid": "55ae3ee6-4a0d-11e7-9c24-22000b100078"
+        }, 
         "osg.evolmarinva": {
             "gid": 8045, 
             "num_members": 3, 
@@ -1858,7 +1863,9 @@
             "comment": "Adriano Di Giovanni", 
             "shell": "/bin/bash", 
             "uid": 100001, 
+            "connect_project": "osg.xenon1t", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "uchicago", 
@@ -1867,11 +1874,9 @@
                 "osg.xenon1t"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.xenon1t", 
-            "gid": 1000, 
             "condor_schedd": 2, 
-            "email": "adriano.digiovanni@nyu.edu"
+            "email": "adriano.digiovanni@nyu.edu", 
+            "ssh_keys": {}
         }, 
         "admilic": {
             "comment": "Adriana Milic", 
@@ -5422,6 +5427,7 @@
                 "atlas.org.mit", 
                 "osg.Errorstudy", 
                 "osg.RicePhenomics", 
+                "osg.ddpscbioinfo", 
                 "atlas.org.uiowa", 
                 "atlas.org.iastate", 
                 "atlas.org.harvard", 
@@ -15366,7 +15372,8 @@
             "groups": [
                 "connect", 
                 "osg", 
-                "osg.ConnectTrain"
+                "osg.ConnectTrain", 
+                "osg.ddpscbioinfo"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 5, 
