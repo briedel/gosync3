@@ -9,6 +9,12 @@ Important notes READ BEFORE USING:
 * This is a BETA. It does not have all the necessary features, like creating a group in Globus, to act as a full replacement yet.
 *  This version uses Globus Nexus client based on the Globus SDK created by Stephen Rosen. This is not an official product of the Globus team. It is maintained though.
 
+## Workflow
+
+The general workflow for GOSync3 is that first we retrieve all the groups associated with the Globus `Administrator` user (called root user from here on out) for the `connect` group in Globus Groups. For this list of groups, we then retrieve the group summary. This step is necessary at the moment because the groups summary includes the number of active members. Once we all the necessary information for groups, the new groups are created and existing groups are updated. 
+
+For creating and updating users the workflow is a little bit more complicated. First, we retrieve all users and their summary, i.e. profile, associated with the root group, i.e. `connect`. This will allow us to update most of the user information, except for the user's group memberships. To get the user's group membership, we will retrieve the group to users mapping, i.e. loop through all groups we retrieved above and get their group members. This mapping will then be inverted, i.e. create a user to groups mapping. We can now add the user's group membership to the user profile and add the user to or update the user in the JSON object.
+
 ## Prerequisites
 
 GOSync3 requires two Python packages:
@@ -97,7 +103,7 @@ The configuration is a JSON file for ease of parsing it as a dictionary. The min
 
 This JSON object will be parsed into a Python dictionary and will be passed to the various classes.
 
-## Execute code
+## Execute code - `gosync_globus_auth.py`
 
 If there are no changes to default config, execute the code syncing process by just running `./gosync_globus_auth.py`. If you want to run with you own config: `./gosync_globus_auth.py --config /path/to/config`. If you want to increase the verbosity, default the program will not print out anything to screen, simply add the `-v` flag. To increase the verbosity, just add more `v`s, i.e. `-vvvv`.
 
