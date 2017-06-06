@@ -9,11 +9,23 @@ Important notes READ BEFORE USING:
 * This is a BETA. It does not have all the necessary features, like creating a group in Globus, to act as a full replacement yet.
 *  This version uses Globus Nexus client based on the Globus SDK created by Stephen Rosen. This is not an official product of the Globus team. It is maintained though.
 
-## Workflow
+## Work flow
 
-The general workflow for GOSync3 is that first we retrieve all the groups associated with the Globus `Administrator` user (called root user from here on out) for the `connect` group in Globus Groups. For this list of groups, we then retrieve the group summary. This step is necessary at the moment because the groups summary includes the number of active members. Once we all the necessary information for groups, the new groups are created and existing groups are updated. 
+The GOSync3 work flow is meant to operate without human intervention, i.e. as a `cron` job, beyond the normal user approval process. At the moment, GOSync3 has no way of knowing which user us new or updated his/her profile or whether there is a new group it needs to create. This can change in the future, see the last part paragraph of this section for details.
 
-For creating and updating users the workflow is a little bit more complicated. First, we retrieve all users and their summary, i.e. profile, associated with the root group, i.e. `connect`. This will allow us to update most of the user information, except for the user's group memberships. To get the user's group membership, we will retrieve the group to users mapping, i.e. loop through all groups we retrieved above and get their group members. This mapping will then be inverted, i.e. create a user to groups mapping. We can now add the user's group membership to the user profile and add the user to or update the user in the JSON object.
+The current work flow is that we first retrieve all the groups associated with the Globus `Administrator` user (called root user from here on out) for the `connect` group in Globus Groups. For this list of groups, we then retrieve the group summary. This step is necessary at the moment because the groups summary includes the number of active members. Once we all the necessary information for groups, the new groups are created and existing groups are updated. 
+
+For creating and updating users the work flow is a little bit more complicated. First, we retrieve all users and their summary, i.e. profile, associated with the root group, i.e. `connect`. This will allow us to update most of the user information, except for the user's group memberships. To get the user's group membership, we will retrieve the group to users mapping, i.e. loop through all groups we retrieved above and get their group members. This mapping will then be inverted, i.e. create a user to groups mapping. We can now add the user's group membership to the user profile and add the user to or update the user in the JSON object.
+
+There are three slow processes in the above work flow:
+
+* Getting the group summary 
+* Getting the user summary
+* Getting the user group memberships
+
+The first processes are slow because we have to query the Globus Groups database separately each piece of the group information: group profile, number of members, and group members, respectively. In addition, queries on the Globus side slow down as the group tree grows in size and as we add more groups the more queries we have to perform. Getting the user summary is a similarly expensive process because we have to query Globus for every user twice, once to get their general information, and another to get their SSH key.
+
+One of the main steps to improve the efficiency requires to change the website to use OAuth2. This would allow us to operate on a per-user basis rather than on a per-group basis. In an idealized work flow, a user would sign up on the website. This sign up process would trigger the ability to retrieve the users identity (including their SSH key)and their Globus OAuth tokens, see below for more details on Globus OAuth tokens. With the identity and Globus token in hand, we can then query Globus for just the new user's group memberships. The first query would happen be default at sign up, while the group membership query would come after they are approved. The second query may have to be repeated several time. This is not wasted effort though, since we are waiting for human intervention. Similarly, we could trigger a Globus query of a given user's profile once they login. This would make updating the user information on our end dependent on user actions rather than us having to repeatedly query Globus for their information. Given that we most likely will never have tokens for all users, we will need operate in a hybrid mode, where the new user's are handled solely through the tokens, while older users will have still have to be kept up to date through the above described work flow. 
 
 ## Prerequisites
 
@@ -39,10 +51,7 @@ For more details, please see the [Globus SDK documentation](http://globus-sdk-py
 
 ## Assumptions
 
-Following assumptions are made in the code:
 
-* All users are part of the `connect` Globus Group
-* The `connect` user is an `admin` or `manager` in all relevant groups
 
 ## Configuration
 
