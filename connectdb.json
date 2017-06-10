@@ -652,7 +652,7 @@
         }, 
         "osg.AdHocComm": {
             "gid": 6044, 
-            "num_members": 3, 
+            "num_members": 4, 
             "globus_uuid": "9ccbc666-e3fd-11e6-b9d7-22000b74c0b7"
         }, 
         "osg.AfricanSchool": {
@@ -1419,6 +1419,11 @@
             "gid": 7381, 
             "num_members": 4, 
             "globus_uuid": "1721fcfe-b1cd-11e6-bfce-22000ab4b42b"
+        }, 
+        "osg.nsides": {
+            "gid": 100002, 
+            "num_members": 2, 
+            "globus_uuid": "e281b044-4d20-11e7-a46a-22000b100078"
         }, 
         "osg.numfpi": {
             "gid": 8095, 
@@ -3434,6 +3439,10 @@
                 "98bruenn@euler": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA+GT8a+KrEKcx9N/IglyVX7ysJ2CDLML+wBH1PMeScfQ5XnDzyqnhJIy9k7uJ2Qr081ocw2PlQSj//0X51tzTX7eE+SvFpjNCmH+Nh52pd7ypSS6QQyubnq3Y2AL51MNfAWwOQH2oysNRlkN8LU5Wqu0MxnjP3ez7bKoEpMTgcW+UAxELFbXwHvslsBHLV1NOa6sSjmVZ7MOx+q6B8kvlHZfoSC3MzgUONYF2+B5chd+SDrGTViizplHYkzJuDGY6A0/XokTpE8ngqfXtWHlb/jZnYLVG96KMCtLrJWrHIO1pVhjAzzTU/P8z8XtqwQNEHT/oprJOnePenygVFJ9cww=="
+                }, 
+                "Boris.Bauermeister@fysik.su.se": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCbq4oMVF4rW/OZHRbCVFIarnO5DnHIbTCAh95mvTrH8KC2r4cN+zj+kT04uv1k98EUtGY680edr1BzMh8pnRuhSSr2loWvoBRjBDQpoRc6xKdXmvIGPotcuW9eaCDYt1udA9G28jsqInhg5jHkgTzX4elaMb6IgS1VvlsH54WyrzRWKHDxruuIxABhypwnC3+TBBf4kSJEcJ1RjwJxgEfCrtC7063lS0ppxmayY0H5XFLQFjWX0jbZZgxW5Jz0FDQFFA645uXUfX9r2tExXGWJer4cNj6HrzmJLoue2DHm+cAJwKNWsLSGZnE6N6YLu9HD9C3Xci9X5ktdiLadg11@wifi-dot1x-131-251.lngs.infn.it"
                 }
             }, 
             "connect_project": null, 
@@ -3755,7 +3764,12 @@
         "bflan": {
             "comment": "Benjamin Flanagan", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "benjaminflanagan@Benjamins-MacBook-Pro-2.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCXO9JcZZOQdlbk1/XiXQ33YXpuf8gxAbdoUDr52SfCehcTiU0cAf45UcsP9BdWJ2gyOIrjt5yMpBYfOzJdMV5NAwURLI5s32ouJUeYLT0MqyQ3naZpJBWJPdjmZBZsOgJCh06nErrhWopzRan278Ga50zD1nUdWx7zzqd2ej+bR81ejYeJXkVXfOtnhn/v9frqx2ZwE9LPftPkXDEUiOdxPqRMX0AEz1p3LDDg5Ry0LYOFpfrnZrWDlCUAynuCxyed5Ue7VKzvRHIxMUEYHi8d0KK3VHRHwPI0OtWjXOmWCk4t8viPMrJqbROQrZHlC1TOvYUeHybdkS2JLkMfe+1V"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -5448,6 +5462,7 @@
                 "osg.OSG-Staff", 
                 "umich", 
                 "atlas.wg.Flavour-Tagging", 
+                "osg.nsides", 
                 "atlas.org.pitt", 
                 "osg.microphases", 
                 "atlas.org.anl", 
@@ -6821,7 +6836,12 @@
         "dramirez": {
             "comment": "Diego Ram\u00edrez Garc\u00eda", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "dr1036@apppc14": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDFYFsz3UtHeEgjLPmZ81xeHtUCbT+yMnFYfVW30Df1ZRlZultEvyO57laIKdN73/h2oGnWergr7yJiQtrpnmDUW2Tp8lIxDecNFKxhEl1cf1srmVZ0kxW78AJ9+Jd8TMDWjn0hLFdLSf4Dsisn9YVxb+4T42M73ArwDJsTGHRgzvzJWr/iNlZlszUG3xoHOOA5FK8ceF1InT1w2YJ7+JJQg+fSOeUn5cDyVTKnlaCmOJUvkebUJj+dlJJZjI+vpYfSWYRd+rX7wHjYlYKLhyrH7yfFakZqBHLtTV86vydMU3In1XFM5qRw7JYUCPfO653fMbe7Gtcj2XXjNyCkdDfl"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -6834,7 +6854,7 @@
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 2, 
-            "email": "dramrez@students.uni-mainz.de", 
+            "email": "diego.ramirez@physik.uni-freiburg.de", 
             "uid": 45887
         }, 
         "drdrswanson": {
@@ -14685,7 +14705,12 @@
         "mmw88": {
             "comment": "Marta Wells", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "martawells@rama": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDbi2kMwxn69HDBvvZy4pSlCsfLFEFP42o0zHX3JQgD8rt34QaNxsJrA7dT9buWV5xfFuqJGWg6+X+Ok5F9rMew3Z7Dp1hxO1BYQFCYFbEr8hi9wL9HZPjC93X+Bcd6Vj9OTjF+J29FdxHLgYrKRd4RTxqYwFq03ckJ4JGhXMPovJbCDVptuKCO/QtlEMUJ4WjdfAv8gkrxoywaYVqYo0apBrgr92O39M5tXZUS3e1EN+bNm5At9jndYHYD5dinSH/DsNKf3MinPvqJPB/FbfQpxRWMjeisJVPgxMuwTza1TDNWQI9q3xcpMRqHZE8jnqxA/amjnaAWIVKeimaYVt7V"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -18180,9 +18205,11 @@
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
+                "osg.AdHocComm", 
                 "connect", 
                 "osg", 
-                "osg.ConnectTrain"
+                "osg.ConnectTrain", 
+                "osg.nsides"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 1, 
