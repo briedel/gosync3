@@ -8091,7 +8091,12 @@
         "filikhin": {
             "comment": "Igor Filikhin", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "rsa-key-20170609": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEA8c2/PmlryIRAOKq70P/PyzkjK1RsmE7BZObAuT2eGt57IaiBrRnUUbVeZw4X234oyylbKPWmsse2GMLNTgQ6nRPG03IQMQ86x1QmNHXivjykvP+Ip4DfK/+XzCmPkaer1fudplwU5wtHMopgBCxWljWbBNvHzyNGqmaXbt7r/69xdF+z51tBWAoPXKrUj3we47rOwlM4xWTlvQtwmXgA0zTsC7xYDtTaAovJmlVQjjTgvfXYT/+v0eVGUIL4evOmyAJJ5Jnw4BNWfTDBmVuP3fwXJk8CPM9xzZo/Lb6eY+dy1EcK6BqJTnjPNk0ONpecjWljBnERMKaw/bkYne3/wQ=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -15797,7 +15802,12 @@
             "nexus_refresh_token": null, 
             "condor_schedd": 5, 
             "email": "nranasinghe@unm.edu", 
-            "ssh_keys": {}
+            "ssh_keys": {
+                "rsa-key-20170609": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAnfDqtovVopYPfJT3+bbo/iqzR84KEce9esBpDuaQIL9yb5ZdZB2Lt/76xgxGO+BFLxtwLPAVPC5tRUrG3ZO+V9FYz/y+sTgJnBJ/J82mGYy1iaeyHHUWwHP0TwZET7CuzQTIkyYr29ezlWmTrXQdgNfB2IHBulO+MMntyk5f2Ji07bYZSs9rianCVfsvJbRDxgdCG+FbvLXOH5fGVUyHicwZTkdM5ucJH/YCOliNJRwxdd/+UnZb1eNVDemziWFwtXlTeg+rSv/2UzOJN0mlWDTLTtM9+4+52FNM0W2Ujo3oC6zAs6xAXUQEXMVEMSF0ZMupiB7hFNW11b8F6koL+w=="
+                }
+            }
         }, 
         "nuyun": {
             "comment": "Nuyun Zhang", 
