@@ -2,7 +2,7 @@
     "accounts::groups": {
         "atlas": {
             "gid": 7452, 
-            "num_members": 128, 
+            "num_members": 129, 
             "globus_uuid": "5ea8c77a-0c1b-11e3-af5a-1231391ccf32"
         }, 
         "atlas.org.albany": {
@@ -127,7 +127,7 @@
         }, 
         "atlas.org.pitt": {
             "gid": 5151, 
-            "num_members": 2, 
+            "num_members": 3, 
             "globus_uuid": "4922df52-5e74-11e3-a4f3-12313809f035"
         }, 
         "atlas.org.sc": {
@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1002, 
+            "num_members": 1003, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -1524,6 +1524,11 @@
             "gid": 8074, 
             "num_members": 59, 
             "globus_uuid": "f6632c68-9a07-11e6-a471-22000ab4b42b"
+        }, 
+        "staff": {
+            "gid": 100003, 
+            "num_members": 10, 
+            "globus_uuid": "8dac2ffa-4f9a-11e7-9964-22000b100078"
         }, 
         "uchicago": {
             "gid": 9487, 
@@ -3564,6 +3569,24 @@
             "email": "bc13h@my.fsu.edu", 
             "uid": 17670
         }, 
+        "bcarlson": {
+            "comment": "Ben Carlson", 
+            "shell": "/bin/bash", 
+            "uid": 100006, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "atlas", 
+                "connect", 
+                "atlas.org.pitt"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "atlas.org.pitt", 
+            "gid": 1000, 
+            "condor_schedd": 3, 
+            "email": "bcarlson@cern.ch"
+        }, 
         "beissinger": {
             "comment": "Timothy Beissinger", 
             "shell": "/bin/bash", 
@@ -4106,7 +4129,12 @@
         "bocklund": {
             "comment": "Brandon bocklund", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "brandon@client-104-39-43-122.mobility.psu.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDWluW+dr4h7uGt0KPPAYttaPM8MocZvU01tMV/HMUYHDICxz8cj1VL4Ir/5hADmu0+Ti82wZ2kR6HcmROV4utxgPYaL7QTwSvJ5T9caVPJRRX4pLtjpSsPS1wiauYy4eFv/Dzz+XEqhdKNlCkxJArTAYkcw4hOHWP7QpzAc/9qqfZvlcQ0wBIGHG8Uzw/d3BgiS8UJufkijAVDEO4yMcaaZSHuTlArVrRY53VL7KSWqIdg1CHYC9zQbU2DWxJKcbdb4BNmaXHdupsCyYvRzdVjDArdNcj4iEQMSNCPEpxavS8kUmE84QI8XWWWj2h5rQ7WeEJ6FHPkUQJMxCBXlZZh"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -4263,6 +4291,7 @@
                 "uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "spt", 
                 "osg.xenon1t", 
                 "osg.SouthPoleTelescope", 
@@ -5248,12 +5277,7 @@
         "connect": {
             "comment": "CI Connect", 
             "shell": "/bin/bash", 
-            "ssh_keys": {
-                "lincolnb@the-mondor.local": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC/pjUwYcfRT5tsxLZJDpapps01h2SDtjC9b6dmdNek4xmrv8ogXeFtEHXDNgZYptvbAFNpSmsjn96DIHpD0KxZCYIH2P/kFORfJF1BAfybu7BgtfQhx3hvcvhO44Af8WzybM8Oc4vTGzMEzKX9IpM+DSKJX9h80DOtSyeo4a5SoMwvDvEgFOEHHPxHLP+HlPrlK8wTMqiokom2HBymuiJ5V0cV2wBcOo4wBAqMokNQATUAmnpTTPFwRhT1bUcz/ZRho0GG6oYoTAei0OTm5KW3Kml16oWNEmaOKM25HUBNcO5otU2WYJ6Nj5tPyDoWF09wOcidYlPUbJHsQwaLoYll"
-                }
-            }, 
+            "ssh_keys": {}, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -5370,6 +5394,7 @@
                 "osg", 
                 "cms.org.bu", 
                 "atlas.org.utexas", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.GTConvertHTC", 
                 "osg.TrappedOrbits", 
@@ -6053,6 +6078,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.SWC-OSG-IU15", 
@@ -8092,9 +8118,9 @@
             "comment": "Igor Filikhin", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "rsa-key-20170609": {
+                "rsa-key-20170612": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEA8c2/PmlryIRAOKq70P/PyzkjK1RsmE7BZObAuT2eGt57IaiBrRnUUbVeZw4X234oyylbKPWmsse2GMLNTgQ6nRPG03IQMQ86x1QmNHXivjykvP+Ip4DfK/+XzCmPkaer1fudplwU5wtHMopgBCxWljWbBNvHzyNGqmaXbt7r/69xdF+z51tBWAoPXKrUj3we47rOwlM4xWTlvQtwmXgA0zTsC7xYDtTaAovJmlVQjjTgvfXYT/+v0eVGUIL4evOmyAJJ5Jnw4BNWfTDBmVuP3fwXJk8CPM9xzZo/Lb6eY+dy1EcK6BqJTnjPNk0ONpecjWljBnERMKaw/bkYne3/wQ=="
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAvWgF49xH4ZQ4eIo7iCyo4hPoO8dc9PjcFITPLN1Eepo31tcmppYQSopw77F+uKzpe0eTKVriRDcut9DUv9T1HsXNXsb8n7QDhvhduUqSbCCvBLauVYEMZNG25loXNWPyG1RQ1azJijZqx856pvkEgGqUNwzKUL+a/jWIA0hswY2RYU7SjwHRZW1Gz2j5BG3B5UI7gLtbmCc8gQxI2jUKvHjx7vyRfOxkKjxl1ZFpL+AKg1RqJqYNCnsnUXcDV+owGW8rIfxGvEIyOzJXf2VV6CnsLZkngcQU8Cn++5OqRQgtGn/hBkyJt4e5ISiWTCwHaskGVnePJ0AQcER3yfy+gw=="
                 }
             }, 
             "connect_project": null, 
@@ -8619,6 +8645,7 @@
                 "atlas.org.uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.OSG-Staff"
             ], 
             "nexus_refresh_token": null, 
@@ -8766,7 +8793,12 @@
         "golmoham": {
             "comment": "Ahmad Golmohammadi", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "rsa-key-20170612": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAIEApxl1tfNIxAxb9FCD3mG7JjpVOHqpwUxI2qouNU96q7r0SRP9AmlczHi+xLlUH7QZAE8G6Z1IoqVT1CKD8rmYz5cnTTi1AWZm6fxtyzvW+2vBLJF3SX14DQ9+vSuAhhP86IUVbeL/IPnaf6EfWg9KNjn6EeWX+89eDzRrPLRIcak="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -9929,6 +9961,7 @@
                 "atlas.org.uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.ConnectTrain", 
                 "atlas.wg.USAtlas-TechSupport"
             ], 
@@ -11003,6 +11036,7 @@
                 "atlas.org.uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.ConnectTrain", 
                 "osg.UserSchool2016", 
                 "spt"
@@ -11254,7 +11288,7 @@
             "ssh_keys": {
                 "josh@Josh-Ubuntu": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDHDxY3CPgn17pqwZhHeD9SHVKxGTC627mY2RM+zeDEoRxCMQrCHKyLWmLAEmp/PsKQh6zi+GhqMiayepk5BQ9GpNx7C0VJVY8yqRthhNkIfkKERrNCHzue1qM1KXktAXhtnlPc86JmibRjLKxi1vs8pHm9gsm4x1TnDDkEZEmKeyru/lvnXZi0jI+39DIum1+7NL2d6c+FF9a/0foH/1ThofudnUL+7ByrgO1lzaBlLXGtbtjJ083aKB1f54zxEXki1CUDQPoti5y+e/geLODpV5Zfs6BhHve65nNZ/tMVELOYcrhVnTLWxGQOLRdkGQw5ejkMUvk3ssCTLlXb/4GP"
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCyDSJoE94bq5IqPlCMTEGYOVgxPxeUbWNcXjUTacFmpTeCLkfvN4e4s7tbS0dvEL63jQICc4M6yiQbmxRh/Prgjles3VaVxAyhSU49mv1SE/KVIDZxX6A4Nk3TXvw12GLgi7MH8RXyzPgiDyosWGcKbLS0WTydsaukto4Uyc0xrXK6vhDxURpYL9N1LcN4nqOTYCv6+S53qpZjZ5NGtNupZK7zkwX6I4eZ+0Tbim15D2u/umsEjOwKQizgsIEJRGPvVnGY8syejI8U/tXGojX3FKpjoXMKIA8osL7ZbL88/tcfdqDuwOHxGsNhZAyOnE0LC4Rl51iUXRVTlI5PB9wR"
                 }
             }, 
             "connect_project": null, 
@@ -13061,6 +13095,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.TextLab", 
@@ -14714,6 +14749,10 @@
                 "martawells@rama": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDbi2kMwxn69HDBvvZy4pSlCsfLFEFP42o0zHX3JQgD8rt34QaNxsJrA7dT9buWV5xfFuqJGWg6+X+Ok5F9rMew3Z7Dp1hxO1BYQFCYFbEr8hi9wL9HZPjC93X+Bcd6Vj9OTjF+J29FdxHLgYrKRd4RTxqYwFq03ckJ4JGhXMPovJbCDVptuKCO/QtlEMUJ4WjdfAv8gkrxoywaYVqYo0apBrgr92O39M5tXZUS3e1EN+bNm5At9jndYHYD5dinSH/DsNKf3MinPvqJPB/FbfQpxRWMjeisJVPgxMuwTza1TDNWQI9q3xcpMRqHZE8jnqxA/amjnaAWIVKeimaYVt7V"
+                }, 
+                "mwells@ultron": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuom+n7iga46e4jvz1kmSKLHIZ4WEDzZamm7lxOh8J8URO0vsw3p3MEPZJkINa9+dGCeKhRp2QcIM7Ued2uTjKQcR4uhShs1AfPY6sdeIRQjlu0Yys1DxDnaYFb9gg/SVsfS3clKpI6PL9qA+X7NAwNSe5tItmMVHF29d4t8Xr9hMzegKzCrk/3Ujbkkxs/ONG62tLvGWOchguMU2as26EzFROzUzmTvRQtDrFmgyjU3QCj9w1lbEWHbCEBOTfCyoZY+3pXmQE/UWSbq8tvASUJpi55SvseJC45fk1xA8A8Q0mQ5CyYFWTt4iG5QsHQS6000w8+mNcTtdhTQaIOaS/Q=="
                 }
             }, 
             "connect_project": null, 
@@ -15806,6 +15845,10 @@
                 "rsa-key-20170609": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAnfDqtovVopYPfJT3+bbo/iqzR84KEce9esBpDuaQIL9yb5ZdZB2Lt/76xgxGO+BFLxtwLPAVPC5tRUrG3ZO+V9FYz/y+sTgJnBJ/J82mGYy1iaeyHHUWwHP0TwZET7CuzQTIkyYr29ezlWmTrXQdgNfB2IHBulO+MMntyk5f2Ji07bYZSs9rianCVfsvJbRDxgdCG+FbvLXOH5fGVUyHicwZTkdM5ucJH/YCOliNJRwxdd/+UnZb1eNVDemziWFwtXlTeg+rSv/2UzOJN0mlWDTLTtM9+4+52FNM0W2Ujo3oC6zAs6xAXUQEXMVEMSF0ZMupiB7hFNW11b8F6koL+w=="
+                }, 
+                "nranasinghe@Geo100": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCxDgmgJZLSfK5iEj38tozeZEGklv2jVsVUmbBM2Bz/\nzAICfFeak4Z53pYn0rFJmiu8MYsME6ujcP814l+ZfhUvmV7KmKJWqNIMtPrk9cynaYE0DrdLsaM/abco\nuoif5BiHkFdFo4maEC0pj8MevDrE3w5UNByKqh8a13u1jm/V2OUeOt8C4mDUip3uCxggUQ8d6PFk6uyJ\nD+XuJ/65H1EGGwkVAA98sg80dnsa8uG+CpCnWZKd6tu7x9UanWVc19QTKal1yj2EB/AQxjaZOkybgX1/\nuqq9mzrBLOruG+uPf0O19Rzulo6ZKojd24/flLW0mwRrpPnxnwyDnlhdHc6p"
                 }
             }
         }, 
@@ -18271,6 +18314,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.TechEX15", 
@@ -18371,6 +18415,7 @@
                 "duke.swcstaff", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.SWC-OSG-IU15", 
@@ -19790,6 +19835,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.SWC-OSG-IU15", 
