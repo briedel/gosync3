@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1003, 
+            "num_members": 1005, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -637,7 +637,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 768, 
+            "num_members": 770, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -3573,7 +3573,9 @@
             "comment": "Ben Carlson", 
             "shell": "/bin/bash", 
             "uid": 100006, 
+            "connect_project": "atlas.org.pitt", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "atlas", 
@@ -3581,11 +3583,9 @@
                 "atlas.org.pitt"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "atlas.org.pitt", 
-            "gid": 1000, 
             "condor_schedd": 3, 
-            "email": "bcarlson@cern.ch"
+            "email": "bcarlson@cern.ch", 
+            "ssh_keys": {}
         }, 
         "beissinger": {
             "comment": "Timothy Beissinger", 
@@ -7149,6 +7149,32 @@
             "email": "dw148@duke.edu", 
             "uid": 26427
         }, 
+        "dwd": {
+            "comment": "Dave Dykstra", 
+            "shell": "/bin/bash", 
+            "uid": 100008, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "dwd@dwd.drdykstra.us": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDBBhR/0IPrMfKx4JWcsTeJUTilom0sohq3ezS525KRR1RD7JMUUVMv+/a9lYk3ixbcWlGan3TK+T91NZrRXunu7ddT23g2U/HrXmc07x8asPA/fKRPf3RTTNE5mn7+k0TJAKVcMML17ByyfxA2bYVA9WpHT4leiz5MWXgAKt4Y9+JzK9yM/QXGiQsF2chwxvRlXFml88b3WPMMslzFQX/YSTT/KQKKq0CHk2zgLHW+WXovormidCp0RFph5POli2ukd15KeMYaxJM93Eurz9/oNcRNYEzkks4kF3KLNwuyVPua+Uh8MhhbA8OMWwJsCbbt8QkkBbb47kImMgOYJLgR"
+                }, 
+                "dwd@dwd": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAIEA4rr1T9RHPXmUYgY6zKY+SH6jRofZ1/78tAh/q/KagIGmzMWela5Q7L2gzNc7GVTDbODLoZHpmrLG9v7Z3GrzrTjuRbce3tQ8tezT3EWIX76NoKDxf0hRrkBVG0unjrh/I/uisFoHphAT0Tt7wy7nAnbCPB2wNlemp1kCwXaGXmU="
+                }
+            }, 
+            "connect_project": "osg", 
+            "gid": 1000, 
+            "condor_schedd": 4, 
+            "email": "dwd@fnal.gov"
+        }, 
         "dweitzel": {
             "comment": "Derek Weitzel", 
             "shell": "/bin/bash", 
@@ -10659,6 +10685,23 @@
             "condor_schedd": 5, 
             "email": "connect-support@opensciencegrid.org", 
             "uid": 21738
+        }, 
+        "jeremyvan614": {
+            "comment": "Jeremy Van", 
+            "shell": "/bin/bash", 
+            "uid": 100007, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg", 
+            "gid": 1000, 
+            "condor_schedd": 1, 
+            "email": "jeremyvan@uchicago.edu"
         }, 
         "jerperez": {
             "comment": "Jerry Perez", 
