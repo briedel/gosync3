@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1005, 
+            "num_members": 1006, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -637,7 +637,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 770, 
+            "num_members": 771, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -742,7 +742,7 @@
         }, 
         "osg.ConnectTrain": {
             "gid": 7021, 
-            "num_members": 540, 
+            "num_members": 541, 
             "globus_uuid": "da657c6a-b4a3-11e3-8e76-12313809f035"
         }, 
         "osg.ContinuousIntegration": {
@@ -1502,7 +1502,7 @@
         }, 
         "osg.xenon1t": {
             "gid": 8812, 
-            "num_members": 75, 
+            "num_members": 76, 
             "globus_uuid": "dd27e2ea-5195-11e5-b638-22000aeb2621"
         }, 
         "osg.z2dqmc": {
@@ -1532,7 +1532,7 @@
         }, 
         "uchicago": {
             "gid": 9487, 
-            "num_members": 94, 
+            "num_members": 95, 
             "globus_uuid": "6e99ebfc-dc84-11e3-89cc-12313b077182"
         }, 
         "uchicago.RDCEP": {
@@ -3029,6 +3029,10 @@
                 "clement@d-ip-31-235.nhn.ou.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDfgv1aZUvNP5mTLMNykGQ0MsKFMo1nMgfbTMnDv5dYIQqhzqix2i0KFnOp0JBWYu47al8j+ITh3aL73Pm9PORvwmSvBtRqyn+1kb6v/jud/Wn3yQM5zGlQz6ramfKLzjKMvsLQtg3/igJkeYj2/6ki/6qJY2yvPf/A2hOE0KYeorJU5obcrNj9MIyJNXrs2qvKDlpEfis3iiej6QwfgMPBJ+n+d579Uj3I6huC90bTSvIULX+QIUkwZRZLzsv8b+zaSHNWv+h8RLF9j6/NbgYTa21GTsQi6uQrWP4hLdiaO8T+gASJZ5xI1aUHv72+xuvSIhiVVsgygP2VvLYHvTK9"
+                }, 
+                "Clement@clement-2.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDjww7mxvqt9WjmgRFoImTC6g9YfEBFiuLXg7gBJZXxZGSlAaaJrsrR0VfEua+TgKkATf76eGMW+TcaF2e5nXf+Uiw1wsM+yQrerjcpNqPYwi+px2elTYb3X3GoE5IW9zqK6HLUJUSw4uN0x6F2+sRi5dwlsmyz7rh1h4UPKdGAHlUh02nBQ1d52PoRrJ0yEanm9kZndXLDOKffZ5D3UCl2cPNc1TD+wHHEAj501aaBjivubouLcK1BBKagZkXBiYRvJc+K0RQ+b1jFyH4dPR4X8OVuM701VDWkrFru2+EJ3FvmIi8N0Gu7QyAzOPQOhx4QojSy/ZUSB+L/Dvfm+tuV"
                 }
             }, 
             "connect_project": null, 
@@ -3440,6 +3444,10 @@
                 "koenig@roland2": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuQzXoSX5vRwhAhHi4VJfP/9HIIgjMRwlZBoJgrWhWGCwwl3YceOsMQSHathx6ui6QnADtRXit4IUfRzEQ/mHk4APWa9inVi7NrGEvcMsYnYQaDh02STpST4wMT0K7fKrZCeYr8ee0Mf/IsQM1yYQnO/mQ8FBXuMAwUGiviP58KLY4DWOxSXkdtIZrvPTqGQ6EMoUwQZxfJ6sfJTcJGBi48qOQ5eGB97V5LPuNIGuuAOp/TYcHYSChbOqbYCr6r3pZFhbDoXhu4t+zU/eGKDHamQEh8RvJiDERjelFNblN4TOtkX14k7+gOzL4an1lJnEe9ijKA0mwlvvRXuNPtf/Yw=="
+                }, 
+                "guillaume@ge": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA3+AaL0kU9wivyFQe+C0tLVSzC/gGNKNorLQXFAhpgqQEWuPfvZ//wqg/FE9cbc/h5jvf7IYEGL1AH8+KCh//xrjgrh8YjBfbWfZjMdEmglM8KBkWX3QoOf6kgs26bQpQoFaBrRmmiDDgC0eBPjERyIHXz1T0FKSpMgktPHe31APMCxz94ARn5YUgthS+09579QE0p3X8hgtGpSGw5Q1Uco8BjGwmisG91gFs4f9RcEj1rFGCe2qGdocrpJrhH5mn4r8q2xuCPFCm3yzoKJH3UlaAqN8fmig+eqg3Txtv2hVPSWGdYP11cNgDl68eGk2CDE7fkUO9o7FXmC2IRFTxIw=="
                 }, 
                 "98bruenn@euler": {
                     "type": "ssh-rsa", 
@@ -6469,6 +6477,25 @@
             "email": "dkulkar@clemson.edu", 
             "uid": 62801
         }, 
+        "digangi": {
+            "comment": "Pietro Di Gangi", 
+            "shell": "/bin/bash", 
+            "uid": 100009, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg.xenon1t", 
+            "gid": 1000, 
+            "condor_schedd": 1, 
+            "email": "digangi@bo.infn.it"
+        }, 
         "dip": {
             "comment": "Ashiqul Islam Dip", 
             "shell": "/bin/bash", 
@@ -7153,13 +7180,18 @@
             "comment": "Dave Dykstra", 
             "shell": "/bin/bash", 
             "uid": 100008, 
+            "connect_project": "osg", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
-                "osg"
+                "osg", 
+                "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
+            "condor_schedd": 4, 
+            "email": "dwd@fnal.gov", 
             "ssh_keys": {
                 "dwd@dwd.drdykstra.us": {
                     "type": "ssh-rsa", 
@@ -7169,11 +7201,7 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAIEA4rr1T9RHPXmUYgY6zKY+SH6jRofZ1/78tAh/q/KagIGmzMWela5Q7L2gzNc7GVTDbODLoZHpmrLG9v7Z3GrzrTjuRbce3tQ8tezT3EWIX76NoKDxf0hRrkBVG0unjrh/I/uisFoHphAT0Tt7wy7nAnbCPB2wNlemp1kCwXaGXmU="
                 }
-            }, 
-            "connect_project": "osg", 
-            "gid": 1000, 
-            "condor_schedd": 4, 
-            "email": "dwd@fnal.gov"
+            }
         }, 
         "dweitzel": {
             "comment": "Derek Weitzel", 
@@ -10690,18 +10718,18 @@
             "comment": "Jeremy Van", 
             "shell": "/bin/bash", 
             "uid": 100007, 
+            "connect_project": "osg", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
                 "osg"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg", 
-            "gid": 1000, 
             "condor_schedd": 1, 
-            "email": "jeremyvan@uchicago.edu"
+            "email": "jeremyvan@uchicago.edu", 
+            "ssh_keys": {}
         }, 
         "jerperez": {
             "comment": "Jerry Perez", 
