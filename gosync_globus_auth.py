@@ -53,6 +53,7 @@ if __name__ == '__main__':
     parser.add_argument('--verbose', '-v', action='count')
     parser.parse_args(['-vvv'])
     args = parser.parse_args()
-    log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=args.verbose)
+    log.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
+                    level=args.verbose)
     log.debug("Using config file %s", args.config)
     main(args)
