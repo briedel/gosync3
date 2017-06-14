@@ -1,0 +1,2 @@
+globus-sdk[jwt]>=1.0,<2.0
+globus-nexus-client>=0.2.5
