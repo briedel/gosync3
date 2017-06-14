@@ -1,13 +1,13 @@
 # GOSync3
 
-GOSync3 is the replacement for the current GOSync. It is based on the [Globus SDK](http://globus-sdk-python.readthedocs.io/en/latest/), the [Globus SDK-based Globus Nexus Client](https://github.com/sirosen/globus-nexus-client/tree/master/globus_nexus_client), and puppet/hiera to create and manage UNIX users and groups. The main tasks of these classes and scripts is to interact with the GlobusID and Globus Groups database through their RESTful API and manage the JSON file that puppet/hiera requires for creating and managing user accounts. 
+GOSync3 is the replacement for the original GOSync. It is based on the [Globus SDK](http://globus-sdk-python.readthedocs.io/en/latest/), the [Globus SDK-based Globus Nexus Client](https://github.com/sirosen/globus-nexus-client/tree/master/globus_nexus_client), and puppet/hiera to create and manage UNIX users and groups. The main tasks of these classes and scripts are to interact with the GlobusID and Globus Groups database through their RESTful API and manage the JSON file that puppet/hiera requires for creating and managing user accounts. 
 
-The old GOSync was based on the [Globus Nexus Python library](https://github.com/globusonline/python-nexus-client). The Globus Nexus Python library has been officially deprecated and functionality, such as accessing a user's GlobusID, will disappear over time. There was a GOSync2, however, it was still based on the Globus Nexus Python library and Globus is moving to an OAuth2-based model for all authentication and access to a user's GlobusID. We abandoned it after this change. 
+The original GOSync is based on the [Globus Nexus Python library](https://github.com/globusonline/python-nexus-client). The Globus Nexus Python library has been officially deprecated. An improved version of the original GOSync, i.e. GOSync2, was under development. It was still based on the Globus Nexus Python library. The development was abandoned as Globus has moved to a OAuth2-based authentication model and access to a user's GlobusID.
 
 Important notes READ BEFORE USING:
 
 * This is a BETA. It does not have all the necessary features, like creating a group in Globus, to act as a full replacement yet.
-*  This version uses Globus Nexus client based on the Globus SDK created by Stephen Rosen. This is not an official product of the Globus team. It is maintained though.
+* This version uses Globus Nexus client based on the Globus SDK created by Stephen Rosen. This is not an official product of the Globus team. It is maintained though.
 
 ## Work flow
 
@@ -23,10 +23,10 @@ GOSync3 requires two Python packages:
 
 ```
 globus-sdk[jwt]>=1.0,<2.0
-globus-nexus-client>=0.2.4
+globus-nexus-client>=0.2.5
 ```
 
-`globus-sdk[jwt]>=1.0,<2.0` is the Globus SDK including the JSON Web Token library. This is necessary to interact with Globus Auth and be able to do token introspection. `globus-nexus-client>=0.2.4` is an implementation of the Nexus client using the Globus SDK. It is not an official Globus product, but supported by one of the authors (Stephen Rosen) of the Globus SDK.
+`globus-sdk[jwt]>=1.0,<2.0` is the Globus SDK including the JSON Web Token library. This is necessary to interact with Globus Auth and be able to do token introspection. `globus-nexus-client>=0.2.5` is an implementation of the Nexus client using the Globus SDK. It is not an official Globus product, but supported by one of the authors (Stephen Rosen) of the Globus SDK.
 
 In addition to the Python packages, one will need a Globus Confidential "app" that:
 
@@ -41,7 +41,10 @@ For more details, please see the [Globus SDK documentation](http://globus-sdk-py
 
 ## Assumptions
 
-
+Following assumptions are made in the code:
+  
+* All users are part of the `connect` Globus Group
+* The `connect` user is an `admin` or `manager` in all relevant groups
 
 ## Configuration
 
