@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1010, 
+            "num_members": 1011, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -637,7 +637,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 775, 
+            "num_members": 776, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -742,7 +742,7 @@
         }, 
         "osg.ConnectTrain": {
             "gid": 7021, 
-            "num_members": 541, 
+            "num_members": 542, 
             "globus_uuid": "da657c6a-b4a3-11e3-8e76-12313809f035"
         }, 
         "osg.ContinuousIntegration": {
@@ -4784,7 +4784,9 @@
             "comment": "Cory Cotter", 
             "shell": "/bin/bash", 
             "uid": 100012, 
+            "connect_project": "spt.all", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "spt.all", 
@@ -4793,16 +4795,14 @@
                 "spt"
             ], 
             "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "ccotter@fnal.gov", 
             "ssh_keys": {
                 "ccotter@fnal.gov": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ9XlGcGY6AAy+6rg8XH9+3jMhhT1vW6BYcBjjSrJDztH8+rpW3FSYQ3gh6zVjZHsZuss8yytat+QxDIfZyIDA78RgqOvfrRhRPCoJyLXwk1IEpaTzBUlWk5cKXm8LD/zj42QZNDLc3kORzwpyQkat6K6i34YL3cWjcUbNXRUYLB3H+J4noeAAlG6v65Il0Yzw0O2zuAoNyzQ1xKft4bGQqAotipEvSLU8cQgnWxcIxmkPcGNZlOHzmSIqoZcsmF8yCLZV//e11T8UPq0VnBf4j0gnNLD6sS8YONisRQexj6xkN8LBgfeqEE510tA6eOph99vwb6bWrh9PeVgA1Q+L"
                 }
-            }, 
-            "connect_project": "spt.all", 
-            "gid": 1000, 
-            "condor_schedd": 1, 
-            "email": "ccotter@fnal.gov"
+            }
         }, 
         "cd112": {
             "comment": "Chien-Kuang Ding", 
@@ -8267,7 +8267,9 @@
             "comment": "Florian Joerg", 
             "shell": "/bin/bash", 
             "uid": 100011, 
+            "connect_project": "osg.xenon1t", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "uchicago", 
@@ -8276,11 +8278,9 @@
                 "osg.xenon1t"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.xenon1t", 
-            "gid": 1000, 
             "condor_schedd": 2, 
-            "email": "florian.joerg@mpi-hd.mpg.de"
+            "email": "florian.joerg@mpi-hd.mpg.de", 
+            "ssh_keys": {}
         }, 
         "fkw888": {
             "comment": "Frank Wuerthwein", 
@@ -8720,7 +8720,9 @@
             "comment": "Guillaume Eurin", 
             "shell": "/bin/bash", 
             "uid": 100010, 
+            "connect_project": "osg.xenon1t", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "uchicago", 
@@ -8729,11 +8731,9 @@
                 "osg.xenon1t"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.xenon1t", 
-            "gid": 1000, 
             "condor_schedd": 1, 
-            "email": "eurin@mpi-hd.mpg.de"
+            "email": "eurin@mpi-hd.mpg.de", 
+            "ssh_keys": {}
         }, 
         "gfacini": {
             "comment": "Gabriel Facini", 
@@ -16135,6 +16135,10 @@
                 "ovidiu@Ovidius-MacBook-Air.local": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC0MlkaQP/V8/Rvcp9AahzlrMOFYbisZcHXY0WhfbZ4HH34sCuPSNjpsBjSIGt/vJDKNXtowTzjxqhpCj5tvFe8mB206JYlOtQHx3z3iWoReh1PYthvdzTBGDU4XwbzGzXwI3Y5aSx6srAm1CATBDd6eq3Xs6tzH2O97zc9fOqAv6kB+oiXdHsOZuq3w+4FOS7mGYWpCJKBjUXCsjpILNBQj9bGljZkJFrjv7f9FveQTMCmfsWHPKE5zosHcdXh5nxy2pEY9y+udtUeW/IDPIh/cAGzF5oPLXqA6P4vAbfJx0QB9t1kXWO2QO3kRVyrQkSgxpNGsArmY2UOaBAPHrJr"
+                }, 
+                "oana.carja@gmail.com": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDF4QIb0vQVx4iwDE+Yes7W4QiSt72WwbIY/RZjJgD1d2NPpctlNt/xLQyVF+MoNEOB5NPFmBLjULdVcIC0Ggh6ryS2G84eW6gnyAhkh94qRrMkgBhFw1j3bVXxi1VUFHUdQDMMTj7CjnfcMUHSia4LMFCXcB5sXKRJMtOukcesRqoxoWDlHd4ybFWIdHGhCTIPIPqjL6iIfD3lSf+4OWhsSYqbbAonPqOpaZa1eQq1fJF634sDO+PbNVbjc9wuyMW6dbO1/1Otr4soLzRV6PSrYZmCXN/ewYDhkDFiHE0OXB2m/5ZZD86EmB6/KKyqdV3gfEYDbZ1h56kJFIe1KXkff/dTVJ0In/yLHXfw4TgAE+gIf/JBmiAxdlqyFkHvvKWL+B4mEji3UiZ4CNcKWIqQEUpTKTfqbAbIVhTFQguIUx33ilWBpCSJm8xC7mTsjmMQFTLQbZyxbwYCP2LuHhHZsD1UwJ+HCVCqg6zT5trHfurFgkUcWaQrCvLsbK3i7labtdwOQdajSrtv/nI+selvsuJq25XP7CMJrKtVtxMs2xcpPoLslZxhXB+fgp4wCab5fJwebvWgMM08m/DLdDLvbZgn5nNdjTThf8ypAiQaMwE/1JtF+TE/9WDuxP8YYyrp4H8VWWS2Kl7APp8ocQ3jkfCnrw8QsWWhKKsOn4eMoQ=="
                 }
             }, 
             "connect_project": null, 
@@ -17339,6 +17343,24 @@
             "condor_schedd": 3, 
             "email": "pascal.paschos@northwestern.edu", 
             "uid": 41462
+        }, 
+        "prabisha": {
+            "comment": "Prabisha Shrestha", 
+            "shell": "/bin/bash", 
+            "uid": 100013, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg.ConnectTrain", 
+            "gid": 1000, 
+            "condor_schedd": 1, 
+            "email": "prabisha.shrestha@kysu.edu"
         }, 
         "prasad": {
             "comment": "Prasad Maddumage", 
@@ -20367,7 +20389,12 @@
         "tcrawfor": {
             "comment": "Thomas Crawford", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "thomascrawford_old@Thomass-MacBook-Air-3.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQD0DUM0n3c74qufjHmUKHBPLJoDchi5t7kBZz1DPdFm2IBGVBEjtuVufF7yUN2cWnqXBcFpZP+4mwQdOObYBUPJTFKVzeQQ14YTdn6D+SvPKh/PwUqJkqvrMyMSvE5+TZ5hGqbLdnIMF2jRGDvskmdA23RNN6bU3CFLfI219ZCJZa282r3GC3SlLTeEna/fTUeOb+OreEZVjNkjbI99m/qCXP5Gczmk8KDkoo/3YyCXSzS8bsKVc67jSQJIsmbKi1QxzfSE93Y5HeLoZHuY0iVrN9yawt8R02NW5QlZCOitvISjn36dBgSsHh2sUcy8mYFY37HMXm3B7/ZhrkfP1oMr"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
