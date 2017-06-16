@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1011, 
+            "num_members": 1014, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -632,12 +632,12 @@
         }, 
         "old.ConnectTrain": {
             "gid": 100000, 
-            "num_members": 76, 
+            "num_members": 77, 
             "globus_uuid": "f7b10014-0dff-11e3-8f0b-12313d2d6e7f"
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 776, 
+            "num_members": 779, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -1502,7 +1502,7 @@
         }, 
         "osg.xenon1t": {
             "gid": 8812, 
-            "num_members": 78, 
+            "num_members": 79, 
             "globus_uuid": "dd27e2ea-5195-11e5-b638-22000aeb2621"
         }, 
         "osg.z2dqmc": {
@@ -1517,12 +1517,12 @@
         }, 
         "spt": {
             "gid": 5803, 
-            "num_members": 61, 
+            "num_members": 62, 
             "globus_uuid": "d4f30666-9a07-11e6-b672-22000aef184d"
         }, 
         "spt.all": {
             "gid": 8074, 
-            "num_members": 60, 
+            "num_members": 61, 
             "globus_uuid": "f6632c68-9a07-11e6-a471-22000ab4b42b"
         }, 
         "staff": {
@@ -1532,7 +1532,7 @@
         }, 
         "uchicago": {
             "gid": 9487, 
-            "num_members": 97, 
+            "num_members": 98, 
             "globus_uuid": "6e99ebfc-dc84-11e3-89cc-12313b077182"
         }, 
         "uchicago.RDCEP": {
@@ -6089,6 +6089,29 @@
             "email": "davidkelly@uchicago.edu", 
             "uid": 48803
         }, 
+        "davorka": {
+            "comment": "Davorka Gulisija", 
+            "shell": "/bin/bash", 
+            "uid": 100015, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "old.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "davorka@lsb031.wlan.sas.upenn.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDz1x+LWe10f5RQi3I164l8q/azHlceB82ZfTrCAZVd2Xh/YKxiRR6YuYTHPJgl2/hlwLPR6fqM7UP84QEMAI0DGkoHQ22Mnbuz4d2Q/YWQSd8cio5QzHV6op0aDo/6xcTBfzBKOjgMyOplZqu/8cBi+w2VM5uSmBMyeJauv7zJymY9t6YbsfnlffUi/knF2t0PE3JNoxM2YHdAwVQEINbjMwZr+TJoFeLTFBvH/IzUx3ZUvXVYxCzOiQ+pJzCv9dH9tAoKo0tto9wG3r/M8bbKvv/9tcKqnaRrBSKRjlbSbNgcY+LAVf6lPuOuW+Gc3pJpedpt7qw2yGM46pdlNuPB"
+                }
+            }, 
+            "connect_project": "old.ConnectTrain", 
+            "gid": 1000, 
+            "condor_schedd": 3, 
+            "email": "davorka@sas.upenn.edu"
+        }, 
         "dbala": {
             "comment": "Balamurugan Desinghu", 
             "shell": "/bin/bash", 
@@ -8206,6 +8229,10 @@
             "comment": "Igor Filikhin", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "filikhin@localhost.localdomain": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDe21/NYPw+TxcbYCMMzQCrQpdLnyOZwgbKBqhvwcb4YXfxYuFgY60R2CdbBTn+/3hKYscWXsh8aW9BkTyI/E/JVKUB5mOcutiScgFkN3j0A803eAzJNg2ywkF30rAnLj9Obi2t8+FtHugb8AJkG8Dlj3DxGNybKTqYpp37QFlsobiklFBcDP5An7bFpqEinmRQzKThv4nwAmmlFo7h/icNz/+XGlj4tekSwPZw4ffNfzx/duuHU/9L35b4cO5rg4uIkyBm5VG5WgUkgQyzi/KzuQa2Ld636DRPkOdbaiQ8CVemUvL1dyud8T1+g8CU02mhIdliRVJ1EXVwLO3wZVdN"
+                }, 
                 "rsa-key-20170612": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAvWgF49xH4ZQ4eIo7iCyo4hPoO8dc9PjcFITPLN1Eepo31tcmppYQSopw77F+uKzpe0eTKVriRDcut9DUv9T1HsXNXsb8n7QDhvhduUqSbCCvBLauVYEMZNG25loXNWPyG1RQ1azJijZqx856pvkEgGqUNwzKUL+a/jWIA0hswY2RYU7SjwHRZW1Gz2j5BG3B5UI7gLtbmCc8gQxI2jUKvHjx7vyRfOxkKjxl1ZFpL+AKg1RqJqYNCnsnUXcDV+owGW8rIfxGvEIyOzJXf2VV6CnsLZkngcQU8Cn++5OqRQgtGn/hBkyJt4e5ISiWTCwHaskGVnePJ0AQcER3yfy+gw=="
@@ -8457,6 +8484,30 @@
             "condor_schedd": 3, 
             "email": "bala.fsurf@gmail.com", 
             "uid": 39218
+        }, 
+        "ftoschi": {
+            "comment": "Francesco Toschi", 
+            "shell": "/bin/bash", 
+            "uid": 100014, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "ftoschi@ubuntu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmlF391mrlrI6zqd8L6yitMYk2daGImaQG8JCAP2spju7NE2hdYnwydr5/uZ0bYU+dIKWRfGBXUcuu21cSo9BLK9GKPs2X/3hCHIWyn8T5nqli8EitwuyKHoAdh/PWzO5nHu2+G9ZNeo0FqiostT17WUxZIA73kX+rohgO1UMvJNPqSAH/UpbQ8vTJlBMSrAciwyU01ce6+tPZfYFw9NXduE7wFjfIg0Vi4ZxDu8nUdprz2w08/wjJsV742d47XAoN+CAmtHUC2/KCxYkaIvc0CqhLJe7tytVC12bTum6rdIDAjABir1U5JJ9m9I0yhKOe1O4BnIAVyyLAYu4ijL0/"
+                }
+            }, 
+            "connect_project": "osg.xenon1t", 
+            "gid": 1000, 
+            "condor_schedd": 2, 
+            "email": "francesco.toschi@bo.infn.it"
         }, 
         "gallicchio": {
             "comment": "Jason Gallicchio", 
@@ -9519,6 +9570,30 @@
             "condor_schedd": 4, 
             "email": "nhduongvn1@gmail.com", 
             "uid": 19210
+        }, 
+        "hogann": {
+            "comment": "Hogan Nguyen", 
+            "shell": "/bin/bash", 
+            "uid": 100016, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "spt.all", 
+                "connect", 
+                "osg", 
+                "spt"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "hogannguyen@mac-116585.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCxsNmrA7+iJuAK1OFgbHfrsFAWpstIFD5N5iYUWO92asfEAv8IwyBGdgNUcGoA/DIRj8a9akV2qxqbZ1Gu8UNs96DjU5eL4KVuwv3DUNtDgFEn5MyZioIGLX83hStcQepuE4xcZUPbLi5/n4FFDYPXDcP6FczMB6abliZMZxz6s/Fp7jsEpOMeLpZotXuwti2d8eDmeOq4OsbGHvo511HFth5CO/UzmFa7qVmW/CuSkhCNKdr5YS08Bs7kMeNyj16mw3x5zYZQZcj48J2IAQI4smtfa4e7ionUPW3/7HvMu92D+y5OxGNsCmUkOUWBLHNAGR2pxUEhJ/sjRPxmjIop"
+                }
+            }, 
+            "connect_project": "spt.all", 
+            "gid": 1000, 
+            "condor_schedd": 4, 
+            "email": "hogann@fnal.gov"
         }, 
         "hogenbirk": {
             "comment": "Erik Hogenbirk", 
@@ -18915,7 +18990,12 @@
         "sdiglio": {
             "comment": "Sara Diglio", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "saradiglio@MacBook-Pro-di-sara-diglio-2.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDazmU1IPnMyEIx4JGoAdRGhzZt1/lISR5ci9+p95J0h7eOkzvuCe/vY9EVLxo6wryCf0iI63fpZjduDj2DPovsdVAFUZtCnm4zNpgEiP9FNDLVKi1F35nzjc47dYhVK630QdweSINYIAI3+4F1dBRr/QTOdvkg9K1jSghG2k+O7OwFxHoNiHd6wRnx/DM2RBHV8oWffcrxW89Wxbx9Jz5ooVfdnmQYaHSJ13mYjHjzvasdkzPbW90cnFuvLfhe6TSaDdOXOKWt21iwsWaq0xCDWvneBbyIZdVQkXkWCXKUufDLZJ+ft9vlSVOuqeaZNX8QaFTenfzq55G5rQbcCnC1"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
