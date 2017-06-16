@@ -17348,7 +17348,9 @@
             "comment": "Prabisha Shrestha", 
             "shell": "/bin/bash", 
             "uid": 100013, 
+            "connect_project": "osg.ConnectTrain", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
@@ -17356,11 +17358,9 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.ConnectTrain", 
-            "gid": 1000, 
             "condor_schedd": 1, 
-            "email": "prabisha.shrestha@kysu.edu"
+            "email": "prabisha.shrestha@kysu.edu", 
+            "ssh_keys": {}
         }, 
         "prasad": {
             "comment": "Prasad Maddumage", 
@@ -22262,7 +22262,12 @@
         "yasirs": {
             "comment": "Yasir Suhail", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "yasir@farismac.ebalto.jhmi.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAwAJq+e+jkdcah7sPwXl5hIpfIV/5FDzp4JRkLp8f3PWkNQ0eIMEE6yWJOUqEGzouz3KSGfKKZzykG/y2Qob3obxpAXBEec9PlW94aBCiSEsyssPL1zl6Zx6bo2gki/FrZfi+rWXaF+JJdFm3SA+94caU1eFhbGRfx1gimFEMkdC/IYGtb5z92JEn0FuKtDoflN99i0F/Crp4XPgOcEzTrOR7i8Rtc/Gq+o+uZz7p/w/nURzQIKilIHa/tcu+gdUos8Ff00m3sTHid9zXqihxZeCY3Zdmu52DW3+qYZesE/PUtu4Ybo4fb0eAN36CqOxjY8J9kQdct2eTiuTMzNhWOQ=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
