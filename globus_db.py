@@ -237,12 +237,12 @@ class globus_db(object):
         return (connect_member_count == group_count)
 
     def add_group(self, project_file, group_parent=None,
-                  username=None):
+                  username=None, users=None, add_group_db=False):
         """
         Adding group to Globus Groups through the Nexus API
 
         Args:
-            project_file (string): Text file with project description
+            project_file (string): Paht to text file with project description
             group_parent (string): Optional parent group for group that
                                    is being added
             username (string): Optional user that is admin of the group
@@ -258,10 +258,17 @@ class globus_db(object):
         else:
             group_name = (".").join([group_parent, group_name])
         # Getting UUID to assign parenthood
-        group_parent_uuid = self.connect_db.get_group(
-            group_parent)["globus_uuid"]
-        nexus_client.create_group(group_name, description,
-                                  parent=group_parent_uuid)
+        if group_parent == "test_briedel":
+            group_parent_uuid = '94080092-84f0-11e6-a90c-22000ab80e73'
+        else:
+            group_parent_uuid = self.connect_db.get_group(
+                group_parent)["globus_uuid"]
+        globus_group = nexus_client.create_group(group_name,
+                                                 description,
+                                                 parent=group_parent_uuid).data
+        if add_group_db:
+            self.connect_db.add_group(globus_group)
+            self.connect_db.write_db()
 
     def parse_project_file(self, project_file):
         """
@@ -282,7 +289,7 @@ class globus_db(object):
                 # Finding the project name
                 if "Short Project Name" in line:
                     project_name = line.split(":")[-1].strip(" ").rstrip("\n")
-                # Making things HTML compliant - Replace \n to <br>
+                # Making things HTML compliant - Replace \n with <br>
                 line = line.replace("\n", "<br>")
                 lines.append(line)
         description = ("").join(lines)
