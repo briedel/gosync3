@@ -26,7 +26,7 @@ For creating and updating users the work flow is more complicated. First, GOSync
 
 ## Prerequisites
 
-GOSync3 requires two Python packages:
+GOSync3 requires at least Python 2.7 and Python packages:
 
 ```
 globus-sdk[jwt]>=1.0,<2.0
@@ -137,7 +137,7 @@ The clients can be authenticated using Globus Auth tokens or Globus Online Auth 
 
 Globus Auth tokens are OAuth2 tokens. OAuth2 gives the user and the authorization server the explicit power to reject or limit (either in time or scope) an application's access, to the user's information. It also moves large parts of the authentication process from the resource provider to an authentication provider, which allows for better separation between resources and authentication. For more details please visit [An introduction to OAuth2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2). 
 
-The Globus Auth tokens are split into three different types: Auth, Transfer, and Nexus. One will receive one, two, or all three, when a user authenticates against the app depending on an app's scopes, i.e. requested permissions. With the app created in the prequesities one will receive all three tokens. Auth tokens are meant for retrieving a user's information from Globus ID, i.e. linked identities, SSH keys, etc. Transfer tokens are for initiating Globus transfers on behalf of the user. Nexus tokens are for authorizing against the Globus Groups service to allow viewing a user's group membership. The Nexus tokens do not allow to view a user's Globus groups profile through a call to the user's Globus Nexus profile, i.e. the group-specific custom fields and the user identity, directly. This due to the Nexus group scope not having the permissions to view the user's GlobusID. This can be circumvented by through accessing the profile through the groups interface instead. I know... Please note that Nexus tokens are special. They are not officially available, one has to request access to the "group" scopes from Globus. 
+The Globus Auth tokens are split into three different types: Auth, Transfer, and Nexus. One will receive one, two, or all three, when a user authenticates against the app depending on an app's scopes, i.e. requested permissions. With the app created in the prerequisites one will receive all three tokens. Auth tokens are meant for retrieving a user's information from Globus ID, i.e. linked identities, SSH keys, etc. Transfer tokens are for initiating Globus transfers on behalf of the user. Nexus tokens are for authorizing against the Globus Groups service to allow viewing a user's group membership. The Nexus tokens do not allow to view a user's Globus groups profile through a call to the user's Globus Nexus profile, i.e. the group-specific custom fields and the user identity, directly. This due to the Nexus group scope not having the permissions to view the user's GlobusID. This can be circumvented by through accessing the profile through the groups interface instead. I know... Please note that Nexus tokens are special. They are not officially available, one has to request access to the "group" scopes from Globus. 
 
 Globus Auth tokens expire after some time, usually within 10 minutes, i.e. you as the application only have a limited amount of time to retrieve the desired information out of Globus. To be able to repeatedly authenticate with Globus Auth, one can request "refresh tokens". These tokens are valid until the user revokes an app's permission. These are required for GOSync3.
 
@@ -184,7 +184,7 @@ Project Description:
 
 From this the only required field is the "Short Project Name". The value will be used as the group name in Globus Groups. 
 
-`parse_project_file` parses the project file, determines the expected name of the group, and converts the plain text to HTML-formatted text. The project name is determined from the "Short Project Name" in the project file and the parent group. The format of the Globus Groups name is `<parent_group>.<shprt_project_name`. To make the text HTML-formatted, the only action is to converted newline characters (`\n`) to `<br>`.
+`parse_project_file` parses the project file, determines the expected name of the group, and converts the plain text to HTML-formatted text. The project name is determined from the "Short Project Name" in the project file and the parent group. The format of the Globus Groups name is `<parent_group>.<short_project_name`. To make the text HTML-formatted, the only action is to converted newline characters (`\n`) to `<br>`.
 
 ### Group Membership Methods
 
