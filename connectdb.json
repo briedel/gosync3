@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1014, 
+            "num_members": 1015, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -637,7 +637,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 779, 
+            "num_members": 781, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -777,7 +777,7 @@
         }, 
         "osg.Duke-QGP": {
             "gid": 9929, 
-            "num_members": 9, 
+            "num_members": 10, 
             "globus_uuid": "e9cd6ca8-b3ae-11e3-a41a-1231391ccf32"
         }, 
         "osg.EDFCHT": {
@@ -1502,7 +1502,7 @@
         }, 
         "osg.xenon1t": {
             "gid": 8812, 
-            "num_members": 79, 
+            "num_members": 80, 
             "globus_uuid": "dd27e2ea-5195-11e5-b638-22000aeb2621"
         }, 
         "osg.z2dqmc": {
@@ -1529,10 +1529,10 @@
             "gid": 100003, 
             "num_members": 10, 
             "globus_uuid": "8dac2ffa-4f9a-11e7-9964-22000b100078"
-        },
+        }, 
         "uchicago": {
             "gid": 9487, 
-            "num_members": 98, 
+            "num_members": 99, 
             "globus_uuid": "6e99ebfc-dc84-11e3-89cc-12313b077182"
         }, 
         "uchicago.RDCEP": {
@@ -2961,13 +2961,13 @@
             "comment": "Andrew Ruether", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "aruether@Andrews-MacBook-Air.local": {
-                    "type": "ssh-dss", 
-                    "key": "AAAAB3NzaC1kc3MAAACBAOT1Ui3JVCDXDmPf2U9/L0w3+Demo2UZJxaA+9AV+KbyzvM+ryhl7OBTWOINL9MVnk+bfW+uglu8pS2JMDMgTgcj8e57QU1n/7Yu4SmdKimxMZcCwcA7s2dFqFC8G+cU0P591DzSamI7eFazPpcknHViBUuY3TM7h7VCIErCDzmJAAAAFQCd4GAVJI73euyY7wTslZaumxglvwAAAIBcvedmHy+N0JhsTm2uxSpC7QLpL9n/OhL6NOBqPmRow5w8aI47EW6oFYM9lMiDE1OgW0jGrkjHqQUq02gqo3wAETeRxnhcNOWUsK6gY8uO3Rw8WJhW2LHLQq3S9bQNmSsLw8YwYrGodBmxh0hJzgdQ0fx4xFnLebMi5XUaGVUiVgAAAIEAgS/bzC0szxtdpb1p+YdOVTuHSO4Hk8E0ccWNDqbVZ5vtfba7w3YJhgKcLcHTpxm3C+lMWRJzCPE2Z+RS2xsxzOSAze1VQ65CEXFexLFsRWsNH0OxM7Id5IhJBr1mMf4ALfjZvyQ7lk6zZCmu2B884TV7Jl8Zyg1tkpyNGlHlMa4="
-                }, 
                 "aruethe2@swarthmore.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC44AWvjwnvJyyNfwe/kMSi63dUkoSkKhgyGuEFWGA7R8rGtHjwrNJ1xG4JMdLO4/rjIZ5tOzM57vEaQuG+p7lpk41cutu2E6Pr3sBw2mqvlht19xU3L2FBZE6IRAg4Ktt1QR1vDd2llZNTWDtHYQy8n3fUoSnJXYvePvxLO1oHWr7EXRG689JwJHGMRzFdLSrnBeb6IuqkyrUC3oaf9Ev2+t4ofzlHCdxdQg0ssQOCRSavX46dgUgemynJOHfD3b2GRF27Fpg3RpOhmccCr2mZEl/B3zSvH/6HHoVp8LHW0JYwaOLo1/yaRbfT5Sla72nWkRu16oZe8JVIqtVBbQYd"
+                }, 
+                "aruether@Andrews-MacBook-Air.local": {
+                    "type": "ssh-dss", 
+                    "key": "AAAAB3NzaC1kc3MAAACBAOT1Ui3JVCDXDmPf2U9/L0w3+Demo2UZJxaA+9AV+KbyzvM+ryhl7OBTWOINL9MVnk+bfW+uglu8pS2JMDMgTgcj8e57QU1n/7Yu4SmdKimxMZcCwcA7s2dFqFC8G+cU0P591DzSamI7eFazPpcknHViBUuY3TM7h7VCIErCDzmJAAAAFQCd4GAVJI73euyY7wTslZaumxglvwAAAIBcvedmHy+N0JhsTm2uxSpC7QLpL9n/OhL6NOBqPmRow5w8aI47EW6oFYM9lMiDE1OgW0jGrkjHqQUq02gqo3wAETeRxnhcNOWUsK6gY8uO3Rw8WJhW2LHLQq3S9bQNmSsLw8YwYrGodBmxh0hJzgdQ0fx4xFnLebMi5XUaGVUiVgAAAIEAgS/bzC0szxtdpb1p+YdOVTuHSO4Hk8E0ccWNDqbVZ5vtfba7w3YJhgKcLcHTpxm3C+lMWRJzCPE2Z+RS2xsxzOSAze1VQ65CEXFexLFsRWsNH0OxM7Id5IhJBr1mMf4ALfjZvyQ7lk6zZCmu2B884TV7Jl8Zyg1tkpyNGlHlMa4="
                 }
             }, 
             "connect_project": null, 
@@ -3441,6 +3441,10 @@
             "comment": "Boris Bauermeister", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "florian@florian-VirtualBox": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDgCHxykjxjKtznK43OL956sAQ56QG0btm+vTaDM/wNdbx2pD2hKBYSiafwV2TXEvBqM1fHOeadjtkTMvTIA8JIF3w4QutY7Q8Q2iNe/iDeFQqC2HjsW/PiSBPWBSsW75qwbp7dwiDuMPPDZmEAy1ivVsPfZgSmIX9JrE60EQGVP8sKbRZQwavnX1Zqi7sXM6qjETylNwtiCXLJV5CBBjhIquoiKK3mzRFsvTh5HMjAuIjI92capRIEP7oWdkQd5r77VsM3+cBwXsknq9BCIOeY3lio71reOHxSvxx12o3QJDROR6m/NlbNxGVDwBuUpFkrHxIidB2kCW4bvleOCiB5"
+                }, 
                 "koenig@roland2": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuQzXoSX5vRwhAhHi4VJfP/9HIIgjMRwlZBoJgrWhWGCwwl3YceOsMQSHathx6ui6QnADtRXit4IUfRzEQ/mHk4APWa9inVi7NrGEvcMsYnYQaDh02STpST4wMT0K7fKrZCeYr8ee0Mf/IsQM1yYQnO/mQ8FBXuMAwUGiviP58KLY4DWOxSXkdtIZrvPTqGQ6EMoUwQZxfJ6sfJTcJGBi48qOQ5eGB97V5LPuNIGuuAOp/TYcHYSChbOqbYCr6r3pZFhbDoXhu4t+zU/eGKDHamQEh8RvJiDERjelFNblN4TOtkX14k7+gOzL4an1lJnEe9ijKA0mwlvvRXuNPtf/Yw=="
@@ -3448,10 +3452,6 @@
                 "guillaume@ge": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA3+AaL0kU9wivyFQe+C0tLVSzC/gGNKNorLQXFAhpgqQEWuPfvZ//wqg/FE9cbc/h5jvf7IYEGL1AH8+KCh//xrjgrh8YjBfbWfZjMdEmglM8KBkWX3QoOf6kgs26bQpQoFaBrRmmiDDgC0eBPjERyIHXz1T0FKSpMgktPHe31APMCxz94ARn5YUgthS+09579QE0p3X8hgtGpSGw5Q1Uco8BjGwmisG91gFs4f9RcEj1rFGCe2qGdocrpJrhH5mn4r8q2xuCPFCm3yzoKJH3UlaAqN8fmig+eqg3Txtv2hVPSWGdYP11cNgDl68eGk2CDE7fkUO9o7FXmC2IRFTxIw=="
-                }, 
-                "florian@florian-VirtualBox": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDgCHxykjxjKtznK43OL956sAQ56QG0btm+vTaDM/wNdbx2pD2hKBYSiafwV2TXEvBqM1fHOeadjtkTMvTIA8JIF3w4QutY7Q8Q2iNe/iDeFQqC2HjsW/PiSBPWBSsW75qwbp7dwiDuMPPDZmEAy1ivVsPfZgSmIX9JrE60EQGVP8sKbRZQwavnX1Zqi7sXM6qjETylNwtiCXLJV5CBBjhIquoiKK3mzRFsvTh5HMjAuIjI92capRIEP7oWdkQd5r77VsM3+cBwXsknq9BCIOeY3lio71reOHxSvxx12o3QJDROR6m/NlbNxGVDwBuUpFkrHxIidB2kCW4bvleOCiB5"
                 }, 
                 "98bruenn@euler": {
                     "type": "ssh-rsa", 
@@ -7305,11 +7305,11 @@
             "comment": "Daipeng Yang", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "dyang@g.hmc.edu": {
+                "dyang18@soctt.grid.uchicago.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQC35G+p/Z8lDa/cW24+/k3lr53WxtPdMnqevbuPGp1Tho/RwAhtXdP6Xoo85JgIVq5CmecOd2+9DHvbC+a5UZKe69CH/QhFOqaeJ6YK5Ab/XSpFLrSTUUzTXEQoZPWMvx0Bzx12F0+bfBKcj2tbyj+7bHTgGoFlOnRg+s5H5Iw80Fs6c/ww8ptOTwDBs+buDHBNn1v1BExxoPJjxV/WtooDVTF/7MifIkFKhsxR7mol3hayrC14d1dHIlUyCcS+aAqRjCsKk0UutyremCfjuKuOokFjua30ZKFN3Aql+5ttZ+8U8tvKwe3wI/X/uXknDaGW8QBWItw8cZxjmp44k/TW0w2MUJpNRSyyEuPj5kZ7FpZ4qjiGR62w5pTM0ty9SUVuQHZiKG2P9f9kmcNMO+YWEtk8s4XF/FxAmHIzVU+P+nYW7iimAzgWHFgMPjwL6GbGPTK4JdfbtLv62pVqnWRLst2TcK6UBLhsuC/uFYQS7W9tu2J5vzAYesk79ROBK9ymvo2/M1XFwD/aMW1rHyJNIhOhGYsdypjzG4rgsO4ER/rZDDJvMUwyrpU8fMo2BKEYODbsJu/nmQJXNc+AaGk3C7UR7QVt5FQ2WMedtLoD3RkeXHl/L1W/iISy3UHFGvhwGvp9dLwiISqospzeYOgr96GR2fZJVcXEdqk9wStTNQ=="
                 }, 
-                "dyang18@soctt.grid.uchicago.edu": {
+                "dyang@g.hmc.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQC35G+p/Z8lDa/cW24+/k3lr53WxtPdMnqevbuPGp1Tho/RwAhtXdP6Xoo85JgIVq5CmecOd2+9DHvbC+a5UZKe69CH/QhFOqaeJ6YK5Ab/XSpFLrSTUUzTXEQoZPWMvx0Bzx12F0+bfBKcj2tbyj+7bHTgGoFlOnRg+s5H5Iw80Fs6c/ww8ptOTwDBs+buDHBNn1v1BExxoPJjxV/WtooDVTF/7MifIkFKhsxR7mol3hayrC14d1dHIlUyCcS+aAqRjCsKk0UutyremCfjuKuOokFjua30ZKFN3Aql+5ttZ+8U8tvKwe3wI/X/uXknDaGW8QBWItw8cZxjmp44k/TW0w2MUJpNRSyyEuPj5kZ7FpZ4qjiGR62w5pTM0ty9SUVuQHZiKG2P9f9kmcNMO+YWEtk8s4XF/FxAmHIzVU+P+nYW7iimAzgWHFgMPjwL6GbGPTK4JdfbtLv62pVqnWRLst2TcK6UBLhsuC/uFYQS7W9tu2J5vzAYesk79ROBK9ymvo2/M1XFwD/aMW1rHyJNIhOhGYsdypjzG4rgsO4ER/rZDDJvMUwyrpU8fMo2BKEYODbsJu/nmQJXNc+AaGk3C7UR7QVt5FQ2WMedtLoD3RkeXHl/L1W/iISy3UHFGvhwGvp9dLwiISqospzeYOgr96GR2fZJVcXEdqk9wStTNQ=="
                 }
@@ -8229,13 +8229,13 @@
             "comment": "Igor Filikhin", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "rsa-key-20170612": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAvWgF49xH4ZQ4eIo7iCyo4hPoO8dc9PjcFITPLN1Eepo31tcmppYQSopw77F+uKzpe0eTKVriRDcut9DUv9T1HsXNXsb8n7QDhvhduUqSbCCvBLauVYEMZNG25loXNWPyG1RQ1azJijZqx856pvkEgGqUNwzKUL+a/jWIA0hswY2RYU7SjwHRZW1Gz2j5BG3B5UI7gLtbmCc8gQxI2jUKvHjx7vyRfOxkKjxl1ZFpL+AKg1RqJqYNCnsnUXcDV+owGW8rIfxGvEIyOzJXf2VV6CnsLZkngcQU8Cn++5OqRQgtGn/hBkyJt4e5ISiWTCwHaskGVnePJ0AQcER3yfy+gw=="
-                }, 
                 "filikhin@localhost.localdomain": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDe21/NYPw+TxcbYCMMzQCrQpdLnyOZwgbKBqhvwcb4YXfxYuFgY60R2CdbBTn+/3hKYscWXsh8aW9BkTyI/E/JVKUB5mOcutiScgFkN3j0A803eAzJNg2ywkF30rAnLj9Obi2t8+FtHugb8AJkG8Dlj3DxGNybKTqYpp37QFlsobiklFBcDP5An7bFpqEinmRQzKThv4nwAmmlFo7h/icNz/+XGlj4tekSwPZw4ffNfzx/duuHU/9L35b4cO5rg4uIkyBm5VG5WgUkgQyzi/KzuQa2Ld636DRPkOdbaiQ8CVemUvL1dyud8T1+g8CU02mhIdliRVJ1EXVwLO3wZVdN"
+                }, 
+                "rsa-key-20170612": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAvWgF49xH4ZQ4eIo7iCyo4hPoO8dc9PjcFITPLN1Eepo31tcmppYQSopw77F+uKzpe0eTKVriRDcut9DUv9T1HsXNXsb8n7QDhvhduUqSbCCvBLauVYEMZNG25loXNWPyG1RQ1azJijZqx856pvkEgGqUNwzKUL+a/jWIA0hswY2RYU7SjwHRZW1Gz2j5BG3B5UI7gLtbmCc8gQxI2jUKvHjx7vyRfOxkKjxl1ZFpL+AKg1RqJqYNCnsnUXcDV+owGW8rIfxGvEIyOzJXf2VV6CnsLZkngcQU8Cn++5OqRQgtGn/hBkyJt4e5ISiWTCwHaskGVnePJ0AQcER3yfy+gw=="
                 }
             }, 
             "connect_project": null, 
@@ -11234,13 +11234,13 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC33Xboi96O+aWYT1vLJIbOBsgkS0LLNT6VSjD8MqTufua/yQZPef+IZdDiRFhPl4PcjcZYmZnk5bm6j70EP7v2Gw4t6SvC5/Stx9zJ5BwrjfxLPVg7RehYAx9omsAJaqh3oN86nY0gUGBzNBHWXdTFxUezb692EXQ3kneAN+azi3bJNxbfckiwmOkOkbrxsfqWldD2bTTm4Ul99FSL6o0rmIP42fxO6PJwapNoa51ZP7joE8MANQ7oL0ZLrUrTvICqIkEyFDbR08o7Eopiv5YVkwn481ggM1f1o5rbvwPkH1ONo74CipMOdkH0elqBMwa/IBOOM5gNgPAraqwmOWfN"
                 }, 
-                "jlstephen@uct2-kvm-head.mwt2.org": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDx3E1toufsOkXNt3BfRu7Sk4huN5J4A3qzln/dsHYgNLv3EpVBskHnbsPdmeJXVkjWtDwV3g9hpRqIdFo+EGgGSLZjughNAfqzDvHsipzaSYIWT01bl51XCL1FnBR7i2eSRUpKze0ioB9GRFegOjYkodcMXtJ8IVmGUV50AQ1K6bUMMchzlEk9VuWUUx26U5CuGxum+nAXZU3yvtDPoyp/iD06kmDWWyVEl4+zUM6XHeqNuF5QBLahOlZSwLxkrt8/6eXFAgLv97mLFD7EEvja4E9/8B1jpp8meawDtc3V0PAuKLidy2AQ1aLZ6WMfF0ns0OEGLknoxbGTqPIHdeFd"
-                }, 
                 "jlstephen@cereal-box": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDHx8q/Qkx4v6wosrAvD4psx1Amzz4rsoIJcxWB2ks9HP0IB2n8tR5Ighk4bw6OiDnlBm85b8MGb7E3G0aLEFSSDF9wL6ajW/D00RdUm1nt4CqgxVI3wtb2lLtDQtO4YzMxryEEW0TC4ocHp4p8USR2YRxyJGJiGu8SFbTeNm3OD9uUkn05TbrQu2bQYf2s7LYULmrHQ5hmlfjKfOVLUjZU5cJq5m+IeZmQr/S/TCKarDkotEFs0tME7Rw+35RzxeKLf1zxztEX5LiAN2HHdl8TwBZuEYjIAIe6yxi8e7w5tuCqlsJybZd38Js2xrIOpeihOvGcVz2tRg1eVZc/nWoL"
+                }, 
+                "jlstephen@uct2-kvm-head.mwt2.org": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDx3E1toufsOkXNt3BfRu7Sk4huN5J4A3qzln/dsHYgNLv3EpVBskHnbsPdmeJXVkjWtDwV3g9hpRqIdFo+EGgGSLZjughNAfqzDvHsipzaSYIWT01bl51XCL1FnBR7i2eSRUpKze0ioB9GRFegOjYkodcMXtJ8IVmGUV50AQ1K6bUMMchzlEk9VuWUUx26U5CuGxum+nAXZU3yvtDPoyp/iD06kmDWWyVEl4+zUM6XHeqNuF5QBLahOlZSwLxkrt8/6eXFAgLv97mLFD7EEvja4E9/8B1jpp8meawDtc3V0PAuKLidy2AQ1aLZ6WMfF0ns0OEGLknoxbGTqPIHdeFd"
                 }
             }, 
             "connect_project": null, 
@@ -11263,6 +11263,25 @@
             "condor_schedd": 3, 
             "email": "jlstephen@uchicago.edu", 
             "uid": 50884
+        }, 
+        "jmasbou": {
+            "comment": "Julien Masbou", 
+            "shell": "/bin/bash", 
+            "uid": 100017, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg.xenon1t", 
+            "gid": 1000, 
+            "condor_schedd": 3, 
+            "email": "masbou@rcc.uchicago.edu"
         }, 
         "jmyers10": {
             "comment": "John Myers", 
@@ -12575,21 +12594,21 @@
             "comment": "Karol Krizka", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "kkrizka@tiny101": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEArXgEE/YSFIjlCQIDJP68Fng2jsEZQjaTgZ4h0/HUjZLXzE+F2RLJwRRFS+Sn30y8sZ3buCGYeIQKH+L0FLvN/0kn3CM+/mIwBeH1+CGETsIliGjSO62ewk+ePsM6vtQ7RxVY7Z1NI+lz5vMuTXiUr9qd5Le/EiblbcIDiIAzVtHVLYFUPiTlHeEbsSgP1wA9dUPzz5Ge4sIBqYuur1FlvJTP5cjo+PsZkHuarbLabhR69U/zfd9w8ba01RJJiJVL7ZqozuYi9GnnGMT72UroIvriyUZfJqRIdQm2VxME+KSBsnf8sqqJJVUY+owCluYPMjFpsnmnXoNosLSDpZpP+Q=="
-                }, 
-                "kkrizka@0-27-e-33-88-53.dhcp.lbl.gov": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmaY4VL6SCGnrWjSelT+A099I4bhp1Tk4iGj/9WLxvB8xE3c/URkbxjaO3QIT/eyjK5KfZcLLY8BcVwshhaWPrqmLu+WLWkPSpySH2WNumZwf9/BMD34Acu/iIsOwtntv9vJYVqKyYAWCc8rA5HvS+ieklp/nZl5T8nme/eRDXDuAMYJzq66u+hyoWBSnZmgzN0mP/sH7W3dmqS42W8qFIU/Apu9LZF4jSgMh5KU9jkQ5EybpNmlPL95MW+bW2ovWxue1t+GVIpGSQNoI9wDnX+7YxEYmt82W1ehGzpE/gXhSs4Amwyy70kZuhnm0OHR5b58XJeIUKJic6Ic1cvLkz"
-                }, 
                 "kkrizka@uct3-s1.uchicago.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAz8WbbOuThH3ct8PSQCVFhXaKLlgCfZ+kXQp7dSy7GnbRIG3I08NBa+8rcYVLG3j0JO557WzsPYfRWN9rQzWpctQFcUpesV9Vjwjf0rZby3G4eglLd6ajLOakrhIbamos9V8Q4Dy/6NkzV3QL2CkcW7hlbuQBOz4YX6P9Cp7aqo8wNVAuvUNikb2SNj7BsywdsZvyOtOeO8ygw2FOBtGQ0fjq+WQlln0o5C3N2nPHc4E9nfSfQqzMK3lJKLQ87SQv/s1vqb2RLZ4XUDB5ciBd68WmvZhbAehAIEzIfmKS/7X8kjxyFGsvZ/YWsJH9qHCWL3TkR0xWUMbxFPc+KAcIMQ=="
                 }, 
+                "kkrizka@tiny101": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEArXgEE/YSFIjlCQIDJP68Fng2jsEZQjaTgZ4h0/HUjZLXzE+F2RLJwRRFS+Sn30y8sZ3buCGYeIQKH+L0FLvN/0kn3CM+/mIwBeH1+CGETsIliGjSO62ewk+ePsM6vtQ7RxVY7Z1NI+lz5vMuTXiUr9qd5Le/EiblbcIDiIAzVtHVLYFUPiTlHeEbsSgP1wA9dUPzz5Ge4sIBqYuur1FlvJTP5cjo+PsZkHuarbLabhR69U/zfd9w8ba01RJJiJVL7ZqozuYi9GnnGMT72UroIvriyUZfJqRIdQm2VxME+KSBsnf8sqqJJVUY+owCluYPMjFpsnmnXoNosLSDpZpP+Q=="
+                }, 
                 "kkrizka@roof": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDML/ALuVDSqI+Sq70ohKPzJXPFgJn4wdQeCYoHlm0sg4AAf8fSSOqskAvc442hjkLcXQVTxgSXRR1jqJT8o5uIiGYnoOHKtQHAr9guKccUrKjBzINLl77zwbwE65mSBWz3cqudK+FVeFzPv+1SNgvjEjxnnb4FEQu58Qggm6W5CVjvEn6KZbhWFyMRlB+MCCQO3dKRb26wYNm5RbLL/03wph+Aw6UIsWBmCj883UT4q2+LQ4tpHqOK63ggEvV70wB7hxKTQUGVr2EwXaqfWkIIiHXxMNJTMn/t3p+GrTfgQa3LwvziINBon64awcUhz41ZKfxWJLuQe2cV/0c+mCW3"
+                }, 
+                "kkrizka@0-27-e-33-88-53.dhcp.lbl.gov": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmaY4VL6SCGnrWjSelT+A099I4bhp1Tk4iGj/9WLxvB8xE3c/URkbxjaO3QIT/eyjK5KfZcLLY8BcVwshhaWPrqmLu+WLWkPSpySH2WNumZwf9/BMD34Acu/iIsOwtntv9vJYVqKyYAWCc8rA5HvS+ieklp/nZl5T8nme/eRDXDuAMYJzq66u+hyoWBSnZmgzN0mP/sH7W3dmqS42W8qFIU/Apu9LZF4jSgMh5KU9jkQ5EybpNmlPL95MW+bW2ovWxue1t+GVIpGSQNoI9wDnX+7YxEYmt82W1ehGzpE/gXhSs4Amwyy70kZuhnm0OHR5b58XJeIUKJic6Ic1cvLkz"
                 }
             }, 
             "connect_project": null, 
@@ -12860,13 +12879,13 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDOas3JeqHMAOfxAYtWCOUyACx1bUdgN299KGhvxpFpdMvhjqPQTCeuk4q1j9F/Pl+KVjK1ocvnP+cn6odC7d0KqeZvXj1leMHfPcBKy5TZN6c2exIQPEIq6f3wt3TmIuk3bG70Jdpi15xxn9iOwefqn8t1nsN8Bdeq7Wilw2qshWb1YAQKhPWJjCiVCU5Chy53OLDZZffRd59nu0NOIeyD7cLBXVdSXF1iUnNNVcCrONZjkjRAxxorj0adOQwqTikBFhfqe5gBFri8wTwOg92LJHs6ql9Lp/FhHi/bL1X2fd4kFj3GNhYfmiR0RW9tIgeBx73kVGC5tnIi8KTS7xaV"
                 }, 
-                "chard1key": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAIB/+0zob5R0BOvU91+Hws5kdvH7LOk+fHB4Q7GvuO4iQwncDGWNVOhEoWiCfAeSGGI4OkXbiNwEQcC4P4Xca6c+jkeOQDJIzPWKdO6bFbGwEiECq0ZWGv1OZMwcC6BPrVs2hIsTQn/RfKmsSXwl1W6vnOjPjadiKcEyhlspEBvVBQ=="
-                }, 
                 "kyle@dti-tbi.ci.uchicago.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAtpg8hWG0DuTPB5g6SjpZN2LCzMZf9MIplmGOMccWxDJLhNX/qPCp3l3Xdh1gxTYZFIPfXmDS1t13MKGCn7nBjmpf6bnByW1vJXg74bhwqk1HqRe/lphklnB5ku/1XNnXO4RpZA3OKFvpG9S5lz0Ju1wozGX6kYw7HkO3EKdTWcAM98npcv1Sv9lLFPxTi3pi6zDblGSm5dWzlorrErQYc3+c/9OZWz3RpafMHphaBHgJG3JitxKg01IGr6zRDi+Uwl4XBjG2VbkezSFIy7vix4LpdwOjzXLRpx9JmO8U0tJV8HPF9Lm0Z8Rh5QW8yZwnx3X+Rnb9fw4dxTO2LLcp8w=="
+                }, 
+                "chard1key": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAIB/+0zob5R0BOvU91+Hws5kdvH7LOk+fHB4Q7GvuO4iQwncDGWNVOhEoWiCfAeSGGI4OkXbiNwEQcC4P4Xca6c+jkeOQDJIzPWKdO6bFbGwEiECq0ZWGv1OZMwcC6BPrVs2hIsTQn/RfKmsSXwl1W6vnOjPjadiKcEyhlspEBvVBQ=="
                 }
             }, 
             "connect_project": null, 
@@ -13641,13 +13660,13 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDKIEcoYX9vRQXRlpMXfIhWSffV4zfkerikg5dNbJDriMmJJ2XfKXN+o6Ff4FssvGi7k3ilVLZyIIKXPNU1zgMFbbuE0FZjbAjUlIJLvCQFjcvQE6IXemLh03oNFdmnl8h4CMQrndzj6gAo8vId8U0HhM00hn/5TsB9R6KtJfsmo6VRiWM0fkNwCUwMVVNsiQmiK+rXbnA/BTaRXa3N0qUBDzGEavL3i5O854kwRbtkTaWnDh1mjZ8if6Na4yTPc9QcAEzuBvVA66HpU8taAYqCgJM1MJHVkmn9Kqv1peisb54d9lO/JZDYPnkYpEEGG6ZtLfD+Zinl9ABtiaZpiO4x2xxIC5qjKhPzPqTHNHW8NkwJySklZgCuOhNdfqxVZdpVrtN0EWbJkTMIdIedkHJXTwjopAMwKB3MKTxCKDf7Os1MwPGoSXNS1c8O7NAV0vK8rvfG3mzuKd2YBEXt6WqV7lnEIxytm8bcmCTHKFgx+wocyjdbsH9XoosbaRqQwzejlo1Famg7xns76JuKcziA42MmYpH9ecrqvyb5GDzpTq0uLEh8ZioLHerSKV5EDqZGmHh3zFMIwWe5+Spvizpq7JJ0HIiGm7UBJy5kFhZNEeeFkDntSa5yLQ6QdL3nr7epWxVfk2NbhH4WH1LoWutITwihh0YFrDvbghJrfI4P9w=="
                 }, 
-                "luehring@iuatlasmac03": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDdkpiwzNxIG4M2FSHaJeeESPcf0b44LCkwI3uC6ZBNkysuHbghFRysJ+XBARIQ78S+uyuGC+o7K/x9EXRsI2lx+gEmhDx2mqImDmog6ZeBvII2v8BGQ3PVHxo4ZUaSUWtOcIclXadWq6BPzT6F+IIr2V50g64mtt/0sloN1janGzPn9CadTB+Q8tfh9m2PGETvRWiTATDCB5iWLJz3yF0d9ZNRg2hJgbR6/D8RZV/feEni/0ZjRlo5xtpvA3ka2yFO2JqLy3ijKkx7dk+HVCx94ay4SjVlsuL97FROIOPhQ6Dj0rVrOIuVYvo92qye5xYIU/OqyOYIDCjCzsUM4enrF9GAuPsrcoYGYN63Dmj84MqphFs2qRyXA5pZlReHzLZkaNUIPl/mFD8GagUpzsRGiZLHnXfhuKsms0srDo7BdAtUSFDqfg1vo7onVMzs0wm4DJuuy5eO0F6L6uF8QgSgMMDuDRpj0N3iTh/OTpPrNVYQm4910a75AdoSz7JU4SjZw0vnSEs8dldSYZDHlvcOKp1jE1m6d6AllvZqzU/Uo4iz5fImWGUq9lMBTqaHBsMIg+1eyptKBiqtovMwVqMBm7EvuZXpH8dRpBa/SteJvXQIwnX4gFRJujaUVYfCh+w9Z7g8wCSliHWrsvm3WApd0ZGhzQiFLATLF4Pjb2/JTw=="
-                }, 
                 "luehring@donnas-imac": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQCvqpAY+CC//O9812w6c8MNTFCeaKvqh3mlSKBluNyuHfVT/6JpuTWEHmOcMutVFsF+jz8wVn+bFm/f8YPkDviK2CwC2/Sz+yHAbrW2hOrhDwz2he/I+xA5wXazZOaqWwKVKLjlS/gKa3nxdMsZmZPcJh5BsCpWgTOPKHTxSQ8CLXI8Q9iNw43UY700GHCNxvA9c+icJp4H2efhlClklBu764BGMMjyYN2pkpK9ZTEF3uu9mzu6iUp/huH1irmm25y7WqyTC89oyXkv6t4rZCN+bTHWvLGDcrAUm/kCIID94EhfjZwfkYATGVBjohUWwffNEB9s6+Phs9ttQlMFuxfHwqj9kFtOLY8epuqgyGu+YiAzkrMbL9G50zKHE/yb77r0zRGtBIvW+yHZEthNPj/maiCA6/1WBuswUbyKsI2TCmNbVNt4vJtu2vdxMZ3jAvRI6qJWRQjJ5+jQ75un0HMRf8XV9KZurON+GV74G22fgxl/8iVuZw8GbDMIh05B8WUZVfKX9el5iPmZW4U3p6ViVnOUFWL/2mx60L8tRDfuSIuL58vSJqdk6kJWdxhoNOoScogYGruSnjM1Gv6GGc4r9/YO9+QLRiR/lyf7POYsz3tZVtJ92HWqotEoEQ/OJjvTTzxLaMJXvqiOJGXRLGJjkMCoHdWCJrxsreTrjn+i+w=="
+                }, 
+                "luehring@iuatlasmac03": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDdkpiwzNxIG4M2FSHaJeeESPcf0b44LCkwI3uC6ZBNkysuHbghFRysJ+XBARIQ78S+uyuGC+o7K/x9EXRsI2lx+gEmhDx2mqImDmog6ZeBvII2v8BGQ3PVHxo4ZUaSUWtOcIclXadWq6BPzT6F+IIr2V50g64mtt/0sloN1janGzPn9CadTB+Q8tfh9m2PGETvRWiTATDCB5iWLJz3yF0d9ZNRg2hJgbR6/D8RZV/feEni/0ZjRlo5xtpvA3ka2yFO2JqLy3ijKkx7dk+HVCx94ay4SjVlsuL97FROIOPhQ6Dj0rVrOIuVYvo92qye5xYIU/OqyOYIDCjCzsUM4enrF9GAuPsrcoYGYN63Dmj84MqphFs2qRyXA5pZlReHzLZkaNUIPl/mFD8GagUpzsRGiZLHnXfhuKsms0srDo7BdAtUSFDqfg1vo7onVMzs0wm4DJuuy5eO0F6L6uF8QgSgMMDuDRpj0N3iTh/OTpPrNVYQm4910a75AdoSz7JU4SjZw0vnSEs8dldSYZDHlvcOKp1jE1m6d6AllvZqzU/Uo4iz5fImWGUq9lMBTqaHBsMIg+1eyptKBiqtovMwVqMBm7EvuZXpH8dRpBa/SteJvXQIwnX4gFRJujaUVYfCh+w9Z7g8wCSliHWrsvm3WApd0ZGhzQiFLATLF4Pjb2/JTw=="
                 }
             }, 
             "connect_project": null, 
@@ -16203,13 +16222,13 @@
             "comment": "Oana Carja", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "ovidiu@Ovidius-MacBook-Air.local": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC0MlkaQP/V8/Rvcp9AahzlrMOFYbisZcHXY0WhfbZ4HH34sCuPSNjpsBjSIGt/vJDKNXtowTzjxqhpCj5tvFe8mB206JYlOtQHx3z3iWoReh1PYthvdzTBGDU4XwbzGzXwI3Y5aSx6srAm1CATBDd6eq3Xs6tzH2O97zc9fOqAv6kB+oiXdHsOZuq3w+4FOS7mGYWpCJKBjUXCsjpILNBQj9bGljZkJFrjv7f9FveQTMCmfsWHPKE5zosHcdXh5nxy2pEY9y+udtUeW/IDPIh/cAGzF5oPLXqA6P4vAbfJx0QB9t1kXWO2QO3kRVyrQkSgxpNGsArmY2UOaBAPHrJr"
-                }, 
                 "carja@lsb084.wireless-pennnet.upenn.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDN/snZeEvi6Wc9FZ7X4RTZwgjv+IodFAdRM9XB0ZMhlP2JnRc/DEhSDTCgB1/k9oREgqT1mnsAOERDg8+UYZABa3HUU9juYRlgw8rJKTT/BFF3TWq04EViwni+56FVUnXuv/2OzkB8NlE8WYHO08EObEZJ5E7T0Mv1nCou03wvyPjqorveOJnwcVyZH4Ikm7CTcPa70cJzqPt4Mfa56fDIt6m2zIr38vNdvzZOCPVIwppmjR7IXFFReYmyzSJP86rysy7RDRYCxpwgTCxl12M3DxIlVt1gfWM6baWK56shSID9VX+BCqgbyK8qslN7Lm/P2qjjfBWfgTGPAG26FpBr"
+                }, 
+                "ovidiu@Ovidius-MacBook-Air.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC0MlkaQP/V8/Rvcp9AahzlrMOFYbisZcHXY0WhfbZ4HH34sCuPSNjpsBjSIGt/vJDKNXtowTzjxqhpCj5tvFe8mB206JYlOtQHx3z3iWoReh1PYthvdzTBGDU4XwbzGzXwI3Y5aSx6srAm1CATBDd6eq3Xs6tzH2O97zc9fOqAv6kB+oiXdHsOZuq3w+4FOS7mGYWpCJKBjUXCsjpILNBQj9bGljZkJFrjv7f9FveQTMCmfsWHPKE5zosHcdXh5nxy2pEY9y+udtUeW/IDPIh/cAGzF5oPLXqA6P4vAbfJx0QB9t1kXWO2QO3kRVyrQkSgxpNGsArmY2UOaBAPHrJr"
                 }, 
                 "oana.carja@gmail.com": {
                     "type": "ssh-rsa", 
@@ -16292,9 +16311,9 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC5a0MygGzhNTevdxSQghAc9I0b3IpCgK4p6oYDNnzfwBjpy+QjEg0idtaKGchjLvHkot28XE3JOlJnUCSxMtLcamCKlI69lv/hTXcNcbFcJxSLyjkylV48fzp9xn6AfrnzfHKVLxp2dNz4z9uB9Nk7FyFPh1OncRbtTtxaxApqAXsD8e4mjmriPUUa3FpLcWbwqY3+MgYlfD88fxn+seHBJTZ5xVVUDOlUYYI5wglAk4gjhDn1KBeiqPOIG4E8KMGn0UFG0Pji6OsOcLXnB6XUh3OyblIsDTpL0jKFgsrDWINq2LkvHHucczyOMoDOoxLDGd8D8EiCDpZhCUWiU5A7"
                 }, 
-                "tg825274@login1.stampede.tacc.utexas.edu": {
+                "olsona@login01.osgconnect.net": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDD38TOVomZhmA+RNbA55C1xU0bq7RdZCRQBHYw5bg97m4R4tudZvv6k7SDTybhLMXUVPvep5F8R4wX1i3gq7OOXW7tK4d+6da3NmV63Rf+mdt6PthcoazftiN1Yd6F/pkt3JN1acy3lb2lwPCn3XTPis/eqVlSxGgocwIrGuhVrp/LmZ1ECgXxeJe4Wy90X8It5RF9seln86u94cqcMMs4M0FJF39R20CxLBRN623NFKxw1foU4/dLm3jSpWu/mpUB5AXeclblsm4gdNb47wfY9hpW9g2/ylYFm96XsuhflH8DXw367pTuK3QHk7bFcp9wrst39Z3PJpKjMmjmMwIx"
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAv7rxbGaUh+SOldJTvYtWR/Lec2OLulqk8U+u0rzQXRXh+J6fvaNTzNgAMECyl9bJm2D3zlbyxpTt7xMUHEGDfMQAPjY7QIIZ0dFtoEUp8mvsjAKpBHMlBgRENHYUGStncm/1T1R1AIPodrBfbstAeHQmf3sL04yNlTAwdaJ/rUSjSpeHbaYIJPHa63PfhatncxoWPUecRYQLwNqafV4mQKSgznA+SwDT6bSuQEOORqMxk57AXqCvqPN9M+SbOJu0REpT/jcoEP/GXxgQvdOAs/c3oYS+7OLHU6HuammvsxP78G0u8pZV6imQZPT+R9pSfhgc04yg233tkemKQRSphw=="
                 }, 
                 "anna@merino": {
                     "type": "ssh-rsa", 
@@ -16304,9 +16323,9 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAyGWrphuXcyAHroXC3NdR224mmuuBdU5mbDXYHam0JQ3NnF4hSIAdmpWHy13mwnR2movId3D9iiUYWCPTMTZgvYkSlT7sxilpN2vlTYmk/1xnFammEU4RC+PWFzQc44adFrFWydg1FPQrfgN8f39QgMxKsccntGBz1WyqGyvMuNRjk9lNOCLp9baJT3oQqLY21CfC59m7aNPdX9VJTh89QQf7WcA21HbFXvOwMvMEHMf3udQ0+jJVHajeVlQI9Sopt6TMUu7Ji+sT3BLLG4Y5Z/+Im6lXBrhhDeqJ1w1PwjwPpokX/FhgALzq9BYWE9a+l9x+eQtb+dgnoG7JThnGYQ=="
                 }, 
-                "olsona@login01.osgconnect.net": {
+                "tg825274@login1.stampede.tacc.utexas.edu": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAv7rxbGaUh+SOldJTvYtWR/Lec2OLulqk8U+u0rzQXRXh+J6fvaNTzNgAMECyl9bJm2D3zlbyxpTt7xMUHEGDfMQAPjY7QIIZ0dFtoEUp8mvsjAKpBHMlBgRENHYUGStncm/1T1R1AIPodrBfbstAeHQmf3sL04yNlTAwdaJ/rUSjSpeHbaYIJPHa63PfhatncxoWPUecRYQLwNqafV4mQKSgznA+SwDT6bSuQEOORqMxk57AXqCvqPN9M+SbOJu0REpT/jcoEP/GXxgQvdOAs/c3oYS+7OLHU6HuammvsxP78G0u8pZV6imQZPT+R9pSfhgc04yg233tkemKQRSphw=="
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDD38TOVomZhmA+RNbA55C1xU0bq7RdZCRQBHYw5bg97m4R4tudZvv6k7SDTybhLMXUVPvep5F8R4wX1i3gq7OOXW7tK4d+6da3NmV63Rf+mdt6PthcoazftiN1Yd6F/pkt3JN1acy3lb2lwPCn3XTPis/eqVlSxGgocwIrGuhVrp/LmZ1ECgXxeJe4Wy90X8It5RF9seln86u94cqcMMs4M0FJF39R20CxLBRN623NFKxw1foU4/dLm3jSpWu/mpUB5AXeclblsm4gdNb47wfY9hpW9g2/ylYFm96XsuhflH8DXw367pTuK3QHk7bFcp9wrst39Z3PJpKjMmjmMwIx"
                 }
             }, 
             "connect_project": null, 
@@ -16347,13 +16366,13 @@
             "comment": "Othmane Rifki", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "othmanerifki@hepwl129.hep.anl.gov": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDe6c1y1S4TgR94LdQ4Hi3F1a1KVIvLJnLSI8yBAreSMFoNDCjL57nVoMoMZ9NvR9kzvhei4PQnooc2o70HIn1epv+2+zFzYOKzQGAKIgX0zHLXpm8x+x1kpySf0UAxgojUUb3Me/yDt/xY62sF2v7Fc8G6SogA0BBlXOmNOOp2WmOqh/tQyBAF6EBysRWYShEDHbcc830IBqfIBfG8Lkh76rj3SS+UxQA6ueI6QkidsD/IgSLWtSR/8vWMKWiOa17RCoySk9c3feG2TSrdXMI8AGxdb49EmwDoQ4oAy5jS6uY6SWM3DwtEd+xS3a9wVidOUw3i+sTOH/nBOrORc/Vl"
-                }, 
                 "orifki@atlas32.hep.anl.gov": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA19yO40sOWnr1BcGy55aCyOh9AfhHzKhvNqR+UBJIY9YxrbWZLoQDPYTy6BdDRbpgRKohvvAZD3OEsqAEu91aKucg9Rd2qdD+HrVbhJhDvwp7L6bVsGJ1Ac4TU4sAvTmbMhRyx+OohoknUqgFvwVf0pWScVjm9R2ocA0ymQdrxy0+hdXSbTAZoZeSgNBv5feEE4GQ8Zp8NIviipK0mjy+R/trKyxRw++4dY216ceACvpi4J9HNVH4L2PVXPhF1EE0q92SXof+lRQg0jHtlL62gjXJGAyGpfK78jK3xq6V192aTUtJUpvOLGS8VQh4c2cLEFFCxLVhswx/hdQ5wM5euw=="
+                }, 
+                "othmanerifki@hepwl129.hep.anl.gov": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDe6c1y1S4TgR94LdQ4Hi3F1a1KVIvLJnLSI8yBAreSMFoNDCjL57nVoMoMZ9NvR9kzvhei4PQnooc2o70HIn1epv+2+zFzYOKzQGAKIgX0zHLXpm8x+x1kpySf0UAxgojUUb3Me/yDt/xY62sF2v7Fc8G6SogA0BBlXOmNOOp2WmOqh/tQyBAF6EBysRWYShEDHbcc830IBqfIBfG8Lkh76rj3SS+UxQA6ueI6QkidsD/IgSLWtSR/8vWMKWiOa17RCoySk9c3feG2TSrdXMI8AGxdb49EmwDoQ4oAy5jS6uY6SWM3DwtEd+xS3a9wVidOUw3i+sTOH/nBOrORc/Vl"
                 }
             }, 
             "connect_project": null, 
@@ -16889,13 +16908,13 @@
             "comment": "Phillip Cansler", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "pc83@vmsrv01.lsrc.duke.edu": {
-                    "type": "ssh-dss", 
-                    "key": "AAAAB3NzaC1kc3MAAACBAPnt6UgEaxxJUVYHDJPo7nY0O54IvESmm31jgk2aQ3lbBi7k8b6v15hBzJ0qkL+Jq4z555xy4w709PfwG7mOPMhOrt1+zHiHtPLxUQgVEYC8317MRYvVP7Q2yUg8Aglc/t3AK+iccQYh7RmedPk5FvO2g89ERdmdvn9NfWczF9MBAAAAFQDkygd1NEkMqE2nHR0LUXicFwff4wAAAIBdbkFZHZl9P3RUsvvI8s6hXB6csXofOvzNzFNNzT00cTZVHjO2Ht8F+IBtk6LwQdb7p88FTWVtTC3pOrp2g41D7k/wTCrfpeGgXavvNqMyFUsh2mm0cnwGQ2TtEOeCFd3mdk5GPiYPDE0drmqGEYK/NcT3QRaSV+zrorVu/35o3AAAAIAkJ1DxFEBz8PxZZi/Tt/ABXinIfe4b8ccdPlEHcACwKCYOCRQTDFGG/qSa2okbCIqKE3AepFV9sP9Wq4xAAwZxgbwV0P/t/3yBjXF8V2hvfskpvXnmnJ1NhqG6HUpASynof6OPO89CK5EtxJ+S+VZ5WJWz71D0Ex8UpCuvTW5wLQ=="
-                }, 
                 "pc83@CHGV-PC83-M.local": {
                     "type": "ssh-dss", 
                     "key": "AAAAB3NzaC1kc3MAAACBALPNHQ/FbGl0mioDxfRsXA01wq7KVoL2aBK2BLXyrMDH2C3jqeWdvmXq2bKGRh5+VAZnKGt7jl3W5hiC+T1L3n1iPiTxr1VYdTEbjW4SaULuNUon/ogz0xRKz+HlX8UJwTGbQrQsqRSXr48dFvLCmPTYQHynNCC8y31BxXLqjAVlAAAAFQDTxAoJoD+eK6CcGdSk1C+m61214QAAAIEAlL7ITWgjkBpRgL9Ycwv5Fcsh5EjVjqPOHMW6A0leeIlz4Gsk1tiefEVHQWu3S9Gqxe6Oh2YnwJ2I1wmPo+UH7GtHhKehIA65U72HF349PFPQa2P5OugedPg+dsL541LX/4NjTM3rf+i2oY4iGt3NIck/duebwVCSIlTDCAGCDJkAAACAagT2ABTZusxb+3VYpy9XR29r6vwNferuJDF2TvK/J829g3aR+GoDDQGVI2YKf2fzll/+cW4v7sRBWV+tJGXHTHcyMDJ2VSW3jFCcZU6RagmwJY4KTZJh4FqL9iwpaF/N3LwKWF+3TJj5D4VE+JPpZZMcBu843sXEzpGEocYnzwU="
+                }, 
+                "pc83@vmsrv01.lsrc.duke.edu": {
+                    "type": "ssh-dss", 
+                    "key": "AAAAB3NzaC1kc3MAAACBAPnt6UgEaxxJUVYHDJPo7nY0O54IvESmm31jgk2aQ3lbBi7k8b6v15hBzJ0qkL+Jq4z555xy4w709PfwG7mOPMhOrt1+zHiHtPLxUQgVEYC8317MRYvVP7Q2yUg8Aglc/t3AK+iccQYh7RmedPk5FvO2g89ERdmdvn9NfWczF9MBAAAAFQDkygd1NEkMqE2nHR0LUXicFwff4wAAAIBdbkFZHZl9P3RUsvvI8s6hXB6csXofOvzNzFNNzT00cTZVHjO2Ht8F+IBtk6LwQdb7p88FTWVtTC3pOrp2g41D7k/wTCrfpeGgXavvNqMyFUsh2mm0cnwGQ2TtEOeCFd3mdk5GPiYPDE0drmqGEYK/NcT3QRaSV+zrorVu/35o3AAAAIAkJ1DxFEBz8PxZZi/Tt/ABXinIfe4b8ccdPlEHcACwKCYOCRQTDFGG/qSa2okbCIqKE3AepFV9sP9Wq4xAAwZxgbwV0P/t/3yBjXF8V2hvfskpvXnmnJ1NhqG6HUpASynof6OPO89CK5EtxJ+S+VZ5WJWz71D0Ex8UpCuvTW5wLQ=="
                 }
             }, 
             "connect_project": null, 
@@ -17441,13 +17460,13 @@
             "comment": "Prasad Maddumage", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "hemantha@parakum": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuntQM9UNggj/KW02ZPFMONl19ehNUjs9XIqbggweD3Vpmuhjv2yx2KJuCYGToqKa6pVglP+E4z0znUd46KUYvVANpxIDBtGDCBXaZpMgq3Br2NGfNv526lDf+l577N+SXsoDig5qChhRcbdE0FSA301L7KL9FMK+FLuQT2aGbx05hi7tR7xcw4gyuRziJs6/VrwKHqiVOtS+toVegcBEnP2ggYEGxnvemzCk/ibFSsqOkWOMEBqzfQgYV7eTV9B8TKk/ki5bd6infngcAGlmdjqBWrDzV5odAUQ1FMqIS1Z8mUnybOXPasES2RGdLzoqT8um9KZuuNP4vCJZ15ALMw=="
-                }, 
                 "prasad@prasad": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDHdv7S4Rhfkqm8sRROxS6gjJ2F1ktAAtnAO2JbaORDf1BnEn3hGSls+F8RHkaThh3QPbO4Kk8WiYxBJ+ff9wCjd12oMUn4tT7DnaUJZSg64vaXiUof4a4iJtpxmKti2iupsZ8WFmh7DKKdUaRRxcFUeBP5DNEPmJd3eQPBjxl/vqidJ9LKEuuo5WeCdk6bT1YJsnNgejwo8RTVltvuc9WVHN9V4TBTe7i0xlZCY//HGLpXG1BWsyFU+ouhEyk+wcQVUWVYwHHimScaiYp9NwX8fr/UqAALoTPy5FCvK0fdcrkEcYvPbp1iy+V5Grpfb1pZcqrN+8fliYVnMGZtLk9P"
+                }, 
+                "hemantha@parakum": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuntQM9UNggj/KW02ZPFMONl19ehNUjs9XIqbggweD3Vpmuhjv2yx2KJuCYGToqKa6pVglP+E4z0znUd46KUYvVANpxIDBtGDCBXaZpMgq3Br2NGfNv526lDf+l577N+SXsoDig5qChhRcbdE0FSA301L7KL9FMK+FLuQT2aGbx05hi7tR7xcw4gyuRziJs6/VrwKHqiVOtS+toVegcBEnP2ggYEGxnvemzCk/ibFSsqOkWOMEBqzfQgYV7eTV9B8TKk/ki5bd6infngcAGlmdjqBWrDzV5odAUQ1FMqIS1Z8mUnybOXPasES2RGdLzoqT8um9KZuuNP4vCJZ15ALMw=="
                 }
             }, 
             "connect_project": null, 
@@ -18638,13 +18657,13 @@
             "comment": "Mats Rynge", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "rynge@login01.osgconnect.net": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAsz98NMTlBBxh96xu04oCuaLAiqyPQ0VXWbabr2R0LDveGBPNG+A7SNQKTgoIwBbRolT40JqCJ/zjJPOjRgk2n7IdghyzBwqJ3kaz34YnWHssGsK54R9yXUt2leExgbMhSIeG8r1WtDrIv4MjTFMs/jhp9x9oNUTFzZ4EQfdyuXvTEosFw/VOcnEe15k7/er40fOHGMMq0fALuHptIpPxd8lgMjVqOIb7KRPHhkQn4BDmXJ0udk+sO8mYpbPKzpNhTdoFUsENz/73BrC4SMkI910r8elvf/wYt6iXs3F8l1027LhPQCwo1/x8kArnnCVB7PeupZOnAyUcsadJQAcT3w=="
-                }, 
                 "rynge@fenrir": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQC3e1TSFh19+nWBOoSmOnbzgjsYhxdM4ONfuDCJQubkt/WLOstkzCLGozCAKQ4SubkBWbwBi70gfGA2K9am8wnXX+//77LuJUN2mQWOKnGo0mwhnygRIWfFEZaEGwsBa0pDXxty5J9SDX3YGEcFWUSJefSQhnpzt76jj+0M4k2sgOuydHi6hKoHDyb0qkRujlUnqnenbxz3pnyzncFqL5yyu8F1YtHEMQz86B0UPGqmdYwS6dK1uUPgrI6D3MmOfJoVyhefJoCLRDiNi6jKWTwQskAPHHLw0vyo+UGDzA6knCPdpd9jWWR3REX5Mj39d5nKj/Fo9YU9F01I2R8uZorTfCTnHhN/32puvnjjJp+BvpbR+nB4ir2umxl6DLPp7ZhdV782KdpGfTMKmYAreGKiAbAWg5hqHrPTdZFS1of7pJMV/Fx45+Zpa1XeP8VaaVd4dmbK1jsFQHNNYjyjy8u2fbOsEbbC6hARryoO0DVak5BwEqZZIkWhgh3fb5CKGrDLPBAKI5qphBPT0206urE4zOU+XqSFyuICPAAlS8XtBBtIENN3N4n5WX6wiK58prx9uSyJx+1cdUtr9uw65c26UXtfO8a5VcKvlMPFMCoBdCNZxYsf1J2aH5/MOA5DyH0f/3qlusMoA0vQ8hQp7U5FfVXTO2c9ApXctF78TJ+eTQ=="
+                }, 
+                "rynge@login01.osgconnect.net": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAsz98NMTlBBxh96xu04oCuaLAiqyPQ0VXWbabr2R0LDveGBPNG+A7SNQKTgoIwBbRolT40JqCJ/zjJPOjRgk2n7IdghyzBwqJ3kaz34YnWHssGsK54R9yXUt2leExgbMhSIeG8r1WtDrIv4MjTFMs/jhp9x9oNUTFzZ4EQfdyuXvTEosFw/VOcnEe15k7/er40fOHGMMq0fALuHptIpPxd8lgMjVqOIb7KRPHhkQn4BDmXJ0udk+sO8mYpbPKzpNhTdoFUsENz/73BrC4SMkI910r8elvf/wYt6iXs3F8l1027LhPQCwo1/x8kArnnCVB7PeupZOnAyUcsadJQAcT3w=="
                 }
             }, 
             "connect_project": null, 
@@ -20017,13 +20036,13 @@
             "comment": "Shawn Sivy", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "ssivy@NTSC02H32WBDV7N.local": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmhCtf4EfWh9tdrBJdd6v1J7FVqpd5hSsUmZXk1cKJY/gsTKJ58+8JsY8SluZuT1a7q/PIhYbXSpuy9XI9emP/ORKzkXHSAFbekLtdexSi73/8UUD+zrJymfxfnkuyltjvxN5WXqiIxpUx/6B7Ak6R+Pe0NcJybN+CN89Mh2wBxAq1bWYp9ut15uKiDHQfzXtpbL/dDPAmumAsbex1FwrV3PSNVvSOdTo2AG4sT5+fuB8IGAkEYD/muBq+ER99iCf3M6arnZPKPiZ30XloudHdWmudeIZ3X/cy429rXKl+7709McBCbGVzWt5UiQyFYvYzq1WA03Dm0/z6sKwtIs+D"
-                }, 
                 "ssivy@TCNJ.EDU": {
                     "type": "ssh-dss", 
                     "key": "AAAAB3NzaC1kc3MAAACBAPLwUL9C5I0d4iEqtbr/krvcNrPTFGfj9icr8fjkZKT+Pw2alDiUzRvN9dg5ecQzc8XUHa7B0aqiG/EUu1osp7TabdmHcZBVpZcEgaHTtuM+JR7cMepg9OsgVHREy9lyIhFzEYFvQhzXyDX61BPbIwGRbJxQYa0Sj9BdtO1pkpQVAAAAFQDSJLGXSWa7NEax7gpBq7S9rY/eVwAAAIAnAgVfz3CGeEBQ8B86DRxOkdu3WQXDguj40s2I0c/t577p3kc3MXL/EWCuD1uAjcMb/MkVbXifA2Ma/8LZUl7cwvhgRiry/DyYrMwm0NKqwnwsAooJ38h3AoA0ChzvrR/DBR2pUsGFrjbo/IgQisnqpC9jHT5v/n5xwJKFJ5TOBgAAAIEAmG1r1FN5UVjgDZWenEBIjg2VpIYsvb9pgCEFvikJJRxMl5IgLPpLyMss9UL9uSI0TXfq6rMy+JOVQKWGIRdv59xpZ67AzFf7/OMaEwDAFsXBJq2qfbl3WAruqg9kOz4G0cs+YHSGRFwqhyG0moRl5J+iuQMwRGmY2SGYpM1H1VA="
+                }, 
+                "ssivy@NTSC02H32WBDV7N.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmhCtf4EfWh9tdrBJdd6v1J7FVqpd5hSsUmZXk1cKJY/gsTKJ58+8JsY8SluZuT1a7q/PIhYbXSpuy9XI9emP/ORKzkXHSAFbekLtdexSi73/8UUD+zrJymfxfnkuyltjvxN5WXqiIxpUx/6B7Ak6R+Pe0NcJybN+CN89Mh2wBxAq1bWYp9ut15uKiDHQfzXtpbL/dDPAmumAsbex1FwrV3PSNVvSOdTo2AG4sT5+fuB8IGAkEYD/muBq+ER99iCf3M6arnZPKPiZ30XloudHdWmudeIZ3X/cy429rXKl+7709McBCbGVzWt5UiQyFYvYzq1WA03Dm0/z6sKwtIs+D"
                 }
             }, 
             "connect_project": null, 
@@ -20382,13 +20401,13 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEApW9//fbefkscDRej/XspAeyNytFAXMlfZJg08GzHKm+Oi2p33+IWsECOFMR1xGaXdRBmVqK6Lp15s5hQ8cqQtR6WdHEmIru4a4KfCYVIvH8xSHAVcYa/rS2z+XyuPszZGCCpNFweYy8EAZy7WEHgF2dYSYL73yhR7Ty8NVEp688ex78XZaTOMVj9GxFd8TRMer+ZQq+izIDqp0Y9IkZPkf3EJYrxDM7SAgPkiTPm8sF5HF06yzes/zPoqDPIfHVFowiQGb6b+kG240b9zzPkurkhxzMJ5cuaFufriuXJuLVO6bgnjcDhI1UflaMqA59UUK63WmktAG4xdoXjqA5CCQ=="
                 }, 
-                "tbanderson@taylor-linux": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQD2DAlWi6Td2RXKAx6oWcaUx7RuH2D08vrATMlr+b18ZqsS9OonJGwMJFSK88viYjUWn+iLjjm/fszXaMdG+anTKCbzxYv+f0+RWhQBsl9/Mm9l95+o2Rj+6UBQVR5Zcc5Ofm48RkP+l54IzowcvxFDK4FrVNuCxrvaoFzunA7MQxvVaQ3heZniVsPGii3fKD2ui5Zdtx2MdjizE4IudCSdzkibjAumDb2ykqcZ2wUJQ4JX5gtCMZEHCz9aNgt/a2ULduiQ24wm17Id4LoHMtjN1966ujcddFaErkns2wSjzA80W8iJkY3fH3JBVipfuCxYrKpxzrZos9CXENHw5GdR"
-                }, 
                 "tbanderson@taylor-mac.local": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCboOAQCmnngO7evb29kZuQFSwEWCZIKR5GoDz+viXiM56qJE2WxBXcfw1/h6w4Emwhvt0PTRrVrXogMLflM5/ZrP6Xci/omzksNedZMuH6JlqdMyWuBM0BuS0NFzblptQee+6OCKVN7gqMuvnc+DAr9jQKEkHD6wSkla5ZVswU9WhKy8RCD8rwToqpT9cJqbOSsTJsjLuGax0lPI+pEsQ4YQguyIhVhSnxLT/389RmC9drkRsgdPygMPRfYoxt4edKfShzHyDfq9Znz3LGHbi9v1yN12fh7UWrViTeQ1t9TPTpQb34sSDQb5NzGaU95kKuXi/t2pWo5qooyUfPXYJJ"
+                }, 
+                "tbanderson@taylor-linux": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQD2DAlWi6Td2RXKAx6oWcaUx7RuH2D08vrATMlr+b18ZqsS9OonJGwMJFSK88viYjUWn+iLjjm/fszXaMdG+anTKCbzxYv+f0+RWhQBsl9/Mm9l95+o2Rj+6UBQVR5Zcc5Ofm48RkP+l54IzowcvxFDK4FrVNuCxrvaoFzunA7MQxvVaQ3heZniVsPGii3fKD2ui5Zdtx2MdjizE4IudCSdzkibjAumDb2ykqcZ2wUJQ4JX5gtCMZEHCz9aNgt/a2ULduiQ24wm17Id4LoHMtjN1966ujcddFaErkns2wSjzA80W8iJkY3fH3JBVipfuCxYrKpxzrZos9CXENHw5GdR"
                 }
             }, 
             "connect_project": null, 
@@ -21161,13 +21180,13 @@
             "comment": "Nick Tyler", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "tylern@Nicholass-MBP.sc.rr.com": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDDNaDTkafwX3FlpF55OH10Q7yecQNQnn0aKfODdY3QPCOIkbFqlko1fXZjsrcizDm/ZW4K2oo5y4lxRVZrrCFSvv7A0Mfe12AVqcZ2+U2tGnzXyDoK8E0gEUkt/rp4FJHLSrB9WGEhvkCepwJz7vScBMv9SnEK+kOb8EBpwIY4/hiNrGeFS9PKSze/jtTF4siZ9okWpCgXDvTlKZ0DtQTCehu/Pfv34qb6jWNbEz+4N9l8Y4+8W1AMug3+NSbczM5nHM4ilrx2O3aLyeMs+riNH89HWbuviQOpvE53hct4D1YqoM+45teEjRnWzEGA1yUV3yXDAXFGopLOSy6FSTNf"
-                }, 
                 "tylern@workstation": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCi+VU83uM4fcd1t3fcE/2Lao7hG37GEvRcRJuhRMdgCyrnI7pbS7ROmNlvtm98qUtmChHtn0CKksPQm2qqlcopMSR+PG2xj77fqkwFlxGHaZzmmDACgx4P8Rx5gWQe91uJ5mk0VYsZ3VpVBCLRobcDsF29VV/Bwgk913bxiUizSeWt4Cq0A4/+jak97gkO4vnstJ+OrchVyknUEQOcPf+ZUSxLlWEhiiXIw1e29fXnWzFE8PN0yf8zCAoHd+sesGrh9Z+pt11Odsou1hOzN31vgSDgdH+9Ic5At0rCBtNuNnOM+NJ5CSc+pM/kV1UuWAsUQYwozujxgotxN8Z27B5j"
+                }, 
+                "tylern@Nicholass-MBP.sc.rr.com": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDDNaDTkafwX3FlpF55OH10Q7yecQNQnn0aKfODdY3QPCOIkbFqlko1fXZjsrcizDm/ZW4K2oo5y4lxRVZrrCFSvv7A0Mfe12AVqcZ2+U2tGnzXyDoK8E0gEUkt/rp4FJHLSrB9WGEhvkCepwJz7vScBMv9SnEK+kOb8EBpwIY4/hiNrGeFS9PKSze/jtTF4siZ9okWpCgXDvTlKZ0DtQTCehu/Pfv34qb6jWNbEz+4N9l8Y4+8W1AMug3+NSbczM5nHM4ilrx2O3aLyeMs+riNH89HWbuviQOpvE53hct4D1YqoM+45teEjRnWzEGA1yUV3yXDAXFGopLOSy6FSTNf"
                 }
             }, 
             "connect_project": null, 
@@ -21256,13 +21275,13 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAtL/zTEBJwuxSFYsJl2dsbKaThcCRRbr1azDpeHkrMH/M/6lesd1M7F8wM+vW0xe0vAiYQlAyN2XegczTlJ3qqPq6/2JjkqNV9CK4N+TbaYmO6BQbyjShY2ioUUxt/S9zZuzsGeOHA7qTnP+srlHSiQYfILSS+SOIzCHS5dwUe+mVxfb/vdgQvhrFAhmntS1Bic+MZOlBaHLrcdSe1+/giKWTYAeLpykZdzRZRzNgLqV//PgEp90q8YsvMM8PwlHXbuax3INa9cwC2j50nlQvHRZOruCrXT/jjq/Wz/c54srPSXDYAS0h8g+TSz3buirpIS9W/JiB7p5nnB6AMRO6zw=="
                 }, 
-                "uschille@darwin": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDWs7ljT6OBpy8gSTcEvHCqdHtkCe2KiuPfddUbDike1AOD5xU5loJR1530fZfj/8BSaPkvQPrwozvRccPS04hYU/e1+ORpRXt3+Pyq8DtN/ys/9owjAXKAwkfokugZ5nMFhYDbWuXFofUA6tou6oAToq1mhZxKzL9/3FAsc2xD5y0CwONYj1S3eYCuVdRduwIac98G/imOzYrd0i09IjBy8iPeV1YU/p0OWBFTkxK4IpSr5uhzz35aTxVyxQ1IgOLTeD6n5QHfxrUKjaPbG6sgSPa63lj40QdzVwP3VyYsipFtvcogWafl5f5FuKV6n1K56xJO1dHp49WhjiDq9wG/"
-                }, 
                 "uschill@mse01": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCxIJqNZ+s2QTz8gsCESWatb7F6rFXItQYq/J5mBe5ayLdGrcjcmJiLYrakf7inF5+GIe7HLOhHk5+EX8jk4UqtdUjlDTyfoBSBR4Y/gSvQQzm81BWlODaJvYfhewkZn1txwluLF/U+QMKPokspx+xL2Rr+5HLv5qBKu5nABs1/V+WAF0YG4TAmloTtN/GU/vwJbsn53O7iUm0EX2Vglw86wsSfNcf9Fd1fGqPOEyLcgaGr9hkV/matgD8hcoP7xBtGxRJZJY9G/sAEACh8IpaQmdq3VWmc+N1jR08fNZYN132XJUAx/6cPFH/j5ud+icOXN3CgE4buNLqVfYQtPaFr"
+                }, 
+                "uschille@darwin": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDWs7ljT6OBpy8gSTcEvHCqdHtkCe2KiuPfddUbDike1AOD5xU5loJR1530fZfj/8BSaPkvQPrwozvRccPS04hYU/e1+ORpRXt3+Pyq8DtN/ys/9owjAXKAwkfokugZ5nMFhYDbWuXFofUA6tou6oAToq1mhZxKzL9/3FAsc2xD5y0CwONYj1S3eYCuVdRduwIac98G/imOzYrd0i09IjBy8iPeV1YU/p0OWBFTkxK4IpSr5uhzz35aTxVyxQ1IgOLTeD6n5QHfxrUKjaPbG6sgSPa63lj40QdzVwP3VyYsipFtvcogWafl5f5FuKV6n1K56xJO1dHp49WhjiDq9wG/"
                 }
             }, 
             "connect_project": null, 
@@ -22091,13 +22110,13 @@
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAq7/Lf7LOb+FfLNWBNnkGDItY8zovpNYA17VvG71L2sCbjqvdNEAGrPAsDBfUzeX2AaYE/+kIpPftLwrSS0M3NUr+bvtMLYf/ujF8vwLU+XdfeI+rKOMRD+dyx6gc1rJHMB71bT0ZuSPV4kwldO2Y5i6R2c9db79BKOjxJupIfnJCcOiquQb0YKlTWzROiO9fStknQUqIEKWp3b03HsXfJ3oFlX3ZycOBddAAZZbyTgXgmyciTATOnx6PNwaR7uphWNsYhxWOauAJsxa+a17hGm0mdrTYr73EFIb+bSQfIteGmHa/zjdVpCfOjpaLuR2P7Px7XYgfKRiXDvaY4OqCPQ=="
                 }, 
-                "rsa-key-20170606": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAk9MQM0/DcFPDMrA19xQPvksiObp7JGYjcj8QdGOlPXggqZmRA4D7vZSZPYkkctKzyW2l5aAhiO6Z9i3qp/yAtyCRfF4iae8VcLWPobSdd6WUj8aZvI4UCNt6SczUBi9Sq8LBdjFXCFBCEy9pb8b7KZkGJt3AknKB1oyKJBKufFIDyj5WoJvzXbB3SJn4jGljFZ9/BpSqWWPKgY42cpZXw2A2xz4wXKtSn7FLgYaVXCagjxwYVL+L85YO6UZhWEyhumvWZPSCJbVyMETziP/Y6FGLQXrVkWhLW+T8BCV9doAlZErlic8vMTZb1iVydv0XWtrNqkaZ7OADaTNjcvAGmw=="
-                }, 
                 "wpoehlm@user001": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA052uqp+cotU4A5o+MWOGVs0A/CjqZ1f86nonu2L0lv0yxJpWqj4soEdMHf/SZOaSRiftqWUYcJtHomz6fCWetu03vrj+veqvy37cL/hJe0lLd7YO7dh+B3b2/FCLV5yuE26tOhSvL9oL9kjaNp2g9V1AJQx30DA7Qn3zdKUyosXxrkZZgXXf7CG95r8lK62QuCBLFZYFcm4afKtcKQArnBJDOQUX+cfrvZ6NVMAxunWmFvBsAatLFcOyCBi7qe4C+B3a5VzG5cRUEv/vRBWDKdRcqvDlDfDJ5wxC7mVuvvbWnVc5UI5NJeqLRroZfH1ZCTCMvqGOKs1iR0oal2o3zQ=="
+                }, 
+                "rsa-key-20170606": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAk9MQM0/DcFPDMrA19xQPvksiObp7JGYjcj8QdGOlPXggqZmRA4D7vZSZPYkkctKzyW2l5aAhiO6Z9i3qp/yAtyCRfF4iae8VcLWPobSdd6WUj8aZvI4UCNt6SczUBi9Sq8LBdjFXCFBCEy9pb8b7KZkGJt3AknKB1oyKJBKufFIDyj5WoJvzXbB3SJn4jGljFZ9/BpSqWWPKgY42cpZXw2A2xz4wXKtSn7FLgYaVXCagjxwYVL+L85YO6UZhWEyhumvWZPSCJbVyMETziP/Y6FGLQXrVkWhLW+T8BCV9doAlZErlic8vMTZb1iVydv0XWtrNqkaZ7OADaTNjcvAGmw=="
                 }
             }, 
             "connect_project": null, 
@@ -22735,7 +22754,9 @@
                 "duke", 
                 "duke.SWC-Duke15", 
                 "duke.campus", 
-                "connect"
+                "connect", 
+                "osg", 
+                "osg.Duke-QGP"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 3, 
