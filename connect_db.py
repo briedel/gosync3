@@ -49,7 +49,7 @@ class connect_db_json(object):
         """
         Write out json file
         """
-        self.commit_old_version()
+        # self.commit_old_version()
         self.users = collections.OrderedDict(sorted(self.users.items()))
         self.groups = collections.OrderedDict(sorted(self.groups.items()))
         self.db = {"accounts::users": self.users,
