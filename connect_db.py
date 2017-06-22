@@ -230,6 +230,15 @@ class connect_db_json(object):
         }
         self.uids.append(new_uid)
 
+    def set_user_nologin(self, user):
+        """
+        Setting a user's shell to nologin. Used to "remove" a user
+
+        Args:
+            user (dict): user information from Globus, pre-formatted
+        """
+        self.users[user["username"]]["shell"] = "/sbin/nologin"
+
     def update_user(self, user):
         """
         Updating user information, i.e. email, SSH key, group membership

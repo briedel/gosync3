@@ -251,6 +251,7 @@ Some of the methods in this class are self-explanatory:
 * `remove_unicode`: Remove unicode characters from a user's name. This can cause problems when generating a passwd file or trying to serialize a JSON file.
 * `commit_old_version`: In the spirit of old GOSync, we commit the JSON file to Gitlab, so puppet/hiera can grab it from there
 * `write_db`: Write the JSON object out.
+* `set_user_nologin`: Set a user's shell to nologin, used in case they are no longer "active" in a Globus group
 
 The `get_default_project` method is tries to guess a user's first OSG project for account reasons. If the user is a member of more than more than one sub-project we need to filter out any of the default ones. First, "osg.ConnectTrain" is removed. If there are still more than one projects, we filter out any project associated with a user school and any OSG project, if the user is a member of the other connect instances, i.e. SPT, ATLAS, CMS, and Duke. 
 
