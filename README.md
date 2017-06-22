@@ -6,7 +6,7 @@ The original GOSync is based on the [Globus Nexus Python library](https://github
 
 Important notes READ BEFORE USING:
 
-* This is a BETA. It does not have all the necessary features, like creating a group in Globus, to act as a full replacement yet.
+* This is a BETA. It does not have all the necessary features to act as a full replacement yet.
 * This version uses Globus Nexus client based on the Globus SDK created by Stephen Rosen. This is not an official product of the Globus team. It is maintained though.
 
 ## Assumptions
