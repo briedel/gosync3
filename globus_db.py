@@ -236,6 +236,69 @@ class globus_db(object):
         connect_member_count = self.connect_db.get_member_count(group_name)
         return (connect_member_count == group_count)
 
+    def add_group(self, project_file, group_parent=None,
+                  username=None, users=None, add_group_db=False):
+        """
+        Adding group to Globus Groups through the Nexus API
+
+        Args:
+            project_file (string): Paht to text file with project description
+            group_parent (string): Optional parent group for group that
+                                   is being added
+            username (string): Optional user that is admin of the group
+        """
+        if username is None:
+            username = self.config["globus"]["root_user"]["username"]
+        auth_client, nexus_client = self.get_globus_client(username=username)
+        group_name, description = self.parse_project_file(project_file)
+        # Setting the parent group, by default we need to hang off the
+        # connect group
+        if group_parent is None:
+            group_parent = self.config["globus"]["groups"]["root_group"]
+        else:
+            group_name = (".").join([group_parent, group_name])
+        # Getting UUID to assign parenthood
+        if group_parent == "test_briedel":
+            group_parent_uuid = '94080092-84f0-11e6-a90c-22000ab80e73'
+        else:
+            group_parent_uuid = self.connect_db.get_group(
+                group_parent)["globus_uuid"]
+        globus_group = nexus_client.create_group(group_name,
+                                                 description,
+                                                 parent=group_parent_uuid).data
+        if add_group_db:
+            self.connect_db.add_group(globus_group)
+            self.connect_db.write_db()
+
+    def parse_project_file(self, project_file):
+        """
+        Parse a project file and convert it into the right format, i.e. HTML
+        for Globus Groups
+
+        Args:
+            project_file (string): File with project information
+
+        Returns:
+            project_name (string): Name of project to be added
+            description (string): Project description in HTML
+        """
+        project_name = None
+        lines = []
+        with open(project_file, "rt") as f:
+            for line in f:
+                # Finding the project name
+                if "Short Project Name" in line:
+                    project_name = line.split(":")[-1].strip(" ").rstrip("\n")
+                # Making things HTML compliant - Replace \n with <br>
+                line = line.replace("\n", "<br>")
+                lines.append(line)
+        description = ("").join(lines)
+        if not project_name:
+            log.fatal(('No "Short Project Name" provided in project file. '
+                       'Cannot generate a Globus Group without one'))
+            raise RuntimeError()
+        return project_name, description
+
     """
     Group Membership Methods
     """

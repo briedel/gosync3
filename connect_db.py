@@ -45,11 +45,12 @@ class connect_db_json(object):
         log.info("std out git commit = %s", git_out[0])
         log.info("std err git commit = %s", git_out[1])
 
-    def write_db(self):
+    def write_db(self, commit_old_version=False):
         """
         Write out json file
         """
-        self.commit_old_version()
+        if commit_old_version:
+            self.commit_old_version()
         self.users = collections.OrderedDict(sorted(self.users.items()))
         self.groups = collections.OrderedDict(sorted(self.groups.items()))
         self.db = {"accounts::users": self.users,
@@ -144,7 +145,7 @@ class connect_db_json(object):
             # group's UNIX ID
             "gid": new_gid,
             # Number of active members
-            "num_users": group["active_count"],
+            "num_members": group["active_count"],
             # Globus group UUID
             "globus_uuid": group["id"]
         }
@@ -229,6 +230,15 @@ class connect_db_json(object):
             "condor_schedd": random.randint(1, 5)
         }
         self.uids.append(new_uid)
+
+    def set_user_nologin(self, user):
+        """
+        Setting a user's shell to nologin. Used to "remove" a user
+
+        Args:
+            user (dict): user information from Globus, pre-formatted
+        """
+        self.users[user["username"]]["shell"] = "/sbin/nologin"
 
     def update_user(self, user):
         """

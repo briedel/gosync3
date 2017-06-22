@@ -2,7 +2,7 @@
     "accounts::groups": {
         "atlas": {
             "gid": 7452, 
-            "num_members": 128, 
+            "num_members": 131, 
             "globus_uuid": "5ea8c77a-0c1b-11e3-af5a-1231391ccf32"
         }, 
         "atlas.org.albany": {
@@ -127,7 +127,7 @@
         }, 
         "atlas.org.pitt": {
             "gid": 5151, 
-            "num_members": 2, 
+            "num_members": 3, 
             "globus_uuid": "4922df52-5e74-11e3-a4f3-12313809f035"
         }, 
         "atlas.org.sc": {
@@ -227,7 +227,7 @@
         }, 
         "atlas.org.yale": {
             "gid": 7404, 
-            "num_members": 3, 
+            "num_members": 4, 
             "globus_uuid": "bc364e26-5e73-11e3-b3f2-1231391ccf32"
         }, 
         "atlas.wg.B-Physics": {
@@ -307,7 +307,7 @@
         }, 
         "cms": {
             "gid": 7366, 
-            "num_members": 57, 
+            "num_members": 58, 
             "globus_uuid": "ea39c31c-0322-11e4-a050-123139141556"
         }, 
         "cms.org.baylor": {
@@ -372,7 +372,7 @@
         }, 
         "cms.org.fnal": {
             "gid": 8417, 
-            "num_members": 10, 
+            "num_members": 11, 
             "globus_uuid": "47c85d60-8705-11e5-9735-22000ab4b42b"
         }, 
         "cms.org.fsu": {
@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 998, 
+            "num_members": 1024, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -615,11 +615,6 @@
             "num_members": 42, 
             "globus_uuid": "23f094d2-851f-11e3-9f5b-12313809f035"
         }, 
-        "duke.duke-campus": {
-            "gid": 8752, 
-            "num_members": 10, 
-            "globus_uuid": "a429324e-8751-11e6-9bdc-22000ab80e73"
-        }, 
         "duke.staff": {
             "gid": 5107, 
             "num_members": 6, 
@@ -632,12 +627,12 @@
         }, 
         "old.ConnectTrain": {
             "gid": 100000, 
-            "num_members": 76, 
+            "num_members": 77, 
             "globus_uuid": "f7b10014-0dff-11e3-8f0b-12313d2d6e7f"
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 763, 
+            "num_members": 788, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -652,7 +647,7 @@
         }, 
         "osg.AdHocComm": {
             "gid": 6044, 
-            "num_members": 3, 
+            "num_members": 4, 
             "globus_uuid": "9ccbc666-e3fd-11e6-b9d7-22000b74c0b7"
         }, 
         "osg.AfricanSchool": {
@@ -742,7 +737,7 @@
         }, 
         "osg.ConnectTrain": {
             "gid": 7021, 
-            "num_members": 538, 
+            "num_members": 547, 
             "globus_uuid": "da657c6a-b4a3-11e3-8e76-12313809f035"
         }, 
         "osg.ContinuousIntegration": {
@@ -777,7 +772,7 @@
         }, 
         "osg.Duke-QGP": {
             "gid": 9929, 
-            "num_members": 8, 
+            "num_members": 10, 
             "globus_uuid": "e9cd6ca8-b3ae-11e3-a41a-1231391ccf32"
         }, 
         "osg.EDFCHT": {
@@ -1067,7 +1062,7 @@
         }, 
         "osg.PainDrugs": {
             "gid": 8942, 
-            "num_members": 4, 
+            "num_members": 5, 
             "globus_uuid": "e1e2dbe8-e2df-11e4-a554-123139260d4e"
         }, 
         "osg.Paniceae-trans": {
@@ -1184,6 +1179,11 @@
             "gid": 6723, 
             "num_members": 3, 
             "globus_uuid": "75eee096-f056-11e5-bd02-22000ab4b42b"
+        }, 
+        "osg.SSGAforCSP": {
+            "gid": 100004, 
+            "num_members": 2, 
+            "globus_uuid": "4d5dafe4-5762-11e7-af3b-22000b500e8d"
         }, 
         "osg.SWC-OSG-IU15": {
             "gid": 8481, 
@@ -1340,6 +1340,11 @@
             "num_members": 4, 
             "globus_uuid": "4ed05d82-f818-11e4-9074-123139260d4e"
         }, 
+        "osg.ddpscbioinfo": {
+            "gid": 100001, 
+            "num_members": 2, 
+            "globus_uuid": "55ae3ee6-4a0d-11e7-9c24-22000b100078"
+        }, 
         "osg.evolmarinva": {
             "gid": 8045, 
             "num_members": 3, 
@@ -1414,6 +1419,11 @@
             "gid": 7381, 
             "num_members": 4, 
             "globus_uuid": "1721fcfe-b1cd-11e6-bfce-22000ab4b42b"
+        }, 
+        "osg.nsides": {
+            "gid": 100002, 
+            "num_members": 2, 
+            "globus_uuid": "e281b044-4d20-11e7-a46a-22000b100078"
         }, 
         "osg.numfpi": {
             "gid": 8095, 
@@ -1492,7 +1502,7 @@
         }, 
         "osg.xenon1t": {
             "gid": 8812, 
-            "num_members": 74, 
+            "num_members": 80, 
             "globus_uuid": "dd27e2ea-5195-11e5-b638-22000aeb2621"
         }, 
         "osg.z2dqmc": {
@@ -1507,17 +1517,22 @@
         }, 
         "spt": {
             "gid": 5803, 
-            "num_members": 60, 
+            "num_members": 63, 
             "globus_uuid": "d4f30666-9a07-11e6-b672-22000aef184d"
         }, 
         "spt.all": {
             "gid": 8074, 
-            "num_members": 59, 
+            "num_members": 62, 
             "globus_uuid": "f6632c68-9a07-11e6-a471-22000ab4b42b"
+        }, 
+        "staff": {
+            "gid": 100003, 
+            "num_members": 10, 
+            "globus_uuid": "8dac2ffa-4f9a-11e7-9964-22000b100078"
         }, 
         "uchicago": {
             "gid": 9487, 
-            "num_members": 93, 
+            "num_members": 99, 
             "globus_uuid": "6e99ebfc-dc84-11e3-89cc-12313b077182"
         }, 
         "uchicago.RDCEP": {
@@ -1977,7 +1992,12 @@
         "aganonce": {
             "comment": "James Flamino", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "Flamino@Jamess-MacBook-Pro.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDfFgXM2ywGuYq5IpQ5K1zaQVtA3cKPJ4mQ57QIbSFn9qqepWG7o6gQJRwYG+ZtzUr5unwAb9aV9DM0Az3OIxD89K5SG+plHSh0e2vDy9pkqQU2ByQxalLJUflKukX9QlA7h3Df7iJyancPg0wkj+2ng0ZLPJSC7DCIcqQeIGw1LP8LZKeuI4Emt+NzQwAXVaAkC8qflIcEct/C0OuIaakVZo3lDrMR40XGbOWfY64UiduCVLCtFRF79vP+rpgC9ID9q6Cbh/7PncNPHXB5koJDySy1EOWFjW4KllkaY/1e3/mEDU5TjQ0kKLYw4q0PY8TD9fC+4kg3Dl42JQx+rGV7"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -2360,7 +2380,12 @@
         "alexwei": {
             "comment": "Shouyi Wei", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "mbudassi@migradlab1": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDCOT7RnCZRhWFEgJEXr1yOPA3sslRVsY0viPL3V/2xkvyHK0phsLyHnz5A61Ps8hw376UFUTcd5bWLGqPJUZI5Sk7bvfu+BDeAt29B9UQvJR0wvudFII6g29ujylq/MuR89fvGNchXEi2l7bxqmmmKC18IDSKulfSsb4KnyuHF89oe/ZaiTCuizjFqd5gXa7tXpbBMTghbDztwFeg4kF06o+fcTyEXp9mCh5xxpNOGq2KFbquDQy8gl5yCIW6WXfYmaRQQljun7R4OOjlkPzgPfCT7kRDbNB4miVpxtoZ0GypBfFMjVXwibqdLc4hAnb+b5CXmb5fdYJJDu8L2RT6L"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -3000,7 +3025,16 @@
         "astromsc": {
             "comment": "Matthew Clement", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "clement@d-ip-31-235.nhn.ou.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDfgv1aZUvNP5mTLMNykGQ0MsKFMo1nMgfbTMnDv5dYIQqhzqix2i0KFnOp0JBWYu47al8j+ITh3aL73Pm9PORvwmSvBtRqyn+1kb6v/jud/Wn3yQM5zGlQz6ramfKLzjKMvsLQtg3/igJkeYj2/6ki/6qJY2yvPf/A2hOE0KYeorJU5obcrNj9MIyJNXrs2qvKDlpEfis3iiej6QwfgMPBJ+n+d579Uj3I6huC90bTSvIULX+QIUkwZRZLzsv8b+zaSHNWv+h8RLF9j6/NbgYTa21GTsQi6uQrWP4hLdiaO8T+gASJZ5xI1aUHv72+xuvSIhiVVsgygP2VvLYHvTK9"
+                }, 
+                "Clement@clement-2.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDjww7mxvqt9WjmgRFoImTC6g9YfEBFiuLXg7gBJZXxZGSlAaaJrsrR0VfEua+TgKkATf76eGMW+TcaF2e5nXf+Uiw1wsM+yQrerjcpNqPYwi+px2elTYb3X3GoE5IW9zqK6HLUJUSw4uN0x6F2+sRi5dwlsmyz7rh1h4UPKdGAHlUh02nBQ1d52PoRrJ0yEanm9kZndXLDOKffZ5D3UCl2cPNc1TD+wHHEAj501aaBjivubouLcK1BBKagZkXBiYRvJc+K0RQ+b1jFyH4dPR4X8OVuM701VDWkrFru2+EJ3FvmIi8N0Gu7QyAzOPQOhx4QojSy/ZUSB+L/Dvfm+tuV"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -3379,13 +3413,13 @@
             "comment": "Baudilio Tejerina", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "baudilio@europa.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC5pJkhr1tuKVp2XFYXTVs8mCaSMilO8wo/o8eM+jkp6baQRkl4VNH6o+lTGxGbwyfufdhuJ3OS0lvGUZneIXeL74JvJrQc0tz65AsVFZm5HxSLz/LUofyS+VFdN1YIpE9Nv98I+qwrMUk/xUDC5LQZuPQBgDkkPwfXl2OOqWYmOZYdixxdOH9qgrwbFC0tcORcikjYOtFjU0SQCvEbzk1O9KS4Q2eY7WARlv2om4Iv/bBL8rxgS3qBX00UtzLPTG3HQoRbcAWz9c1mDoYOIjvJA1B1vGhNfNSvp8MU+HN1Ju1xraHYlnYYtBpkntMYHHUVL98s4qTgBxt2bdJ5DK53"
+                }, 
                 "baudilio@leon": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCf4e5oVkAh3GkDSv1bJYtLbi3Me4s+POOtBZmM5lab+bwRYgdGYT2dVcsNqfaB0/pCYLJpxvvw4snEF0V91sfTFLUIAmZFVx7tAeC4Bj1ElGdhoBm22r5HUjkPaPNDRY7g/1xtiIqPNZhIoR9lbim/QbzP2/dUexXkLrLXimRkdJBUjtFIfAgHW8+MIi0SvitMMNQlgqLPqds9UJELA3ATRy1LuyOaXOJhEllM2RFw4ySuEciMGuA+rYcieyu56rzHyfElad882vh+7i4Eq5gBkd2rQ266yXkjtqJrgwCvLXP2nsTaBzXXc+Syn0dw6KH6HMoJJwAuUCCaT1UHPNEB"
-                }, 
-                "bltejerina@gmail.com": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCzSzqDqrEq3Qihg3GxGVCpKQRBi3gEbyGcp0YUktUPFOv6yEQ5JPFuNiIcEjJwv+28MofZn3mPUxrWNSjMyUkiL0pjtXn8NxB2TOQBUEWK/CRN6iugpXmzztvFWPVmv3mNwtmVtUgFTQN4Ucm5Ur65gFwC8jYBWfBKRQzsXZV2klYayFGHjoyPTIroXyO7z4i+aM5DiTZ0r8k3VoJh95Zy4WZJS0KMg8kQFbUvAYuwJLCRwKE0wU/+bh4WEyOhSQLR7JN6U2lPRqtu/6/ChEzfNCizeYV4AXVhm3JeDfUPfXTXp0ILGS2NgmwgAsjvmafcnxfmtdZ1fCg+jqFEo8q/"
                 }
             }, 
             "connect_project": null, 
@@ -3407,9 +3441,25 @@
             "comment": "Boris Bauermeister", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "florian@florian-VirtualBox": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDgCHxykjxjKtznK43OL956sAQ56QG0btm+vTaDM/wNdbx2pD2hKBYSiafwV2TXEvBqM1fHOeadjtkTMvTIA8JIF3w4QutY7Q8Q2iNe/iDeFQqC2HjsW/PiSBPWBSsW75qwbp7dwiDuMPPDZmEAy1ivVsPfZgSmIX9JrE60EQGVP8sKbRZQwavnX1Zqi7sXM6qjETylNwtiCXLJV5CBBjhIquoiKK3mzRFsvTh5HMjAuIjI92capRIEP7oWdkQd5r77VsM3+cBwXsknq9BCIOeY3lio71reOHxSvxx12o3QJDROR6m/NlbNxGVDwBuUpFkrHxIidB2kCW4bvleOCiB5"
+                }, 
                 "koenig@roland2": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuQzXoSX5vRwhAhHi4VJfP/9HIIgjMRwlZBoJgrWhWGCwwl3YceOsMQSHathx6ui6QnADtRXit4IUfRzEQ/mHk4APWa9inVi7NrGEvcMsYnYQaDh02STpST4wMT0K7fKrZCeYr8ee0Mf/IsQM1yYQnO/mQ8FBXuMAwUGiviP58KLY4DWOxSXkdtIZrvPTqGQ6EMoUwQZxfJ6sfJTcJGBi48qOQ5eGB97V5LPuNIGuuAOp/TYcHYSChbOqbYCr6r3pZFhbDoXhu4t+zU/eGKDHamQEh8RvJiDERjelFNblN4TOtkX14k7+gOzL4an1lJnEe9ijKA0mwlvvRXuNPtf/Yw=="
+                }, 
+                "guillaume@ge": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA3+AaL0kU9wivyFQe+C0tLVSzC/gGNKNorLQXFAhpgqQEWuPfvZ//wqg/FE9cbc/h5jvf7IYEGL1AH8+KCh//xrjgrh8YjBfbWfZjMdEmglM8KBkWX3QoOf6kgs26bQpQoFaBrRmmiDDgC0eBPjERyIHXz1T0FKSpMgktPHe31APMCxz94ARn5YUgthS+09579QE0p3X8hgtGpSGw5Q1Uco8BjGwmisG91gFs4f9RcEj1rFGCe2qGdocrpJrhH5mn4r8q2xuCPFCm3yzoKJH3UlaAqN8fmig+eqg3Txtv2hVPSWGdYP11cNgDl68eGk2CDE7fkUO9o7FXmC2IRFTxIw=="
+                }, 
+                "98bruenn@euler": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA+GT8a+KrEKcx9N/IglyVX7ysJ2CDLML+wBH1PMeScfQ5XnDzyqnhJIy9k7uJ2Qr081ocw2PlQSj//0X51tzTX7eE+SvFpjNCmH+Nh52pd7ypSS6QQyubnq3Y2AL51MNfAWwOQH2oysNRlkN8LU5Wqu0MxnjP3ez7bKoEpMTgcW+UAxELFbXwHvslsBHLV1NOa6sSjmVZ7MOx+q6B8kvlHZfoSC3MzgUONYF2+B5chd+SDrGTViizplHYkzJuDGY6A0/XokTpE8ngqfXtWHlb/jZnYLVG96KMCtLrJWrHIO1pVhjAzzTU/P8z8XtqwQNEHT/oprJOnePenygVFJ9cww=="
+                }, 
+                "Boris.Bauermeister@fysik.su.se": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCbq4oMVF4rW/OZHRbCVFIarnO5DnHIbTCAh95mvTrH8KC2r4cN+zj+kT04uv1k98EUtGY680edr1BzMh8pnRuhSSr2loWvoBRjBDQpoRc6xKdXmvIGPotcuW9eaCDYt1udA9G28jsqInhg5jHkgTzX4elaMb6IgS1VvlsH54WyrzRWKHDxruuIxABhypwnC3+TBBf4kSJEcJ1RjwJxgEfCrtC7063lS0ppxmayY0H5XFLQFjWX0jbZZgxW5Jz0FDQFFA645uXUfX9r2tExXGWJer4cNj6HrzmJLoue2DHm+cAJwKNWsLSGZnE6N6YLu9HD9C3Xci9X5ktdiLadg11@wifi-dot1x-131-251.lngs.infn.it"
                 }
             }, 
             "connect_project": null, 
@@ -3530,6 +3580,24 @@
             "condor_schedd": 4, 
             "email": "bc13h@my.fsu.edu", 
             "uid": 17670
+        }, 
+        "bcarlson": {
+            "comment": "Ben Carlson", 
+            "shell": "/bin/bash", 
+            "uid": 100006, 
+            "connect_project": "atlas.org.pitt", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "atlas", 
+                "connect", 
+                "atlas.org.pitt"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 3, 
+            "email": "bcarlson@cern.ch", 
+            "ssh_keys": {}
         }, 
         "beissinger": {
             "comment": "Timothy Beissinger", 
@@ -3731,7 +3799,12 @@
         "bflan": {
             "comment": "Benjamin Flanagan", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "benjaminflanagan@Benjamins-MacBook-Pro-2.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCXO9JcZZOQdlbk1/XiXQ33YXpuf8gxAbdoUDr52SfCehcTiU0cAf45UcsP9BdWJ2gyOIrjt5yMpBYfOzJdMV5NAwURLI5s32ouJUeYLT0MqyQ3naZpJBWJPdjmZBZsOgJCh06nErrhWopzRan278Ga50zD1nUdWx7zzqd2ej+bR81ejYeJXkVXfOtnhn/v9frqx2ZwE9LPftPkXDEUiOdxPqRMX0AEz1p3LDDg5Ry0LYOFpfrnZrWDlCUAynuCxyed5Ue7VKzvRHIxMUEYHi8d0KK3VHRHwPI0OtWjXOmWCk4t8viPMrJqbROQrZHlC1TOvYUeHybdkS2JLkMfe+1V"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -3908,7 +3981,12 @@
         "bion": {
             "comment": "Bogdan Ion", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "ionb@vishnu.structbio.pitt.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDn7diLGHw/nUyv8tdV9UI4aSHpNYz8DY6NkwwPAMgrgrWp9SmJe+zLuYMAlWDVbve7OqiJQq/psFfJcnjk5vJGCXY1M5VO14/4HD+Z0l4xsoLbN4xhGzCmGHE9a3b2+i+fU2UHFm/TFNtJWaBCfxnZLskoILe/u5PCv5FaR/3DDUvUu1qkrUOZEaxyt78/ZE8gRicbeKfy1R2YhlS4ylHWupTuM0WNQTIo8kN+jRldc6ZYPZZJBa3TVYWiIjk2u0eUoWVaJGpflZ44k5nRaQvBzpErIbQFAztWtUskBIh9jA4efWUJnUqp1V5Mq/hubZPyHAoL48NHdQg6mgHB+uUH"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -4068,7 +4146,12 @@
         "bocklund": {
             "comment": "Brandon bocklund", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "brandon@client-104-39-43-122.mobility.psu.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDWluW+dr4h7uGt0KPPAYttaPM8MocZvU01tMV/HMUYHDICxz8cj1VL4Ir/5hADmu0+Ti82wZ2kR6HcmROV4utxgPYaL7QTwSvJ5T9caVPJRRX4pLtjpSsPS1wiauYy4eFv/Dzz+XEqhdKNlCkxJArTAYkcw4hOHWP7QpzAc/9qqfZvlcQ0wBIGHG8Uzw/d3BgiS8UJufkijAVDEO4yMcaaZSHuTlArVrRY53VL7KSWqIdg1CHYC9zQbU2DWxJKcbdb4BNmaXHdupsCyYvRzdVjDArdNcj4iEQMSNCPEpxavS8kUmE84QI8XWWWj2h5rQ7WeEJ6FHPkUQJMxCBXlZZh"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -4225,6 +4308,7 @@
                 "uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "spt", 
                 "osg.xenon1t", 
                 "osg.SouthPoleTelescope", 
@@ -4270,6 +4354,25 @@
             "condor_schedd": 5, 
             "email": "brosene@clemson.edu", 
             "uid": 47770
+        }, 
+        "bruenner": {
+            "comment": "Stefan Bruenner", 
+            "shell": "/bin/bash", 
+            "uid": 100004, 
+            "connect_project": "osg.xenon1t", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 5, 
+            "email": "stefan.bruenner@mpi-hd.mpg.de", 
+            "ssh_keys": {}
         }, 
         "bryanhowell": {
             "comment": "Bryan Howell", 
@@ -4464,7 +4567,11 @@
             "ssh_keys": {
                 "bxie4@ccb.tbc.iit.edu": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCqM0Kvlb4ffBrJ+mtoGXjgpam/O/9djryiYJ2HELL6+uy+MEZU52/PNiWgIlu7yueehVGHWbgPkSBJA7rrTtWGcCB4gZaKkvw4z/i9grOYj6LmlXc4ZhAPMPT4cLNhnmBJcUFurrd0bE+3XkOZlPZixfij46+28Hjtm/OevBLducmyHV+5fqfBE/eoPTlFFbxax77HUnrC+6409lcqR5vwP9yYdPlZqsw1Jw9aBXfo+dneONdDUGHI/oXJ985nz8JNc4UZRzsdIU3pf1yuE3f93T3DQSa9ESncTXmPw8BNP7cizS5qCBw6lzbAug3YUT7ssjNGvZB9b9Ao8PuTNLM3"
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA5sFs47wuNvRgnYdM/ZFxK+2H3+Z5qWDGQD1bHvJ/0pq36G6JpBLmql6oDwONclKqsXSMJlhp8F4sTmrrZ2IjmCoA8EVSW61La4vJ9l8psYvk1y0/fojMW4xArArxDwPZHsOt6Bd4iZTQsGF/XtKthq9LVDI/ewSEInVPaDOhrGy8CZTp1NkbVbkaIIS+Rs7BFL81amtw07PORj9eGRTznDJU+95Qtmj9zlLxaEi1EV4CO3yE+FQgYOeUFRNqDUSWXFpF5zWOPhsChK2u/EFn4QYyBJwtR0mqheE6OtzFrLlD71OVBq6bx5U5H3N0LSCUAB9ghRkPbiBAu6qqro9/zw=="
+                }, 
+                "bingxie@dhcp119.merusouth124.iit.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCxjY5K76UCyDG0gely8YZuTItAlqc4hrgEIM9DEPqQwWq3Y9pOENBAKfurg5b5YRc1OtVAeKS8RiF932siX/SF+HyXcZn7aXqzOtvNFzVsOG+NP+4h7rx5ymvCGekUtisKclSV71bdQ9vjhZoG4dHQ5jS/jpUIFj/J/M65Ai4c/MFuCQrUTurqbLmN56egV+EsJ1GrEW+7IrIvxIIroLacWNzPjenbuqeN/hI5ouORL9paLB3oSCivzd5D/kJTqZEm4Ep8lOzQ9/HXMZpVh6NQquCIiPeWNPEFeOXGLur8jMmIIWcSBdSz1a7QrB2btwNaFpW/Wj05OLs75FMSS/PB"
                 }
             }, 
             "connect_project": null, 
@@ -4681,6 +4788,30 @@
             "condor_schedd": 1, 
             "email": "ccioce@mail.usf.edu", 
             "uid": 20313
+        }, 
+        "ccotter": {
+            "comment": "Cory Cotter", 
+            "shell": "/bin/bash", 
+            "uid": 100012, 
+            "connect_project": "spt.all", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "spt.all", 
+                "connect", 
+                "osg", 
+                "spt"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "ccotter@fnal.gov", 
+            "ssh_keys": {
+                "ccotter@fnal.gov": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ9XlGcGY6AAy+6rg8XH9+3jMhhT1vW6BYcBjjSrJDztH8+rpW3FSYQ3gh6zVjZHsZuss8yytat+QxDIfZyIDA78RgqOvfrRhRPCoJyLXwk1IEpaTzBUlWk5cKXm8LD/zj42QZNDLc3kORzwpyQkat6K6i34YL3cWjcUbNXRUYLB3H+J4noeAAlG6v65Il0Yzw0O2zuAoNyzQ1xKft4bGQqAotipEvSLU8cQgnWxcIxmkPcGNZlOHzmSIqoZcsmF8yCLZV//e11T8UPq0VnBf4j0gnNLD6sS8YONisRQexj6xkN8LBgfeqEE510tA6eOph99vwb6bWrh9PeVgA1Q+L"
+                }
+            }
         }, 
         "cd112": {
             "comment": "Chien-Kuang Ding", 
@@ -5191,12 +5322,7 @@
         "connect": {
             "comment": "CI Connect", 
             "shell": "/bin/bash", 
-            "ssh_keys": {
-                "lincolnb@the-mondor.local": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC/pjUwYcfRT5tsxLZJDpapps01h2SDtjC9b6dmdNek4xmrv8ogXeFtEHXDNgZYptvbAFNpSmsjn96DIHpD0KxZCYIH2P/kFORfJF1BAfybu7BgtfQhx3hvcvhO44Af8WzybM8Oc4vTGzMEzKX9IpM+DSKJX9h80DOtSyeo4a5SoMwvDvEgFOEHHPxHLP+HlPrlK8wTMqiokom2HBymuiJ5V0cV2wBcOo4wBAqMokNQATUAmnpTTPFwRhT1bUcz/ZRho0GG6oYoTAei0OTm5KW3Kml16oWNEmaOKM25HUBNcO5otU2WYJ6Nj5tPyDoWF09wOcidYlPUbJHsQwaLoYll"
-                }
-            }, 
+            "ssh_keys": {}, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -5213,7 +5339,6 @@
                 "cms.org.llnl", 
                 "osg.ncidft", 
                 "cms.org.unl", 
-                "duke.duke-campus", 
                 "duke.SWC-Duke15", 
                 "osg.MMHA", 
                 "osg.EvolSims", 
@@ -5313,6 +5438,7 @@
                 "osg", 
                 "cms.org.bu", 
                 "atlas.org.utexas", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.GTConvertHTC", 
                 "osg.TrappedOrbits", 
@@ -5405,6 +5531,7 @@
                 "osg.OSG-Staff", 
                 "umich", 
                 "atlas.wg.Flavour-Tagging", 
+                "osg.nsides", 
                 "atlas.org.pitt", 
                 "osg.microphases", 
                 "atlas.org.anl", 
@@ -5422,8 +5549,10 @@
                 "atlas.org.mit", 
                 "osg.Errorstudy", 
                 "osg.RicePhenomics", 
+                "osg.ddpscbioinfo", 
                 "atlas.org.uiowa", 
                 "atlas.org.iastate", 
+                "osg.SSGAforCSP", 
                 "atlas.org.harvard", 
                 "osg.AlGDock", 
                 "osg.SysBioEdu", 
@@ -5577,7 +5706,12 @@
         "creichardt": {
             "comment": "Christian Reichardt", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "cr@MeltingPot.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDBp8RNWmfZJ/yCnv22FSZYbVMsSCa5r662UqXCTf+lM4uAG5RqZz1Vf5s5u4ZXWYjKPXvZca2VXQ2CBVuGjH2ejngpE+iUKMor+LVZTrPHNvubLsgqqoIzOYkSc6XZUX2XKIaL8XWWun7kaj29p8f/2yK8yYnCEQ+C/Dx6IWjtZ3OCzGtBgg3XUg7WxG/+i2Ut6ZePnyPEoMIanbFwkXMp2SyfVpq7h8iBcKDys+OxOtzwA+E7BgEZYVwOxWyfjCmZ5UJ+dF6asdUqr7WK0IsE1fwn+dUO6kPnbx4h/3cKSl1K/CWv6xgcpDunu2q50EJFGCGaxxpsRBZR7V373YLf"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -5611,6 +5745,23 @@
             "condor_schedd": 1, 
             "email": "chiara.rizzi@cern.ch", 
             "uid": 18984
+        }, 
+        "cs123y3": {
+            "comment": "Yuqing Zhang", 
+            "shell": "/bin/bash", 
+            "uid": 100003, 
+            "connect_project": "osg", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "yuqing@uchicago.edu", 
+            "ssh_keys": {}
         }, 
         "csheare": {
             "comment": "Courtney Shearer", 
@@ -5670,6 +5821,29 @@
             "condor_schedd": 5, 
             "email": "csul@usc.edu", 
             "uid": 38000
+        }, 
+        "culbert": {
+            "comment": "Jim Culbert", 
+            "shell": "/bin/bash", 
+            "uid": 100023, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "culbertj@Jims-MacBook-Air.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDRiMUdsyAn7+2rU5YFWzDYPovaIWyoS1K52DhmMmjhdwYzn8D/p2SLrDg2ooaxZF1GXaGMXdcMM+9vAyiHQQ+vABvLMgjoUPvEQPi4Mzfs4OVLU20xcGiCIqZFrAOZ507MNVZSEmFmqPTwF5Es4O7OymNa0iznmhjJl+7Umd5gkQGojd36EO5GIz/fMbgqpV+cyrvnvjeWx5tRoCV4+RuzRmLr7Kh/9dqau17xKQqwpaIJ6Nr3b1kZlp8TaEX/huf5dz2P86GKMV7BVsv+IY3uQW1csJSjOL+P7zN32nJCw/++U6l/5m2aGaN3gyJa7fxPmcYHAhRAYY51o45VJju7"
+                }
+            }, 
+            "connect_project": "osg.ConnectTrain", 
+            "gid": 1000, 
+            "condor_schedd": 1, 
+            "email": "culbertj@mghpcc.org"
         }, 
         "cvergeli": {
             "comment": "Carlos Miguel Vergel Infante", 
@@ -5952,6 +6126,29 @@
             "email": "davidkelly@uchicago.edu", 
             "uid": 48803
         }, 
+        "davorka": {
+            "comment": "Davorka Gulisija", 
+            "shell": "/bin/bash", 
+            "uid": 100015, 
+            "connect_project": "old.ConnectTrain", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "old.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 3, 
+            "email": "davorka@sas.upenn.edu", 
+            "ssh_keys": {
+                "davorka@lsb031.wlan.sas.upenn.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDz1x+LWe10f5RQi3I164l8q/azHlceB82ZfTrCAZVd2Xh/YKxiRR6YuYTHPJgl2/hlwLPR6fqM7UP84QEMAI0DGkoHQ22Mnbuz4d2Q/YWQSd8cio5QzHV6op0aDo/6xcTBfzBKOjgMyOplZqu/8cBi+w2VM5uSmBMyeJauv7zJymY9t6YbsfnlffUi/knF2t0PE3JNoxM2YHdAwVQEINbjMwZr+TJoFeLTFBvH/IzUx3ZUvXVYxCzOiQ+pJzCv9dH9tAoKo0tto9wG3r/M8bbKvv/9tcKqnaRrBSKRjlbSbNgcY+LAVf6lPuOuW+Gc3pJpedpt7qw2yGM46pdlNuPB"
+                }
+            }
+        }, 
         "dbala": {
             "comment": "Balamurugan Desinghu", 
             "shell": "/bin/bash", 
@@ -5977,6 +6174,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.SWC-OSG-IU15", 
@@ -6031,9 +6229,13 @@
             "comment": "Daniel Ben-Zion", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "danielben-zion@MacBook-Air.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC0u/t0apV8GXcODf7cQy+sqKUrSs564P7dCqfMV6rO5NoYB1MSriCSygHg9VmCQnrheAilNxOqT6DY5sealuyaJM+NApDMLtZk62UgsFDnBFQV3uuP0g39cVLOXLlZdf2lMf+N9XpcgNUa7UW6fAjG5TGmvGt5smpyH0WqbNCJ4x1Bt+gp7wR4+/ge8RjsC1hK2g5Ttg/MORvxgG7fK2LGWk1KY7boeTo6CET/YEsPGpgoosJlYKjGhzJPAMiFI6UWtmAehPKjhOm6vq/fnv5Ui250pEd+63+9ekxNlCZpWTN+894ByoMG7mqFZHItG2JAGtcHTGXahsfqIdaXfxIn"
+                }, 
                 "dbz@honeybadger2": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCyV/M10oHsmX+HWDsTpf1E+loqdUgpZEyAIu1c1TzDWf0KVuYIb4JF0eXslJg9yhZ4wSlxDDIr+p2eAA1BUgHy+LLTntkaXBwUjcOqBRGmOzNeiIUJzYtgHaCoPKnppcQqw48zi8Xi++MmAI54nD5QzVIrgaPb5ljoxdeY3Af1ID+Ue7ImU7emKBJxr5cZGaDqLTO6uJSQpb2XX9CsuejSpnxlZJ8CZtcW8gH9AUvzoHdhLsC24iNU+oIznS2iTErTAPUsHlUiG8IJEfDDo1VzlzmJ27ih/bJu9W2DW5nZMBvnVVpFh84kKMf2tHOwelvrXNvQROiKGNs7BJQPAjYz"
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC3RxxEUdSZrGeYj8Z96eqJpbnF1m/rknPkgKWuac7wg8TwRInnK/2T+cjUUccTmJFkNu8d1xMBFh53ziZZxF0OiEkByK3AMykEHYeAxGjBQAh3mkamd4X2LQdjHdXD9MHxFKADtBwfUnLRKyR/cR6b9D5B5EI9U7nRbSkW6IZzH55NbRZQWoVHxgLspFwbYfKmpsiLGI0O5voeQZLVa5yE4SnXC5+V3zpCCMbD9wmM/TJlKMBrnuky94ozg/MnPgPALaxOUI5SUJ1YWtspJDFS9XUkfStNPtqvBV6gt7KoreW+MLcY0X21PUiRWMBvlSbsz73IFjFe86sNxe/Zpohj"
                 }
             }, 
             "connect_project": null, 
@@ -6075,6 +6277,10 @@
                 "dblyth@eic0": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDt5tb/zVptPBAF6J3f4qrLDH3u8I/oPnZX9rt31mbaA3xC14/Ytf+LsV3Lp+BkWic8AyQj6Hqwf0w3OOI5kuPLrSK6kDN8zg1UpPxIBLI37CsDpecDAw4Ez+Pi/KHmfS0dNvL2JIoMjGqLZfRnEbcx/fj35sbfNPXdmnaBhjx3YsPwwTY3xSAmmVzPXN7hlFl1E6yV/cYIbD+ASP8k/U5F6CEZFZFMnqIJASbQbS/ci/9ya9qB88uAuaqcnVAQgKM5Gfle8DHu3JFXAjAH7CWhGkBgo+24X89QInhYoIZlRGLePm7II5BoHW+3NBVb+6yufFFGlD9a/hJaHRSnWdFl"
+                }, 
+                "dblyth@eic1.hep.anl.gov": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDoNQOUgHJ9Z4Vht4hK5LmR0Vc2pH9z1XOvhNnTUzdm8eJFiYtfDYXnm70BKTd/CuteXAWoCLwk8fGJsuaxixKKquqIPepsF2hldCJXR/giVenEzYrI06vtaQAuYqiWqqQBYaBymIpyQoZIqTKJnpfKJg9pVJa5nTcf13gb/TxB9H2VGA+Kwz92961zLnP0RHEO0T1tB5YDKwE4nZPoEJZiGuP4ldRlyP8HJhOREJkClBGkPWFFefTOXDRQSbl5tbwfJQazr1hQ8sPMRitXX8sJPQXmmi/Uyr5Z7OL61IpSzZOfQLCJYn4q2acej4VaHR10Az1zrR1qQzBDYBXKZCo7"
                 }, 
                 "dblyth@dblyth-server": {
                     "type": "ssh-rsa", 
@@ -6363,6 +6569,30 @@
             "email": "dkulkar@clemson.edu", 
             "uid": 62801
         }, 
+        "digangi": {
+            "comment": "Pietro Di Gangi", 
+            "shell": "/bin/bash", 
+            "uid": 100009, 
+            "connect_project": "osg.xenon1t", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "digangi@bo.infn.it", 
+            "ssh_keys": {
+                "digangi@dhcp53.bo.infn.it": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCzoT+LL+1ZD/0H+B1gl9e1kSYNxksioleZmQz+c2PxJuy+r3Y1h/DzsUJFhZt2/0MTWotCaP618EGB7WtM7yZjy5oiBWAGi48k+C77i9TKY9MWbQ27PQxHILWjzR+Ef5dyNsv+3A2eiE4Wu+q4gAUNfj9OAWL5ve6hcwme9imGN0xIykc+xHWd8uQT2r+AmeHsUcagTjyasy7/sETbnNjTx2+zqsZ0ieo331J1NPClXod2Bf0eAzQvlQk3BXb8uIhIKXcpm+LvY6qHNqSPLnyk16HTS3FN6rC/oVtXpDoWTH/QFPXViWHblLSMIoHaQ1NnSobV9qXjfndDeHtA4fOX"
+                }
+            }
+        }, 
         "dip": {
             "comment": "Ashiqul Islam Dip", 
             "shell": "/bin/bash", 
@@ -6494,7 +6724,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -6533,6 +6762,10 @@
                 "dleon@pandabear": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCvNQVxN43C/WBgfZIFgv6X46Wm/bkbdiEhXtm4sdKFzaNouq3H4yJQNsN9WRoOcPV0VE9caPAjw3eXaG1RMX4grtcwMi1WVnZqRyjlJUER3qGEXUwppIIZOBEUbk4dwusz5hDMv1XYUAC+KDWgNIL8JcTKUfSr8FptnoZoSsz+Iav9wn8bYV0OntXutgNcEUS4xPLm9de5SPHTZcwvDkw3w9D22TEa5w+mCspgAvvXz9H117K+Lir5G0YszTvcuzZHh2oLIP1ODYeRb2xAlrKBiAeUVyP1x12DHuW6cd1jHq8dXKAdMFoO2ivqHG+TwFBdOFbC3IPblVUHM4cWgu5F"
+                }, 
+                "dleon@dleon-xps": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC3bwBN0NtCvMeUGEms8cvkQkMgSIxTg2pYjyDpuWQkwWHwY/nWJFlU3nz93zHM4hH2wySYqDxYn2fk4V5QyRnmICwaDs0zzI/48bS61R9GO5CmcsxCLoDkfmz1ao9OA82sDqVsIW15S7JoUqRj+8/BHqD4GpoJA0ERB+mN4wOS4wokr3UBlQuWyUI8Cbq/leDxgnVGKRwW7eeiFAm6yVBwjKRhXBEc5m7XmS31DOwbVVd6dOjxgK66p05LwfjQFObZ0AmlXXZ0d4FXK/OQZWrdHPxV2+DfDLhPaVu4OtDZ3SyPMbm7B67BOJgiGs5qyTNUMC5WH9rbye/gGQ1rhP41"
                 }
             }, 
             "connect_project": null, 
@@ -6752,7 +6985,12 @@
         "dramirez": {
             "comment": "Diego Ram\u00edrez Garc\u00eda", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "dr1036@apppc14": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDFYFsz3UtHeEgjLPmZ81xeHtUCbT+yMnFYfVW30Df1ZRlZultEvyO57laIKdN73/h2oGnWergr7yJiQtrpnmDUW2Tp8lIxDecNFKxhEl1cf1srmVZ0kxW78AJ9+Jd8TMDWjn0hLFdLSf4Dsisn9YVxb+4T42M73ArwDJsTGHRgzvzJWr/iNlZlszUG3xoHOOA5FK8ceF1InT1w2YJ7+JJQg+fSOeUn5cDyVTKnlaCmOJUvkebUJj+dlJJZjI+vpYfSWYRd+rX7wHjYlYKLhyrH7yfFakZqBHLtTV86vydMU3In1XFM5qRw7JYUCPfO653fMbe7Gtcj2XXjNyCkdDfl"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -6765,7 +7003,7 @@
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 2, 
-            "email": "dramrez@students.uni-mainz.de", 
+            "email": "diego.ramirez@physik.uni-freiburg.de", 
             "uid": 45887
         }, 
         "drdrswanson": {
@@ -7033,6 +7271,33 @@
             "condor_schedd": 1, 
             "email": "dw148@duke.edu", 
             "uid": 26427
+        }, 
+        "dwd": {
+            "comment": "Dave Dykstra", 
+            "shell": "/bin/bash", 
+            "uid": 100008, 
+            "connect_project": "osg", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 4, 
+            "email": "dwd@fnal.gov", 
+            "ssh_keys": {
+                "dwd@dwd.drdykstra.us": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDBBhR/0IPrMfKx4JWcsTeJUTilom0sohq3ezS525KRR1RD7JMUUVMv+/a9lYk3ixbcWlGan3TK+T91NZrRXunu7ddT23g2U/HrXmc07x8asPA/fKRPf3RTTNE5mn7+k0TJAKVcMML17ByyfxA2bYVA9WpHT4leiz5MWXgAKt4Y9+JzK9yM/QXGiQsF2chwxvRlXFml88b3WPMMslzFQX/YSTT/KQKKq0CHk2zgLHW+WXovormidCp0RFph5POli2ukd15KeMYaxJM93Eurz9/oNcRNYEzkks4kF3KLNwuyVPua+Uh8MhhbA8OMWwJsCbbt8QkkBbb47kImMgOYJLgR"
+                }, 
+                "dwd@dwd": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAIEA4rr1T9RHPXmUYgY6zKY+SH6jRofZ1/78tAh/q/KagIGmzMWela5Q7L2gzNc7GVTDbODLoZHpmrLG9v7Z3GrzrTjuRbce3tQ8tezT3EWIX76NoKDxf0hRrkBVG0unjrh/I/uisFoHphAT0Tt7wy7nAnbCPB2wNlemp1kCwXaGXmU="
+                }
+            }
         }, 
         "dweitzel": {
             "comment": "Derek Weitzel", 
@@ -7598,6 +7863,7 @@
                 "duke", 
                 "duke.SWC-Duke15", 
                 "connect", 
+                "osg", 
                 "duke.4fermion"
             ], 
             "nexus_refresh_token": null, 
@@ -7627,7 +7893,12 @@
         "etolley": {
             "comment": "Emma Tolley", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "Tolley.42@dhcp-x234-175.mobile.uci.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQD1OYeqkLTfkqpQ7ZIyTzZAXQ3MNHCngL8A8ndJUdmNvMZw7f/B5BE/5sVYQ1rNG9YvfMBAuzR2Stb4ED51d/LqDjXQ6DrOtQRbywrgqTHE3KXmNLm7ErF80jlLXVI3bq/ztSlXv44oHXj2qcHKeJGW7yOmeO0C4mXnYkjVI4MgLFq724QHGci3MXzg1c0R+7VPJlqf7POl7j2W7j4l+2+mVBre3N6jup/oPMW+P2KKVjh05+R6QyxCSXgrT8O+f0xhvZvYorXiGvdYWyyaZvnBxG8vrKOZg0JQbbqYtZTWbmlnC55hwfGbsdoH0hgvvHtr5w5WffuculbZcX6YX/09"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -8002,7 +8273,16 @@
         "filikhin": {
             "comment": "Igor Filikhin", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "filikhin@localhost.localdomain": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDe21/NYPw+TxcbYCMMzQCrQpdLnyOZwgbKBqhvwcb4YXfxYuFgY60R2CdbBTn+/3hKYscWXsh8aW9BkTyI/E/JVKUB5mOcutiScgFkN3j0A803eAzJNg2ywkF30rAnLj9Obi2t8+FtHugb8AJkG8Dlj3DxGNybKTqYpp37QFlsobiklFBcDP5An7bFpqEinmRQzKThv4nwAmmlFo7h/icNz/+XGlj4tekSwPZw4ffNfzx/duuHU/9L35b4cO5rg4uIkyBm5VG5WgUkgQyzi/KzuQa2Ld636DRPkOdbaiQ8CVemUvL1dyud8T1+g8CU02mhIdliRVJ1EXVwLO3wZVdN"
+                }, 
+                "rsa-key-20170612": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAvWgF49xH4ZQ4eIo7iCyo4hPoO8dc9PjcFITPLN1Eepo31tcmppYQSopw77F+uKzpe0eTKVriRDcut9DUv9T1HsXNXsb8n7QDhvhduUqSbCCvBLauVYEMZNG25loXNWPyG1RQ1azJijZqx856pvkEgGqUNwzKUL+a/jWIA0hswY2RYU7SjwHRZW1Gz2j5BG3B5UI7gLtbmCc8gQxI2jUKvHjx7vyRfOxkKjxl1ZFpL+AKg1RqJqYNCnsnUXcDV+owGW8rIfxGvEIyOzJXf2VV6CnsLZkngcQU8Cn++5OqRQgtGn/hBkyJt4e5ISiWTCwHaskGVnePJ0AQcER3yfy+gw=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -8054,6 +8334,25 @@
             "condor_schedd": 2, 
             "email": "David.W.Miller@uchicago.edu", 
             "uid": 50250
+        }, 
+        "fjoerg": {
+            "comment": "Florian Joerg", 
+            "shell": "/bin/bash", 
+            "uid": 100011, 
+            "connect_project": "osg.xenon1t", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 2, 
+            "email": "florian.joerg@mpi-hd.mpg.de", 
+            "ssh_keys": {}
         }, 
         "fkw888": {
             "comment": "Frank Wuerthwein", 
@@ -8230,6 +8529,30 @@
             "condor_schedd": 3, 
             "email": "bala.fsurf@gmail.com", 
             "uid": 39218
+        }, 
+        "ftoschi": {
+            "comment": "Francesco Toschi", 
+            "shell": "/bin/bash", 
+            "uid": 100014, 
+            "connect_project": "osg.xenon1t", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 2, 
+            "email": "francesco.toschi@bo.infn.it", 
+            "ssh_keys": {
+                "ftoschi@ubuntu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmlF391mrlrI6zqd8L6yitMYk2daGImaQG8JCAP2spju7NE2hdYnwydr5/uZ0bYU+dIKWRfGBXUcuu21cSo9BLK9GKPs2X/3hCHIWyn8T5nqli8EitwuyKHoAdh/PWzO5nHu2+G9ZNeo0FqiostT17WUxZIA73kX+rohgO1UMvJNPqSAH/UpbQ8vTJlBMSrAciwyU01ce6+tPZfYFw9NXduE7wFjfIg0Vi4ZxDu8nUdprz2w08/wjJsV742d47XAoN+CAmtHUC2/KCxYkaIvc0CqhLJe7tytVC12bTum6rdIDAjABir1U5JJ9m9I0yhKOe1O4BnIAVyyLAYu4ijL0/"
+                }
+            }
         }, 
         "gallicchio": {
             "comment": "Jason Gallicchio", 
@@ -8489,6 +8812,25 @@
             "email": "gerow@uchicago.edu", 
             "uid": 51728
         }, 
+        "geurin": {
+            "comment": "Guillaume Eurin", 
+            "shell": "/bin/bash", 
+            "uid": 100010, 
+            "connect_project": "osg.xenon1t", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "eurin@mpi-hd.mpg.de", 
+            "ssh_keys": {}
+        }, 
         "gfacini": {
             "comment": "Gabriel Facini", 
             "shell": "/bin/bash", 
@@ -8525,6 +8867,7 @@
                 "atlas.org.uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.OSG-Staff"
             ], 
             "nexus_refresh_token": null, 
@@ -8672,7 +9015,12 @@
         "golmoham": {
             "comment": "Ahmad Golmohammadi", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "rsa-key-20170612": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAIEApxl1tfNIxAxb9FCD3mG7JjpVOHqpwUxI2qouNU96q7r0SRP9AmlczHi+xLlUH7QZAE8G6Z1IoqVT1CKD8rmYz5cnTTi1AWZm6fxtyzvW+2vBLJF3SX14DQ9+vSuAhhP86IUVbeL/IPnaf6EfWg9KNjn6EeWX+89eDzRrPLRIcak="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -9101,7 +9449,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -9234,7 +9581,12 @@
         "hmtmherath": {
             "comment": "Thakshila Madushani Herath", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "rsa-key-20170620": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAwihYfZ5J3FsEj9kob4Bg2g55w/+MS+ZGGhXTHgpJOu4Jqqk5yPGaWFWrYgzZWLQs/ZZX7UqL9tKJ+MICF48j5lJf7zNfZUxzJ5wkweSlmP8p+w0pJnA6Ygj3m3TUuf/paipi4hBakjfG0F0fL6IfFrocuJJw6FaBZXogFzrnLJJC35dMiXL3fqj1I7w8BMDb0LFD3os+7owwcxuO05WHkEZ98otHAf+WNTJEVa3H4RTcrnG85fQuz4iUGZPq4D0uC2wp6PysQMmHK/BY/z/OBYS+cZCE5aO2pzfdWVId+tbM3QouIZYJ7zaVMKxKyRskKjBzOdaCwu8b1sIf5YZ6mQ=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -9267,6 +9619,34 @@
             "condor_schedd": 4, 
             "email": "nhduongvn1@gmail.com", 
             "uid": 19210
+        }, 
+        "hogann": {
+            "comment": "Hogan Nguyen", 
+            "shell": "/bin/bash", 
+            "uid": 100016, 
+            "connect_project": "spt.all", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "spt.all", 
+                "connect", 
+                "osg", 
+                "spt"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 4, 
+            "email": "hogann@fnal.gov", 
+            "ssh_keys": {
+                "hogann@mac-121135": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDVYu0crjz8XNiesLxx+WG6iJItWQBoJ7NgHG6ciwUY6/Atz+NA0GBbINJCIEyQWI2MQH53t2FTyDNm/xEdHxD2rgruPVxakvYRRRlhssdf0cgcVrhlBCpnrp6dpIvmZZIFaEKxbCu5E2GdXj+69HccJyH/qpDJQPvHy8ox7gaKgAB9gstOLsqdugKVcrlnOTECQ9eTkdB/1iW3s2zHA+mU42y6GjZ7VIyGisyQtWCa7iBmWniMWUv8zkHWXpGieoL4GbcvUeVX3NCbdq7IlbXIjDkfunHrEzWgjjD55qvV9LbDxmCM4wQePv7Agmzmg4ZS+e/BczLydSjDv6cJv+k7"
+                }, 
+                "hogannguyen@mac-116585.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCxsNmrA7+iJuAK1OFgbHfrsFAWpstIFD5N5iYUWO92asfEAv8IwyBGdgNUcGoA/DIRj8a9akV2qxqbZ1Gu8UNs96DjU5eL4KVuwv3DUNtDgFEn5MyZioIGLX83hStcQepuE4xcZUPbLi5/n4FFDYPXDcP6FczMB6abliZMZxz6s/Fp7jsEpOMeLpZotXuwti2d8eDmeOq4OsbGHvo511HFth5CO/UzmFa7qVmW/CuSkhCNKdr5YS08Bs7kMeNyj16mw3x5zYZQZcj48J2IAQI4smtfa4e7ionUPW3/7HvMu92D+y5OxGNsCmUkOUWBLHNAGR2pxUEhJ/sjRPxmjIop"
+                }
+            }
         }, 
         "hogenbirk": {
             "comment": "Erik Hogenbirk", 
@@ -9333,7 +9713,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -9835,6 +10214,7 @@
                 "atlas.org.uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.ConnectTrain", 
                 "atlas.wg.USAtlas-TechSupport"
             ], 
@@ -10533,6 +10913,23 @@
             "email": "connect-support@opensciencegrid.org", 
             "uid": 21738
         }, 
+        "jeremyvan614": {
+            "comment": "Jeremy Van", 
+            "shell": "/bin/bash", 
+            "uid": 100007, 
+            "connect_project": "osg", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "jeremyvan@uchicago.edu", 
+            "ssh_keys": {}
+        }, 
         "jerperez": {
             "comment": "Jerry Perez", 
             "shell": "/bin/bash", 
@@ -10604,6 +11001,25 @@
             "condor_schedd": 2, 
             "email": "jessie.tenenbaum@duke.edu", 
             "uid": 55317
+        }, 
+        "jfacelli": {
+            "comment": "Julio Facelli", 
+            "shell": "/bin/bash", 
+            "uid": 100024, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain", 
+                "osg.SSGAforCSP"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg.SSGAforCSP", 
+            "gid": 1000, 
+            "condor_schedd": 2, 
+            "email": "julio.facelli@utah.edu"
         }, 
         "jfernan": {
             "comment": "Javier Fernandez Menendez", 
@@ -10909,6 +11325,7 @@
                 "atlas.org.uchicago", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.ConnectTrain", 
                 "osg.UserSchool2016", 
                 "spt"
@@ -10917,6 +11334,30 @@
             "condor_schedd": 3, 
             "email": "jlstephen@uchicago.edu", 
             "uid": 50884
+        }, 
+        "jmasbou": {
+            "comment": "Julien Masbou", 
+            "shell": "/bin/bash", 
+            "uid": 100017, 
+            "connect_project": "osg.xenon1t", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "uchicago", 
+                "connect", 
+                "osg", 
+                "osg.xenon1t"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 3, 
+            "email": "masbou@rcc.uchicago.edu", 
+            "ssh_keys": {
+                "masbou@midway-login1": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA2+zA7D5yGydLWBR5t8ruPxw03S6c3UFlBSQX6BEaCoUWr/vaww2ngtMpwcP1QYldKK8Xpsh942Z8NkjK06WRcB6XXP6Z5v8pdH/MXGz5z2RbmJjtSeArIhv44THXFAeUg40j1b0+tK8VrBaQzFIy+7fCAWJZZ7uwUksf9/cuQFi79G0rQZWZAnYTvjRWXJMzsCNqhgYk64jdZprq/szGupltZt4iRp0ERk2TXKMKb6s54crvPrUc4DYin48MOpI90rjUgkA16WlZ8er5p83xggFc/KOK/Uo04tQ3ZN55MpvESDq7k+GxCcTQ/XLFDm0YezW0FJY8uKOpgtD1Cvp4tQ=="
+                }
+            }
         }, 
         "jmyers10": {
             "comment": "John Myers", 
@@ -10986,6 +11427,10 @@
                 "rsa-key-20170401": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEA9qy3VGReYYnmXUBNbB12AKzIrqWutZGNX/nWZmuAagcWOjxGSnkM9/cst8CEHRcEOV7I2E9oEcJFDd8pqR0A3tgdXq6UiGMXm/doQyCplKMV4EKBaI9SebTdaB5biUWmLEWOLRh6i6K0cb+oCXN924JIg549TYNK7CT6KBJDqLdhRw0Cs9SSPy+ZctANiB9tudnUccYxj4x7sVbyvrsOfY1N18mVDzgtDeVDyR7xz+k5nDBucNZQIhQCqEXrdKWwtQze0n+kLDNmrvYn8xt7Y31EjRjMssXIOsUiInawyeIF15nkR/yfeOWlKMymPH/nori2PIpzHsNJUht2/G4E5w=="
+                }, 
+                "giedt@bsm": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDAUPdvEQjKg5WECTpgAWxbUGEQysifvfLJVFEedPx8+u3vBUerTWjRXzdRQx9Va+ZehNfzX6pv13CA0jHbO2Q27QDeb/WzpPzv83sG5Ks0mLNXQnwsX0KMJsHoiPKZc8/VnuUzkBCRRxmF+Q88bdENesP1ifCSW5cZO6VyRLfFRrE6Q4D5urbszqR708IUMzsOLW7jHi8wnjsujP2/Izn4yZZ3KA7DkqzRJZ0MQwh/uN6e9OMRHp/XQuZy7GgPCv+kz11Y1uY3akXfYVqMS4lJ0UgLPeHUU2BWvknfLAMGyDISKc74sjTrFLVGSZU6UEnVIQ/DWWMejZAaWQfG/KxR"
                 }
             }, 
             "connect_project": null, 
@@ -11153,7 +11598,20 @@
         "joshvandenbrink": {
             "comment": "Joshua Vandenbrink", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "jpvanden@olemiss.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDIYgIhtXEp2PN1HQDqzwnual0wulenc3bu3hSOAPo7k3nxoNsNqlYdIbRGlZ0+zg4hpuKamZQEjZuhRs/uaXmePWHseQTNq4OHcS9nt0ydLY0UAYHYaq03r+dQoS70V+PybwGw7QfKR2ii7E6zQ8bHSdIeVNYvvjthntFEaPwetDONfXPmeCO/TPbUNyIW6EMJiTGoqq3AEHy9L9BiFRWNoKpK5N2Upi8/1SLQnbF9IInE+kVu9LhRmeNXEmqwgJIhSpyYJGL2lp2LfEPGoJ5tA2rfff71ZVkE/XKjMDAtpeMDh1QasALuH9s8E2pE35fE4Y7pjRsKkv2RjXxq5a0h"
+                }, 
+                "rsa-key-20170620": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEA3f7o+khcAH1xqzAbE5NgSdFwb9qKgSaMcTCz9QF9Vkb0XtrTjdv9ajYkA8QooXkxslHZ5rfvLcvXv5OLYAMN5JZws9wAdZyk8etm3ckP6Q/5wRnI6eNim7cR8Enb8B7n2TqwoUcz33WxU4Ov08AU6oejXcjZaN7MPmBtJ/t+XAI3oThQLxESp057SkhNCpLj/vTZ/7f3CvMy++XXP5cCsFrhdlJjq7gohWOSH6qsCee4n0IZDO29hEfPcmUpsSOX8ffFR6hL/b9QdkOpIjeUZG+eEOhprpAXtEv9VjU2nst7FSZHuiuGbQw9Iz/x9JT+9X6uuWxrzVm7n2doy7RaSw=="
+                }, 
+                "josh@Josh-Ubuntu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDHDxY3CPgn17pqwZhHeD9SHVKxGTC627mY2RM+zeDEoRxCMQrCHKyLWmLAEmp/PsKQh6zi+GhqMiayepk5BQ9GpNx7C0VJVY8yqRthhNkIfkKERrNCHzue1qM1KXktAXhtnlPc86JmibRjLKxi1vs8pHm9gsm4x1TnDDkEZEmKeyru/lvnXZi0jI+39DIum1+7NL2d6c+FF9a/0foH/1ThofudnUL+7ByrgO1lzaBlLXGtbtjJ083aKB1f54zxEXki1CUDQPoti5y+e/geLODpV5Zfs6BhHve65nNZ/tMVELOYcrhVnTLWxGQOLRdkGQw5ejkMUvk3ssCTLlXb/4GP"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -11256,7 +11714,12 @@
         "jpienaar": {
             "comment": "Jacques Pienaar", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "jpienaar@midway2-login2.rcc.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDd6mXpAZjnRAyIHbAm1AD5xY0yON55yeYLKlhQmokN+TKjYnfXhOIEhgSG0BB1oQ5CZvn03jBFG+mtpIZU4UtIwViRYMtGsoFLpqHoH5z+dGGfvEghU/VURgFPHXX/LzHZxlf1I2v3eYbjNXMSGFF9faomeC8tNACY/2qb8fV0er/Yy0TE6gyg0jsqAWWgXhcz9SdmgADKhqUBflRY7d8o/tfD/OCMlxjiba1Dug+c1qAS34WXD98Fx/dtsOGuh/9DExwZpcIhXaKjRhUs7c2x3NynNXHMAhtcrjMa6scyzPOLhaDU2CKa+hwe4o6R+s5ZEnng0V4krYrHyMggce1j"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -11481,6 +11944,24 @@
             "condor_schedd": 2, 
             "email": "jory.sonneveld@desy.de", 
             "uid": 25194
+        }, 
+        "jsw": {
+            "comment": "Jon Wilson", 
+            "shell": "/bin/bash", 
+            "uid": 100025, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg.ConnectTrain", 
+            "gid": 1000, 
+            "condor_schedd": 3, 
+            "email": "jsw@fnal.gov"
         }, 
         "jtqv84": {
             "comment": "Francis Liu", 
@@ -11956,6 +12437,29 @@
             "email": "kdlong@wisc.edu", 
             "uid": 63149
         }, 
+        "keenandr": {
+            "comment": "Andrew Keen", 
+            "shell": "/bin/bash", 
+            "uid": 100022, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "rsa-key-20170303": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAgEAkpDdJH+mOOVb71Piwvu0FypOsguoK+SqgCbMxbLgI8Z3gNGCPDRhH9JpossFXvpZT6VYTrs+I740f/FIHMwO49D18pxLs4lhDnJYIu6eS/GMHkCqT2X058wzY6KIhE29Ex8PGNTU8vpW0tYuaFvomm+EFYQwNQUnMeKEC3NuTc33bmmNVw5WA7hGUOL0z/z2TlTvTcxO7u0bTWVgrxMQHrUljXqcia36mghVhI+ggsi+Zma68/iJD/cIHagfHGhM2maBE+nNeQ7voffs2FxivYMckT+l5Mk+N/x+4xz/Q3c4myqKnGIZJmovngBq31fjv+1K4/C9+8S24G5GcgYttVc4SwA+4flVqIi+cMI9/FG0rhv80Wtj+wNBYr//5XHl98ptYGh4IqVI2Q9MB249mfMp4kt7o5HHHACA4IlRxLT+jCKu6DsW9dkNweymr5UpiQhpRXMQFX3wt+w59BQaF2oskZkI7oONpdTAN11ZYTIQw9N3/4DpgHax7wMz4gKJMVPgryYD2Q6CRXUHQUqggS9PkUIJO16QfcDjqGUkmznO1sstRSRxgY/etcFvQW7QdwC7YOU6vKZVDvY5G2McCCMN76uCR3L7EX/hIKlmn5nam/LwLMLcqDcr4DUFky+PqIge2KQh7sRdRt5bWqNeATVLhh7hmWFnj5phGt2LvvU="
+                }
+            }, 
+            "connect_project": "osg.ConnectTrain", 
+            "gid": 1000, 
+            "condor_schedd": 4, 
+            "email": "keenandr@msu.edu"
+        }, 
         "kevinbegcy": {
             "comment": "Kevin Begcy", 
             "shell": "/bin/bash", 
@@ -12220,29 +12724,21 @@
             "comment": "Karol Krizka", 
             "shell": "/bin/bash", 
             "ssh_keys": {
-                "kkrizka@dyson": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDm6Ht0PY/gOWMm0YZTvCJ8Xhhj2h+p6dfuhdn4KTs60JTJfZTWZmP3HWG/iDinCqwO7Fp0fYSEw4DtsX0y9B6Y6v+evqoiTaH9qMDNg9LcdiX1guTIuWcGPFx/WFGAeJLzzqQlKWpsl19/Lfd6lMuHFRxSf3r/2cPYWl5QFy/DM7IU7x0zTPCanuNBMcTHl9DgNgkyJiHsCOMiAgm4cL2yDNWWV9uAtHJv3Ec4mx2Ew0YvcFNrNr2Raue4sovcX7+0iJHB9XY17ISXTkx+7zx3zKBLzYjIrDmYxpSu4LttnWuRxiDe1LvQ2vWrtE6p63koO1au8X6IGIlAKs3Xs3Od"
-                }, 
-                "kkrizka@localhost": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDGtojSAsvQtYjf5HfK3w5AI3UL+QD8FXNLy6iSPQ9vHrayTZamc3ACA5Wc4RIhczlHbHCJcwgV3HsLUM+qDAcUtxD6mOyXOhvt2n36Z+yFtuRV32M+u57GalWjODClLum+ZwDO5Pu9Yt7YaRRroYUoJ+WOMr9RuyD6oZeY3zTFSZydjjDSMHALmrdQ88dFSw1xziUm8NTbWXZGoQaVfqyZLU4sQwR3s5vklMpwXIpGbIUhFhtDzPkBeZYZds6Vao1Zog43tiSkIOj4zHr+D9IYTcJDrVWM36g1THKo2pqRgFzBX+llZVNuYm4tb4VWgd0xA8T9f42KPllpk7isdXl/"
-                }, 
                 "kkrizka@uct3-s1.uchicago.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAz8WbbOuThH3ct8PSQCVFhXaKLlgCfZ+kXQp7dSy7GnbRIG3I08NBa+8rcYVLG3j0JO557WzsPYfRWN9rQzWpctQFcUpesV9Vjwjf0rZby3G4eglLd6ajLOakrhIbamos9V8Q4Dy/6NkzV3QL2CkcW7hlbuQBOz4YX6P9Cp7aqo8wNVAuvUNikb2SNj7BsywdsZvyOtOeO8ygw2FOBtGQ0fjq+WQlln0o5C3N2nPHc4E9nfSfQqzMK3lJKLQ87SQv/s1vqb2RLZ4XUDB5ciBd68WmvZhbAehAIEzIfmKS/7X8kjxyFGsvZ/YWsJH9qHCWL3TkR0xWUMbxFPc+KAcIMQ=="
+                }, 
+                "kkrizka@tiny101": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEArXgEE/YSFIjlCQIDJP68Fng2jsEZQjaTgZ4h0/HUjZLXzE+F2RLJwRRFS+Sn30y8sZ3buCGYeIQKH+L0FLvN/0kn3CM+/mIwBeH1+CGETsIliGjSO62ewk+ePsM6vtQ7RxVY7Z1NI+lz5vMuTXiUr9qd5Le/EiblbcIDiIAzVtHVLYFUPiTlHeEbsSgP1wA9dUPzz5Ge4sIBqYuur1FlvJTP5cjo+PsZkHuarbLabhR69U/zfd9w8ba01RJJiJVL7ZqozuYi9GnnGMT72UroIvriyUZfJqRIdQm2VxME+KSBsnf8sqqJJVUY+owCluYPMjFpsnmnXoNosLSDpZpP+Q=="
                 }, 
                 "kkrizka@roof": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDML/ALuVDSqI+Sq70ohKPzJXPFgJn4wdQeCYoHlm0sg4AAf8fSSOqskAvc442hjkLcXQVTxgSXRR1jqJT8o5uIiGYnoOHKtQHAr9guKccUrKjBzINLl77zwbwE65mSBWz3cqudK+FVeFzPv+1SNgvjEjxnnb4FEQu58Qggm6W5CVjvEn6KZbhWFyMRlB+MCCQO3dKRb26wYNm5RbLL/03wph+Aw6UIsWBmCj883UT4q2+LQ4tpHqOK63ggEvV70wB7hxKTQUGVr2EwXaqfWkIIiHXxMNJTMn/t3p+GrTfgQa3LwvziINBon64awcUhz41ZKfxWJLuQe2cV/0c+mCW3"
                 }, 
-                "chronos@localhost": {
+                "kkrizka@0-27-e-33-88-53.dhcp.lbl.gov": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAmuRXcauek2Q6jMblcxUqNeahwhMt/X1gHcSwoiaa2/iF3S9xxFktMIO3nH2ctlR88vtSw29L1jwlQcc8j3Xj/pzfPKqcWnq7z4dRiNIxKc2YFZPqFZrTG8nnwNpjTPXn0Urwe7jYu36y1/PcJzdcl0RM3t0mw2MEWlfWrrJ/YY6PRdln8PCiXUKpFNVCN66L3tXIen+4tmm5bvrD+ocWApWqbD+648J8eaDQOPvYbb12PHLH1h4HLy48ShoTfDj+v1BTXoeineFd+1gQk64q2HrbSHTcns9unUzc9ZV+BOvx8/V0qe9K72h/ZFnMrY9GZQMJYB2jItCSN5IsLTfWKQ=="
-                }, 
-                "kkrizka@tiny101": {
-                    "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEArXgEE/YSFIjlCQIDJP68Fng2jsEZQjaTgZ4h0/HUjZLXzE+F2RLJwRRFS+Sn30y8sZ3buCGYeIQKH+L0FLvN/0kn3CM+/mIwBeH1+CGETsIliGjSO62ewk+ePsM6vtQ7RxVY7Z1NI+lz5vMuTXiUr9qd5Le/EiblbcIDiIAzVtHVLYFUPiTlHeEbsSgP1wA9dUPzz5Ge4sIBqYuur1FlvJTP5cjo+PsZkHuarbLabhR69U/zfd9w8ba01RJJiJVL7ZqozuYi9GnnGMT72UroIvriyUZfJqRIdQm2VxME+KSBsnf8sqqJJVUY+owCluYPMjFpsnmnXoNosLSDpZpP+Q=="
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCmaY4VL6SCGnrWjSelT+A099I4bhp1Tk4iGj/9WLxvB8xE3c/URkbxjaO3QIT/eyjK5KfZcLLY8BcVwshhaWPrqmLu+WLWkPSpySH2WNumZwf9/BMD34Acu/iIsOwtntv9vJYVqKyYAWCc8rA5HvS+ieklp/nZl5T8nme/eRDXDuAMYJzq66u+hyoWBSnZmgzN0mP/sH7W3dmqS42W8qFIU/Apu9LZF4jSgMh5KU9jkQ5EybpNmlPL95MW+bW2ovWxue1t+GVIpGSQNoI9wDnX+7YxEYmt82W1ehGzpE/gXhSs4Amwyy70kZuhnm0OHR5b58XJeIUKJic6Ic1cvLkz"
                 }
             }, 
             "connect_project": null, 
@@ -12966,6 +13462,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.TextLab", 
@@ -13719,7 +14216,12 @@
         "mattg92": {
             "comment": "Matthew Grimes", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "matt@Matthews-MacBook-Air-4.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDR72OoZXmLNPUF1isrtNYlPw5bpPF4m15bGPggfz76XnSXsSnjqZC9Rwcs3PSbQOSKJLBCW0UIy34qCp8HAN0hLpEXma11hrFKg/OhqYow4jvHeCLecsHOr0mf0cG/b0VWorQKCmnYCw3RBumegg1L/VLFdEf14V84eo5ezQ7xO/RegEVTLj0ttNY8R4wK/Blj5v/PczjhA+ty58vmOtwLcQiDM8jfPKq7Ce0oHO2e5D7UWJ6oURKVbqjRnfjjLExN6ro7RZRGLL191exKLOju97a1eXwvkONNmAmiZw/3FtFO91vc+F/AgFjpOFS6Ij4VedOL//5JgbRhyCG9HZIV"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -14587,7 +15089,12 @@
         "mleblanc": {
             "comment": "Matthew LeBlanc", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "matt.leblanc@cern.ch": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQCVhMZ+gs+LqX4vUfI3qJvWldF53KODeeqEmzSFq9/SBBPm7ctsBE+PfNPAwlANraLk57s0ZoeSH8Ts/h750zlvivvxODYkoMzom/1/d7IJ2uatOLsLCeDu2SXz/f2c/Fi5OlsWYjep3+yT1X2tv933sYNc1UXh66dzBTpuVklHx2dOEWRnHpoLKkRv9e4okI/Wmmok1jE6wg8hyI0ioHK15EjbehoUqbZgUte7Ue5x2D1MIN7QTHaklciRCIgAFc3xMYP86J7ul5yhrLdTmh3yOCNPyPVpbAz2F+E7+pLsEyB5eDZ5b90xEhj/t7TsOAq5s/S5YzjxnMuZFw3fpS5ckvcKA+RiMeQM7KALMG3/TJzWEKhncXY39UCXBYl5vUH7tGUE0Ccw4ijwlpg2B9OexO07CLbkgFWpWSAiMhl7BpyrV1JjBPT7UGK1rkFawBqOA1kyjl5ZgvPDDYQAOkI501iMwu2h6RmkDPXsNaq/xjo6zycZ1PTEtHKIQ7e8yDuZgSqMn5V/QNwcbpebN36wmabFa8D7EJcp8UH9cXPXJJYdOgOby9gA21/DeSXAGqWNBzAiueZuh8UJM26zDAJWPh+c0IChskwrz89YbBRlSMGHqluq975aRKUGvtJu43eM6wVqfIFjio0iZnd3kkvT6BQ+Jp/gblTYoOqfgWLfDQ=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -14605,7 +15112,20 @@
         "mmw88": {
             "comment": "Marta Wells", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "mwells@avenger.structbio.pitt.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAv2+XZaxv1SANaoPFcxdVPDpkvnq5OVQ9lBzyMfp0e3VnHtkCNSIipLqv7EoFcHtlPXTbJCRdnvgolCV9SS96Htk3YC66YfzqvM3kxuCneKXvjRVV52vleshW7RdwUYVp3a2/IfHVv6ynDt1Y9HcUd46C9nyHH+7tl3FwTHw04hETiLengZEwD3WalFy3PePHB3RrbiEOthwDnEFYtnqYwcZuxg44yZtX4Hz0fFbQd/UGE3Q9LCo1yjuaYOz00fIwMej58nFPYzffaRvh4oQEzXfxa2GGP5VlYwEpEicQqh0SHdebLTSIARpl/kXWRt64oQ86STCzjirAmABs6cfPhQ=="
+                }, 
+                "martawells@rama": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDbi2kMwxn69HDBvvZy4pSlCsfLFEFP42o0zHX3JQgD8rt34QaNxsJrA7dT9buWV5xfFuqJGWg6+X+Ok5F9rMew3Z7Dp1hxO1BYQFCYFbEr8hi9wL9HZPjC93X+Bcd6Vj9OTjF+J29FdxHLgYrKRd4RTxqYwFq03ckJ4JGhXMPovJbCDVptuKCO/QtlEMUJ4WjdfAv8gkrxoywaYVqYo0apBrgr92O39M5tXZUS3e1EN+bNm5At9jndYHYD5dinSH/DsNKf3MinPvqJPB/FbfQpxRWMjeisJVPgxMuwTza1TDNWQI9q3xcpMRqHZE8jnqxA/amjnaAWIVKeimaYVt7V"
+                }, 
+                "mwells@ultron": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAuom+n7iga46e4jvz1kmSKLHIZ4WEDzZamm7lxOh8J8URO0vsw3p3MEPZJkINa9+dGCeKhRp2QcIM7Ued2uTjKQcR4uhShs1AfPY6sdeIRQjlu0Yys1DxDnaYFb9gg/SVsfS3clKpI6PL9qA+X7NAwNSe5tItmMVHF29d4t8Xr9hMzegKzCrk/3Ujbkkxs/ONG62tLvGWOchguMU2as26EzFROzUzmTvRQtDrFmgyjU3QCj9w1lbEWHbCEBOTfCyoZY+3pXmQE/UWSbq8tvASUJpi55SvseJC45fk1xA8A8Q0mQ5CyYFWTt4iG5QsHQS6000w8+mNcTtdhTQaIOaS/Q=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -14813,6 +15333,10 @@
             "comment": "Mohammadhossein Saadatzi", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "rsa-key-20170620": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAsPnZxJLmklMhVxWUh52/0kamB+cTvTJeNYWRyx8LBsLkbRzSg11SGpHp2kVP3p8k631BbScewbJXlI9cS9DoxGK6WQrAeE2UWSdRcNzVFmOUY06ymuUc2n8/sD5Fe3v0pjEvXkEh0XSDkrAzlD42A2BR/CM4MCywIAbvTukmDopyW8aH2+iA0dY+rU73Qzk8c+q+pd/mj+oIKEAFxkSk9vwWOXDf+9VzSFFwYEb6uDxZMTBwzrsXCDyb9B+VazpOeAdbgax/V2zD3dxygitMEBSSxzKNhusGSl1zMi1gd18qwsbLDaDYBS5oBjbf1SS6UDmS5SBHQk99Qo5AtwSINQ=="
+                }, 
                 "rsa-key-20170531": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAl8HcyfL5XB6gKLJtQbLXyWDVqJ5ULIB2AYihYH58EM5RD81MGpTr2Oz7smrDBX1HryMPr2aeXz+UdEJk+L6+8y5N2HZk1Gsty6eexl76SrzP0d1tlVm6+KOBquVTukLB7yqPQY78kKcBR1zBZmiNKv2MSLDpByMP/elTJFiSY5/XOLJ8DtfDWnZWie1r52/J5dVhB/JztQluvhCS0jTvWw9k2pYIhp+qtdxorDYf7LiIspz4oVIp03maekLJXj+O5Ll/n1jSnJstBZob9d/s6NIUzFOT0DjEiqcjh8OjCjs+EZedXjKw+q2cP2zOw0qsRlxkUVeUCR5/cD2A2Fw1fw=="
@@ -15338,7 +15862,20 @@
         "nepomuk": {
             "comment": "A. Nepomuk Otte", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "aotte6@phys44225.physics.gatech.edu": {
+                    "type": "ssh-dss", 
+                    "key": "AAAAB3NzaC1kc3MAAACBAMK+zJliHDpfWRbrExKbxOb8fsIbFRlixzctGj1qBLeA88Xj/n6K3eyN4XEwHPdakjUXGLzFTVi+D2JMAVrNxBuqUgCqUNHFLO8okVgCldyxRED4g4bhZnXPny+77kkXWGf3etooyNalk7BTa2HV1wxInt7kwWb1hUUfzFltGakFAAAAFQCEM3ujY4UX5p5029pSfh9LV3O6VQAAAIAGjBu13rP5rvHrW1bbl5VNmcsZii4rBco1qXs50L1jBuUyvzyyaW0vhVQLbNMV5t8wbXkXsPP7uuksKT15gtjKYOcpuf3uUNvahapXAmP2Dtgdru2eiqvuwyQRaGGt9dX8Y9So+YHHID0j6KK+FQDeqFSPgYYCXuhQQkZ5sD27TAAAAIEAwNE3UsQugLkjvA73LfaXcYFu0Ou2/pA3NiCEECjKSlGDo1Xdutr+HQuXj+7rzGBe0qgUEsDkuEZBTolI/inKixjogwyXE6DBWj7iC68lgi5RBWd6+hMblVrJJAj8KL6I9HS3rMMt1L8ss1+lo0NCaLD2mRfaRX6MB5+hHV18UEY="
+                }, 
+                "aotte6@cygnus.pace.gatech.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAmeIaiVZ8yBEp/Ss8KbAypCnosVYLdDtbVA+Qzc63LOTeMK6bZs6x8pMrTkEVVA6/zg08xOR6i4GP+EcWc30kqGDtmmdc5zxcSsW+z+SvozVlIv6fMuCHNetlwUoNvu/2t1RqkWEPYvZciHppO7fo7kwKMQvosIWIfV3m87H+03/si4nlwfMQBNjDfHFvyr4234BHQGkjwPpnCHsRemKbpTztsd1bE8QdKnB5ZkeyJKXN7h5BDx3JlpIeUdgi5xsV7mZA6gRvgMw8lXzXfCn6DLC4MXaDKUBEU6QMUeiZwIb8s2kt/MPo3hKZ1UP0Vdsnwn111fzQcBSaLNC10zup+Q=="
+                }, 
+                "nepi@NepisUltrabook": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCYpPdyKApahtL0HSo3clQ4ONUiA1Vlied5ZeOfhxEb36vlLPK5xO/BkVzt+54NRrYisFD1iTiJ5QhT45AndDnDdfAJmog1429pKr76Xptb5gA8eDHGIY2tiw/lLlY598j6ecGmYjSzizSUPtC3Htx1Qf3fHfN5L+7QfSPEOgDsOF7tpJKHI+FuBWAoG6M1NkldTQWwjAL7jL+Px5O1YxR+BIMWsahWEPveQYkdMdtGiYaPDl4G9ZnTtmSIMHM2ILSbwGfruZnMjEOnz2pYIHRBcCzR3vuuH14/UrfRpw21OgI/3dk7dGuMIlG53uIRnpqp74mGTfv1YV3uPGvR3Y/V"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -15366,7 +15903,8 @@
             "groups": [
                 "connect", 
                 "osg", 
-                "osg.ConnectTrain"
+                "osg.ConnectTrain", 
+                "osg.ddpscbioinfo"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 5, 
@@ -15453,7 +15991,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -15662,6 +16199,33 @@
             "email": "npavlovikj@cse.unl.edu", 
             "uid": 34737
         }, 
+        "nrana001": {
+            "comment": "Nishath", 
+            "shell": "/bin/bash", 
+            "uid": 100005, 
+            "connect_project": "osg.ConnectTrain", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 5, 
+            "email": "nranasinghe@unm.edu", 
+            "ssh_keys": {
+                "rsa-key-20170609": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAnfDqtovVopYPfJT3+bbo/iqzR84KEce9esBpDuaQIL9yb5ZdZB2Lt/76xgxGO+BFLxtwLPAVPC5tRUrG3ZO+V9FYz/y+sTgJnBJ/J82mGYy1iaeyHHUWwHP0TwZET7CuzQTIkyYr29ezlWmTrXQdgNfB2IHBulO+MMntyk5f2Ji07bYZSs9rianCVfsvJbRDxgdCG+FbvLXOH5fGVUyHicwZTkdM5ucJH/YCOliNJRwxdd/+UnZb1eNVDemziWFwtXlTeg+rSv/2UzOJN0mlWDTLTtM9+4+52FNM0W2Ujo3oC6zAs6xAXUQEXMVEMSF0ZMupiB7hFNW11b8F6koL+w=="
+                }, 
+                "nranasinghe@Geo100": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCxDgmgJZLSfK5iEj38tozeZEGklv2jVsVUmbBM2Bz/\nzAICfFeak4Z53pYn0rFJmiu8MYsME6ujcP814l+ZfhUvmV7KmKJWqNIMtPrk9cynaYE0DrdLsaM/abco\nuoif5BiHkFdFo4maEC0pj8MevDrE3w5UNByKqh8a13u1jm/V2OUeOt8C4mDUip3uCxggUQ8d6PFk6uyJ\nD+XuJ/65H1EGGwkVAA98sg80dnsa8uG+CpCnWZKd6tu7x9UanWVc19QTKal1yj2EB/AQxjaZOkybgX1/\nuqq9mzrBLOruG+uPf0O19Rzulo6ZKojd24/flLW0mwRrpPnxnwyDnlhdHc6p"
+                }
+            }
+        }, 
         "nuyun": {
             "comment": "Nuyun Zhang", 
             "shell": "/bin/bash", 
@@ -15795,9 +16359,17 @@
             "comment": "Oana Carja", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "carja@lsb084.wireless-pennnet.upenn.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDN/snZeEvi6Wc9FZ7X4RTZwgjv+IodFAdRM9XB0ZMhlP2JnRc/DEhSDTCgB1/k9oREgqT1mnsAOERDg8+UYZABa3HUU9juYRlgw8rJKTT/BFF3TWq04EViwni+56FVUnXuv/2OzkB8NlE8WYHO08EObEZJ5E7T0Mv1nCou03wvyPjqorveOJnwcVyZH4Ikm7CTcPa70cJzqPt4Mfa56fDIt6m2zIr38vNdvzZOCPVIwppmjR7IXFFReYmyzSJP86rysy7RDRYCxpwgTCxl12M3DxIlVt1gfWM6baWK56shSID9VX+BCqgbyK8qslN7Lm/P2qjjfBWfgTGPAG26FpBr"
+                }, 
                 "ovidiu@Ovidius-MacBook-Air.local": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC0MlkaQP/V8/Rvcp9AahzlrMOFYbisZcHXY0WhfbZ4HH34sCuPSNjpsBjSIGt/vJDKNXtowTzjxqhpCj5tvFe8mB206JYlOtQHx3z3iWoReh1PYthvdzTBGDU4XwbzGzXwI3Y5aSx6srAm1CATBDd6eq3Xs6tzH2O97zc9fOqAv6kB+oiXdHsOZuq3w+4FOS7mGYWpCJKBjUXCsjpILNBQj9bGljZkJFrjv7f9FveQTMCmfsWHPKE5zosHcdXh5nxy2pEY9y+udtUeW/IDPIh/cAGzF5oPLXqA6P4vAbfJx0QB9t1kXWO2QO3kRVyrQkSgxpNGsArmY2UOaBAPHrJr"
+                }, 
+                "oana.carja@gmail.com": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDF4QIb0vQVx4iwDE+Yes7W4QiSt72WwbIY/RZjJgD1d2NPpctlNt/xLQyVF+MoNEOB5NPFmBLjULdVcIC0Ggh6ryS2G84eW6gnyAhkh94qRrMkgBhFw1j3bVXxi1VUFHUdQDMMTj7CjnfcMUHSia4LMFCXcB5sXKRJMtOukcesRqoxoWDlHd4ybFWIdHGhCTIPIPqjL6iIfD3lSf+4OWhsSYqbbAonPqOpaZa1eQq1fJF634sDO+PbNVbjc9wuyMW6dbO1/1Otr4soLzRV6PSrYZmCXN/ewYDhkDFiHE0OXB2m/5ZZD86EmB6/KKyqdV3gfEYDbZ1h56kJFIe1KXkff/dTVJ0In/yLHXfw4TgAE+gIf/JBmiAxdlqyFkHvvKWL+B4mEji3UiZ4CNcKWIqQEUpTKTfqbAbIVhTFQguIUx33ilWBpCSJm8xC7mTsjmMQFTLQbZyxbwYCP2LuHhHZsD1UwJ+HCVCqg6zT5trHfurFgkUcWaQrCvLsbK3i7labtdwOQdajSrtv/nI+selvsuJq25XP7CMJrKtVtxMs2xcpPoLslZxhXB+fgp4wCab5fJwebvWgMM08m/DLdDLvbZgn5nNdjTThf8ypAiQaMwE/1JtF+TE/9WDuxP8YYyrp4H8VWWS2Kl7APp8ocQ3jkfCnrw8QsWWhKKsOn4eMoQ=="
                 }
             }, 
             "connect_project": null, 
@@ -16543,6 +17115,10 @@
             "comment": "Patrick de Perio", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "tunnell@midway-login2": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAslhISl5UxUTe1gMYET+sm7FwkbFdndu2eThp4LpJUZztmnPKReR7wRf1frN5LksqpOhGxr71TsL20b+JPYVth0hWBXSnyzUFAQnb4LklwT0KoKSvt902DaukmZWHU1Ii/NMHUijKCDf0etlXkCOkeKjSZ1X67e78Xo1Y1YUeVH6VW+c6Wqj2iTDBf5MWi0eM3bjBuXRcqSqPy7FGbIuHI/yp8NCU96p79amQUcB3M1v2YYWyv8YMp7Pkn6L9aOsqVHW+Mnrsw8HEA89DU7t0V7zl+UkI3ygzFeS5c9GLxCUYxZ85BCcBwZMA/RSmhbQRkwjzlY75+b42PXoZDyTj+w=="
+                }, 
                 "pdeperio@hattorikun.local": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCpWpCPt6Bmoqa+Kdrf4jN5nejMbBtuED0qI8X6Vybn5fkL4QJo76CJ2wAWduSWAiVWVwHdWIKcf0gE84GI6FjK/vJp431A5dgWsMSdX59YvD9VmCNMjNGj640xXjfGkFn390TR9YFBXol4FuseZjU+iKr8pjkvrm5g+HFZiFYUHBizjhDs9LomyCMG6lZWzJPQbElseFpLhrJNHjn6de4uFesZZWtV2J1abXOGNlq28+HPleF45xWbaRPTHVyJzbYo2Sgcpxm6dyrY088a3cSTTGm4XQwc37V56hbvO+JXVtCS/WvZDMwWJexNW/b5ak4OE+nozGfc7fDdJmn8kkRH"
@@ -16570,7 +17146,12 @@
         "pedrok": {
             "comment": "Kevin Pedro", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "kpedro88@gmail.com": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDOobWSZ1xQtKAA679rCxJRVbOtVwwbrSIK/fTdvpDcVmAbCyheb/6wDYn8YSYXVd+m367CJahmGw0oagsYE2Ome0NO9ZxWn1jVeN0n2Va3x9RcTBIj8allLglf5hc+EzZHwGPLQPI0/iwvhJmYdjAd3Lzj05BsPWDtZ0EkcNBxCKvItzWi3SS0LS5HrbB7gmFVMzJ4+ONUSlcgM/ryxWaKxWpSeMs85vXeNK3iVqOCHC/DxyNHK646dM0Y+PR1s0fuIhrrg4bZHqn1Ep1DsLpluzeLsAnVlxibGu53xlJBF7E7hZ3B+ANFKtX7SpnMnZLagMcUDP2TOgvsJqFpl0Jt"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -16936,7 +17517,12 @@
         "posada": {
             "comment": "Chrystian Posada", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "posada@globus": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDpzK9ss/AWF3KXa0O524TZZgnUvuYa8772Ea/QxMA2xztPEpItDNFCjgOwAzvxRAG86klA111bRpbfBkRFgxoti/BQ5t4kkFtbTL/Cd5mQDaFyEjWKnk8U9RcZov+6GDWHMJxyjoERfioL6V+xOZa5Bukz7MaLJHq1pSYUJYJXwtYzMy+v+TL2H8hoNpR/Y2bpy31d69yho2RRlpU94jBuZWL2d0+zowN9NTaWAE+M0Eb9pEIUmkxy9f7ogyn4lStsd2xlTIuHe0EaZvgMcssADOp1BH3LkaCFQTaH/BRmJV00Q/W6UsBLD+YuGjUFkszi99ek2beFGOgg12jP+UFy+TFineMfBOgIDIawNFEFDIm8Xnq0h33JMwNpeDjtPKKtSuI5i5kW1X2vqtWrDPYXHCLK1MXqEBAi4jcfLLWV2TZ+K9ZU/hiMRokrHYB7R1r9yXaI2Ch0SUuqlf6UnQmAYJoivlbI0jIRBbkb7pPFdycHO5Bs6Bfpjys1jNbQkyDFXWC66aFYAjf+XGY2p8GIl9hIVQg9+I3KobkWE9MvyaKtjEajD0xSWGVEPaaRoWjFT3YorF3VGMceO4F0aFyLkiNL3fGSCWrLMOsoeIT29FQMyXH3RlVD81VUMTDQtGgLiD/LZaQ6+5pjJHYZ/l95iE0CcsrjRjCCrr3V7sRCjw=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -16993,6 +17579,24 @@
             "condor_schedd": 3, 
             "email": "pascal.paschos@northwestern.edu", 
             "uid": 41462
+        }, 
+        "prabisha": {
+            "comment": "Prabisha Shrestha", 
+            "shell": "/bin/bash", 
+            "uid": 100013, 
+            "connect_project": "osg.ConnectTrain", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "prabisha.shrestha@kysu.edu", 
+            "ssh_keys": {}
         }, 
         "prasad": {
             "comment": "Prasad Maddumage", 
@@ -17095,6 +17699,10 @@
                 "psiders@localhost.localdomain": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDGeDYtYqW22bRmmcv2Lma0ZppvbvuDtS/uDMMtgTUIN+gao8Zr+OnQgocFf6G7vFi1dqkTcxpbXMgXQ5TpCFtq/jVXc/MuFPralTb1o/ayb8sC4ATjb0OeNm5Q5HW8NVLqR0lgE2kb9CDCVyOHvmBmGFpYNdcuj5InBGpzNH9gnPlNeAzaPMe/qg3nvXtdVoTdSKkqEUpkKNopcpm34HmYdl/Tttf9m/rj4Qq4ZwF37JiFzwF2oSyfC2c1RdKRif//vqTr5z8EONPUpJQp5ImZEVcFcrYj+R1vAEXByC16fjdnI/cOw+Z2/9/qBun9m/t5axi9i3A/Ux9fHEiEmHkD"
+                }, 
+                "rsa-key-20170607": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAqTy0Ojm2CHYRlUWdamfV9Jb8TcFrYb76O3oPNWM0vWjP99ns8/tb8WAv8hiPuhD/q8+XXb5Khoo2DVP6J0taSqdhRqyTGr0JRSojk90cXWPo4nA1lh9Zh2J1j0yu94n3tmTD1uJVqJN3KTj1/Teyhjo3aQB63RVTVMaZZ7cR0hR11mNwZjHAsXoG8oThYnyivyHzXQVi1YUiL9idEEjoWxP/D1ldU3+Kca+HZ38WU42wqAOkf7T0417b5j29AUq+xeHuFBVpKdN4ALD3C/AnIiE0SbDe/1kDNn5eRNKWnkD858FK0oXsMkrYhiIAdccJbRdVt4mnl4PTZ9Ndfe0Agw=="
                 }
             }, 
             "connect_project": null, 
@@ -17129,6 +17737,24 @@
             "condor_schedd": 1, 
             "email": "pskubic@ou.edu", 
             "uid": 29029
+        }, 
+        "psurukuc": {
+            "comment": "Pranava Teja Surukuchi", 
+            "shell": "/bin/bash", 
+            "uid": 100018, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "osg.ConnectTrain", 
+            "gid": 1000, 
+            "condor_schedd": 5, 
+            "email": "psurukuc@hawk.iit.edu"
         }, 
         "pujasaha": {
             "comment": "Puja Saha", 
@@ -17430,7 +18056,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -17566,6 +18191,24 @@
             "condor_schedd": 2, 
             "email": "rfhe@wsu.edu", 
             "uid": 53318
+        }, 
+        "rgilmore": {
+            "comment": "Rob Gilmore", 
+            "shell": "/bin/bash", 
+            "uid": 100002, 
+            "connect_project": "osg.ConnectTrain", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "rgilmore@umc.edu", 
+            "ssh_keys": {}
         }, 
         "riccardodellavecchia": {
             "comment": "Riccardo Della Vecchia", 
@@ -18037,9 +18680,11 @@
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
+                "osg.AdHocComm", 
                 "connect", 
                 "osg", 
-                "osg.ConnectTrain"
+                "osg.ConnectTrain", 
+                "osg.nsides"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 1, 
@@ -18091,6 +18736,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.TechEX15", 
@@ -18191,6 +18837,7 @@
                 "duke.swcstaff", 
                 "connect", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.SWC-OSG-IU15", 
@@ -18404,6 +19051,24 @@
             "email": "satra@mit.edu", 
             "uid": 41188
         }, 
+        "sbein": {
+            "comment": "Samuel Louis Bein", 
+            "shell": "/bin/bash", 
+            "uid": 100021, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "cms", 
+                "connect", 
+                "cms.org.fnal"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {}, 
+            "connect_project": "cms.org.fnal", 
+            "gid": 1000, 
+            "condor_schedd": 5, 
+            "email": "samuel.bein@gmail.com"
+        }, 
         "scampana": {
             "comment": "Campana", 
             "shell": "/bin/bash", 
@@ -18521,7 +19186,12 @@
         "sdiglio": {
             "comment": "Sara Diglio", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "saradiglio@MacBook-Pro-di-sara-diglio-2.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDazmU1IPnMyEIx4JGoAdRGhzZt1/lISR5ci9+p95J0h7eOkzvuCe/vY9EVLxo6wryCf0iI63fpZjduDj2DPovsdVAFUZtCnm4zNpgEiP9FNDLVKi1F35nzjc47dYhVK630QdweSINYIAI3+4F1dBRr/QTOdvkg9K1jSghG2k+O7OwFxHoNiHd6wRnx/DM2RBHV8oWffcrxW89Wxbx9Jz5ooVfdnmQYaHSJ13mYjHjzvasdkzPbW90cnFuvLfhe6TSaDdOXOKWt21iwsWaq0xCDWvneBbyIZdVQkXkWCXKUufDLZJ+ft9vlSVOuqeaZNX8QaFTenfzq55G5rQbcCnC1"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -18720,6 +19390,30 @@
             "condor_schedd": 4, 
             "email": "sgoldstein@wisc.edu", 
             "uid": 29404
+        }, 
+        "sguns": {
+            "comment": "Sam Guns", 
+            "shell": "/bin/bash", 
+            "uid": 100019, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "spt.all", 
+                "connect", 
+                "osg", 
+                "spt"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "samtomguns@Sams-Air-3.dhcp.lbnl.us": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ8mbvUC3u57+zXVbBQHcr0lplKt6NPYiYrmuIcpI7qof1seoWND46k9b3eIkDtawrvAbfe/KObrfaxWCSi68Ot3C0xiHxbxmb9jzUk9b9n0JxgkY7uxoff8qc/xfqjijz8/sKnF4bY7BzO9OTTioVMhK1RFemmhXYAoZIdRDC2vzkZh/4BU8m45I8sjyC4DPDdYqHKiuIkKysqU+9P6d6MNRXMv2GLSiLnd416eX4sJz9Jvdjt+gx6M0SOdXbb/kpP/n9GMISGyLOF7dm7aqVoaC26JtaoT7KhwFS9rZOnsU3/4OTiHNz+G4WhQBTMeG/3oucpaDj6qJTa/uqRLXj"
+                }
+            }, 
+            "connect_project": "spt.all", 
+            "gid": 1000, 
+            "condor_schedd": 1, 
+            "email": "sguns@berkeley.edu"
         }, 
         "sh383": {
             "comment": "Salman Habib", 
@@ -19290,7 +19984,12 @@
         "snirgaz": {
             "comment": "Snir Gazit", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "snirgaz@dhcp-128-32-240-58.lips.berkeley.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDr+J5/ug6GFJJcgaKB7JOJJlVPWe7PpfzmV0etqqHpeBgsxMkAHyJZRu4fKhhQZTQAAf4dUPPoBY1mWbXvnYhV8TI4E0qggjoVcTYTWPSKZflxQaHUW+rT5mgxvD8YWGlYOCclLkmQ+pp+at5UdNVW7RPNywP5drJyt21dwibJK6kt5aQanD5BpypB7P7JNYTQ74DIq0hNRjMWDAJpxT8AvbPoMCSsjYP9lRXR2C/dDNjQR7zdQmzO+6YGVxUW+zmbOiJ9KZsfxHzZp5g5iNGq2Rd6BLkFBoHm/zNhK0NxaFkZLfrEa2A1RpAhS/0/dwDoKxQsH/x7NVwpF5mC9Utd"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -19605,6 +20304,7 @@
                 "connect", 
                 "uchicago.campus", 
                 "osg", 
+                "staff", 
                 "osg.freesurfer", 
                 "osg.ConnectTrain", 
                 "osg.SWC-OSG-IU15", 
@@ -19989,7 +20689,12 @@
         "tcrawfor": {
             "comment": "Thomas Crawford", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "thomascrawford_old@Thomass-MacBook-Air-3.local": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQD0DUM0n3c74qufjHmUKHBPLJoDchi5t7kBZz1DPdFm2IBGVBEjtuVufF7yUN2cWnqXBcFpZP+4mwQdOObYBUPJTFKVzeQQ14YTdn6D+SvPKh/PwUqJkqvrMyMSvE5+TZ5hGqbLdnIMF2jRGDvskmdA23RNN6bU3CFLfI219ZCJZa282r3GC3SlLTeEna/fTUeOb+OreEZVjNkjbI99m/qCXP5Gczmk8KDkoo/3YyCXSzS8bsKVc67jSQJIsmbKi1QxzfSE93Y5HeLoZHuY0iVrN9yawt8R02NW5QlZCOitvISjn36dBgSsHh2sUcy8mYFY37HMXm3B7/ZhrkfP1oMr"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -20083,7 +20788,9 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "connect"
+                "connect", 
+                "osg", 
+                "osg.Duke-QGP"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 1, 
@@ -20225,7 +20932,12 @@
         "tkorokn": {
             "comment": "tibor koroknai", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "tkoroknai2@gmail.com": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDe2+u66ZvEAalA3z1lgM7Em7V1VC729hcodwl89k68mU8XS2NQ8aljXJT0OzkuKQN545gIWo2iL4C3/AkjFSNmZ34QI8f/FWSRUH8kAwA1YErtDcX7w5yz49OLYULYeoKyeKxNIeiTqkhfQc7Vn1ViC2bBXzuTyXhnchWHOFcoP3adggh7v55rkI0cSYYcFM6gJDUBQrh0LD4KwP87JfbqHTmkgx9ybTEJcJnMAPi+TNtrVwoaQODLBDwf3hLM1Xoh4cFGzyYQXTbFwzDU5+V9uMPot984o8b6kBvardgpz3id7CdGDuCjXi1jf+TfT7RsUpNv1ZkmlCdr9WgbLjVhUEO54kUmeBigmjUmXAWq1EOJPnWVi4RzURYSy5XAgamE/3cR3fvD4SXz69Mi7+mGI1/FyHTctH6G+yfjKGPpUrHkDGUZ41KE83AacuOp+/FRIOszJXNhf/DV+AgPQvGeNuzrY5FsvF/uf2laoBBLjAYyGaVrieWlP8SihIV0+Jc9d6lbdYziKCK478FkIxwrwnl6ze8tLKFv/wwYnNvFoivk7Zg+W85L0L3PymTocxZzyKVaoBdgjKcsoUoIb5BU4jMDv7/nCubc3UouaS8QMJuCl4F57Aeo/1K2DOECdPjTahoO1NJw+JoafDIORk8Bj8GX4wVypRtzLTA0mY1P5Q=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -20250,7 +20962,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.SWC-Duke15", 
                 "duke.campus", 
                 "connect", 
@@ -20327,7 +21038,12 @@
         "tnatoli": {
             "comment": "Tyler Natoli", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "tnatoli@spt.uchicago.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA07DCQpau6dQkX/s/XZ3sqL0D7W8SWk7I4PoxJ9CNwz3lKc7jlWhwAlH5fesxlbYSNewx80UiVUWMNdql0CnuLAofYTnbLqK/w0kOqp4APDU32QeH+dgmM349BBk7L1JtVasoW0klrxi9rHSZoOkGMfqL/SRwwduox+mvPHehi51raEHoIKz1pBNPMLl7jqb8WwiirHxFleD42a/Qx/LJ1oB3O3s3UN63VKqeOGBEaQzKBCrzqvT3OZCD0ErCYk9/1lUYpuyJ76kfPRRya5bKbD6/G85C6dHOMhIR11T+bfI2Yk2O6LocC4CwnZ33z/x5IfFZ+h6JQENzOqniU87J6w=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -20650,7 +21366,6 @@
             "gid": 1000, 
             "manage_group": false, 
             "groups": [
-                "duke.duke-campus", 
                 "duke.SWC-Duke15", 
                 "duke.campus", 
                 "connect"
@@ -21407,8 +22122,13 @@
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 4, 
-            "email": "weiyh@physik.uzh.ch", 
-            "ssh_keys": {}
+            "email": "ywei@physics.ucsd.edu", 
+            "ssh_keys": {
+                "yuehuan@midway-login2": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA3mdu7N9lCIuL48pyqCgQrswP6CUbzu7sG+RIF8y9v0D30HlaOYMoUz7jKRnOA5vcYhO8AWA7KTBsM6gZhplEYJWAIeXjR4oPCWhHNK1qX25pr9K/tHgFiO8NHwGOS7QRMVg6G9wtPnj2IdvTklAkZ0pISpphxGquAh35PqRFAo+KHCKlwdQ+GIUchJkeWfSo6WSRgT41G0evIm/6WJhPgf8bnaqkWCIHPN1ZRy+iNCPtOnBr8b3gLMemsPqNKbGbb9fvH1IAGwt567Mj2zBgHu4/vzUb/HRip0nEod30MLsJHhKoSLi5jmQehkJmRHNgTBzZLC5OQeVbnjd1+/hj9Q=="
+                }
+            }
         }, 
         "westland": {
             "comment": "James Christopher Westland", 
@@ -21585,9 +22305,17 @@
             "comment": "William Poehlman", 
             "shell": "/bin/bash", 
             "ssh_keys": {
+                "wpoehlm@login01.osgconnect.net": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAq7/Lf7LOb+FfLNWBNnkGDItY8zovpNYA17VvG71L2sCbjqvdNEAGrPAsDBfUzeX2AaYE/+kIpPftLwrSS0M3NUr+bvtMLYf/ujF8vwLU+XdfeI+rKOMRD+dyx6gc1rJHMB71bT0ZuSPV4kwldO2Y5i6R2c9db79BKOjxJupIfnJCcOiquQb0YKlTWzROiO9fStknQUqIEKWp3b03HsXfJ3oFlX3ZycOBddAAZZbyTgXgmyciTATOnx6PNwaR7uphWNsYhxWOauAJsxa+a17hGm0mdrTYr73EFIb+bSQfIteGmHa/zjdVpCfOjpaLuR2P7Px7XYgfKRiXDvaY4OqCPQ=="
+                }, 
                 "wpoehlm@user001": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA052uqp+cotU4A5o+MWOGVs0A/CjqZ1f86nonu2L0lv0yxJpWqj4soEdMHf/SZOaSRiftqWUYcJtHomz6fCWetu03vrj+veqvy37cL/hJe0lLd7YO7dh+B3b2/FCLV5yuE26tOhSvL9oL9kjaNp2g9V1AJQx30DA7Qn3zdKUyosXxrkZZgXXf7CG95r8lK62QuCBLFZYFcm4afKtcKQArnBJDOQUX+cfrvZ6NVMAxunWmFvBsAatLFcOyCBi7qe4C+B3a5VzG5cRUEv/vRBWDKdRcqvDlDfDJ5wxC7mVuvvbWnVc5UI5NJeqLRroZfH1ZCTCMvqGOKs1iR0oal2o3zQ=="
+                }, 
+                "rsa-key-20170606": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAk9MQM0/DcFPDMrA19xQPvksiObp7JGYjcj8QdGOlPXggqZmRA4D7vZSZPYkkctKzyW2l5aAhiO6Z9i3qp/yAtyCRfF4iae8VcLWPobSdd6WUj8aZvI4UCNt6SczUBi9Sq8LBdjFXCFBCEy9pb8b7KZkGJt3AknKB1oyKJBKufFIDyj5WoJvzXbB3SJn4jGljFZ9/BpSqWWPKgY42cpZXw2A2xz4wXKtSn7FLgYaVXCagjxwYVL+L85YO6UZhWEyhumvWZPSCJbVyMETziP/Y6FGLQXrVkWhLW+T8BCV9doAlZErlic8vMTZb1iVydv0XWtrNqkaZ7OADaTNjcvAGmw=="
                 }
             }, 
             "connect_project": null, 
@@ -21832,7 +22560,12 @@
         "yasirs": {
             "comment": "Yasir Suhail", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "yasir@farismac.ebalto.jhmi.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEAwAJq+e+jkdcah7sPwXl5hIpfIV/5FDzp4JRkLp8f3PWkNQ0eIMEE6yWJOUqEGzouz3KSGfKKZzykG/y2Qob3obxpAXBEec9PlW94aBCiSEsyssPL1zl6Zx6bo2gki/FrZfi+rWXaF+JJdFm3SA+94caU1eFhbGRfx1gimFEMkdC/IYGtb5z92JEn0FuKtDoflN99i0F/Crp4XPgOcEzTrOR7i8Rtc/Gq+o+uZz7p/w/nURzQIKilIHa/tcu+gdUos8Ff00m3sTHid9zXqihxZeCY3Zdmu52DW3+qYZesE/PUtu4Ybo4fb0eAN36CqOxjY8J9kQdct2eTiuTMzNhWOQ=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -21848,6 +22581,29 @@
             "email": "yasir.suhail@gmail.com", 
             "uid": 33168
         }, 
+        "yaw52": {
+            "comment": "Yali Wang", 
+            "shell": "/bin/bash", 
+            "uid": 100020, 
+            "auth_refresh_token": null, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.PainDrugs"
+            ], 
+            "nexus_refresh_token": null, 
+            "ssh_keys": {
+                "yaliwang@vishnu.structbio.pitt.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCuFacQPjEbrH2Zg9c7R8pOjzcQUBKGrKlkSe0WmYgvTwousl3xybsKorrrTq2/btcJwr7w8++x+uNnckcvybixK0zsHryo/1YJfS5Tam6l+bwOfwA6DEMAn1u4o8SfJMfKd9SDvi+gz1pIb4Ig96/8K0DYs1cB1NAV/rxj96Mr+gm6XXo2j+3wfPL3t1Brmndw+JwqkU6SIMOeYq+Dd+13ORXupqAyPQOWLUSso3KEFomSR4P2RdD9c7Z0d9n8LIEj3xOqBPYUxCKxhiNkIWHlnua6GJb53RDIDpiY0JyDwyn7fqAwYCAtXzS7S5mM7hS1LmvAm7J9LGA/TiFsKrcf"
+                }
+            }, 
+            "connect_project": "osg.PainDrugs", 
+            "gid": 1000, 
+            "condor_schedd": 1, 
+            "email": "yaw52@pitt.edu"
+        }, 
         "yawarq": {
             "comment": "Yawar Qadri", 
             "shell": "/bin/bash", 
@@ -21858,7 +22614,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -21947,7 +22702,6 @@
             "manage_group": false, 
             "groups": [
                 "duke", 
-                "duke.duke-campus", 
                 "duke.campus", 
                 "connect"
             ], 
@@ -22220,7 +22974,9 @@
                 "duke", 
                 "duke.SWC-Duke15", 
                 "duke.campus", 
-                "connect"
+                "connect", 
+                "osg", 
+                "osg.Duke-QGP"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 3, 
@@ -22635,7 +23391,12 @@
         "zubatyuk": {
             "comment": "Roman Zubatyuk", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "rsa-key-20170605": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAABJQAAAQEAxQh0PqAu1iufIrI5fydqvRIdA7JT55UoL6KI6HtaBzPuTDmzkaw+rquT2YFdVYzEZGUUyUUDP2SKa+wMDfbURAKpes6dmqFCwlqnGbOfjOfnT6MUwDHxxJYcayTc1UwsYqhOIEC5BRPCnyRnQPDBKjjoju96yuJBLr/bFuGL7FqH89aLg1FVbLBjyhwtSxlGEluE7btv/aLmtKwvBLew2DKtkedinHwSZtk2BJ0fly6Mhutdfk/OvfUz45ep7Ovgj4CxntlqbRUkl/gmVoNNmen0YlWPA0CIy1QBX/k2hacoROiZ2jVemU4zoh6Ofl0IjI35D75902qiM+LiM9gCxw=="
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
