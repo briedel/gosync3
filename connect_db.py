@@ -45,11 +45,12 @@ class connect_db_json(object):
         log.info("std out git commit = %s", git_out[0])
         log.info("std err git commit = %s", git_out[1])
 
-    def write_db(self):
+    def write_db(self, commit_old_version=False):
         """
         Write out json file
         """
-        # self.commit_old_version()
+        if commit_old_version:
+            self.commit_old_version()
         self.users = collections.OrderedDict(sorted(self.users.items()))
         self.groups = collections.OrderedDict(sorted(self.groups.items()))
         self.db = {"accounts::users": self.users,
