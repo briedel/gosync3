@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1024, 
+            "num_members": 1025, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -632,7 +632,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 788, 
+            "num_members": 789, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -737,7 +737,7 @@
         }, 
         "osg.ConnectTrain": {
             "gid": 7021, 
-            "num_members": 547, 
+            "num_members": 548, 
             "globus_uuid": "da657c6a-b4a3-11e3-8e76-12313809f035"
         }, 
         "osg.ContinuousIntegration": {
@@ -884,6 +884,11 @@
             "gid": 6510, 
             "num_members": 4, 
             "globus_uuid": "b587de92-41b7-11e3-9619-1231391ccf32"
+        }, 
+        "osg.IITPROSPECT": {
+            "gid": 100005, 
+            "num_members": 2, 
+            "globus_uuid": "99049bd0-5828-11e7-9f90-22000b500e8d"
         }, 
         "osg.IVSelection": {
             "gid": 5209, 
@@ -5535,6 +5540,7 @@
                 "atlas.org.pitt", 
                 "osg.microphases", 
                 "atlas.org.anl", 
+                "osg.IITPROSPECT", 
                 "atlas.org.indiana", 
                 "atlas.wg.Jet-EtMiss", 
                 "cms.org.ua", 
@@ -5826,7 +5832,9 @@
             "comment": "Jim Culbert", 
             "shell": "/bin/bash", 
             "uid": 100023, 
+            "connect_project": "osg.ConnectTrain", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
@@ -5834,16 +5842,14 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "culbertj@mghpcc.org", 
             "ssh_keys": {
                 "culbertj@Jims-MacBook-Air.local": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDRiMUdsyAn7+2rU5YFWzDYPovaIWyoS1K52DhmMmjhdwYzn8D/p2SLrDg2ooaxZF1GXaGMXdcMM+9vAyiHQQ+vABvLMgjoUPvEQPi4Mzfs4OVLU20xcGiCIqZFrAOZ507MNVZSEmFmqPTwF5Es4O7OymNa0iznmhjJl+7Umd5gkQGojd36EO5GIz/fMbgqpV+cyrvnvjeWx5tRoCV4+RuzRmLr7Kh/9dqau17xKQqwpaIJ6Nr3b1kZlp8TaEX/huf5dz2P86GKMV7BVsv+IY3uQW1csJSjOL+P7zN32nJCw/++U6l/5m2aGaN3gyJa7fxPmcYHAhRAYY51o45VJju7"
                 }
-            }, 
-            "connect_project": "osg.ConnectTrain", 
-            "gid": 1000, 
-            "condor_schedd": 1, 
-            "email": "culbertj@mghpcc.org"
+            }
         }, 
         "cvergeli": {
             "comment": "Carlos Miguel Vergel Infante", 
@@ -11006,7 +11012,9 @@
             "comment": "Julio Facelli", 
             "shell": "/bin/bash", 
             "uid": 100024, 
+            "connect_project": "osg.SSGAforCSP", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
@@ -11015,11 +11023,9 @@
                 "osg.SSGAforCSP"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.SSGAforCSP", 
-            "gid": 1000, 
             "condor_schedd": 2, 
-            "email": "julio.facelli@utah.edu"
+            "email": "julio.facelli@utah.edu", 
+            "ssh_keys": {}
         }, 
         "jfernan": {
             "comment": "Javier Fernandez Menendez", 
@@ -11949,7 +11955,9 @@
             "comment": "Jon Wilson", 
             "shell": "/bin/bash", 
             "uid": 100025, 
+            "connect_project": "osg.ConnectTrain", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
@@ -11957,11 +11965,9 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.ConnectTrain", 
-            "gid": 1000, 
             "condor_schedd": 3, 
-            "email": "jsw@fnal.gov"
+            "email": "jsw@fnal.gov", 
+            "ssh_keys": {}
         }, 
         "jtqv84": {
             "comment": "Francis Liu", 
@@ -12441,7 +12447,9 @@
             "comment": "Andrew Keen", 
             "shell": "/bin/bash", 
             "uid": 100022, 
+            "connect_project": "osg.ConnectTrain", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
@@ -12449,16 +12457,14 @@
                 "osg.ConnectTrain"
             ], 
             "nexus_refresh_token": null, 
+            "condor_schedd": 4, 
+            "email": "keenandr@msu.edu", 
             "ssh_keys": {
                 "rsa-key-20170303": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABJQAAAgEAkpDdJH+mOOVb71Piwvu0FypOsguoK+SqgCbMxbLgI8Z3gNGCPDRhH9JpossFXvpZT6VYTrs+I740f/FIHMwO49D18pxLs4lhDnJYIu6eS/GMHkCqT2X058wzY6KIhE29Ex8PGNTU8vpW0tYuaFvomm+EFYQwNQUnMeKEC3NuTc33bmmNVw5WA7hGUOL0z/z2TlTvTcxO7u0bTWVgrxMQHrUljXqcia36mghVhI+ggsi+Zma68/iJD/cIHagfHGhM2maBE+nNeQ7voffs2FxivYMckT+l5Mk+N/x+4xz/Q3c4myqKnGIZJmovngBq31fjv+1K4/C9+8S24G5GcgYttVc4SwA+4flVqIi+cMI9/FG0rhv80Wtj+wNBYr//5XHl98ptYGh4IqVI2Q9MB249mfMp4kt7o5HHHACA4IlRxLT+jCKu6DsW9dkNweymr5UpiQhpRXMQFX3wt+w59BQaF2oskZkI7oONpdTAN11ZYTIQw9N3/4DpgHax7wMz4gKJMVPgryYD2Q6CRXUHQUqggS9PkUIJO16QfcDjqGUkmznO1sstRSRxgY/etcFvQW7QdwC7YOU6vKZVDvY5G2McCCMN76uCR3L7EX/hIKlmn5nam/LwLMLcqDcr4DUFky+PqIge2KQh7sRdRt5bWqNeATVLhh7hmWFnj5phGt2LvvU="
                 }
-            }, 
-            "connect_project": "osg.ConnectTrain", 
-            "gid": 1000, 
-            "condor_schedd": 4, 
-            "email": "keenandr@msu.edu"
+            }
         }, 
         "kevinbegcy": {
             "comment": "Kevin Begcy", 
@@ -12672,6 +12678,24 @@
             "condor_schedd": 3, 
             "email": "khurtado@nd.edu", 
             "uid": 24239
+        }, 
+        "kittykat78": {
+            "comment": "Katherine Stewart", 
+            "shell": "/bin/bash", 
+            "uid": 100026, 
+            "connect_project": "osg.ConnectTrain", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 4, 
+            "email": "0427thekat@gmail.com", 
+            "ssh_keys": {}
         }, 
         "kjdaniel": {
             "comment": "Kate Daniel", 
@@ -17742,19 +17766,25 @@
             "comment": "Pranava Teja Surukuchi", 
             "shell": "/bin/bash", 
             "uid": 100018, 
+            "connect_project": "osg.ConnectTrain", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
                 "osg", 
-                "osg.ConnectTrain"
+                "osg.ConnectTrain", 
+                "osg.IITPROSPECT"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "osg.ConnectTrain", 
-            "gid": 1000, 
             "condor_schedd": 5, 
-            "email": "psurukuc@hawk.iit.edu"
+            "email": "psurukuc@hawk.iit.edu", 
+            "ssh_keys": {
+                "psurukuc@dhcp94.merunorth99.iit.edu": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAAAgQDzwBqQNt/KEnl47mhk8zRuaIiil5r+1pfFx2ZwQMSub9IvVBA2yuA9z+xTqdrsT9BxQhhUm0kpHEUb49rdZv1kRHmlZpn5Sa3Rzo3FZ0uphbgx8AZbUJ7o++aNwYqTcOJStPrNj3nyYqv1jP4ByQNQkezFwlZl/OURtn6fCWQdhQ=="
+                }
+            }
         }, 
         "pujasaha": {
             "comment": "Puja Saha", 
@@ -19055,7 +19085,9 @@
             "comment": "Samuel Louis Bein", 
             "shell": "/bin/bash", 
             "uid": 100021, 
+            "connect_project": "cms.org.fnal", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "cms", 
@@ -19063,11 +19095,9 @@
                 "cms.org.fnal"
             ], 
             "nexus_refresh_token": null, 
-            "ssh_keys": {}, 
-            "connect_project": "cms.org.fnal", 
-            "gid": 1000, 
             "condor_schedd": 5, 
-            "email": "samuel.bein@gmail.com"
+            "email": "samuel.bein@gmail.com", 
+            "ssh_keys": {}
         }, 
         "scampana": {
             "comment": "Campana", 
@@ -19395,7 +19425,9 @@
             "comment": "Sam Guns", 
             "shell": "/bin/bash", 
             "uid": 100019, 
+            "connect_project": "spt.all", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "spt.all", 
@@ -19404,16 +19436,14 @@
                 "spt"
             ], 
             "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "sguns@berkeley.edu", 
             "ssh_keys": {
                 "samtomguns@Sams-Air-3.dhcp.lbnl.us": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ8mbvUC3u57+zXVbBQHcr0lplKt6NPYiYrmuIcpI7qof1seoWND46k9b3eIkDtawrvAbfe/KObrfaxWCSi68Ot3C0xiHxbxmb9jzUk9b9n0JxgkY7uxoff8qc/xfqjijz8/sKnF4bY7BzO9OTTioVMhK1RFemmhXYAoZIdRDC2vzkZh/4BU8m45I8sjyC4DPDdYqHKiuIkKysqU+9P6d6MNRXMv2GLSiLnd416eX4sJz9Jvdjt+gx6M0SOdXbb/kpP/n9GMISGyLOF7dm7aqVoaC26JtaoT7KhwFS9rZOnsU3/4OTiHNz+G4WhQBTMeG/3oucpaDj6qJTa/uqRLXj"
                 }
-            }, 
-            "connect_project": "spt.all", 
-            "gid": 1000, 
-            "condor_schedd": 1, 
-            "email": "sguns@berkeley.edu"
+            }
         }, 
         "sh383": {
             "comment": "Salman Habib", 
@@ -22585,7 +22615,9 @@
             "comment": "Yali Wang", 
             "shell": "/bin/bash", 
             "uid": 100020, 
+            "connect_project": "osg.PainDrugs", 
             "auth_refresh_token": null, 
+            "gid": 1000, 
             "manage_group": false, 
             "groups": [
                 "connect", 
@@ -22593,16 +22625,14 @@
                 "osg.PainDrugs"
             ], 
             "nexus_refresh_token": null, 
+            "condor_schedd": 1, 
+            "email": "yaw52@pitt.edu", 
             "ssh_keys": {
                 "yaliwang@vishnu.structbio.pitt.edu": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCuFacQPjEbrH2Zg9c7R8pOjzcQUBKGrKlkSe0WmYgvTwousl3xybsKorrrTq2/btcJwr7w8++x+uNnckcvybixK0zsHryo/1YJfS5Tam6l+bwOfwA6DEMAn1u4o8SfJMfKd9SDvi+gz1pIb4Ig96/8K0DYs1cB1NAV/rxj96Mr+gm6XXo2j+3wfPL3t1Brmndw+JwqkU6SIMOeYq+Dd+13ORXupqAyPQOWLUSso3KEFomSR4P2RdD9c7Z0d9n8LIEj3xOqBPYUxCKxhiNkIWHlnua6GJb53RDIDpiY0JyDwyn7fqAwYCAtXzS7S5mM7hS1LmvAm7J9LGA/TiFsKrcf"
                 }
-            }, 
-            "connect_project": "osg.PainDrugs", 
-            "gid": 1000, 
-            "condor_schedd": 1, 
-            "email": "yaw52@pitt.edu"
+            }
         }, 
         "yawarq": {
             "comment": "Yawar Qadri", 
