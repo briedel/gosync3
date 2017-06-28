@@ -19,7 +19,8 @@
         "osg",
         "duke",
         "uchicago",
-        "umich"
+        "umich",
+        "staff"
       ],
       "root_group": "connect",
       "root_group_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
