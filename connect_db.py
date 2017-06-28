@@ -47,7 +47,13 @@ class connect_db_json(object):
 
     def write_db(self, commit_old_version=False):
         """
-        Write out json file
+        Write out json files. One with all the group and user information and
+        another will all the user's emails.
+
+        Args:
+            commit_old_version (bool): Optional argument that allows you to
+                                       make commit changes to the database
+                                       to the codes github repo
         """
         if commit_old_version:
             self.commit_old_version()
@@ -58,6 +64,17 @@ class connect_db_json(object):
 
         with open(self.config["connect_db"]["db_file"], "w") as cdbf:
             json.dump(self.db, cdbf, indent=4)
+
+        with open(self.config["connect_db"]["email_file"], "wt") as emf:
+            emails = self.get_emails()
+            json.dump(emails, emf, indent=4)
+
+        if "email_file" in self.config["connect_db"].keys():
+            for tg in self.config["globus"]["groups"]["top_level_groups"]:
+                with open(tg + "_" + self.config["connect_db"]["email_file"],
+                          "wt") as emf:
+                    emails = self.get_emails(group=tg)
+                    json.dump(emails, emf, indent=4)
 
     def new_unix_id(self, ids, id_minium=100000):
         """
@@ -85,22 +102,32 @@ class connect_db_json(object):
         """
         puppet_ssh_key = collections.defaultdict(dict)
         for key in user["ssh_pubkeys"]:
-            key_pieces = key.split(" ")
-            # Question about keys that dont have emails or hostnames
-            # What to do????
-            if len(key_pieces) > 3:
-                key_pieces = key_pieces[0:2]
-            if key_pieces[-1] != "":
-                key_pieces[-1] = key_pieces[-1].splitlines()[0]
-            else:
-                key_pieces = key_pieces[:-1]
-            if len(key_pieces) == 3:
-                puppet_ssh_key[key_pieces[-1]] = {"type": key_pieces[0],
-                                                  "key": key_pieces[1]}
-            else:
-                puppet_ssh_key[user["email"]] = {
-                    "type": key_pieces[0],
-                    "key": key_pieces[1]}
+            try:
+                key_pieces = key.split(" ")
+                if len(key_pieces) == 1:
+                    # No spaces in a key. Usually means the key doesn't
+                    # have the right format. Skipping the key in that case
+                    log.warn("Malformed key: %s.", key)
+                    log.warn("Malformed key by user: %s. Skipping key.", user["username"])
+                    continue
+                log.debug("SSH key pieces: %s", key_pieces)
+                if len(key_pieces) > 3:
+                    key_pieces = key_pieces[0:2]
+                if key_pieces[-1] != "":
+                    key_pieces[-1] = key_pieces[-1].splitlines()[0]
+                else:
+                    key_pieces = key_pieces[:-1]
+                if len(key_pieces) == 3:
+                    puppet_ssh_key[key_pieces[-1]] = {"type": key_pieces[0],
+                                                      "key": key_pieces[1]}
+                else:
+                    puppet_ssh_key[user["email"]] = {
+                        "type": key_pieces[0],
+                        "key": key_pieces[1]}
+            except:
+                log.warn("Malformed key: %s.", key)
+                log.warn("Malformed key by user: %s. Skipping key.", user["username"])
+                continue
         return puppet_ssh_key
 
     # def find_alter_duplicate_gids(self):
@@ -331,6 +358,33 @@ class connect_db_json(object):
             Tuple of strings: Globus Auth and Nexus refresh tokens
         """
         return self.get_auth_token(username), self.get_nexus_token(username)
+
+    def get_emails(self, group=None):
+        """
+        Get the emails of a set of users. In this case either all users or
+        optionally of a specified group
+
+        Args:
+            group (string): Optional group whose user emails you want
+        Returns:
+            Dict mapping username to email address
+        """
+        if group is None:
+            return {usr: info["email"] for usr, info in self.users.items()}
+        else:
+            return {usr: info["email"] for usr, info in self.users.items()
+                    if group in info["groups"]}
+
+    def get_email(self, username):
+        """
+        Get email for a specified user
+
+        Args:
+            username (string):
+        Returns:
+            String with user's email address
+        """
+        return self.users[username]["email"]
 
     def update_auth_token(self, username, token):
         raise NotImplementedError()

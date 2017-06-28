@@ -250,8 +250,10 @@ Some of the methods in this class are self-explanatory:
 * `get_globus_tokens`: Retrieves user's Globus Auth and Nexus refresh tokens
 * `remove_unicode`: Remove unicode characters from a user's name. This can cause problems when generating a passwd file or trying to serialize a JSON file.
 * `commit_old_version`: In the spirit of old GOSync, we commit the JSON file to Gitlab, so puppet/hiera can grab it from there
-* `write_db`: Write the JSON object out.
+* `write_db`: Write the JSON object out. If a `email_file` is supplied in the config, it will also create a json file that maps the group users to their email addresses
 * `set_user_nologin`: Set a user's shell to nologin, used in case they are no longer "active" in a Globus group
+* `get_emails`: Get email for everyone or optionally for a given group
+* `get_email`: Get email for a specific user
 
 The `get_default_project` method is tries to guess a user's first OSG project for account reasons. If the user is a member of more than more than one sub-project we need to filter out any of the default ones. First, "osg.ConnectTrain" is removed. If there are still more than one projects, we filter out any project associated with a user school and any OSG project, if the user is a member of the other connect instances, i.e. SPT, ATLAS, CMS, and Duke. 
 

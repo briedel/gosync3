@@ -62,6 +62,7 @@
     }
   },
   "connect_db": {
-    "db_file": "connectdb.json"
+    "db_file": "connectdb.json",
+    "email_file": "user_emails.json"
   }
 }
