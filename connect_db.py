@@ -82,7 +82,7 @@ class connect_db_json(object):
         if "mailchimp_file" in self.config["connect_db"].keys():
             if not os.path.exists("mailchimp"):
                 os.mkdir("mailchimp")
-            mailchimp_file = self.config["connect_db"]["email_file"]
+            mailchimp_file = self.config["connect_db"]["mailchimp_file"]
             with open(os.path.join("mailchimp", mailchimp_file), "w") as mcf:
                 mailchimp_info = self.get_mailchimp_info()
                 json.dump(mailchimp_info, mcf, indent=4)
@@ -91,7 +91,7 @@ class connect_db_json(object):
                                          ("_").join([tg,
                                                      mailchimp_file]))
                 with open(file_path, "w") as mcf:
-                    emails = self.get_mailchimp_info(group=tg)
+                    mailchimp_info = self.get_mailchimp_info(group=tg)
                     json.dump(mailchimp_info, mcf, indent=4)
 
     def new_unix_id(self, ids, id_minium=100000):
