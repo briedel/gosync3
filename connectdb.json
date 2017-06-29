@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1032, 
+            "num_members": 1033, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -749,6 +749,11 @@
             "gid": 9916, 
             "num_members": 10, 
             "globus_uuid": "91996fe4-8ea3-11e3-8cc0-1231391ccf32"
+        }, 
+        "osg.DTWclassifier": {
+            "gid": 100010, 
+            "num_members": 1, 
+            "globus_uuid": "96f53384-5ce9-11e7-bd0b-22000b100078"
         }, 
         "osg.DataTrieste": {
             "gid": 9064, 
@@ -1364,6 +1369,11 @@
             "gid": 100001, 
             "num_members": 2, 
             "globus_uuid": "55ae3ee6-4a0d-11e7-9c24-22000b100078"
+        }, 
+        "osg.electrolytes": {
+            "gid": 100009, 
+            "num_members": 2, 
+            "globus_uuid": "460cb71c-5ce4-11e7-b520-22000b74c0b7"
         }, 
         "osg.evolmarinva": {
             "gid": 8045, 
@@ -5558,6 +5568,7 @@
                 "duke.boolnet", 
                 "osg.BioStat", 
                 "atlas.org.wisc", 
+                "osg.electrolytes", 
                 "osg.megaprobe", 
                 "osg.SBGrid", 
                 "osg.Perchlorate", 
@@ -5687,6 +5698,7 @@
                 "osg.polyHERV", 
                 "osg.SO10GU", 
                 "osg.PainDrugs", 
+                "osg.DTWclassifier", 
                 "osg.Paniceae-trans", 
                 "osg.velev", 
                 "osg.DelhiWorkshop2015", 
@@ -11176,7 +11188,8 @@
             "groups": [
                 "connect", 
                 "osg", 
-                "osg.ConnectTrain"
+                "osg.ConnectTrain", 
+                "osg.electrolytes"
             ], 
             "nexus_refresh_token": null, 
             "condor_schedd": 4, 
