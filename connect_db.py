@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
+import os
 import logging as log
 import json
 import collections
@@ -65,16 +66,33 @@ class connect_db_json(object):
         with open(self.config["connect_db"]["db_file"], "w") as cdbf:
             json.dump(self.db, cdbf, indent=4)
 
-        with open(self.config["connect_db"]["email_file"], "wt") as emf:
-            emails = self.get_emails()
-            json.dump(emails, emf, indent=4)
-
         if "email_file" in self.config["connect_db"].keys():
+            if not os.path.exists("emails"):
+                os.mkdir("emails")
+            email_file = self.config["connect_db"]["email_file"]
+            with open(os.path.join("emails", email_file), "w") as emf:
+                emails = self.get_emails()
+                json.dump(emails, emf, indent=4)
             for tg in self.config["globus"]["groups"]["top_level_groups"]:
-                with open(tg + "_" + self.config["connect_db"]["email_file"],
-                          "wt") as emf:
+                file_path = os.path.join("emails",
+                                         ("_").join([tg, email_file]))
+                with open(file_path, "w") as emf:
                     emails = self.get_emails(group=tg)
                     json.dump(emails, emf, indent=4)
+        if "mailchimp_file" in self.config["connect_db"].keys():
+            if not os.path.exists("mailchimp"):
+                os.mkdir("mailchimp")
+            mailchimp_file = self.config["connect_db"]["email_file"]
+            with open(os.path.join("mailchimp", mailchimp_file), "w") as mcf:
+                mailchimp_info = self.get_mailchimp_info()
+                json.dump(mailchimp_info, mcf, indent=4)
+            for tg in self.config["globus"]["groups"]["top_level_groups"]:
+                file_path = os.path.join("mailchimp",
+                                         ("_").join([tg,
+                                                     mailchimp_file]))
+                with open(file_path, "w") as mcf:
+                    emails = self.get_mailchimp_info(group=tg)
+                    json.dump(mailchimp_info, mcf, indent=4)
 
     def new_unix_id(self, ids, id_minium=100000):
         """
@@ -358,6 +376,29 @@ class connect_db_json(object):
             Tuple of strings: Globus Auth and Nexus refresh tokens
         """
         return self.get_auth_token(username), self.get_nexus_token(username)
+
+    def get_mailchimp_info(self, group=None):
+        """
+        Get the information for mailchimp: email, first and last name
+
+        Args:
+            group (string): Optional group whose user information
+        Returns:
+            Dict mapping username to email address and first and last name
+        """
+        if group is None:
+            return {usr:
+                    {"email": info["email"],
+                     "first_name": info["comment"].split(" ")[0],
+                     "last_name": info["comment"].split(" ")[-1]}
+                    for usr, info in self.users.items()}
+        else:
+            return {usr:
+                    {"email": info["email"],
+                     "first_name": info["comment"].split(" ")[0],
+                     "last_name": info["comment"].split(" ")[-1]}
+                    for usr, info in self.users.items()
+                    if group in info["groups"]}
 
     def get_emails(self, group=None):
         """
