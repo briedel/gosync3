@@ -64,6 +64,7 @@
   },
   "connect_db": {
     "db_file": "connectdb.json",
-    "email_file": "user_emails.json"
+    "email_file": "user_emails.json",
+    "mailchimp_file": "mailchimp_info.json"
   }
 }
