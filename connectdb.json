@@ -567,7 +567,7 @@
         }, 
         "connect": {
             "gid": 5532, 
-            "num_members": 1041, 
+            "num_members": 1042, 
             "globus_uuid": "fdb38a24-03c1-11e3-86f7-12313809f035"
         }, 
         "duke": {
@@ -632,7 +632,7 @@
         }, 
         "osg": {
             "gid": 5782, 
-            "num_members": 803, 
+            "num_members": 804, 
             "globus_uuid": "80321e42-41a3-11e3-bef1-12313d2d6e7f"
         }, 
         "osg.AMFORA": {
@@ -737,7 +737,7 @@
         }, 
         "osg.ConnectTrain": {
             "gid": 7021, 
-            "num_members": 555, 
+            "num_members": 556, 
             "globus_uuid": "da657c6a-b4a3-11e3-8e76-12313809f035"
         }, 
         "osg.ContinuousIntegration": {
@@ -10384,7 +10384,7 @@
             "ssh_keys": {
                 "yuqinghang@228.237.21.198.tigernet.wifi.dyn.clemson.edu": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDF1MhYR0C13MsyaIV3ncy10pmbcKtyVxJerNmrFMVxehq0akdb3T22VsShXCstSwETEMBJOcIee8os6sIMIdLjAfcfJd78EdcBERLjHP3Ov6Oe9hT1LO0kuJne4+noxNPkSXrWMK0TeVA5ygbV8WZtCaPN4qdU1vwP3T3jc+WD8LjxJ1S5w+JumABSzVoNErsiTBohPnTVtd5aKX4uV1vjDSxPg0S7BmXfeXg28Kj+/xhtsCw0WNIqhPQLNmZP/hopiNSwnWACVjCINaNPSEluPuyso2qo0UV21s5ya1fhif4RtVR6PcUwuwKA6KdKHj1kAOUfGgWAt7rvnS58/DML"
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDPrbpu8xwlLj78McPjNz2ZlEqZnlFLYaclPwxUnXtUktWWTLBLxKt/LNUjR5TwmDU3jOjuOfiiYZFYL6XC2k9P6BX7c4SWzZfbUBTaosU/MzC8PSnRvqykHvsu4JcTA0X3wggvh4H5EjMyK9HNaMgg3rUE9sqKfrpk560/S+8j5eIzHbTcGtXyJMFF3ZM0WcLEdJBFrVtoycNTt2k+L5U0RA64JIY7E1Cec2ZNOeckI1z52H9mE6tfrZRZjOt/pciEOOCFwc+GVbnNKx5J2+YKVaNDUBZ8Ac/0ll8m+S/DQ9qRzxcQDbJRoSNioO8svRrtE50HTDFX8P0o8+f+XZEr"
                 }
             }
         }, 
@@ -11641,6 +11641,29 @@
                 "masbou@midway-login1": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAABIwAAAQEA2+zA7D5yGydLWBR5t8ruPxw03S6c3UFlBSQX6BEaCoUWr/vaww2ngtMpwcP1QYldKK8Xpsh942Z8NkjK06WRcB6XXP6Z5v8pdH/MXGz5z2RbmJjtSeArIhv44THXFAeUg40j1b0+tK8VrBaQzFIy+7fCAWJZZ7uwUksf9/cuQFi79G0rQZWZAnYTvjRWXJMzsCNqhgYk64jdZprq/szGupltZt4iRp0ERk2TXKMKb6s54crvPrUc4DYin48MOpI90rjUgkA16WlZ8er5p83xggFc/KOK/Uo04tQ3ZN55MpvESDq7k+GxCcTQ/XLFDm0YezW0FJY8uKOpgtD1Cvp4tQ=="
+                }
+            }
+        }, 
+        "jmcnall3": {
+            "comment": "Jonathan McNally", 
+            "shell": "/bin/bash", 
+            "uid": 100041, 
+            "connect_project": "osg.ConnectTrain", 
+            "auth_refresh_token": null, 
+            "gid": 1000, 
+            "manage_group": false, 
+            "groups": [
+                "connect", 
+                "osg", 
+                "osg.ConnectTrain"
+            ], 
+            "nexus_refresh_token": null, 
+            "condor_schedd": 2, 
+            "email": "jmcnall3@asu.edu", 
+            "ssh_keys": {
+                "jmcnall3@DESKTOP-PIPP437": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDDQlkrnay22LeTnXXLRVfqU0n5PPpF3mfxGAKvHMOdpxvWKhuKb9yusdxBI/47bsdmlrrGLUv8HLyB6SCa5eQZKrJGmNe7kKd2uL/a+umDdojF6zOOOrP0OimJR/k1rqzaO8L8fdy6OsJ/I9eUPmNQ9l4hKXGWL4GvnlHG2JId9+cQszR8UXTV8cQjbSXISFIn7gG393/KRuenHgJJWCa/JDR2l4XJpWx4tAWVWIWMz/CcDXaOXf7NV7ySqXYAa585f6m5A568qFiRC4VupmqnJf3fF/nPSPcTNz8CGQS5DhjXxKQNkHGmlu+7tCPjeixcNX6MgQmVXFthGHh6H0GP"
                 }
             }
         }, 
@@ -16108,11 +16131,11 @@
             "ssh_keys": {
                 "user@nascimento.home": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC4CErCuE8Ks2di66yXlSILDIY+UYtve3gn0QToP3iZlgruKxmTAn2j5jJy3onchWXVkBbtjMC2osxlervDv2WvdSX9LPWXtrdq+FvDf1VOXKZ9gQ/Gpo0DOUvmeE7RKXFCFXGLEEUDapCNRmyojSpSEM0MTIaMh26wE/H6of+6l4xkbbBirh3ofLh9bn13jzdyp1yaaQluhOvK9cA/Gjv7d8j9lm0Y34tnvpGGRBQ9WqcOfs+lnIF/S0CU9+pWRWn5O5U7JIt1u4uKuFXCEhDVMJPtJsjyYfhoMMJqo6Hvo4if8h3sMjrkmWlDfVZKNsEpsCdW1diN885eJFskreOV"
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDMsb95Kwx7mrfoyvEZ7K8E75anF4CgGE203livWW+aORdyXpp7/0g1H18hZqfWPdcyYQqwxTjbN8gMjoK1vIKYLyP+aFLFwtLh1MixGlUeAHPdVhz4d095CrEAd1EXh8EZbwUORDtA2o2JKg+McTGHbbx1FJM7T0aqUWou4jwdhZigkTmIzCvShI4YZxkv+eMFXp1W8OO4Aax4lrnQlCEFxUAh/F8ADoNEE2nb/jy715RzsmyZC6xUUfllD/SjJ+W3eW6SIF2Fl1ScpkpLLEM4kuRkHZXHoAoiavr5oUzgqg/gM526zWjF+cauhhh/bATt15NdJnpfb0ajmu6Uxbp/"
                 }, 
                 "bita@neblina.home": {
                     "type": "ssh-rsa", 
-                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDdIukDwKICUPuZlmbYVuSMAx1hJ9c/Hwg/LtkvelY7SiL8JWc0Q2Cf+teLvRQXEjCPLGHo6bGb+U9BnKjJ6mR+xvSRSmEAdb6qlpIPZprE9gusZuXyrCS9f7MBjA30getnEHsoJ57XnrLV73lcQXKzb/NfVetdMUzYFgJi7j6WjmqaA7SUICtMCqcvvFYZz+4PpgTZtRx2vx7p/lOnJy8nckW6WqPxnfzpXTSSh28AgnN6OIOw5FR/SfI3hEfS9kw037a6i9PaZP3KlNeehMqcugQWBW4f0wwNB/9WD7yTzRZiiS5izli9JnjMfe2YUZgiTp6d7pO+yI+ifc6KdkDt"
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDBEr4UZtuzdpRDM0gutS2vxTeJ5KYa5jRdddnSy8BaSk/YGC+/nFSBQd9vCgVHxDfJiMXjHToAUQO47rNX63aNDZvDv3Omusy53LiilQ4B0vF91lzVAz4EMRQuhwAJuZtthunpMmX/u7hXnlvq+fP6kdHo8lcUWZkWF/5BTOnUjDkVaZKHh+p293/6oN2VFpz2J5s0I608+EexTGsLYbU4qMcNTbx/24NMSvA8j1Wieahhnd+yFbItD6pfPI18CmB00CgUFmqLuMZqX7ic9re9m6vEQgnu4ok8qpDHRRDdOjBVXNjBjoFIefsBhpTA0L+ucwtls40OZy1jK8PW1Wrr"
                 }
             }, 
             "connect_project": null, 
