@@ -3,6 +3,7 @@ from __future__ import print_function
 import sys
 import argparse
 import logging as log
+import datetime
 from globus_db import globus_db
 from connect_db import connect_db_json as connect_db
 from util import parse_json_config
@@ -12,6 +13,7 @@ assert sys.version_info >= (2, 7), ("You done fucked up. "
 
 
 def main(args):
+    print(datetime.datetime.now())
     config = parse_json_config(args.config)
     connectdb = connect_db(config=config)
     globusdb = globus_db(config=config, connect_db=connectdb)
