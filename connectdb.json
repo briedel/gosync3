@@ -6787,7 +6787,12 @@
         "dip": {
             "comment": "Ashiqul Islam Dip", 
             "shell": "/bin/bash", 
-            "ssh_keys": {}, 
+            "ssh_keys": {
+                "DIP@ASHIQULISLAMDIP": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDw2E8JSnuEQUsRDcMWGPOUxYYOCVe1q246ybnVqxsx9XIQFW3YDYz1AhHcGOgbw6pz9NjO9QFz6UAF3sVmUk6AdNzA2O7+juhxw9YUEk19TSBDIEe2NXPUGYzO2dKR+luaaQN9zsRC7ENUdBOl8Tebvv5AbU0jfwZB/UfMMk3x4ttNJ8cR9b6yJOLcXu7xMERkwRczGJXJgPIIIRZY/TVMrp1T/uZ4JYZFm3/aDRuRjhBFeFWsW8c+YO/bAzGLr+WOtQYOL9zhx3Wh89IeXCSByoPXtffpD/07p35Hwr1T4g0bDqZN5rbslER5et8KF23O9gt+X/ZROIHKX7lvVCYN"
+                }
+            }, 
             "connect_project": null, 
             "auth_refresh_token": null, 
             "gid": 1000, 
@@ -16104,6 +16109,10 @@
                 "user@nascimento.home": {
                     "type": "ssh-rsa", 
                     "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC4CErCuE8Ks2di66yXlSILDIY+UYtve3gn0QToP3iZlgruKxmTAn2j5jJy3onchWXVkBbtjMC2osxlervDv2WvdSX9LPWXtrdq+FvDf1VOXKZ9gQ/Gpo0DOUvmeE7RKXFCFXGLEEUDapCNRmyojSpSEM0MTIaMh26wE/H6of+6l4xkbbBirh3ofLh9bn13jzdyp1yaaQluhOvK9cA/Gjv7d8j9lm0Y34tnvpGGRBQ9WqcOfs+lnIF/S0CU9+pWRWn5O5U7JIt1u4uKuFXCEhDVMJPtJsjyYfhoMMJqo6Hvo4if8h3sMjrkmWlDfVZKNsEpsCdW1diN885eJFskreOV"
+                }, 
+                "bita@neblina.home": {
+                    "type": "ssh-rsa", 
+                    "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDdIukDwKICUPuZlmbYVuSMAx1hJ9c/Hwg/LtkvelY7SiL8JWc0Q2Cf+teLvRQXEjCPLGHo6bGb+U9BnKjJ6mR+xvSRSmEAdb6qlpIPZprE9gusZuXyrCS9f7MBjA30getnEHsoJ57XnrLV73lcQXKzb/NfVetdMUzYFgJi7j6WjmqaA7SUICtMCqcvvFYZz+4PpgTZtRx2vx7p/lOnJy8nckW6WqPxnfzpXTSSh28AgnN6OIOw5FR/SfI3hEfS9kw037a6i9PaZP3KlNeehMqcugQWBW4f0wwNB/9WD7yTzRZiiS5izli9JnjMfe2YUZgiTp6d7pO+yI+ifc6KdkDt"
                 }
             }, 
             "connect_project": null, 
