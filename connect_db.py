@@ -119,7 +119,7 @@ class connect_db_json(object):
             puppet_ssh_key (dict): SSH key formatted for hiera/puppet
         """
         puppet_ssh_key = collections.defaultdict(dict)
-        for key in user["ssh_pubkeys"]:
+        for i, key in enumerate(user["ssh_pubkeys"]):
             try:
                 key_pieces = key.split(" ")
                 if len(key_pieces) == 1:
@@ -139,9 +139,14 @@ class connect_db_json(object):
                     puppet_ssh_key[key_pieces[-1]] = {"type": key_pieces[0],
                                                       "key": key_pieces[1]}
                 else:
-                    puppet_ssh_key[user["email"]] = {
-                        "type": key_pieces[0],
-                        "key": key_pieces[1]}
+                    if user["email"] in puppet_ssh_key.keys():
+                        puppet_ssh_key[user["email"] + str(i)] = {
+                            "type": key_pieces[0],
+                            "key": key_pieces[1]}
+                    else:
+                        puppet_ssh_key[user["email"]] = {
+                            "type": key_pieces[0],
+                            "key": key_pieces[1]}
             except:
                 log.warn("Malformed key: %s.", key)
                 log.warn("Malformed key by user: %s. Skipping key.", user["username"])
